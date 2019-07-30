@@ -307,14 +307,14 @@ namespace SDGAdmin.Controllers
             }
         }
 
-        public ActionResult AddSerialNumber(string id)
+        public ActionResult AddSerialNumber(/*string*/int id)
         {
             var userActivity = "Entered Add Serial Number Info Page";
 
             var actRefNumber = ApplicationLog.UserActivityLog("SDGAdmin", userActivity, "AddSerialNumber", "");
 
 
-            if (id != string.Empty)
+            if (id != /*string.Empty*/ 0)
             {
                 GenerateDataForDropDown();
             }
@@ -328,13 +328,13 @@ namespace SDGAdmin.Controllers
                 {
                     Value = d.MasterDeviceId.ToString(),
                     Text = d.DeviceName,
-                    Selected = d.MasterDeviceId == Convert.ToInt32(Utility.Decrypt(id))
+                    Selected = d.MasterDeviceId == id//Convert.ToInt32(Utility.Decrypt(id))
                 }).ToList());
 
                 ViewBag.MasterDevice = ddlmasterDevice;
 
                 DeviceModel dm = new DeviceModel();
-                dm.MasterDeviceId = Convert.ToInt32(Utility.Decrypt(id));
+                    dm.MasterDeviceId = id;//Convert.ToInt32(Utility.Decrypt(id));
 
                 return View(dm);
             }

@@ -77,7 +77,7 @@ namespace SDGBackOffice.Controllers
                     {
                         ddlmerchant.AddRange(merchant.Select(p => new SelectListItem()
                         {
-                            Value = Utility.Encrypt(Convert.ToString(p.MerchantId)),
+                            Value = p.MerchantId.ToString(),
                             Text = p.MerchantName
                         }).ToList());
                     }
@@ -85,14 +85,14 @@ namespace SDGBackOffice.Controllers
                     {
                         ddlmerchant.Add(new SelectListItem()
                         {
-                            Value = Utility.Encrypt("0"),
+                            Value = 0.ToString(),
                             Text = val,
                             Selected = value == 0
                         });
 
                         ddlmerchant.AddRange(merchant.Select(p => new SelectListItem()
                         {
-                            Value = Utility.Encrypt(Convert.ToString(p.MerchantId)),
+                            Value = p.MerchantId.ToString(),
                             Text = p.MerchantName
                         }).ToList());
                     }
@@ -108,17 +108,17 @@ namespace SDGBackOffice.Controllers
             }
         }
 
-        public ActionResult MidsAssign(string id, string mId, string cId)
+        public ActionResult MidsAssign(/*string*/int id, int mId, int cId)
         {
             var userActivity = "Entered Mids Assign Page";
 
             var actRefNumber = ApplicationLog.UserActivityLog("SDGBackOffice", userActivity, "MidsAssign", "");
 
-            TempData["CardTypeId"] = cId.Contains(" ") == true ? Utility.Decrypt(cId.Replace(" ", "+")) : Utility.Decrypt(cId);
+               TempData["CardTypeId"] = cId;//.Contains(" ") == true ? Utility.Decrypt(cId.Replace(" ", "+")) : Utility.Decrypt(cId);
 
-            TempData["MIDId"] = id.Contains(" ") == true ? Utility.Decrypt(id.Replace(" ", "+")) : Utility.Decrypt(id);
+            TempData["MIDId"] = id;//.Contains(" ") == true ? Utility.Decrypt(id.Replace(" ", "+")) : Utility.Decrypt(id);
 
-            TempData["MerchantId"] = mId.Contains(" ") == true ? Utility.Decrypt(mId.Replace(" ", "+")) : Utility.Decrypt(mId);
+               TempData["MerchantId"] = mId;//.Contains(" ") == true ? Utility.Decrypt(mId.Replace(" ", "+")) : Utility.Decrypt(mId);
 
             string val = "";
 
@@ -126,7 +126,7 @@ namespace SDGBackOffice.Controllers
 
             var ddlbranch = new List<SelectListItem>();
 
-            var branch = _branchRepo.GetAllBranchesByMerchant(Convert.ToInt32(Utility.Decrypt(mId.Contains(" ") == true ? mId.Replace(" ", "+") : mId)), "");
+            var branch = _branchRepo.GetAllBranchesByMerchant(/*Convert.ToInt32(Utility.Decrypt(mId.Contains(" ") == true ? mId.Replace(" ", "+") : mId))*/mId, "");
 
             if (branch.Count == 0)
             {

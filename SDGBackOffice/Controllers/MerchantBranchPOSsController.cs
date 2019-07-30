@@ -635,13 +635,13 @@ namespace SDGBackOffice.Controllers
             return View();
         }
 
-        public ActionResult ViewInfo(string id)
+        public ActionResult ViewInfo(/*string*/int id)
         {
             var userActivity = "Entered Merchant Branch POSs Info Page";
 
             var actRefNumber = ApplicationLog.UserActivityLog("SDGBackOffice", userActivity, "ViewInfo", "");
 
-            var merchantpos = _posRepo.GetDetailsbyMerchantPOSId(Convert.ToInt32(Utility.Decrypt(id.Contains(" ") == true ? id.Replace(" ", "+") : id)));
+            var merchantpos = _posRepo.GetDetailsbyMerchantPOSId(/*Convert.ToInt32(Utility.Decrypt(id.Contains(" ") == true ? id.Replace(" ", "+") : id))*/id);
 
             MerchantPOSModel pos = new MerchantPOSModel();
             string status = "";

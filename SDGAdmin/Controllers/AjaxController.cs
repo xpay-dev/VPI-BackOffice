@@ -764,7 +764,7 @@ namespace SDGAdmin.Controllers
             {
                 var switchesforDisplay = partnerSwitches.Select(sp => new
                 {
-                    SwitchId = Utility.Encrypt(Convert.ToString(sp.SwitchId)),//sp.SwitchId,
+                    SwitchId = sp.SwitchId.ToString(),//Utility.Encrypt(Convert.ToString(sp.SwitchId)),
                     SwitchName = sp.Switch.SwitchName,
                     AddressRequired = sp.Switch.IsAddressRequired,
                     EnabledToPartner = sp.IsEnabled, // or IsActive
@@ -1158,7 +1158,7 @@ namespace SDGAdmin.Controllers
 
             var devices = masterDevice.Select(p => new
             {
-                MasterDeviceId = Utility.Encrypt(Convert.ToString(p.MasterDeviceId)),//(p.MasterDeviceId),
+                MasterDeviceId = (p.MasterDeviceId),//Utility.Encrypt(Convert.ToString(p.MasterDeviceId)),
                 DeviceName = p.DeviceName,
                 Manufacturer = p.Manufacturer,
                 IsActive = p.IsActive

@@ -1921,14 +1921,15 @@ namespace SDGBackOffice.Controllers
         }
         #endregion
 
-        public ActionResult ViewAssignedDevices(string id)
+        public ActionResult ViewAssignedDevices(int id)//string id)
         {
             var userActivity = "Entered View Assigned Devices Page";
 
             var actRefNumber = ApplicationLog.UserActivityLog("SDGBackOffice", userActivity, "ViewAssignedDevices", "");
 
             MerchantDeviceModel merchModel = new MerchantDeviceModel();
-            merchModel.MerchantId = Convert.ToInt32(Utility.Decrypt(id.Contains(" ") == true ? id.Replace(" ", "+") : id));
+            //merchModel.MerchantId = Convert.ToInt32(Utility.Decrypt(id.Contains(" ") == true ? id.Replace(" ", "+") : id));
+             merchModel.MerchantId = id;
 
             return View(merchModel);
         }
@@ -2168,7 +2169,7 @@ namespace SDGBackOffice.Controllers
         }
 
         [HttpPost]
-        public ActionResult AssignDevice(MerchantDeviceModel md)
+        public ActionResult AssignDevice(int id, MerchantDeviceModel md)
         {
             try
             {
@@ -2181,7 +2182,7 @@ namespace SDGBackOffice.Controllers
                 foreach (string i in deviceId)
                 {
                     var mDevice = new SDGDAL.Entities.DeviceMerchantLink();
-                    mDevice.MerchantId = Convert.ToInt32(TempData["MerchantId"]);
+                    mDevice.MerchantId = id;
                     mDevice.DeviceId = Convert.ToInt32(i);
                     mDevice.IsDeleted = false;
 

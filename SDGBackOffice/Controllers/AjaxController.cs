@@ -355,7 +355,7 @@ namespace SDGBackOffice.Controllers
             var merchantModel = merchants.Select(p => new
             {
                 MerchantName = p.MerchantName,
-                MerchantId = Utility.Encrypt(Convert.ToString(p.MerchantId)),//p.MerchantId,
+                MerchantId = p.MerchantId,//Utility.Encrypt(Convert.ToString(p.MerchantId)),//p.MerchantId,
                 City = p.ContactInformation.City + ", " + p.ContactInformation.Country.CountryName,
                 IsActive = p.IsActive,
                 PrimaryContactNumber = p.ContactInformation.PrimaryContactNumber,
@@ -622,7 +622,7 @@ namespace SDGBackOffice.Controllers
 
             var poss = merchantBranchPOSs.Select(p => new
             {
-                POSId = Utility.Encrypt(Convert.ToString(p.MerchantPOSId)),//p.MerchantPOSId,
+                POSId = p.MerchantPOSId, //Utility.Encrypt(Convert.ToString(p.MerchantPOSId)),//p.MerchantPOSId,
                 POSName = p.MerchantPOSName,
                 ActivationCode = p.MobileApp.Last().ActivationCode,
                 Status = p.MobileApp.Last().IsActive ? "Active" : "Not yet activated",
@@ -981,7 +981,7 @@ namespace SDGBackOffice.Controllers
 
             if (id != "0")
             {
-                merchantId = Convert.ToInt32(Utility.Decrypt(id));
+                merchantId = Convert.ToInt32(id);
             }
 
             var mids =
@@ -993,10 +993,12 @@ namespace SDGBackOffice.Controllers
             var midModel = mids.Select(p => new MerchantMidModel()
             {
                 EncryptedMIDId = Utility.Encrypt(Convert.ToString(p.MidId)),//p.MidId,
+                MIDId = p.MidId,
                 IsActive = p.IsActive,
                 MIDName = p.MidName,
                 EncryptedCardTypeId = Utility.Encrypt(Convert.ToString(p.CardTypeId)),
                 CardType = p.CardType.TypeName,
+                CardTypeId = p.CardTypeId,
                 SwitchId = p.SwitchId,
                 Switch = p.Switch.SwitchName
             }).ToList();
