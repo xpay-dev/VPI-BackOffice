@@ -1,0 +1,83 @@
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\SDGWebService.dll.config
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\SDGWebService.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\SDGWebService.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\DSPREADQPosLayer.exe
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\GatewayProcessor.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\JWT.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\PAYMAYA_ISO8583.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\RamblerLayer1.exe
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\SDGDAL.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\SDGUtil.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\Thx.Research.Security.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\WisepadLayer.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\CTPaymentUtilities.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\System.Net.Http.Formatting.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\Crypto.CryptoManager.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\Dapper.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\DSPREADQPosLayer.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\GatewayProcessor.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\RamblerLayer1.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\SDGDAL.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\SDGUtil.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\WisepadLayer.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\System.Net.Http.Formatting.xml
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\bin\Dapper.xml
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.csprojResolveAssemblyReference.cache
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.dll
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\SDGWebService.dll.config
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\SDGWebService.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\SDGWebService.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\DSPREADQPosLayer.exe
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\GatewayProcessor.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\RamblerLayer1.exe
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\SDGDAL.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\SDGUtil.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\WisepadLayer.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\CTPaymentUtilities.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\System.Net.Http.Formatting.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\Crypto.CryptoManager.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\Dapper.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\DSPREADQPosLayer.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\GatewayProcessor.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\RamblerLayer1.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\SDGDAL.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\SDGUtil.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\WisepadLayer.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\System.Net.Http.Formatting.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\bin\Dapper.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.csprojResolveAssemblyReference.cache
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGWebService.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGWebService.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGWebService.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\DSPREADQPosLayer.exe
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\GatewayProcessor.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\RamblerLayer1.exe
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGDAL.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGUtil.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\WisepadLayer.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\CTPaymentUtilities.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\System.Net.Http.Formatting.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\Crypto.CryptoManager.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\Dapper.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\DSPREADQPosLayer.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\DSPREADQPosLayer.exe.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\GatewayProcessor.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\GatewayProcessor.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\RamblerLayer1.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\RamblerLayer1.exe.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGDAL.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGDAL.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGUtil.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\SDGUtil.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\WisepadLayer.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\WisepadLayer.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\System.Net.Http.Formatting.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\bin\Dapper.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.csprojAssemblyReference.cache
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.csproj.CoreCompileInputs.cache
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.csproj.CopyComplete
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGWebService\obj\Debug\SDGWebService.pdb

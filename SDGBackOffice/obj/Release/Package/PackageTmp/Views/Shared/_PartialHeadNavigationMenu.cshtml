@@ -1,0 +1,183 @@
+﻿<nav class="left-menu" left-menu ng-class="{'hidden-left-menu': hideLeftMenu}">
+    <div class="logo-container">
+        <a href="/Home/Dashboard" class="logo">
+            <img src="@Url.Content("~/assets/common/img/logo.png")" alt="VeritasPay" />
+            <img class="logo-inverse" src="@Url.Content("~/assets/common/img/logo-inverse.png")" alt="PayMaya" />
+        </a>
+    </div>
+    <div class="left-menu-inner scroll-pane">
+        <ul class="left-menu-list left-menu-list-root list-unstyled">
+
+            @if(SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.MerchantLocation) {
+                if(SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Marketing) {
+                    <li>
+                        @Html.ActionLink("Dashboard", "Dashboard", "Home", null, new { @class = "left-menu-link" })
+                    </li>
+
+                    if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
+                        <!-- Partner Pages -->
+                        <li id="partnerMenu" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">Partner Management</a>
+                            <ul class="left-menu-list list-unstyled">
+                                <li id="partnerIndex">@Html.ActionLink("View All Partners", "Index", "Partners", null, new { @class = "left-menu-link" })</li>
+                                <li id="partnerViewInfo">@Html.ActionLink("View My Info", "ViewInfo", "Partners", null, new { @class = "left-menu-link" })</li>
+                                <li id="partnerUpdate">@Html.ActionLink("Update My Info", "UpdateMyInfo", "Partners", null, new { @class = "left-menu-link" })</li>
+
+                                @if(SDGBackOffice.CurrentUser.Role.ToLower().Contains("admin")) {
+                                    <li id="partnerRegister">@Html.ActionLink("Register New Partner", "Registration", "Partners", null, new { @class = "left-menu-link" })</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                    if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner || SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller) {
+                        <!-- Reseller Pages -->
+                        <li id="resellerMenu" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">Reseller Management</a>
+                            <ul class="left-menu-list list-unstyled">
+                                @if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
+                                    <li id="resellerIndex">@Html.ActionLink("View All Resellers", "Index", "Resellers", null, new { @class = "left-menu-link" })</li>
+                                }
+
+                                @if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller) {
+                                    <li id="resellerViewInfo">@Html.ActionLink("View My Info", "ViewMyInfo", "Resellers", null, new { @class = "left-menu-link" })</li>
+                                    if(SDGBackOffice.CurrentUser.Role.ToLower().Contains("admin")) {
+                                        <li id="resellerUpdate">@Html.ActionLink("Update My Info", "UpdateMyInfo", "Resellers", null, new { @class = "left-menu-link" })</li>
+                                    }
+                                }
+
+                                @if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner && SDGBackOffice.CurrentUser.Role.ToLower().Contains("admin")) {
+                                    <li id="resellerRegister">@Html.ActionLink("Register New Reseller", "Registration", "Resellers", null, new { @class = "left-menu-link" })</li>
+                                }
+
+                                @if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller && SDGBackOffice.CurrentUser.Role.ToLower().Contains("admin")) {
+                                    @*<li>@Html.ActionLink("Register Reseller User", "NewUser", "Resellers", null, new { @class = "xn-text" })</li>*@
+                                }
+                            </ul>
+                        </li>
+                    }
+                        <!-- Merchant Pages -->
+                    if(SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.MerchantLocation) {
+                        <li id="merchantSubmenu" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">Merchant</a>
+                            <ul class="left-menu-list list-unstyled">
+                                @if(SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant) {
+                                    <li id="merchantSubIndex">@Html.ActionLink("View All Merchants", "Index", "Merchants", null, new { @id = "merchant", @class = "left-menu-link" })</li>
+                                        <li id="merchantSubIndex">@Html.ActionLink("View Merchant Request", "RequestedMerchants", "Merchants", null, new { @id = "merchant", @class = "left-menu-link" })</li>
+                                        <li id="merchantSubRegister">@Html.ActionLink("Register New Merchant", "Registration", "Merchants", null, new { @id = "merchant", @class = "left-menu-link" })</li>
+                                        @*<li id="merchantBulkRegister">@Html.ActionLink("Merchant Bulk Boarding", "MerchantBulkBoarding", "Merchants", null, new { @id = "merchant", @class = "left-menu-link" })</li>*@
+                                } else {
+                                    <li id="merchantSubViewInfo">@Html.ActionLink("View My Info", "ViewMyInfo", "Merchants", null, new { @class = "left-menu-link" })</li>
+                                    if(SDGBackOffice.CurrentUser.Role.ToLower().Contains("admin")) {
+                                        <li id="merchantSubUpdateInfo">@Html.ActionLink("Update My Info", "UpdateMyInfo", "Merchants", null, new { @class = "left-menu-link" })</li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
+                       <!--end Merchant-->
+
+                        <!-- Merchant Branch -->
+                    <li id="merchantbranchSubmenu" class="left-menu-list-submenu">
+                        <a class="left-menu-link" href="#">Merchant Branch</a>
+                        <ul class="left-menu-list list-unstyled">
+                            <li id="merchantbranchSubIndex">@Html.ActionLink("View All Branches", "Index", "MerchantBranches", null, new { @class = "left-menu-link" })</li>
+                            @if(SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant) {
+                                <li id="merchantbranchSubRegister">@Html.ActionLink("Register New Branch", "Registration", "MerchantBranches", null, new { @class = "left-menu-link" })</li>
+                            }
+
+                        </ul>
+                    </li>
+                        <!-- end Merchant Branch-->
+
+                        <!-- POS -->
+                        <li id="merchantposSubmenu" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">POS</a>
+                            <ul class="left-menu-list list-unstyled">
+                                <li id="merchantposSubIndex">@Html.ActionLink("View All POS", "Index", "MerchantBranchPOSs", null, new { @class = "left-menu-link" })</li>
+                                @if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner || SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller) {
+                                    <li id="merchantposSubRegister">@Html.ActionLink("Register New POS", "Create", "MerchantBranchPOSs", new { id = 0 }, new { @class = "left-menu-link" })</li>
+                                }
+                            </ul>
+
+                        </li>
+                        <!-- end POS -->
+                    if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
+                        <li id="merchantmidSubmenu" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">MID</a>
+                            <ul class="left-menu-list list-unstyled">
+                                <li id="merchantmidSubIndex">@Html.ActionLink("View All MIDs", "Index", "MIDs", null, new { @class = "left-menu-link" })</li>
+                                <li id="merchantmidSubRegister">@Html.ActionLink("Register New MID", "Registration", "MIDs", null, new { @class = "left-menu-link" })</li>
+                            </ul>
+                        </li>
+
+                            <li id="featuresMenu" class="left-menu-list-submenu">
+                                <a class="left-menu-link" href="#">Features</a>
+                                <ul class="left-menu-list list-unstyled">
+                                    <li id="featureMerchant">@Html.ActionLink("Merchant Features", "Index", "MerchantFeatures", null, new { @class = "left-menu-link" })</li>
+                                    <li id="featurePOS">@Html.ActionLink("POS Features", "Index", "POSFeatures", null, new { @class = "left-menu-link" })</li>
+                                </ul>
+                            </li>
+                    }
+                    <li>
+                        @Html.ActionLink("Reports Central", "Index", "Reports", null, new { @class = "left-menu-link" })
+                    </li>
+                        <li>
+                            @Html.ActionLink("Reports Graph", "ReportsGraph", "Reports", null, new { @class = "left-menu-link" })
+                        </li>
+
+                    if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
+                        <li>@Html.ActionLink("User Management", "Index", "Users", null, new { @class = "left-menu-link" })</li>
+                    }
+
+                    if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller
+                                || SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Merchant) {
+                             <!-- User Management Pages -->
+                        <li id="featuresMenu" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">User Management</a>
+                            <ul class="left-menu-list list-unstyled">
+                                <li id="userIndex">@Html.ActionLink("View All User", "Index", "Users", null, new { @class = "left-menu-link" })</li>
+                                <li id="userRegistration">@Html.ActionLink("Create My User", "RegisterMyUser", "Users", null, new { @class = "left-menu-link" })</li>
+                            </ul>
+                        </li>
+                    }
+
+                    if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
+                        <li id="merchantBulk" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">CTPayment Merchant Bulk Boarding</a>
+                            <ul class="left-menu-list list-unstyled">
+                                <li id="AddBulk">@Html.ActionLink("Add Bulk Merchant", "Add", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                                <li id="UpdateBulk">@Html.ActionLink("Update Bulk Merchant", "Update", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                                <li id="DeleteBulk">@Html.ActionLink("Delete Bulk Merchant", "Delete", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                                <li id="ViewResults">@Html.ActionLink("Get Filenames", "GetFileNames", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                            </ul>
+                        </li>
+                    }
+
+                    if(SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Merchant) {
+                             <!-- Virtual Pages -->
+                        <li id="featuresMenu" class="left-menu-list-submenu">
+                            <a class="left-menu-link" href="#">Virtual Terminal</a>
+                            <ul class="left-menu-list list-unstyled">
+                                <li id="payIndex">@Html.ActionLink("Payment", "Index", "Payment", null, new { @class = "left-menu-link" })</li>
+                                <li id="payRefund">@Html.ActionLink("Refund", "Refund", "Payment", null, new { @class = "left-menu-link" })</li>
+                            </ul>
+                        </li>
+                    }
+                } else {
+                    <li>
+                        @Html.ActionLink("Request Merchant", "RequestMerchants", "Home", null, new { @class = "left-menu-link" })
+                    </li>
+                        <li>
+
+                        </li>
+                }
+            } else {
+                <li>
+                    @Html.ActionLink("Reports Central", "Index", "Reports", null, new { @class = "left-menu-link" })
+                </li>
+            }
+        </ul>
+    </div>
+</nav>
+

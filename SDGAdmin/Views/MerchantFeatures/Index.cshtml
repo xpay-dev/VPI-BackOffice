@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Merchant Features";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Merchant Features</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <h4>Select Partner:</h4>
+                           @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4>Select Reseller:</h4>
+                           @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All Merchants</h3>
+            </div>
+
+            <div class="pull-right" id="dvActionKeys">
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("AgreementsText")" onclick="redirectAction(this);">Agreements Text</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("Agreements")" onclick="redirectAction(this);">Agreements Settings</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("Index", "EmailServer")" onclick="redirectActions(this);">Email Server Settings</a>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <table class="table table-inverse nowrap" id="MerchantsTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Merchant Name</th>
+                                        <th>Primary Contact Number</th>
+                                        <th>Location</th>
+                                        <th>Association</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#featuresMenu").addClass("active");
+            $("#featureMerchant").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            refreshMerchantsFeatureTable(0);
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            $("#ddlpartners").on("change", function () {
+                var id = document.getElementById('ddlpartners').value;
+                
+                refreshMerchantsFeatureTable(0);
+
+                $.ajax({
+                    url: rootDir + 'Ajax/GetReseller',
+                    type: 'POST',
+                    data: { "pId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlresellers').empty();
+                        $.each(data, function (key, value) {
+                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if (data.length == 1) {
+                            refreshMerchantsFeatureTable($("#ddlresellers").val());
+                        }
+                    }
+                });
+            });
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                refreshMerchantsFeatureTable(id);
+            });
+
+            $("#message-box-danger").hide();
+            var strErr = '@(TempData["NeedsUpdate"])';
+            if (strErr != "") {
+                $("#errMsg").text(strErr);
+                getModal(1, errMsg);
+            }
+
+            $("#close").click(function () {
+                
+            });
+        });
+    </script>
+}
+

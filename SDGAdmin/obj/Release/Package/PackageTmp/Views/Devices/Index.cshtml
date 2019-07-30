@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Device Management</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All Devices</h3>
+            </div>
+
+            <div class="pull-right" id="dvActionKeys">
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("ViewSerialNumber")" onclick="redirectAction(this);">View Serial Numbers</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("AddSerialNumber")" onclick="redirectAction(this);">Add Serial Number</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("ViewMasterDeviceInfo")" onclick="redirectAction(this);">View Master Device</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("UpdateMasterDeviceInfo")" onclick="redirectAction(this);">Update Master Device</a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+
+                            <table class="table table-inverse nowrap" id="deviceTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Device Name</th>
+                                        <th>Manufacturer</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+    <div class="message-box message-box-success animated fadeIn hide div-contain div-hide" id="message-box-success">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+                <div class="mb-content">
+                    <p id="msg" style="font-size: large"></p>
+                </div>
+                <div class="mb-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#deviceMenu").addClass("active");
+            $("#deviceIndex").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                getModal(0, strSuccess);
+            }
+
+            refreshMasterDeviceTable();
+        });
+    </script>
+}

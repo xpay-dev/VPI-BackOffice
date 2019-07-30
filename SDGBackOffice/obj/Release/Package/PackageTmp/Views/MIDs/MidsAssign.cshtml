@@ -1,0 +1,225 @@
+﻿@{
+    ViewBag.Title = "Assign Mids";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.SDMasterModel
+
+<style>
+    select {
+        font-family: verdana;
+        font-size: 8pt;
+        width: 150px;
+        height: 100px;
+    }
+
+    .selectClass {
+        font-size: 15px;
+        font-family: 'Averia Libre';
+    }
+
+    input {
+        text-align: center;
+    }
+</style>
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "MIDs")">Home</a></li>
+            <li class="active">Mids Assignment</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>MID Assignment</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div style="color: red;">
+                            @Html.ValidationSummary()
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label class="form-control-label">Select Merchant Branch</label>
+                                @Html.DropDownListFor(x => x.MerchantBranch.MerchantBranchId, (List<SelectListItem>)ViewBag.MerchantBranch, new { id = "ddlbranch", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All POS</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div style="color: red;">
+                            @Html.ValidationSummary()
+                        </div>
+                        <form id="massign" action="@Url.Action("MidsAssign")" method="post" role="form" class="form-horizontal">
+                            @Html.Hidden("hdnCtrl", "")
+
+                            <div class="panel-body">
+                                <div class="form-group row">
+                                    <table style='text-align: center; vertical-align: middle;'>
+                                        <tr>
+                                            <td style='width: 160px;'>
+                                                <b>POS List</b><br />
+                                                <select multiple="multiple" id="lstBox1" style="width: 400px;" class="form-control" size="20"></select>
+                                            </td>
+                                            <td style='width: 50px; text-align: center; vertical-align: middle;'>
+                                                &nbsp;
+                                                <input type='button' id='btnRight' value='>  ' class="form-control" />
+                                                <br />
+                                                <input type='button' id='btnLeft' value='  <  ' class="form-control" />
+                                            </td>
+                                            <td style='width: 50px; text-align: center; vertical-align: middle;'>
+                                                &nbsp;
+                                                <b>POS(s) to be assign</b>
+                                                <br />
+                                                <select multiple="multiple" id="lstBox2" style="width: 400px;" class="form-control" size="20"></select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="form-group row">
+                                    <div class="col-md-3 pull-left">
+                                    </div>
+                                    <div class="col-md-9 ">
+                                        <input id="save" type="button" value="Assign" class="btn width-150 btn-primary pull-right" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var errMsg;
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+
+            if ($("#ddlbranch > option").length == 1) {
+                $.ajax({
+                    url: rootDir + 'Ajax/BanchPOS',
+                    type: 'POST',
+                    data: { "id": $("#ddlbranch").val() },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#lstBox1').empty();
+                        $('#lstBox2').empty();
+                        $.each(data, function (key, value) {
+                            $("#lstBox1").append($("<option></option>").val(value.MerchantPOSId).html(value.MerchantPOSName));
+                        });
+                    }
+                });
+            }
+
+            $("#ddlbranch").change(function () {
+                var id = document.getElementById('ddlbranch').value;
+                $.ajax({
+                    url: rootDir + 'Ajax/BanchPOS',
+                    type: 'POST',
+                    data: { "id": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#lstBox1').empty();
+                        $('#lstBox2').empty();
+                        $.each(data, function (key, value) {
+                            $("#lstBox1").append($("<option></option>").val(value.MerchantPOSId).html(value.MerchantPOSName));
+                        });
+                    }
+                });
+            });
+
+            $('#btnRight').click(function (e) {
+                var selectedOpts = $('#lstBox1 option:selected');
+                if (selectedOpts.length == 0) {
+                    alert("Select a PoS to Assign");
+                    e.preventDefault();
+                }
+
+                $('#lstBox2').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $('#btnLeft').click(function (e) {
+                var selectedOpts = $('#lstBox2 option:selected');
+                if (selectedOpts.length == 0) {
+                    alert("Select a PoS that you want to remove");
+                    e.preventDefault();
+                }
+
+                $('#lstBox1').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $('form').submit(function () {
+                var json = "";
+                $("#lstBox2 option").each(function () {
+                    value = $(this).val()
+                    text = $(this).html()
+
+                    if (json.length != 0) json += ",";
+
+                    json += value;
+                });
+                var id = document.getElementById('hdnCtrl').value = json.toString();
+            });
+
+            $("#save").click(function () {
+                var listB = document.getElementById('lstBox2').length;
+                if (listB == 0) {
+                   
+                    errMsg = 'Please select a POS';
+                    getModal(1, errMsg);
+                } else {
+                    $("#massign").submit();
+                }
+            });
+
+        });
+
+    </script>
+}

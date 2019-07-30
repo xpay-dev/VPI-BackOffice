@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Merchant On Board Results";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Merchant on Board</li>
+        </ul>
+
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+<section class="page-content">
+    @Html.Hidden("hdnParentType", SDGBackOffice.CurrentUser.ParentType)
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        @Html.Hidden("outdated", (object)ViewBag.Outdated)
+        @Html.Hidden("error", (object)ViewBag.Error)
+        <section class="panel">
+            <div class="panel-heading">
+                <h4>View All Response Filename/s</h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <div style="display:inline-grid;" id="divActionKeys">
+                                <a href="#" class="btn btn-primary margin-inline pull-right" data-link="@Url.Action("GetFileDetails", "MerchantOnBoard")" onclick="redirectActionToGetResponse(this);">View Response</a>
+                            </div>
+                            <table class="table table-inverse nowrap" id="FileResponseTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>File Name</th>
+                                        <th>Date Received</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/js/CTMerchantOnBoard.js")"></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var errorMsg;
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            $("#merchantBulk").addClass("active");
+            $("#ViewResults").addClass("active");
+
+            document.getElementById('value').value = "merchant";
+            if (document.getElementById('hdnParentType').value == 'Reseller') {
+                $(".panel-hide").css('display', 'none');
+            }
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            var strOutdated = document.getElementById('outdated').value;
+            if (strOutdated != "") {
+                getModal(1, strOutdated);
+            }
+
+            var strError = document.getElementById('error').value;
+            if (strError != "") {
+                getModal(1, strError);
+            }
+
+            $("#close").click(function () {
+            });
+
+            refreshGetAllFilenameResponse();
+        });
+    </script>
+}

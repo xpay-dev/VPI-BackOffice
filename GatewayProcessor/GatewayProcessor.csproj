@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AEB343CB-3DA2-4F79-BAC0-5FA5ED481110}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GatewayProcessor</RootNamespace>
+    <AssemblyName>GatewayProcessor</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CTPaymentUtilities">
+      <HintPath>..\packages\Others\CTPaymentUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="CT_EMV_CLASSES">
+      <HintPath>..\packages\Others\CT_EMV_CLASSES.dll</HintPath>
+    </Reference>
+    <Reference Include="HPA_ISO8583">
+      <HintPath>..\packages\Others\HPA_ISO8583.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\packages\Others\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="PAYMAYA_ISO8583">
+      <HintPath>..\packages\Others\PAYMAYA_ISO8583.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Reflection.Context" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Thx.Research.Security">
+      <HintPath>..\packages\Others\Thx.Research.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApiDoodle.Net.Http.Formatting, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiDoodle.Net.Http.Formatting.3.0.0-pre01\lib\net45\WebApiDoodle.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CTPaymentGateway\ApiResponse.cs" />
+    <Compile Include="CTPaymentGateway\CreditCard.cs" />
+    <Compile Include="CTPaymentGateway\DebitCard.cs" />
+    <Compile Include="CTPaymentGateway\EmvServiceResponse.cs" />
+    <Compile Include="CTPaymentGateway\CTServiceResponsecs.cs" />
+    <Compile Include="CTPaymentGateway\MerchantRequest.cs" />
+    <Compile Include="CTPaymentGateway\PinPad.cs" />
+    <Compile Include="CTPaymentGateway\Terminal.cs" />
+    <Compile Include="CTPaymentGateway\TransactionEMVData.cs" />
+    <Compile Include="PayMaya\Request.cs" />
+    <Compile Include="PayMaya\TransactionResponse.cs" />
+    <Compile Include="PayOnline\TransactionRequest.cs" />
+    <Compile Include="PayOnline\TransactionResponse.cs" />
+    <Compile Include="VeritasPayment\CardDetails.cs" />
+    <Compile Include="VeritasPayment\SocketClient.cs" />
+    <Compile Include="VeritasPayment\SwitchResponse.cs" />
+    <Compile Include="Gateways.cs" />
+    <Compile Include="GlobalOnePay\TransactionData.cs" />
+    <Compile Include="GlobalOnePay\PaymentResponse.cs" />
+    <Compile Include="IsignThis\auth_request.cs" />
+    <Compile Include="IsignThis\AuthResponse.cs" />
+    <Compile Include="IsignThis\pub_downstream_dto.cs" />
+    <Compile Include="MasterCard\APILogin.cs" />
+    <Compile Include="MasterCard\ServiceResponse.cs" />
+    <Compile Include="MVisa\Address.cs" />
+    <Compile Include="MVisa\CardAcceptor.cs" />
+    <Compile Include="MVisa\PurchaseIdentifier.cs" />
+    <Compile Include="MVisa\Response.cs" />
+    <Compile Include="NovaPay\HashFunctions.cs" />
+    <Compile Include="NovaPay\ServiceResponse.cs" />
+    <Compile Include="NovaPay\TransactionData.cs" />
+    <Compile Include="Payeco\RequestXML.cs" />
+    <Compile Include="Payeco\TransactionData.cs" />
+    <Compile Include="Payeco\TransactionResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\CardConnect\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ConversionTool\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FroogalPay\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\PlanetPay\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\VaultPosGateway\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="MasterCard\TransactionData.cs" />
+    <Compile Include="SMS Gateway\SendVerificationCode.cs" />
+    <Compile Include="TrustPay\Transaction.cs" />
+    <Compile Include="TrustPay\TransactionResponse.cs" />
+    <Compile Include="Worldnet\PaymentResponse.cs" />
+    <Compile Include="Worldnet\TransactionData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Service References\CardConnect\CCWSv1.wsdl" />
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.addProfileResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.authTxnResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.captureTxnResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.deleteProfileResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.deposit.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.depositTxnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.echoResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.fundingmaster.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.fundingTxnResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.getProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.inquireTxnResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.profileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.refundTxnResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.settleResp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.settlestatTxnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.txnResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CardConnect\GatewayProcessor.CardConnect.voidTxnResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.ConvertPinDataClearTextResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.ConvertPinDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.ConvertPinDataToPinResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.DecryptRoverResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.DecryptTrack1RoverResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.DecryptTrack2RoverResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.EvertecKeyConversionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.ReturnResultTest.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\GatewayProcessor.ConversionTool.TestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ConversionTool\webservice.wsdl" />
+    <None Include="Service References\FroogalPay\GatewayProcessor.FroogalPay.Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\FroogalPay\transact.wsdl" />
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseAccountFundingTransaction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseAdjustment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseAuthorization.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseAuthorizationAvsOnly.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseAuthorizationDCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseAuthorizationMCP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseAuthorizationPartialReversal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseBatchSettlementClose.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseBatchSettlementStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseBatchSettlementStatusDetail.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseBatchUploadAdvice.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseBinDownload.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseCharge.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseChargeDCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseChargeMCP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseDynamicKeyExchange.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseEcho.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseMoneyTransferFund.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseMoneyTransferSend.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseOfflineAuthorization.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseOfflineCharge.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseOriginalCreditTransaction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseRateLookupDCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseRateLookupMCP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseRateLookupRefundDCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseRateLookupRefundMCP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseReferralTransaction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseRefund.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseRefundDCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseRefundMCP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseReportDownload.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseSettlement.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseTimeOutReversal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseTransactionInquiry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseVoidOrRefund.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseVoidOrRefundMCP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\GatewayProcessor.PlanetPay.ResponseVoidTransaction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PlanetPay\item.wsdl" />
+    <None Include="Service References\PlanetPay\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PlanetPay\Transaction.wsdl" />
+    <None Include="Service References\VaultPosGateway\GatewayProcessor.VaultPosGateway.Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VaultPosGateway\transact.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CardConnect\" />
+    <WCFMetadataStorage Include="Service References\ConversionTool\" />
+    <WCFMetadataStorage Include="Service References\FroogalPay\" />
+    <WCFMetadataStorage Include="Service References\PlanetPay\" />
+    <WCFMetadataStorage Include="Service References\VaultPosGateway\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VaultPosGateway\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VaultPosGateway\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VaultPosGateway\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ConversionTool\webservice.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ConversionTool\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ConversionTool\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ConversionTool\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CardConnect\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CardConnect\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CardConnect\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FroogalPay\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FroogalPay\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\FroogalPay\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PlanetPay\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PlanetPay\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PlanetPay\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SDGDAL\SDGDAL.csproj">
+      <Project>{4fb39a63-82f2-478d-9160-d99f3258cb6b}</Project>
+      <Name>SDGDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGDUtil\SDGUtil.csproj">
+      <Project>{1a526a27-b799-4629-96d4-6508be72b371}</Project>
+      <Name>SDGUtil</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

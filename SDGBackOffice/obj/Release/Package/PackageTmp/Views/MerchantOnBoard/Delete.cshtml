@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Delete Merchant Boarding";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Merchant On Board</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+@Html.Hidden("hdnParentType", SDGBackOffice.CurrentUser.ParentType)
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            @Html.Hidden("success", (object)ViewBag.Success)
+            @Html.Hidden("outdated", (object)ViewBag.Outdated)
+            @Html.Hidden("error", (object)ViewBag.Error)
+           
+             <div class="panel-heading">
+                <h4>Filter Option</h4>
+            </div>
+            
+            <div class="panel-body">
+                <div class="form-group row">                   
+                    <div class="col-md-4">
+                        <label class="form-control-label">Select Reseller</label>
+                        @Html.DropDownList("ddlresellers", (List<SelectListItem>)ViewBag.Resellers, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">                    
+                    <div class="col-md-4">
+                        <label class="form-control-label">Select Data To be Deleted</label>
+                        @Html.DropDownList("ddlactions", (List<SelectListItem>)ViewBag.Actions, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h4>Delete Bulk Merchant</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <div class="pull-right">
+                                <a href="#" class="btn btn-primary margin-inline panel-hide" id="btnGetMerchantId">Send Request To CTPayment</a>
+                            </div>
+                            <table class="table table-inverse nowrap" id="MerchantsTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectall" name="chk" /></th>
+                                        <th>Merchant Name</th>
+                                        <th>Association</th>
+                                        <th>Data To Be Deleted</th>
+                                        <th>Command</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/js/CTMerchantOnBoard.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var errorMsg;
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            $("#merchantBulk").addClass("active");
+            $("#DeleteBulk").addClass("active");
+
+            document.getElementById('value').value = "merchant";
+            if (document.getElementById('hdnParentType').value == 'Reseller') {
+                $(".panel-hide").css('display', 'none');
+            }
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            var strOutdated = '@(TempData["NeedsUpdate"])';
+            if (strOutdated != "") {
+                getModal(1, strOutdated);
+            }
+
+            var strError = document.getElementById('error').value;
+            if (strError != "") {
+                getModal(1, strError);
+            }
+
+            if (document.getElementById('ddlresellers').value != 0 || document.getElementById('ddlactions').value != 0) {
+                refreshDeleteMerchantBulkBoarding(document.getElementById('ddlresellers').value, document.getElementById('ddlactions').value);
+            } else {
+                refreshDeleteMerchantBulkBoarding(0, 0);
+            }
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                var actId = document.getElementById('ddlactions').value;
+                refreshDeleteMerchantBulkBoarding(id, actId);
+            });
+
+            $("#ddlactions").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                var actId = document.getElementById('ddlactions').value;
+                refreshDeleteMerchantBulkBoarding(id, actId);
+            });
+
+            $("#close").click(function () {
+            });
+
+            $('#btnGetMerchantId').click(function () {
+                var dataArr = [];
+                $('input#chkMerchantId:checked').each(function () {
+                    dataArr.push($(this).val());
+                });
+
+                if (dataArr == "") {
+                    errorMsg = 'Please select available Merchant.';
+                    getModal(1, errorMsg);
+                } else {
+                    window.location.href = "/MerchantOnBoard/GetAllMerchantsToBeDeleted?ids=" + dataArr + "&ActionId=" + actionId;
+                }
+            });
+
+            $('#selectall').change(function () {
+                if ($(this).is(":checked")) {
+                    $(':checkbox').not(this).prop('checked', this.checked);
+                } else {
+                    $(':checkbox').not(this).removeAttr('checked', this.checked);
+                }
+            });
+
+        });
+    </script>
+}

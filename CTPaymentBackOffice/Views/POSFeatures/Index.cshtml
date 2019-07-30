@@ -1,0 +1,214 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model CTPaymentBackOffice.Models.MerchantPOSModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Features</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>POS Features</h2>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    @Html.Hidden("success", (object)ViewBag.Success)
+    <div class="row">
+        <div class="col-md-12">
+            @*@if (ViewBag.Branchs != null){
+            *@<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Filter Option</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Reseller</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ResellerId", (List<SelectListItem>)ViewBag.Resellers, new { @placeholder = " ", @class = "form-control", id = "ddlResellers" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Merchant</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Branch</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlbranches", new List<SelectListItem>() { new SelectListItem { Text = "No Branches available", Value = "-3" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*}*@
+            <!-- START SIMPLE DATATABLE -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">View All POS</h3>
+                    <div style="display: inline-grid;" id="dvActionKeys">
+                        <a href="#" class="btn btn-info pull-right" data-link="@Url.Action("Feature")" onclick="redirectAction(this);">Update Mobile App Settings</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table" id="POSTbl">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>POS Name</th>
+                                <th>Activation Code</th>
+                                <th>Association</th>
+                                <th>Status</th>
+                                <th>Date Activated</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- END SIMPLE DATATABLE -->
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="msg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#featuresMenu").addClass("active");
+            $("#featureMerchant").addClass("active");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#msg").text(strSuccess);
+                $("#message-box-success").show();
+                $("#message-box-success").fadeOut(1500);
+            }
+
+            refreshPOSTable(0);
+
+            $("#ddlResellers").on("change", function () {
+                var id = document.getElementById('ddlResellers').value;
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                refreshPOSTable(0);
+                $.ajax({
+                    url: '/Ajax/GetMerchantsByReseller',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlmerchants").on("change", function () {
+                var id = document.getElementById('ddlmerchants').value;
+                refreshPOSTable(0);
+                $.ajax({
+                    url: '/Ajax/GetBranches',
+                    type: 'POST',
+                    data: { "id": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-3']").remove();
+                        $('#ddlbranches').empty();
+                        $.each(data, function (key, value) {
+                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlbranches").on("change", function () {
+                var id = document.getElementById('ddlbranches').value;
+                refreshPOSTable(id);
+            });
+
+            if ($('#ddlResellers > option').length == 1) {
+                var id = document.getElementById('ddlResellers').value;
+
+                $.ajax({
+                    url: '/Ajax/GetMerchantsByReseller',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if ($("#ddlmerchants").length == 1) {
+                            $.ajax({
+                                url: '/Ajax/GetBranches',
+                                type: 'POST',
+                                data: { "id": $("#ddlmerchants").val() },
+                                dataType: "json",
+                                success: function (data) {
+                                    $("option[value='-3']").remove();
+                                    $('#ddlbranches').empty();
+                                    $.each(data, function (key, value) {
+                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                    });
+
+                                    if ($("#ddlbranches").length == 1) {
+                                        refreshPOSTable($("#ddlbranches").val());
+                                    }
+
+                                }
+                            });
+                        }
+
+                    }
+                });
+            } else {
+                refreshPOSTable(0);
+            }
+
+        });
+    </script>
+}
+
+
+

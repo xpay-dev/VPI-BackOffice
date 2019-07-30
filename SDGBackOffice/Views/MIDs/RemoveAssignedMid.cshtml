@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Remove Mids";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.SDMasterModel
+
+<style>
+    select {
+        font-family: verdana;
+        font-size: 8pt;
+        width: 150px;
+        height: 100px;
+    }
+
+    .selectClass {
+        font-size: 15px;
+        font-family: 'Averia Libre';
+    }
+
+    input {
+        text-align: center;
+    }
+</style>
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "MIDs")">Home</a></li>
+            <li class="active">Mids Management</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>MID Management</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Merchant Branch:</label>
+                                @Html.DropDownListFor(x => x.MerchantBranch.MerchantBranchId, (List<SelectListItem>)ViewBag.MerchantBranch, new { id = "ddlbranch", @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select POS:</label>
+                                @Html.DropDownList("ddlpos", new List<SelectListItem>() { new SelectListItem { Text = "Select a Merchant Branch to View POS", Value = "-1" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <form id="massign" action="@Url.Action("MidsAssign")" method="post" role="form" class="form-horizontal">
+            @Html.Hidden("hdnCtrl", "")
+            <section class="panel">
+                <div class="panel-heading">
+                    <h3>Assigned MIDs for this POS</h3>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="margin-bottom-50">
+                                <table class="table table-inverse nowrap" id="POSTbl" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th>MID Name</th>
+                                            <th>Status</th>
+                                            <th>Deleted</th>
+                                            <th>Currency</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+        <!-- End  -->
+    </div>
+</section>
+
+
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            refreshPOSAssignedMIDsTable(0);
+
+            $("#ddlpos").on("change", function () {
+                var ddl = document.getElementById('ddlpos').value;
+                refreshPOSAssignedMIDsTable(ddl);
+            });
+
+            $("#ddlbranch").change(function () {
+                var ddl = document.getElementById('ddlbranch').value;
+                refreshPOSAssignedMIDsTable(0);
+                $.ajax({
+                    url: rootDir + 'Ajax/BanchPOSForMid',
+                    data: { "id": ddl },
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlpos').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            if ($("#ddlbranch > option").length == 1) {
+                $.ajax({
+                    url: rootDir + 'Ajax/BanchPOSForMid',
+                    data: { "id": $("#ddlbranch").val() },
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlpos').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if ($("#ddlpos").length == 1) {
+                            refreshPOSAssignedMIDsTable($("#ddlpos").val());
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+}

@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model CTPaymentBackOffice.Models.PartnerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li class="active">Home</li>
+</ul>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-8">
+            @if (CTPaymentBackOffice.CurrentUser.ParentType != CTPaymentBackOffice.Enums.ParentType.Merchant)
+            {
+                <div id="merchant" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Top 10 Selling Merchant</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" id="topMerchantTbl">
+                            <thead>
+                                <tr>
+                                    <th>Merchant Name</th>
+                                    <th>Partner Company</th>
+                                    <th>Total Sales</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+
+            @if (CTPaymentBackOffice.CurrentUser.ParentType == CTPaymentBackOffice.Enums.ParentType.Merchant)
+            {
+                <div id="branch" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Top 10 Selling Branch</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" id="topBranchTbl">
+                            <thead>
+                                <tr>
+                                    <th>Branch Name</th>
+                                    <th>Partner Company</th>
+                                    <th>Total Sales</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div id="message-box-warning" class="message-box message-box-warning animated fadeIn">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Notice</div>
+            <div class="mb-content">
+                <p id="sMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
+    </script>
+}

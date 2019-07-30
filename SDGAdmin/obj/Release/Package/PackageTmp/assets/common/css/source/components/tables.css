@@ -1,0 +1,59 @@
+/*
+ * BASIC TABLES
+ */
+.table thead th {
+    border-bottom: 1px solid #eceeef;
+    outline: none !important;
+    color: #444444;
+}
+
+.table thead th:focus {
+    background: #eceeef;
+}
+
+.table td, .table th {
+    border-color: #eceff4;
+}
+
+.table td:focus, .table th:focus {
+    background-color: #eceff4;
+}
+
+.table tbody tr:first-child td {
+    border-top: none;
+}
+
+.table.table-hover tbody tr:hover {
+    background: #f2f4f8;
+
+}
+
+.table .thead-inverse th {
+    background: #38354a;
+
+}
+
+.table .thead-default th {
+    background: #eceff4;
+}
+
+.table.table-striped tbody tr:nth-of-type(odd) {
+    background: #f2f4f8;
+}
+
+.table-inverse thead th {
+    border-bottom-color: #eceeef;
+}
+
+.table-inverse th, .table-inverse td {
+    border-top-color: #eceeef;
+}
+
+.table-inverse th, .table-inverse td, .table-inverse thead th {
+    background: #ffffff;
+    color: #444444;
+}
+
+.table-inverse th:focus, .table-inverse td:focus, .table-inverse thead th:focus {
+    background: #2b2838;
+}

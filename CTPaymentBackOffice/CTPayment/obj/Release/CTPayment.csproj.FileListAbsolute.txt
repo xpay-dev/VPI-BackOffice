@@ -1,0 +1,204 @@
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.dll.config
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.pdb
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Crypto.CryptoManager.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPaymentUtilities.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\CT_EMV_CLASSES.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.SqlServer.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\HPA_ISO8583.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.Edm.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.OData.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Newtonsoft.Json.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGDAL.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGUtil.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Extensions.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Formatting.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Primitives.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.WebRequest.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Spatial.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.OData.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.WebHost.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\WebApiDoodle.Net.Http.Formatting.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Dapper.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGDAL.pdb
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGUtil.pdb
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.SqlServer.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.Edm.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.OData.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Newtonsoft.Json.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.WebRequest.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Spatial.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.OData.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.WebHost.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\WebApiDoodle.Net.Http.Formatting.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\Dapper.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.csprojResolveAssemblyReference.cache
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.pdb
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.dll.config
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.pdb
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Crypto.CryptoManager.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPaymentUtilities.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\CT_EMV_CLASSES.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.SqlServer.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\HPA_ISO8583.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.Edm.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.OData.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Newtonsoft.Json.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGDAL.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGUtil.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Extensions.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Formatting.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Primitives.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.WebRequest.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Spatial.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.OData.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.WebHost.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\WebApiDoodle.Net.Http.Formatting.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Dapper.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGDAL.pdb
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGUtil.pdb
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.SqlServer.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.Edm.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.OData.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Newtonsoft.Json.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.WebRequest.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Spatial.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.OData.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.WebHost.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\WebApiDoodle.Net.Http.Formatting.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\Dapper.xml
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\System.Spatial.resources.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.csprojResolveAssemblyReference.cache
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.dll
+C:\Web\Backoffice\PayMaya\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.pdb
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.dll.config
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPayment.pdb
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Crypto.CryptoManager.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\CTPaymentUtilities.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\CT_EMV_CLASSES.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.SqlServer.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\HPA_ISO8583.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.Edm.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.OData.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Newtonsoft.Json.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGDAL.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGUtil.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Extensions.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Formatting.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.Primitives.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.WebRequest.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Spatial.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.OData.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.WebHost.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\WebApiDoodle.Net.Http.Formatting.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Dapper.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGDAL.pdb
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\SDGUtil.pdb
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\EntityFramework.SqlServer.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.Edm.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Microsoft.Data.OData.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Newtonsoft.Json.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Net.Http.WebRequest.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Spatial.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.OData.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\System.Web.Http.WebHost.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\WebApiDoodle.Net.Http.Formatting.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\Dapper.xml
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\de\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\es\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\fr\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\it\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ja\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ko\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\ru\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hans\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\bin\Release\zh-Hant\System.Spatial.resources.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.csprojResolveAssemblyReference.cache
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.dll
+C:\Web\Backoffice\Veritas\SDG Project\SDGBackOffice\CTPayment\obj\Release\CTPayment.pdb

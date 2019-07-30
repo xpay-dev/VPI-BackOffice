@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.PartnerModel
+
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-12">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        @Html.Hidden("outdated", (object)ViewBag.Error)
+        <section class="panel">
+            
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-heading">
+                            <h4>Dashboard</h4>
+                        </div>
+
+                        @if (SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant)
+                        {
+                            <div id="merchant">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Top 10 Selling Merchant</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-inverse nowrap" id="topMerchantTbl" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Merchant Name</th>
+                                                <th>Partner Company</th>
+                                                <th>Total Sales</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+
+                        @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Merchant)
+                        {
+                            <div id="branch">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Top 10 Selling Branch</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-inverse nowrap" id="topBranchTbl" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Branch Name</th>
+                                                <th>Partner Company</th>
+                                                <th>Total Sales</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/js/jquery.cookie.js")'></script>
+
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/blockUI/jquery.blockUI.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            var id = '@(ViewBag.User)';
+            var type = '@(ViewBag.ParentType)';
+            var sPassword = '@(ViewBag.PasswordExpiration)';
+
+            if (type == "Partner") {
+                refreshTopSellingMerchant(id);
+            } else if (type == "Reseller") {
+                refreshTopSellingMerchantForReseller(id);
+            } else {
+                refreshTopSellingMerchantForMerchant(id);
+                var strOutdated = document.getElementById('outdated').value;
+                if (strOutdated != "") {
+                    getModal(1, strOutdated);
+                }
+            }
+
+            if ($.cookie("visits") === undefined) {
+                $.cookie("visits", 1);
+                $("#userPhoto").attr("data-content", "Click here to upload a photo.");
+                $("#userPhoto").popover('show');
+                $("#userPhoto").removeAttr("data-content");
+            }
+
+            if (sPassword != "") {
+                getModal(1, sPassword);
+            }
+        });
+    </script>
+}

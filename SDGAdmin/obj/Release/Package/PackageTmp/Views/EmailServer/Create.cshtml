@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.EmailServerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "EmailServer")">Home</a></li>
+    <li><a href="#">Email Server Management</a></li>
+    <li class="active">Create New Email Server</li>
+</ul>
+
+<!-- END PAGE CONTENT WRAPPER -->
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("create", (object)ViewBag.Create)
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Create Email Server</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <!-- Horizontal Form -->
+                            <h4>Email Server Details</h4>
+                            <form action="@Url.Action("Create")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Email</label>
+                                        @Html.TextBoxFor(m => m.EmailAddress, new { @placeholder = "Email", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Name</label>
+                                        @Html.TextBoxFor(m => m.EmailServerName, new { @placeholder = "Name", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Host</label>
+                                        @Html.TextBoxFor(m => m.Host, new { @placeholder = "Host", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Port</label>
+                                        @Html.TextBoxFor(m => m.Port, new { @placeholder = "Port", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Username</label>
+                                        @Html.TextBoxFor(m => m.Username, new { @placeholder = "Username", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Password</label>
+                                        @Html.TextBoxFor(m => m.Password, new { @placeholder = "Password", @class = "form-control", @type = "password" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Enable SSL:</label>
+                                        @Html.CheckBoxFor(m => m.UseSSL, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Default Credential:</label>
+                                        @Html.CheckBoxFor(m => m.DefaultCredential, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Set as default Email server:</label>
+                                        @Html.CheckBoxFor(m => m.DefaultEmailServer, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-3 pull-left">
+                                            <input type="button" id="clearForm" class="btn btn-default" value="Clear Form" data-toggle="modal">
+                                        </div>
+                                        <div class="col-md-9 ">
+                                            <button class="btn width-150 btn-primary pull-right">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+@using (Html.BeginForm("ConfirmationCreate", "EmailServer", FormMethod.Post))
+{
+    <div class="modal fade modal-size-small" id="modalconfirmation" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <input type="submit" name="submitButton" class="btn btn-primary pull-right" value="Yes" />
+                    <input type="submit" name="btnNo" class="btn" data-dismiss="modal" value="No" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+
+        var strSuccess = document.getElementById('create').value;
+        if (strSuccess != "") {
+            $("#msg").text(strSuccess);
+            $("#modalconfirmation").modal('show');
+            //$("#message-box-success").fadeOut(1500);
+        }
+    </script>
+}

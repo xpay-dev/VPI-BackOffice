@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Partner User";
+}
+
+@model SDGBackOffice.Models.UserModel
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Partners")">Home</a></li>
+            <li><a href="#">Partner Management</a></li>
+            <li class="active">Create New Partner User</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <!-- START WIZARD WITH VALIDATION -->
+    <div class="block">
+        <h4>Partner User Registration</h4>
+        <br />
+        <br />
+        <div style="color: red;">
+            @Html.ValidationSummary()
+        </div>
+        <form id="jvalidate" action="@Url.Action("NewUser")" method="post" role="form" class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User Details</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Name</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control", @placeholder = "Middle Name" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Address</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Numbers</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Information</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "Email Address" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Login Information</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Username" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @type = "password" })
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label class="col-md-2 control-label">Permission Set</label>
+                        <div class="col-md-4">
+                            @{
+                                List<SelectListItem> role = new List<SelectListItem>();
+                                role.Add(new SelectListItem()
+                                {
+                                    Text = "Admin",
+                                    Value = "1"
+                                });
+                                role.Add(new SelectListItem()
+                                {
+                                    Text = "Manager",
+                                    Value = "2"
+                                });
+                                role.Add(new SelectListItem()
+                                {
+                                    Text = "Employee",
+                                    Value = "3"
+                                });
+                            }
+                            @Html.DropDownListFor(m => m.RoleId, role)
+                        </div>
+                    </div>*@
+                </div>
+                <div class="panel-footer">
+                    @Html.ActionLink("Back", "Index", "Partners", null, new { @class = "btn btn-default pull-left" })
+                    <input type="submit" value="Submit" class="btn btn-primary pull-right" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- END WIZARD WITH VALIDATION -->
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById('CountryId').value = 185;
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+    </script>
+}

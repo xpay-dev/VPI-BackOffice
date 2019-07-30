@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.PartnerModel
+
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">User Management</a></li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <br />
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <a id="newUser" href="#" class="btn btn-primary margin-inline"><i class="glyphicon glyphicon-user"></i>Create New User</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <h4>Select User Type:</h4>                          
+                            @Html.DropDownList("ddlusertype", (List<SelectListItem>)ViewBag.UserType, new { @placeholder = " ", @class = "form-control" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <h4>Select Partner:</h4>
+                            @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @placeholder = " ", @class = "form-control" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4>Select Reseller:</h4>
+                            @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <h4>Select Merchant:</h4>
+                            @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4>Select Branch:</h4>
+                            @Html.DropDownList("ddlbranches", new List<SelectListItem>() { new SelectListItem { Text = "No Branches available", Value = "-3" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All Users</h3>
+            </div>
+
+            <div class="pull-right" id="dvActionKeys">               
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("UpdateUserInfo")" onclick="redirectAction(this);">Update User Info</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("ViewInfo")" onclick="redirectAction(this);">View User Info</a>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="margin-bottom-50">
+
+                            <table class="table table-inverse nowrap" id="usersTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Full Name</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>Country</th>
+                                        <th>Contact</th>
+                                        <th>User Status</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".page-content").css("height", "100%");
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#ddlmerchants").change(function () {
+                localStorage.setItem("merchant", "merchant");
+            });
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                getModal(0, strSuccess);
+            }
+
+            var ptId = 0;
+            refreshUsersTable(0, 0);
+
+            $("#ddlpartners").change(function () {
+                var pId = document.getElementById('ddlpartners').value;
+                ptId = 1;
+                refreshUsersTable(pId, ptId);
+                $('#ddlmerchants').empty();
+                $('#ddlmerchants').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchants available');
+                    $('#ddlmerchants').append(option);
+                });
+
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                $.ajax({
+                    url: rootDir + 'Ajax/GetResellerforUser',
+                    type: 'POST',
+                    data: { "pId": pId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlresellers').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlresellers").change(function () {
+                var pId = document.getElementById('ddlresellers').value;
+                ptId = 2;
+                refreshUsersTable(pId, ptId);
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                refreshPOSTable(0);
+                $.ajax({
+                    url: rootDir + 'Ajax/GetMerchantsByResellerforUser',
+                    type: 'POST',
+                    data: { "rId": pId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlmerchants").change(function () {
+                var pId = document.getElementById('ddlmerchants').value;
+                ptId = 3;
+                refreshUsersTable(pId, ptId);
+                $.ajax({
+                    url: rootDir + 'Ajax/GetBranchesforUser',
+                    type: 'POST',
+                    data: { "id": pId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-3']").remove();
+                        $('#ddlbranches').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlbranches").change(function () {
+                var pId = document.getElementById('ddlbranches').value;
+                ptId = 4;
+                refreshUsersTable(pId, ptId);
+            });
+
+            $("select").each(function () { this.selectedIndex = 0 });
+            $("#newUser").click(function (e) {
+                e.preventDefault();
+                var ddlUser = document.getElementById('ddlusertype').value;
+                if (ddlUser == 0 || "") {
+                    $("#errorMsg").text("Please select a User Type");
+                    getModal(1, errorMsg);
+                } else {
+                    localStorage.setItem("userTypeId", ddlUser);
+                    window.location.href = "@Url.Action("Registration")";
+                }
+            });
+
+            $("#close").click(function () {
+              
+            });
+
+        });
+    </script>
+}

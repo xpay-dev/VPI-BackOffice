@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Email Server Management</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Email Server</h2>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    @Html.Hidden("success", (object)ViewBag.Success)
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Filter Option</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Partner</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Reseller</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Select a Merchant from the List to Create an Email Server</h6>
+                    <div style="display: inline-grid;" id="dvActionKeys">
+                        <a href="#"  class="btn btn-info pull-right" data-link="@Url.Action("Create", "EmailServer")" onclick="redirectAction(this);">Create Email Server for this Merchant ?</a>
+                        <a href="#"  class="btn btn-info pull-right" data-link="@Url.Action("EmailServers", "EmailServer")" onclick="redirectAction(this);">View Email Server for this Merchant ?</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table" id="MerchantsTbl">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Merchant Name</th>
+                                <th>Primary Contact Number</th>
+                                <th>Location</th>
+                                <th>Association</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- END SIMPLE DATATABLE -->
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="msg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            refreshMerchantsFeatureTable(0);
+
+            $("#ddlpartners").on("change", function () {
+                var id = document.getElementById('ddlpartners').value;
+
+                refreshMerchantsFeatureTable(0);
+
+                $.ajax({
+                    url: '/Ajax/GetReseller',
+                    type: 'POST',
+                    data: { "pId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlresellers').empty();
+                        $.each(data, function (key, value) {
+                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                refreshMerchantsFeatureTable(id);
+            });
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#msg").text(strSuccess);
+                $("#message-box-success").show();
+                $("#message-box-success").fadeOut(1500);
+            }
+
+            $("#dvActionKeys").hide();
+
+        });
+    </script>
+
+}

@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Merchant UpdateInfo";
+}
+
+@model SDGBackOffice.Models.MerchantModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Merchants")">Home</a></li>
+    <li><a href="#">Merchant Management</a></li>
+    <li class="active">Update Merchant Info</li>
+</ul>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <br />
+            <div style="color: red;">
+                @Html.ValidationSummary()
+            </div>
+            <form id="jvalidate"  role="form" class="form-horizontal" method="post" action="@Url.Action("UpdateInfo")">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Edit Merchant Info</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.HiddenFor(m => m.MerchantFeaturesId)
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Merchant Name</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(m => m.MerchantName, new { @class = "form-control", @placeholder = "Merchant Name", @readonly = "readonly" })
+                                @*<span class="help-block">Required</span>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Address</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Contact Numbers</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Contact Information</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.MerchantEmail, new { @class = "form-control", @placeholder = "Merchant Email Address", @type = "email" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Billing Cycle</label>
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(m => m.BillingCycleId, (List<SelectListItem>)ViewBag.BillingCycles, new { @placeholder = " ", @class = "form-control" })
+
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                        <label class="col-md-2 control-label">Contact Information</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.EmailNotif, new { @class = "form-control", @placeholder = "Merchant Email Address", @type = "email" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Send Email Notification</label>
+                        <div class="col-md-1">
+                            @Html.CheckBoxFor(m => m.EmailNotif, new { @class = "form-control"})
+                            <input type="checkbox" />
+                        </div>
+                    </div>*@
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" class="btn btn-primary pull-right" id="SaveAndContinue" title="Save And Continue" />
+                        @Html.ActionLink("Default Details", null, null, null, new { @class = "btn btn-success pull-left" })
+                        @Html.ActionLink("Back", "Index", "Merchants", null, new { @class = "btn btn-default pull-left" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+}
+
+

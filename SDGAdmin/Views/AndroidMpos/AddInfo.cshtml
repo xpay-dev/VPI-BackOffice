@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.AndroidAppVersionModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "AndroidMpos")">Home</a></li>
+    <li><a href="#">Android Mpos Management</a></li>
+    <li class="active">Add New App Version</li>
+</ul>
+
+<section class="panel">
+    <div class="panel-heading">
+        <h3>Add New App Version</h3>
+    </div>
+    <div class="panel-body">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin-bottom-50">
+                    <h4>Android App Details</h4>
+                    <br />
+                    <!-- Horizontal Form -->
+                    <form action="@Url.Action("AddInfo")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+                        <div style="color: red;">
+                            @Html.ValidationSummary()
+                        </div>
+                        @Html.HiddenFor(m => m.AndroidAppVersionId)
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Enter App Name</label>
+                                @Html.TextBoxFor(m => m.AppName, new { @placeholder = "App Name", @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-label">Enter Mobile App Package Name</label>
+                                @Html.TextBoxFor(m => m.PackageName, new { @placeholder = "Package Name", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Version Name</label>
+                                @Html.TextBoxFor(m => m.VersionName, new { @placeholder = "Version", @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Version Code</label>
+                                @Html.TextBoxFor(m => m.VersionCode, new { @placeholder = "Version Code", @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Version Build</label>
+                                @Html.TextBoxFor(m => m.VersionBuild, new { @placeholder = "Build Version", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Description</label>
+                                @Html.TextBoxFor(m => m.Description, new { @placeholder = "Descrtiption", @class = "form-control" })
+                            </div>
+                            <div class="col-md-1">
+                                <label class="form-control-label">IsActive</label>
+                                @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                    <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                                </div>
+                                <div class="col-md-9 ">
+                                    <button class="btn width-150 btn-primary pull-right">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="message-box message-box-danger animated fadeIn div-hide" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-success animated fadeIn div-hide" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="sMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#mobileAppMenu").addClass("active");
+            $("#mobileAppAdd").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+
+        var strSuccess = document.getElementById('success').value;
+        if (strSuccess != "") {
+            $("#sMsg").text(strSuccess);
+            $("#message-box-success").show();
+            $("#message-box-success").fadeOut(1500);
+        }
+    </script>
+}

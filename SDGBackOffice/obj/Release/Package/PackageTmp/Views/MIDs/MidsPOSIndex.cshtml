@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "POS Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">MID Management</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>MID POS Management</h2>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+
+    <div class="row">
+        <div class="col-md-12">
+            @* @if (ViewBag.POSs != null){
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Filter Option</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Select Partner</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownList("ddlPartners", (List<SelectListItem>)ViewBag.Partners, new { @id = "ddlPartners" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }*@
+            <!-- START SIMPLE DATATABLE -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">View All POSs</h3>
+                    <div style="display:inline-grid;" id="dvActionKeys">
+                        <a href="@Url.Action("MidsPOSViewInfo")" class="btn btn-info pull-right" data-link="@Url.Action("MidsPOSViewInfo")" onclick="redirectAction(this);">View Assigned Mids</a>
+                        <a href="@Url.Action("MidsPOSAssign")" class="btn btn-info pull-right" data-link="@Url.Action("MidsPOSAssign")" onclick="redirectAction(this);">Assign Mid Branch to POS</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table" id="POSsTbl">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>POS Name</th>
+                                <th>Country</th>
+                                <th>Parent Branch</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- END SIMPLE DATATABLE -->
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        var chosenI = 0;
+        function readyForAction(obj) {
+            chosenI = obj.getAttribute("data-value");
+
+            $("#dvActionKeys").show();
+        }
+
+        function redirectAction(obj) {
+            if (chosenI > 0)
+                window.location = obj.getAttribute("data-link") + "/" + chosenI;
+        }
+
+        $(document).ready(function () {
+            refreshTable($("#ddlPartners").value);
+
+            $("#ddlPartners").on("change", function () {
+                $("#dvActionKeys").hide();
+                refreshTable(this.value);
+            });
+
+            function refreshTable(POSId) {
+                $('#POSTb;').dataTable().fnDestroy();
+
+                $('#POSTb').dataTable({
+                    "bDestroy": true,
+                    "bProcessing": true,
+                    "bServerSide": true,
+                    "sPaginationType": "full_numbers",
+                    "bPaginate": true,
+                    "columns": [
+                        {
+                            data: "POSId", "render": function (data, type, full, meta) {
+                                var renderMe = "<input type='radio' name='pickMeUp' data-value='" + data + "' onclick='readyForAction(this);'/>";
+                                return renderMe;
+                            }
+                        },
+                        { data: "CompanyName" },
+                        { data: "PrimaryContactNumber" },
+                        { data: "ParentPOS.CompanyName" },
+                        {
+                            data: "IsActive", render: function (data, type, full, meta) {
+                                var status = data == 1 ? "Active" : "Inactive";
+                                return status;
+                            }
+                        }
+
+                    ],
+                    "oLanguage": {
+                        "sZeroRecords": "No Rows Found"
+                    },
+                    "ajax": {
+                        url: '@Url.Action("POSList")',
+                        type: "POST"
+                    }
+                });
+            }
+        });
+    </script>
+}

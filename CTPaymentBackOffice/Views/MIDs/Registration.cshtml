@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "MIDs Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@model CTPaymentBackOffice.Models.MerchantMidModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "MIDs")">Home</a></li>
+    <li><a href="#">Merchant Management</a></li>
+    <li><a href="#">MID</a></li>
+    <li class="active">Create New MID</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <!-- START WIZARD WITH VALIDATION -->
+    <div class="block">
+        <h4>MID Registration</h4>
+        <div style="color: red;">
+            @Html.ValidationSummary()
+        </div>
+        <form id="reg_form" action="@Url.Action("Registration")" method="post" role="form" class="form-horizontal">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Merchant Name</label>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(m => m.Merchant.MerchantId, (List<SelectListItem>)ViewBag.Merchants, new { @class = "form-control", @placeholder = "Merchant Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MID Details</label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.MIDName, new { @class = "form-control", @placeholder = "MID Name" })
+                    </div>
+                    <label class="col-md-2 control-label">Is Active</label>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(m => m.IsActive, new { @class = "icheckbox" })
+                    </div>
+                </div>
+                <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <label>Switch:</label>
+                        @Html.DropDownListFor(m => m.SwitchId, (List<SelectListItem>)ViewBag.Switches, new { @class = "form-control", @placeholder = "Switch" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Card Type:</label>
+                        @Html.DropDownListFor(m => m.CardTypeId, (List<SelectListItem>)ViewBag.CardTypes, new { @class = "form-control", @placeholder = "Card Type" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Currency:</label>
+                        @Html.DropDownListFor(m => m.CurrencyId, (List<SelectListItem>)ViewBag.Currencies, new { @class = "form-control", @placeholder = "Currency" })
+                    </div>
+                </div>
+
+                <div class="form-group hiddiv">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <label id="param1">Access Code</label>
+                        @Html.TextBoxFor(m => m.Param_1, new { @class = "form-control accessCode", @placeholder = "Access Code" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Merchant ID</label>
+                        @Html.TextBoxFor(m => m.Param_2, new { @class = "form-control", @placeholder = "Merchant Id" })
+                    </div>
+                    <div class="col-md-3">
+                        <label id="param3">Secure Hash</label>
+                        @Html.TextBoxFor(m => m.Param_3, new { @class = "form-control secure", @placeholder = "Secure Hash" })
+                        @Html.TextBoxFor(m => m.Param_6, new { @class = "form-control tid", @placeholder = "Terminal Id" })
+                    </div>
+                </div>
+
+                <div class="form-group hiddiv">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <label>Username</label>
+                        @Html.TextBoxFor(m => m.Param_4, new { @class = "form-control", @placeholder = "Username", @autocomplete = "off" })
+                    </div>
+                    <div class="col-md-3">
+                        <label>Password</label>
+                        @Html.TextBoxFor(m => m.Param_5, new { @class = "form-control", @placeholder = "Password", @type = "password", @autocomplete = "off" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Transaction Charges</label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_Discount, new { @class = "form-control", @placeholder = "Discount Rate" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_CardNotPresent, new { @class = "form-control", @placeholder = "Card Not Present" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_Decline, new { @class = "form-control", @placeholder = "Decline" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_eCommerce, new { @class = "form-control", @placeholder = "eCommerce Rate" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_PreAuth, new { @class = "form-control", @placeholder = "Pre Auth Rate" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_Capture, new { @class = "form-control", @placeholder = "Capture Rate" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_Purchased, new { @class = "form-control", @placeholder = "Purchased Rate" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_Refund, new { @class = "form-control", @placeholder = "Refund Rate" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_Void, new { @class = "form-control", @placeholder = "Void Rate" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_CashBack, new { @class = "form-control", @placeholder = "Cash Back Rate" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.TC_BalanceInquiry, new { @class = "form-control", @placeholder = "Balance Inquiry Rate" })
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                    <button id="save" class="btn btn-primary pull-right">Submit</button>
+                </div>
+            </div>
+            <div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+                <div class="mb-container">
+                    <div class="mb-middle">
+                        <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+                        <div class="mb-content">
+                            <p id="errMsg" style="font-size: large">Please select a Switch.</p>
+                        </div>
+                        <div class="mb-footer">
+                            <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- END WIZARD WITH VALIDATION -->
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type='text/javascript' src="@Url.Content("~/js/plugins/noty/jquery.noty.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#merchantMenu").addClass("active");
+        $("#merchantmidSubmenu").addClass("active");
+        $("#merchantmidSubIndex").addClass("active");
+
+        $(".hiddiv").hide();
+        $(".tid").hide();
+        $("#message-box-danger").hide();
+        $("select").each(function () { this.selectedIndex = 0 });
+        document.getElementById('CurrencyId').value = 1;
+
+        $("#save").click(function () {
+            var ddlmerchant = document.getElementById('Merchant_MerchantId').value;
+            var ddlswitch = document.getElementById('SwitchId').value;
+            var ddlcard = document.getElementById('CardTypeId').value;
+            var ddlcurrency = document.getElementById('CurrencyId').value;
+            if (ddlmerchant == "0") {
+                $("#errMsg").text("Please select a Merchant");
+                $("#message-box-danger").show();
+            } else if (ddlswitch == "0") {
+                $("#errMsg").text("Please select Switch");
+                $("#message-box-danger").show();
+            } else if (ddlcard == "0") {
+                $("#errMsg").text("Please select Card Type");
+                $("#message-box-danger").show();
+            } else if (ddlcurrency == "0") {
+                $("#errMsg").text("Please select Currency");
+                $("#message-box-danger").show();
+            } else {
+                document.getElementById("reg_form").submit();
+            }
+        });
+
+        $("#SwitchId").change(function () {
+            var ddlswitch = document.getElementById('SwitchId').value;
+            if (ddlswitch != 0) {
+                $(".hiddiv").show();
+
+                if (ddlswitch == 27) {
+                    $("#param3").text("Terminal ID");
+                    $(".secure").hide();
+                    $(".tid").show();
+                }
+            } else {
+                $(".hiddiv").hide();
+            }
+        });
+
+        $('#clearForm').click(function () {
+            $("input[type=text]").val("");
+            $("input[type=password]").val("");
+        });
+    });
+</script>

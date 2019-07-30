@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Reseller Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Reseller Management</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Reseller Management</h2>
+</div>
+<!-- END PAGE TITLE -->
+@Html.Hidden("hdnParentType", CTPaymentBackOffice.CurrentUser.ParentType)
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    @Html.Hidden("success", (object)ViewBag.Success)
+    <div class="row">
+        <div class="col-md-12">
+            @* @if (ViewBag.Resellers != null){
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Filter Option</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Select Partner</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownList("ddlPartners", (List<SelectListItem>)ViewBag.Partners, new { @id = "ddlPartners" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }*@
+            <!-- START SIMPLE DATATABLE -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">View All Resellers</h3>
+                    <div style="display:inline-grid;" id="dvActionKeys">
+                        <a href="#"  class="btn btn-info pull-right" data-link="@Url.Action("Registration", "Merchants")" onclick="redirectAction(this);">Create Merchant</a>
+                        <a href="#" class="btn btn-info pull-right" data-link="@Url.Action("UpdateInfo")" onclick="redirectAction(this);">Update Reseller Info</a>
+                        <a href="#" class="btn btn-info pull-right" data-link="@Url.Action("ViewInfo")" onclick="redirectAction(this);">View Reseller Info</a>
+                        <a href="#" class="btn btn-info pull-right" data-link="@Url.Action("NewUser")" onclick="redirectAction(this);">Add New User</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table" id="resellersTbl">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Reseller Name</th>
+                                <th>Primary Contact Number</th>
+                                <th>Location</th>
+                                <th>Associated Partner</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- END SIMPLE DATATABLE -->
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#resellerMenu").addClass("active");
+            $("#resellerIndex").addClass("active");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                $("#message-box-success").show();
+                $("#message-box-success").fadeOut(1500);
+            }
+
+            refreshResellerTable();
+
+            $("#ddlPartners").on("change", function () {
+                $("#dvActionKeys").hide();
+                refreshResellerTable(this.value);
+            });
+        });
+    </script>
+}

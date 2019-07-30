@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Merchant Features";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Merchant Features</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+                <h4>Select Reseller:</h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner)
+            {
+                        <div class="form-group">                            
+                            <div class="col-md-6">
+                                
+                                @Html.DropDownList("ddlresellers", (List<SelectListItem>)ViewBag.Resellers, new { @class = "form-control pull-left" })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+                <h4>View All Merchants</h4>
+            </div>
+
+            <div class="pull-right" id="dvActionKeys">
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("AgreementsText")" onclick="redirectAction(this);">Agreements Text</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("Agreements")" onclick="redirectAction(this);">Agreements Settings</a>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <table class="table table-inverse nowrap" id="MerchantsTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Merchant Name</th>
+                                        <th>Primary Contact Number</th>
+                                        <th>Location</th>
+                                        <th>Association</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            $("#featuresMenu").addClass("active");
+            $("#featureMerchant").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            if ($("#ddlresellers").val() > 0) {
+                refreshMerchantsTable($("#ddlresellers").val());
+            } else {
+                refreshMerchantsTable(0);
+            }
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+
+                refreshMerchantsTable(id);
+            });
+
+            $("#message-box-danger").hide();
+            var strErr = '@(TempData["NeedsUpdate"])';
+            if (strErr != "") {
+                getModal(1, errorMsg);
+            }
+        });
+    </script>
+}
+

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "SuccessTransaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>CT Payment</h2>
+</div>
+<div class="page-content-wrap">
+    <div class="col-md-8">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Result</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <h3 class="panel-title "><span class="fa fa-check bg-success"></span>&nbsp; &nbsp;Credit Transaction <span style="font-weight:bold">Approved</span></h3>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button id="btnDone" type="button" class="btn btn-default pull-right">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnDone").click(function () {
+                window.location = rootDir + 'MerchantBranchPOSs/Index';
+            });
+        });
+    </script>
+}

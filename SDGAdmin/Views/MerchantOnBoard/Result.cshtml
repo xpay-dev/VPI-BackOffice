@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Result";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Merchant On Board</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Add Bulk Merchant Upload</h2>
+</div>
+<div class="page-content-wrap">
+    <div class="col-md-8">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Result</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <h3 class="panel-title">Your request has been successfully sent. Please wait while your request is being processed. To get the results, Go to <span style="font-weight:bold">Merchant On Board -> Get FileNames</span></h3> 
+                        <br/>
+                        <h2></h2>
+                    </div>
+                 </div>
+            </div>
+            <div class="panel-footer">
+                @Html.ActionLink("Back", "Add", "MerchantOnBoard", null, new { @class = "btn btn-default pull-right" })
+            </div>
+        </div>
+    </div>
+</div>

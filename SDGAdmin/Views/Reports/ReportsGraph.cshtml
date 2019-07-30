@@ -1,0 +1,586 @@
+﻿@{
+    ViewBag.Title = "ReportsGraph";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Css/datepicker/jquery-ui-1.9.2.custom.min.css")" rel="stylesheet" type="text/css" />
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Reports Graph</li>
+</ul>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Date:</label>
+                                <input id="datepickerstart" type="text" class="form-control" />
+                                <a id="clear1" class="remover">
+                                    <span class="fa fa-times"></span><label class="form-control-label">Clear</label>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Transaction Types</label>
+                                @Html.DropDownList("ddltranstype", (List<SelectListItem>)ViewBag.TransTypes, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Partner</label>
+                                @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Reseller</label>
+                                @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Merchant</label>
+                                @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Branches</label>
+                                @Html.DropDownList("ddlbranches", new List<SelectListItem>() { new SelectListItem { Text = "No Merchant Branches available", Value = "-3" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select POS</label>
+                                @Html.DropDownList("ddlpos", new List<SelectListItem>() { new SelectListItem { Text = "No POSs available", Value = "-4" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                    <button id="export1" class="btn width-150 btn-primary" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Charts</button>
+                                </div>
+                                <div class="col-md-9 ">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <!-- START LINE CHART -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Daily Transactions Chart</h3>
+                                        <div class="btn-group pull-right">
+                                            <button id="export1" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Charts</button>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <canvas id="graph1"></canvas>
+                                        <img id="url1" />
+                                    </div>
+                                </div>
+                                <!-- END LINE CHART -->
+                            </div>
+
+                            <div class="col-md-6">
+                                <!-- START Area CHART -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Daily Sales Chart</h3>
+                                        <div class="btn-group pull-right">
+                                            <button id="export2" style="visibility:hidden;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Chart</button>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <canvas id="graph2"></canvas>
+                                        <img id="url2" />
+                                    </div>
+                                </div>
+                                <!-- END Area CHART -->
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <!-- START LINE CHART -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Daily Declined Transactions Chart</h3>
+                                        <div class="btn-group pull-right">
+                                            <button id="export3" style="visibility:hidden;" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i> Export Chart</button>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <canvas id="graph3"></canvas>
+                                        <img id="url3" />
+                                    </div>
+                                </div>
+                                <!-- END LINE CHART -->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- START Area CHART -->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Notes here:</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <textarea id="textNote" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <!-- END Area CHART -->
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+<!-- THIS PAGE PLUGINS -->
+<script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/tableExport.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jquery.base64.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/html2canvas.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jspdf/libs/sprintf.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jspdf/jspdf.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jspdf/libs/base64.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/datepicker/jquery-ui-1.9.2.custom.min.js")"></script>
+<script type='text/javascript' src='@Url.Content("~/js/Chart/Chart.js")'></script>
+<script type='text/javascript' src='@Url.Content("~/js/Chart/chart_function.js")'></script>
+<script type='text/javascript' src='@Url.Content("~/js/Html2Canvas/html2canvas.js")'></script>
+@*<script type='text/javascript' src='@Url.Content("~/js/jsPDF/jspdf.debug.js")'></script>*@
+<script type='text/javascript' src='@Url.Content("~/js/jsPDF/jspdf.js")'></script>
+<script type='text/javascript' src='@Url.Content("~/js/jsPDF/zlib.js")'></script>
+<script type='text/javascript' src='@Url.Content("~/js/jsPDF/png.js")'></script>
+<script type='text/javascript' src='@Url.Content("~/js/jsPDF/FileSaver.js")'></script>
+<script type='text/javascript' src='@Url.Content("~/js/jsPDF/addimage.js")'></script>
+<script type='text/javascript' src='@Url.Content("~/js/jsPDF/png_support.js")'></script>
+
+<script type="text/javascript">
+    $("select").each(function () { this.selectedIndex = 0 });
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth(); //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    var dateNow = new Date(year, month, day);
+    var newDate = new Date(dateNow);
+    newDate.setDate(newDate.getDate() - 7);
+
+    var date = new Date(newDate);
+
+    $('#datepickerstart').val("");
+
+
+    $("#datepickerstart").datepicker({});
+
+    $('#datepickerstart').datepicker("setDate", new Date(date));
+
+    $("#clear1").click(function () {
+        $("#datepickerstart").val("");
+    });
+
+    getChartOnLoad();
+
+    $(".remover").css("cursor", "pointer");
+
+    //$("#export1").prop("disabled", true);
+    $("#export2").prop("disabled", true);
+    $("#export3").prop("disabled", true);
+
+    $("#url1").hide();
+    $("#url2").hide();
+    $("#url3").hide();
+
+    $("#ddlpartners").on("change", function () {
+        var id = document.getElementById('ddlpartners').value;
+        $('#ddlmerchants').empty();
+        $('#ddlmerchants').each(function () {
+            var option = $("<option />");
+            option.attr("value", '0').text('No Merchants available');
+            $('#ddlmerchants').append(option);
+        });
+
+        $('#ddlbranches').empty();
+        $('#ddlbranches').each(function () {
+            var option = $("<option />");
+            option.attr("value", '0').text('No Merchant Branches available');
+            $('#ddlbranches').append(option);
+        });
+
+        $('#ddlpos').empty();
+        $('#ddlpos').each(function () {
+            var option = $("<option />");
+            option.attr("value", '0').text('No POSs available');
+            $('#ddlpos').append(option);
+        });
+
+        $.ajax({
+            url: rootDir + 'Ajax/GetReseller',
+            type: 'POST',
+            data: { "pId": id },
+            dataType: "json",
+            success: function (data) {
+                $("option[value='-1']").remove();
+                $('#ddlresellers').empty();
+                $.each(data, function (key, value) {
+                    $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                });
+
+                if (data.length == 1) {
+                    $.ajax({
+                        url: rootDir + 'Ajax/GetMerchantsByReseller',
+                        type: 'POST',
+                        data: { "rId": $("#ddlresellers").val() },
+                        dataType: "json",
+                        success: function (data) {
+                            $("option[value='-2']").remove();
+                            $('#ddlmerchants').empty()
+                            $.each(data, function (key, value) {
+                                $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                            });
+
+                            if (data.length == 1) {
+                                $.ajax({
+                                    url: rootDir + 'Ajax/GetBranches',
+                                    type: 'POST',
+                                    data: { "id": $("#ddlmerchants").val() },
+                                    dataType: "json",
+                                    success: function (data) {
+                                        $("option[value='-3']").remove();
+                                        $('#ddlbranches').empty()
+                                        $.each(data, function (key, value) {
+                                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                        });
+
+                                        if (data.length == 1) {
+                                            $.ajax({
+                                                url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+                                                type: 'POST',
+                                                data: { "bId": $("#ddlbranches").val() },
+                                                dataType: "json",
+                                                success: function (data) {
+                                                    $("option[value='-4']").remove();
+                                                    $('#ddlpos').empty();
+                                                    $.each(data, function (key, value) {
+                                                        $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    $("#ddlresellers").on("change", function () {
+        var id = document.getElementById('ddlresellers').value;
+        $('#ddlbranches').empty();
+        $('#ddlbranches').each(function () {
+            var option = $("<option />");
+            option.attr("value", '0').text('No Merchant Branches available');
+            $('#ddlbranches').append(option);
+        });
+
+        $('#ddlpos').empty();
+        $('#ddlpos').each(function () {
+            var option = $("<option />");
+            option.attr("value", '0').text('No POSs available');
+            $('#ddlpos').append(option);
+        });
+
+        $.ajax({
+            url: rootDir + 'Ajax/GetMerchantsByReseller',
+            type: 'POST',
+            data: { "rId": id },
+            dataType: "json",
+            success: function (data) {
+                $("option[value='-2']").remove();
+                $('#ddlmerchants').empty()
+                $.each(data, function (key, value) {
+                    $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                });
+
+                if (data.length == 1) {
+                    $.ajax({
+                        url: rootDir + 'Ajax/GetBranches',
+                        type: 'POST',
+                        data: { "id": $("#ddlmerchants").val() },
+                        dataType: "json",
+                        success: function (data) {
+                            $("option[value='-3']").remove();
+                            $('#ddlbranches').empty()
+                            $.each(data, function (key, value) {
+                                $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                            });
+
+                            if (data.length == 1) {
+                                $.ajax({
+                                    url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+                                    type: 'POST',
+                                    data: { "bId": $("#ddlbranches").val() },
+                                    dataType: "json",
+                                    success: function (data) {
+                                        $("option[value='-4']").remove();
+                                        $('#ddlpos').empty();
+                                        $.each(data, function (key, value) {
+                                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    $("#ddlmerchants").on("change", function () {
+        var id = document.getElementById('ddlmerchants').value;
+
+        $('#ddlpos').empty();
+        $('#ddlpos').each(function () {
+            var option = $("<option />");
+            option.attr("value", '0').text('No POSs available');
+            $('#ddlpos').append(option);
+        });
+
+        $.ajax({
+            url: rootDir + 'Ajax/GetBranches',
+            type: 'POST',
+            data: { "id": id },
+            dataType: "json",
+            success: function (data) {
+                $("option[value='-3']").remove();
+                $('#ddlbranches').empty()
+                $.each(data, function (key, value) {
+                    $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                });
+
+                if (data.length == 1) {
+                    $.ajax({
+                        url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+                        type: 'POST',
+                        data: { "bId": $("#ddlbranches").val() },
+                        dataType: "json",
+                        success: function (data) {
+                            $("option[value='-4']").remove();
+                            $('#ddlpos').empty();
+                            $.each(data, function (key, value) {
+                                $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    $("#ddlbranches").on("change", function () {
+        var id = document.getElementById('ddlbranches').value;
+
+        $.ajax({
+            url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+            type: 'POST',
+            data: { "bId": id },
+            dataType: "json",
+            success: function (data) {
+                $("option[value='-4']").remove();
+                $('#ddlpos').empty();
+                $.each(data, function (key, value) {
+                    $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                });
+            }
+        });
+    });
+
+    $("#ddlpos").on("change", function () {
+        var id = document.getElementById('ddlpos').value;
+    });
+
+    $("#view").click(function () {
+        var parentId = '@ViewBag.ParentId';
+
+        var date = document.getElementById('datepickerstart').value;
+        var r = document.getElementById('ddlresellers').value;
+        var m = document.getElementById('ddlmerchants').value;
+        var b = document.getElementById('ddlbranches').value;
+        var p = document.getElementById('ddlpos').value;
+        var pt = document.getElementById('ddlpartners').value;
+        var type = document.getElementById('ddltranstype').value;
+
+        if (r != null) {
+            r = document.getElementById('ddlresellers').value;
+        } else { r = 0; }
+
+        if (m != null) {
+            m = document.getElementById('ddlmerchants').value;
+        } else { m = 0; }
+
+        if (b != null) {
+            b = document.getElementById('ddlbranches').value;
+        } else { b = 0; }
+
+        if (p != null) {
+            p = document.getElementById('ddlpos').value;
+        } else { p = 0; }
+
+        if (pt != null) {
+            pt = document.getElementById('ddlpartners').value;
+        } else { pt = 0; }
+
+        if (date != "") {
+            if (pt > 0) {
+                if (type == 5) {
+                    getChart1(date, pt, r, m, b, p);
+                    getChart2(date, pt, r, m, b, p);
+                    getChart3(date, pt, r, m, b, p);
+
+                } else if (type == 4) {
+                    getDebitChart1(date, pt, r, m, b, p);
+                    getDebitChart2(date, pt, r, m, b, p);
+                    getDebitChart3(date, pt, r, m, b, p);
+                } else {
+                    getChart1(date, pt, r, m, b, p);
+                    getChart2(date, pt, r, m, b, p);
+                    getChart3(date, pt, r, m, b, p);
+                }
+            } else {
+
+                if (type == 5) {
+                    getChart1(date, parentId, r, m, b, p);
+                    getChart2(date, parentId, r, m, b, p);
+                    getChart3(date, parentId, r, m, b, p);
+
+                } else if (type == 4) {
+                    getDebitChart1(date, parentId, r, m, b, p);
+                    getDebitChart2(date, parentId, r, m, b, p);
+                    getDebitChart3(date, parentId, r, m, b, p);
+                } else {
+                    getChart1(date, parentId, r, m, b, p);
+                    getChart2(date, parentId, r, m, b, p);
+                    getChart3(date, parentId, r, m, b, p);
+                }
+            }
+        } else {
+            $("#errMsg").text("Please select a Date.");
+            $("#message-box-danger").show();
+        }
+    });
+
+    $("#export1").click(function () {
+        $("#export1").click(function () {
+            html2canvas(document.getElementById('textNote'), {
+                onrendered: function (canvas) {
+                    var imgData = document.getElementById("graph1").toDataURL();
+                    var imgData1 = document.getElementById("graph2").toDataURL();
+                    var imgData2 = document.getElementById("graph3").toDataURL();
+                    var imgData3;
+
+                    var doc = new jsPDF();
+                    imgData3 = canvas.toDataURL();
+
+                    doc.setFontSize(20);
+                    doc.text(15, 30, "Daily Transactions");
+                    doc.addImage(imgData, 'JPEG', 15, 40, 150, 50);
+
+                    doc.text(15, 110, "Daily Sales Transactions");
+                    doc.addImage(imgData1, 'JPEG', 15, 120, 150, 50);
+
+                    doc.text(15, 190, "Daily Declined Transactions");
+                    doc.addImage(imgData2, 'JPEG', 15, 200, 150, 50);
+
+
+                    doc.addPage();
+                    doc.text(15, 30, "Report Conclusion:");
+                    doc.addImage(imgData3, 'PNG', 20, 40, 150, 50);
+
+                    //doc.output('datauri');
+                    //Direct save --> uncomment if need a direct save
+                    doc.save('DailyTransactions.pdf');
+                }
+            });
+        });
+    });
+
+    $("#export2").click(function () {
+        var imgData = document.getElementById("graph2").toDataURL();
+
+        var doc = new jsPDF();
+
+        doc.setFontSize(20);
+        doc.text(30, 20, "Daily Sales Transactions");
+        doc.addImage(imgData, 'JPEG', 15, 40, 180, 100);
+        //doc.output('datauri');
+        //Direct save --> uncomment if need a direct save
+        doc.save('DailySalesTransactions.pdf');
+    });
+
+    $("#export3").click(function () {
+        var imgData = document.getElementById("graph3").toDataURL();
+
+        var doc = new jsPDF();
+
+        doc.setFontSize(20);
+        doc.text(30, 20, "Daily Declined Transactions");
+        doc.addImage(imgData, 'JPEG', 15, 40, 180, 100);
+        //doc.output('datauri');
+        //Direct save --> uncomment if need a direct save
+        doc.save('DailyDeclinedTransactions.pdf');
+    });
+
+    function getChartOnLoad() {
+        var date = document.getElementById('datepickerstart').value;
+
+        getChart1(date, 0, 0, 0, 0);
+        getChart2(date, 0, 0, 0, 0);
+        getChart3(date, 0, 0, 0, 0);
+    }
+
+</script>

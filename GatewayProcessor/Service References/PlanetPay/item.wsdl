@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.planetpayment.net" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.planetpayment.net" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.planetpayment.net/Imports">
+      <xsd:import schemaLocation="https://uat.planetpayment.net/HybridPayTech/?xsd=xsd0" namespace="http://www.planetpayment.net" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITransaction_Echo_InputMessage">
+    <wsdl:part name="parameters" element="tns:Echo" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Echo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EchoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_SystemTest_InputMessage">
+    <wsdl:part name="parameters" element="tns:SystemTest" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_SystemTest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SystemTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_TimeOutReversal_InputMessage">
+    <wsdl:part name="parameters" element="tns:TimeOutReversal" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_TimeOutReversal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TimeOutReversalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchUploadAdvice_InputMessage">
+    <wsdl:part name="parameters" element="tns:BatchUploadAdvice" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchUploadAdvice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BatchUploadAdviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_OriginalCreditTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:OriginalCreditTransaction" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_OriginalCreditTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OriginalCreditTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AccountFundingTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountFundingTransaction" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AccountFundingTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountFundingTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_DynamicKeyExchange_InputMessage">
+    <wsdl:part name="parameters" element="tns:DynamicKeyExchange" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_DynamicKeyExchange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DynamicKeyExchangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_VoidOrRefund_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoidOrRefund" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_VoidOrRefund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoidOrRefundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_VoidOrRefundMCP_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoidOrRefundMCP" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_VoidOrRefundMCP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoidOrRefundMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_TransactionInquiry_InputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionInquiry" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_TransactionInquiry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransactionInquiryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_MoneyTransferSend_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoneyTransferSend" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_MoneyTransferSend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoneyTransferSendResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_MoneyTransferFund_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoneyTransferFund" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_MoneyTransferFund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoneyTransferFundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Authorization_InputMessage">
+    <wsdl:part name="parameters" element="tns:Authorization" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Authorization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_OfflineAuthorization_InputMessage">
+    <wsdl:part name="parameters" element="tns:OfflineAuthorization" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_OfflineAuthorization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OfflineAuthorizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationDCC_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationDCC" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationDCC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationDCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationMCP_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationMCP" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationMCP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationPartialReversal_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationPartialReversal" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationPartialReversal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationPartialReversalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationAvsOnly_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationAvsOnly" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_AuthorizationAvsOnly_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthorizationAvsOnlyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Adjustment_InputMessage">
+    <wsdl:part name="parameters" element="tns:Adjustment" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Adjustment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdjustmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Settlement_InputMessage">
+    <wsdl:part name="parameters" element="tns:Settlement" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Settlement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SettlementResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_SettlementDCC_InputMessage">
+    <wsdl:part name="parameters" element="tns:SettlementDCC" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_SettlementDCC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SettlementDCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_SettlementMCP_InputMessage">
+    <wsdl:part name="parameters" element="tns:SettlementMCP" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_SettlementMCP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SettlementMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Charge_InputMessage">
+    <wsdl:part name="parameters" element="tns:Charge" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Charge_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChargeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_OfflineCharge_InputMessage">
+    <wsdl:part name="parameters" element="tns:OfflineCharge" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_OfflineCharge_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OfflineChargeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ChargeDCC_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChargeDCC" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ChargeDCC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChargeDCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ChargeMCP_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChargeMCP" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ChargeMCP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChargeMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_VoidTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoidTransaction" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_VoidTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoidTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Refund_InputMessage">
+    <wsdl:part name="parameters" element="tns:Refund" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_Refund_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RefundResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RefundDCC_InputMessage">
+    <wsdl:part name="parameters" element="tns:RefundDCC" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RefundDCC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RefundDCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RefundMCP_InputMessage">
+    <wsdl:part name="parameters" element="tns:RefundMCP" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RefundMCP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RefundMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupDCC_InputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupDCC" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupDCC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupDCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupRefundDCC_InputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupRefundDCC" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupRefundDCC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupRefundDCCResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupMCP_InputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupMCP" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupMCP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupRefundMCP_InputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupRefundMCP" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_RateLookupRefundMCP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RateLookupRefundMCPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ReferralTransaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReferralTransaction" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ReferralTransaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReferralTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchSettlementClose_InputMessage">
+    <wsdl:part name="parameters" element="tns:BatchSettlementClose" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchSettlementClose_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BatchSettlementCloseResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchSettlementStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:BatchSettlementStatus" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchSettlementStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BatchSettlementStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchSettlementStatusDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:BatchSettlementStatusDetail" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BatchSettlementStatusDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BatchSettlementStatusDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BinDownload_InputMessage">
+    <wsdl:part name="parameters" element="tns:BinDownload" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_BinDownload_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BinDownloadResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ReportDownload_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReportDownload" />
+  </wsdl:message>
+  <wsdl:message name="ITransaction_ReportDownload_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReportDownloadResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITransaction">
+    <wsdl:operation name="Echo">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/Echo" message="tns:ITransaction_Echo_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/EchoResponse" message="tns:ITransaction_Echo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SystemTest">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/SystemTest" message="tns:ITransaction_SystemTest_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/SystemTestResponse" message="tns:ITransaction_SystemTest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TimeOutReversal">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/TimeOutReversal" message="tns:ITransaction_TimeOutReversal_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/TimeOutReversalResponse" message="tns:ITransaction_TimeOutReversal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchUploadAdvice">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/BatchUploadAdvice" message="tns:ITransaction_BatchUploadAdvice_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/BatchUploadAdviceResponse" message="tns:ITransaction_BatchUploadAdvice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OriginalCreditTransaction">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/OriginalCreditTransaction" message="tns:ITransaction_OriginalCreditTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/OriginalCreditTransactionResponse" message="tns:ITransaction_OriginalCreditTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountFundingTransaction">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/AccountFundingTransaction" message="tns:ITransaction_AccountFundingTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/AccountFundingTransactionResponse" message="tns:ITransaction_AccountFundingTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DynamicKeyExchange">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/DynamicKeyExchange" message="tns:ITransaction_DynamicKeyExchange_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/DynamicKeyExchangeResponse" message="tns:ITransaction_DynamicKeyExchange_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VoidOrRefund">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/VoidOrRefund" message="tns:ITransaction_VoidOrRefund_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/VoidOrRefundResponse" message="tns:ITransaction_VoidOrRefund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VoidOrRefundMCP">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/VoidOrRefundMCP" message="tns:ITransaction_VoidOrRefundMCP_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/VoidOrRefundMCPResponse" message="tns:ITransaction_VoidOrRefundMCP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TransactionInquiry">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/TransactionInquiry" message="tns:ITransaction_TransactionInquiry_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/TransactionInquiryResponse" message="tns:ITransaction_TransactionInquiry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MoneyTransferSend">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/MoneyTransferSend" message="tns:ITransaction_MoneyTransferSend_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/MoneyTransferSendResponse" message="tns:ITransaction_MoneyTransferSend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MoneyTransferFund">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/MoneyTransferFund" message="tns:ITransaction_MoneyTransferFund_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/MoneyTransferFundResponse" message="tns:ITransaction_MoneyTransferFund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Authorization">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/Authorization" message="tns:ITransaction_Authorization_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationResponse" message="tns:ITransaction_Authorization_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OfflineAuthorization">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/OfflineAuthorization" message="tns:ITransaction_OfflineAuthorization_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/OfflineAuthorizationResponse" message="tns:ITransaction_OfflineAuthorization_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationDCC">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationDCC" message="tns:ITransaction_AuthorizationDCC_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationDCCResponse" message="tns:ITransaction_AuthorizationDCC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationMCP">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationMCP" message="tns:ITransaction_AuthorizationMCP_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationMCPResponse" message="tns:ITransaction_AuthorizationMCP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationPartialReversal">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationPartialReversal" message="tns:ITransaction_AuthorizationPartialReversal_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationPartialReversalResponse" message="tns:ITransaction_AuthorizationPartialReversal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationAvsOnly">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationAvsOnly" message="tns:ITransaction_AuthorizationAvsOnly_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/AuthorizationAvsOnlyResponse" message="tns:ITransaction_AuthorizationAvsOnly_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Adjustment">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/Adjustment" message="tns:ITransaction_Adjustment_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/AdjustmentResponse" message="tns:ITransaction_Adjustment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Settlement">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/Settlement" message="tns:ITransaction_Settlement_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/SettlementResponse" message="tns:ITransaction_Settlement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SettlementDCC">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/SettlementDCC" message="tns:ITransaction_SettlementDCC_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/SettlementDCCResponse" message="tns:ITransaction_SettlementDCC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SettlementMCP">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/SettlementMCP" message="tns:ITransaction_SettlementMCP_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/SettlementMCPResponse" message="tns:ITransaction_SettlementMCP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Charge">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/Charge" message="tns:ITransaction_Charge_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/ChargeResponse" message="tns:ITransaction_Charge_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OfflineCharge">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/OfflineCharge" message="tns:ITransaction_OfflineCharge_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/OfflineChargeResponse" message="tns:ITransaction_OfflineCharge_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChargeDCC">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/ChargeDCC" message="tns:ITransaction_ChargeDCC_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/ChargeDCCResponse" message="tns:ITransaction_ChargeDCC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChargeMCP">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/ChargeMCP" message="tns:ITransaction_ChargeMCP_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/ChargeMCPResponse" message="tns:ITransaction_ChargeMCP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VoidTransaction">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/VoidTransaction" message="tns:ITransaction_VoidTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/VoidTransactionResponse" message="tns:ITransaction_VoidTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/Refund" message="tns:ITransaction_Refund_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/RefundResponse" message="tns:ITransaction_Refund_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RefundDCC">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/RefundDCC" message="tns:ITransaction_RefundDCC_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/RefundDCCResponse" message="tns:ITransaction_RefundDCC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RefundMCP">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/RefundMCP" message="tns:ITransaction_RefundMCP_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/RefundMCPResponse" message="tns:ITransaction_RefundMCP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RateLookupDCC">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupDCC" message="tns:ITransaction_RateLookupDCC_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupDCCResponse" message="tns:ITransaction_RateLookupDCC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RateLookupRefundDCC">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupRefundDCC" message="tns:ITransaction_RateLookupRefundDCC_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupRefundDCCResponse" message="tns:ITransaction_RateLookupRefundDCC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RateLookupMCP">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupMCP" message="tns:ITransaction_RateLookupMCP_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupMCPResponse" message="tns:ITransaction_RateLookupMCP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RateLookupRefundMCP">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupRefundMCP" message="tns:ITransaction_RateLookupRefundMCP_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/RateLookupRefundMCPResponse" message="tns:ITransaction_RateLookupRefundMCP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReferralTransaction">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/ReferralTransaction" message="tns:ITransaction_ReferralTransaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/ReferralTransactionResponse" message="tns:ITransaction_ReferralTransaction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchSettlementClose">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/BatchSettlementClose" message="tns:ITransaction_BatchSettlementClose_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/BatchSettlementCloseResponse" message="tns:ITransaction_BatchSettlementClose_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchSettlementStatus">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/BatchSettlementStatus" message="tns:ITransaction_BatchSettlementStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/BatchSettlementStatusResponse" message="tns:ITransaction_BatchSettlementStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BatchSettlementStatusDetail">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/BatchSettlementStatusDetail" message="tns:ITransaction_BatchSettlementStatusDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/BatchSettlementStatusDetailResponse" message="tns:ITransaction_BatchSettlementStatusDetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BinDownload">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/BinDownload" message="tns:ITransaction_BinDownload_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/BinDownloadResponse" message="tns:ITransaction_BinDownload_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReportDownload">
+      <wsdl:input wsaw:Action="http://www.planetpayment.net/ITransaction/ReportDownload" message="tns:ITransaction_ReportDownload_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.planetpayment.net/ITransaction/ReportDownloadResponse" message="tns:ITransaction_ReportDownload_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

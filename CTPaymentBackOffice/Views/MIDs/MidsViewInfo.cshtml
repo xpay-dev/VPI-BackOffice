@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "MIDs Update Info";
+}
+
+@model SDGBackOffice.Models.MerchantMidModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "MIDs")">Home</a></li>
+    <li><a href="#">Merchant Management</a></li>
+    <li><a href="#">MID</a></li>
+    <li class="active">View MID</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" action="@Url.Action("MidsViewInfo")" method="post" role="form" id="reg_form">
+                @Html.HiddenFor(m => m.TransactionChargeId);
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>View MID Info</strong></h3>
+                    </div>
+                    @Html.ValidationSummary()
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Merchant Name</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(m => m.Merchant.MerchantName, new { @class = "form-control", @placeholder = "Merchant Name", @disabled = "disable" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">MID Details</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.MIDName, new { @class = "form-control", @placeholder = "MID Name", @disabled = "disabled" })
+                            </div>
+                            <label class="col-md-2 control-label">Is Active</label>
+                            <div class="col-md-2">
+                                @Html.CheckBoxFor(m => m.IsActive, new { @class = "icheckbox", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                @Html.TextBox("switch", (string)ViewBag.SwitchName, new { @class = "form-control", @placeholder = "MID Name", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBox("cardtype", (string)ViewBag.CardType, new { @class = "form-control", @placeholder = "MID Name", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBox("currency", (string)ViewBag.Currency, new { @class = "form-control", @placeholder = "MID Name", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                        </div>
+                        <div class="form-group hiddiv">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                <label id="param1">Access Code</label>
+                                @Html.TextBoxFor(m => m.Param_1, new { @class = "form-control accessCode", @placeholder = "Access Code" })
+                            </div>
+                            <div class="col-md-3">
+                                <label>Merchant ID</label>
+                                @Html.TextBoxFor(m => m.Param_2, new { @class = "form-control", @placeholder = "Merchant Id" })
+                            </div>
+                            <div class="col-md-3">
+                                <label id="param3">Secure Hash</label>
+                                @Html.TextBoxFor(m => m.Param_3, new { @class = "form-control secure", @placeholder = "Secure Hash" })
+                                @Html.TextBoxFor(m => m.Param_6, new { @class = "form-control tid", @placeholder = "Terminal Id" })
+                            </div>
+                        </div>
+
+                        <div class="form-group hiddiv">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                <label>Username</label>
+                                @Html.TextBoxFor(m => m.Param_4, new { @class = "form-control", @placeholder = "Username", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                <label>Password</label>
+                                @Html.TextBoxFor(m => m.Param_5, new { @class = "form-control", @placeholder = "Password", @type = "password", @disabled = "disabled" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Transaction Charges</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_Discount, new { @class = "form-control", @placeholder = "Discount Rate", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_CardNotPresent, new { @class = "form-control", @placeholder = "Card Not Present Rate", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_Decline, new { @class = "form-control", @placeholder = "Decline Rate", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_eCommerce, new { @class = "form-control", @placeholder = "eCommerce Rate", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_PreAuth, new { @class = "form-control", @placeholder = "Pre Auth Rate", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_Capture, new { @class = "form-control", @placeholder = "Capture Rate", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_Purchased, new { @class = "form-control", @placeholder = "Purchased Rate", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_Refund, new { @class = "form-control", @placeholder = "Refund Rate", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_Void, new { @class = "form-control", @placeholder = "Void Rate", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_CashBack, new { @class = "form-control", @placeholder = "Cash Back Rate", @disabled = "disabled" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.TC_BalanceInquiry, new { @class = "form-control", @placeholder = "Balance Inquiry Rate", @disabled = "disabled" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        @Html.ActionLink("Back", "Index", "MIDs", null, new { @class = "btn btn-default pull-right" })
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- END WIZARD WITH VALIDATION -->
+    </div>
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+    <script type="text/javascript">
+        var isNull = '@ViewBag.IsNull';
+        
+        $("input, select").css("color", "black");
+
+        $(".tid").hide();
+
+        if (isNull == "False") {
+            $("#param3").text("Terminal ID");
+            $(".secure").hide();
+            $(".tid").show();
+        }
+
+    </script>
+
+}

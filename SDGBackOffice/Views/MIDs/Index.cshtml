@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "MID Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.MerchantModel
+
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">MID Management</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        @Html.Hidden("carderror", (object)ViewBag.CardTypeError)
+        @Html.Hidden("cId", "")
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>MID Management</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <h4>Filter Option</h4>
+                            <!-- Horizontal Form -->
+                            <div class="form-group row">
+                                <div class="col-md-4">
+                                    <label class="form-control-label">Select Merchant</label>
+                                    @Html.DropDownListFor(x => x.MerchantId, (List<SelectListItem>)ViewBag.Merchants, new { id = "ddlMerchants", @class = "form-control" })
+                                </div>
+                            </div>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h4>View All MIDs</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <div class="pull-right" id="dvActionKeys">
+                                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsUpdateInfo")" onclick="redirectAction(this);">Update MID Info</a>
+                                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsViewInfo")" onclick="redirectAction(this);">View MID Info</a>
+                                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("RemoveAssignedMid")" onclick="redirectActionMidRemove(this);">View/Remove MID</a>
+                                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsAssign")" onclick="redirectActionMidAssign(this);">Assign MID</a>
+                            </div>
+                            <table class="table table-inverse nowrap" id="MIDsTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>MID Name</th>
+                                        <th>Switch Name</th>
+                                        <th>Card Type</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantmidSubmenu").addClass("active");
+            $("#merchantmidSubIndex").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            var strError = document.getElementById('carderror').value;
+            var fadeTime = 0;
+            if (strSuccess != "") {
+                if (strError != "") {
+                    $("#succMsg").text(strSuccess
+                        + "Failed to create POSs: "
+                        + strError
+                        + " due to conflicting card type. Change the card type if you wish to assign to the listed POS.");
+                    fadeTime = 3000;
+                } else {
+                    getModal(0, strSuccess);
+                }
+                getModal(0, strSuccess);
+            }
+
+            $("#dvActionKeys").hide();
+            if ($("#ddlMerchants > option").length == 1) {
+                refreshMidsTable($("#ddlMerchants").val());
+            } else {
+                refreshMidsTable(0);
+            }
+
+        });
+
+        $("#ddlMerchants").change(function () {
+            var ddlm = document.getElementById('ddlMerchants').value;
+            refreshMidsTable(ddlm);
+        });
+    </script>
+}

@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Failed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.TransactionModel
+
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>CT Payment</h2>
+</div>
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="@Url.Action("Failed")" method="post" role="form" class="form-horizontal" id="jvalidate-transaction" autocomplete="off">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Result</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    @*<div class="col-md-2 control-label"><img src=@Url.Content("~/img/blueimp/error.svg") width="20" height="20" /></div>*@
+                                    <div class="col-md-6">
+                                        <h3 class="panel-title "><span class="fa fa-times bg-danger"></span>&nbsp;Credit Transaction <span style="font-weight:bold">Declined</span></h3>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Error Number</label>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.ErrNumber, new { @class = "form-control", @placeholder = "Error Number", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Error Message</label>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(m => m.ErrMessage, new { @class = "form-control", @placeholder = "POS Name", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button id="btnDone" type="button" class="btn btn-default pull-right">Done</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnDone').click(function () {
+                window.location = rootDir + 'MerchantBranchPOSs/Index';
+            });
+        });
+    </script>
+}

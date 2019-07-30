@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Partner Switches";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.PartnerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Switches")">Home</a></li>
+    <li><a href="#">Partner Switches</a></li>
+</ul>
+
+<h2>Partner Switches</h2>
+
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- START SIMPLE DATATABLE -->
+            <div class="panel panel-default">
+                <br />
+                <div class="form-group">
+                    <h4>Select Partner:</h4>
+                    <div class="col-md-3 ">
+                        @Html.DropDownListFor(m => m.PartnerId, (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control pull-left" })
+                    </div>
+                    <div class="panel-body">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="panel-body">
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">View All Swtich</h3>
+                    <div style="display: inline-grid;" id="dvActionKeys">
+                        <a href="#" class="btn btn-info pull-right"  data-link="@Url.Action("UpdateInfo")" onclick="redirectAction(this);">Update Switch Info</a>
+                        <a href="#" class="btn btn-info pull-right" data-link="@Url.Action("ViewInfo")" onclick="redirectAction(this);">View Switch Info</a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table" id="switchTbl">
+                        <thead>
+                            <tr>
+                                <th id="hidden"></th>
+                                <th>Update Status</th>
+                                <th id="switchid">SwitchID</th>
+                                <th>Switch</th>
+                                <th>Address Required</th>
+                                <th>Is Enabled to Partner</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+            <!-- END SIMPLE DATATABLE -->
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+            refreshSwitchPartnerTable(0);
+
+            $("#PartnerId").change(function () {
+                var id = document.getElementById('PartnerId').value;
+                refreshSwitchPartnerTable(id);
+            });
+        });
+    </script>
+}

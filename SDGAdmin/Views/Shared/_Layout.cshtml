@@ -1,0 +1,399 @@
+﻿@{
+    if (ViewBag.Title == null)
+    {
+        ViewBag.Title = "SD Group";
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META SECTION -->
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon" />
+
+    <link href="@Url.Content("~/assets/common/img/favicon.144x144.png")" rel="apple-touch-icon" type="image/png" sizes="144x144">
+    <link href="@Url.Content("~/assets/common/img/favicon.114x114.png")" rel="apple-touch-icon" type="image/png" sizes="114x114">
+    <link href="@Url.Content("~/assets/common/img/favicon.72x72.png")" rel="apple-touch-icon" type="image/png" sizes="72x72">
+    <link href="@Url.Content("~/ assets/common/img/favicon.57x57.png")" rel="apple - touch - icon" type="image/png">
+    <link href="@Url.Content("~/assets/common/img/favicon.png")" rel="icon" type="image/png">
+    <link href="favicon.ico" rel="shortcut icon">
+
+
+
+    <!-- Vendors Styles -->
+    <!-- v1.0.0 -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/bootstrap/dist/css/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/jscrollpane/style/jquery.jscrollpane.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/ladda/dist/ladda-themeless.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/select2/dist/css/select2.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/fullcalendar/dist/fullcalendar.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/cleanhtmlaudioplayer/src/player.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/cleanhtmlvideoplayer/src/player.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/bootstrap-sweetalert/dist/sweetalert.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/summernote/dist/summernote.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/owl.carousel/dist/assets/owl.carousel.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/ionrangeslider/css/ion.rangeSlider.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/datatables/media/css/dataTables.bootstrap4.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/c3/c3.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/chartist/dist/chartist.min.css")">
+    <!-- v.1.4.0 -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/nprogress/nprogress.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/jquery-steps/demo/css/jquery.steps.css")">
+
+    <!-- Clean UI Styles -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/common/css/source/main.css")">
+
+    <!-- Vendors Scripts -->
+    <!-- v1.0.0 -->
+    <script src="@Url.Content("~/assets/vendors/jquery/jquery.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/tether/dist/js/tether.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap/dist/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-mousewheel/jquery.mousewheel.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jscrollpane/script/jquery.jscrollpane.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/spin.js/spin.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/ladda/dist/ladda.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/select2/dist/js/select2.full.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/html5-form-validation/dist/jquery.validation.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-typeahead/dist/jquery.typeahead.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-mask-plugin/dist/jquery.mask.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/autosize/dist/autosize.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap-show-password/bootstrap-show-password.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/moment/min/moment.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/fullcalendar/dist/fullcalendar.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/cleanhtmlaudioplayer/src/jquery.cleanaudioplayer.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/cleanhtmlvideoplayer/src/jquery.cleanvideoplayer.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap-sweetalert/dist/sweetalert.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/summernote/dist/summernote.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/owl.carousel/dist/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/ionrangeslider/js/ion.rangeSlider.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/nestable/jquery.nestable.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables/media/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables/media/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables-fixedcolumns/js/dataTables.fixedColumns.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables-responsive/js/dataTables.responsive.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/editable-table/mindmup-editabletable.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/d3/d3.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/c3/c3.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/chartist/dist/chartist.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/peity/jquery.peity.min.js")"></script>
+    <!-- v1.0.1 -->
+    <script src="@Url.Content("~/assets/vendors/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js")"></script>
+    <!-- v1.1.1 -->
+    <script src="@Url.Content("~/assets/vendors/gsap/src/minified/TweenMax.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/hackertyper/hackertyper.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-countTo/jquery.countTo.js")"></script>
+    <!-- v1.4.0 -->
+    <script src="@Url.Content("~/assets/vendors/nprogress/nprogress.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-steps/build/jquery.steps.min.js")"></script>
+
+    <!-- Angular Version Scripts -->
+    <script src="@Url.Content("~/assets/vendors/angular/angular.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/angular-route/angular-route.min.js")"></script>
+    <script src="@Url.Content("~/assets/common/js/version_angular/app.js")"></script>
+
+    <!-- Angular Version Controllers -->
+    <script src="@Url.Content("~/assets/vendors/pages/register.ctrl.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/pages/login.ctrl.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/pages/lockscreen.ctrl.js")"></script>
+
+
+    <!-- Clean UI Scripts -->
+    <script src="@Url.Content("~/assets/common/js/common.js")"></script>
+    <script src="@Url.Content("~/assets/common/js/demo.temp.js")"></script>
+
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/js/modal.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/js/jquery.cookie.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/noty/jquery.noty.js")">
+    </script>
+    <script type="text/javascript">
+        var rootDir = "@Url.Content("~/")";
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/js/blockUI/jquery.blockUI.js")"></script>
+</head>
+
+<body class="theme-dark menu-top menu-static colorful-enabled" ng-controller="MainCtrl">
+
+    @Html.Hidden("logoutClick", "")
+
+    <nav class="left-menu" left-menu ng-class="{'hidden-left-menu': hideLeftMenu}">
+        <div class="logo-container">
+            <a href="/Home/Dashboard" class="logo">
+                <img src="@Url.Content("~/assets/common/img/logo.png")" alt="VeritasPay" />
+                <img class="logo-inverse" src="@Url.Content("~/assets/common/img/logo-inverse.png")" alt="VeritasPay" />
+            </a>
+        </div>
+        <div class="left-menu-inner scroll-pane">
+            <ul class="left-menu-list left-menu-list-root list-unstyled">
+           
+                <!-- Partner Pages -->
+                <li id="partnerMenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">Partner Management</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="partnerIndex">@Html.ActionLink("View All Partners", "Index", "Partners", null, new { @class = "left-menu-link" })</li>
+                        <li id="partnerUpdate">@Html.ActionLink("Update My Info", "UpdateInfo", "Partners", null, new { @class = "left-menu-link" })</li>
+                        <li id="partnerRegister">@Html.ActionLink("Register New Partner", "Registration", "Partners", null, new { @class = "left-menu-link" })</li>
+                        <li id="partnerRegistersub">@Html.ActionLink("Register Sub Partner", "RegistrationSubPartner", "Partners", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Reseller Pages -->
+                <li id="resellerMenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">Reseller Management</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="resellerIndex">@Html.ActionLink("View All Resellers", "Index", "Resellers", null, new { @class = "left-menu-link" })</li>
+                        <li id="resellerRegister">@Html.ActionLink("Register New Reseller", "Registration", "Resellers", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Merchant Pages -->
+                <li id="merchantSubmenu" class="left-menu-list-submenu">
+                  
+                    @*<div class="dropdown dropdown-avatar">
+                        <a href="javascript: void(0);" class="left-menu-link" data-toggle="dropdown" aria-expanded="false">
+                            Reseller Management
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="" role="menu">
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-user"></i> Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-header">Home</div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-circle-right"></i> System Dashboard</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-circle-right"></i> User Boards</a>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-circle-right"></i> Issue Navigator (35 New)</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-exit"></i> Logout</a>
+                        </ul>
+                    </div>*@
+
+                    <a class="left-menu-link" href="#">Merchant</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="merchantSubIndex">@Html.ActionLink("View All Merchants", "Index", "Merchants", null, new { @class = "left-menu-link" })</li>
+                        @*<li id="merchantSubIndex">@Html.ActionLink("View Merchant Request", "RequestedMerchants", "Merchants", null, new { @id = "merchant", @class = "left-menu-link" })</li>*@
+                        <li id="merchantSubRegister">@Html.ActionLink("Register New Merchant", "Registration", "Merchants", null, new { @class = "left-menu-link" })</li>
+                        <li id="merchantBulkRegister">@Html.ActionLink("Merchant Bulk Boarding", "MerchantBulkBoarding", "Merchants", null, new { @id = "merchant", @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Merchant Branch -->
+                <li id="merchantbranchSubmenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">Merchant Branch</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="merchantbranchSubIndex">@Html.ActionLink("View All Branches", "Index", "MerchantBranches", null, new { @class = "left-menu-link" })</li>
+                        <li id="merchantbranchSubRegister">@Html.ActionLink("Register New Branch", "Registration", "MerchantBranches", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Merchant POS -->
+                <li id="merchantposSubmenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">POS</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="merchantposSubIndex">@Html.ActionLink("View All POSs", "Index", "MerchantBranchPOSs", null, new { @class = "left-menu-link" })</li>
+                        <li id="merchantposSubRegister">@Html.ActionLink("Register New POS", "Create", "MerchantBranchPOSs", new { id = 0 }, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Merchant MIDS -->
+                <li id="merchantmidSubmenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">MID</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="merchantmidSubIndex">@Html.ActionLink("View All MIDs", "Index", "MIDs", null, new { @class = "left-menu-link" })</li>
+                        <li id="merchantmidSubRegister">@Html.ActionLink("Register New MID", "Registration", "MIDs", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Features Pages -->
+                <li id="featuresMenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">Features</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="featureMerchant">@Html.ActionLink("Merchant Features", "Index", "MerchantFeatures", null, new { @class = "left-menu-link" })</li>
+                        <li id="featurePOS">@Html.ActionLink("POS Features", "Index", "POSFeatures", null, new { @class = "left-menu-link" })</li>
+                        <li id="featureEmailServer">@Html.ActionLink("Email Server", "Index", "EmailServer", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Device Management Pages -->
+                <li id="deviceMenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">Device Management</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="deviceIndex">@Html.ActionLink("View All Devices", "Index", "Devices", null, new { @class = "left-menu-link" })</li>
+                        <li id="deviceRegister">@Html.ActionLink("Create New Device", "CreateMasterDevice", "Devices", null, new { @class = "left-menu-link" })</li>
+                        <li id="deviceAddSerial">@Html.ActionLink("Add Serial Number", "AddSerialNumber", "Devices", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- User Management Pages -->
+                <li>@Html.ActionLink("User Management", "Index", "Users", null, new { @class = "left-menu-link" })</li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Switch Management Pages -->
+                <li>@Html.ActionLink("Switch Management", "SwitchesIndex", "Switches", null, new { @class = "left-menu-link" })</li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Report Central Pages -->
+                <li>@Html.ActionLink("Reports Central", "Index", "Reports", null, new { @class = "left-menu-link" })</li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Report Graph Pages -->
+                <li>@Html.ActionLink("Reports Graph", "ReportsGraph", "Reports", null, new { @class = "left-menu-link" })</li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- Device Management Pages -->
+                <li id="mobileAppMenu" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">Android Mpos Management</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="mobileAppIndex">@Html.ActionLink("View All App Version", "Index", "AndroidMpos", null, new { @class = "left-menu-link" })</li>
+                        <li id="mobileAppAdd">@Html.ActionLink("Add New App Version", "AddInfo", "AndroidMpos", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+                <li class="left-menu-list-separator"><!-- --></li>
+
+                <!-- CT-Payment Pages -->
+                <li id="ctpayment" class="left-menu-list-submenu">
+                    <a class="left-menu-link" href="#">CT Payment</a>
+                    <ul class="left-menu-list list-unstyled">
+                        <li id="CTAddUser">@Html.ActionLink("Add User", "Index", "CTPaymentUser", null, new { @class = "left-menu-link" })</li>
+                        <li class="left-menu-list-separator"><!-- --></li>
+                        <li id="AddBulk">@Html.ActionLink("Add Bulk Merchant", "Add", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                        <li id="UpdateBulk">@Html.ActionLink("Update Bulk Merchant", "Update", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                        <li id="DeleteBulk">@Html.ActionLink("Delete Bulk Merchant", "Delete", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                        <li id="ViewResults">@Html.ActionLink("Get Filenames", "GetFileNames", "MerchantOnBoard", null, new { @class = "left-menu-link" })</li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+    <nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+        <div class="menu-icon-container hidden-md-up">
+            <div class="animate-menu-button left-menu-toggle">
+                <div><!-- --></div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="menu-user-block">
+                <div class="dropdown dropdown-avatar">
+                    <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <span class="avatar" href="javascript:void(0);">
+                            <img src="@Url.Content("~/assets/common/img/temp/avatars/1.jpg")" alt="Avatar">
+                            
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="" role="menu">
+                        @*<a class="dropdown-item" href="javascript:void(0)">@*<i class="dropdown-icon icmn-user"></i>*@ @*Dashboard</a>*@
+                        @Html.ActionLink("Dashboard", "Dashboard", "Home", null, new { @id = "btnYes", @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                       
+                        @*<a class="dropdown-item" href="javascript:void(0)"><i class="dropdown-icon icmn-exit"></i> Logout</a>*@
+                        @Html.ActionLink("Logout", "Index", "Home", null, new { @id = "btnYes", @class = "dropdown-item" })
+                    </ul>
+                </div>
+            </div>
+            <div class="menu-info-block">
+                <div class="left">
+                    <div class="header-buttons">
+                    </div>
+                </div>
+
+                <div class="right hidden-md-down margin-left-20">
+                    <div class="search-block">
+                        @*<div class="form-input-icon form-input-icon-right">
+                            <i class="icmn-search"></i>
+                            <input type="text" class="form-control form-control-sm form-control-rounded" placeholder="Search...">
+                            <button type="submit" class="search-block-submit "></button>
+                        </div>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+   
+
+    <div class="main-backdrop"><!-- --></div>
+
+</body>
+
+
+
+</html>
+@RenderSection("scripts", false)
+<script type="text/javascript">
+    var t;
+
+    $(document).ready(function () {
+        t = setTimeout(function () {
+            $("div[id^='popover']").remove();
+            t = null;
+        }, 2000);
+    });
+
+    $("#btnYes").click(function () {
+        $.removeCookie("visitsAdmin");
+    });
+
+    $("#profileImage").on("click", function () {
+        $("#imageFile").click();
+    });
+
+    $("#userPhoto").click(function () {
+        $("#imageFile").click();
+    });
+
+    @*$('#imageFile').fileupload({
+        dataType: 'json',
+        url: '@Url.Action("UploadUserPhoto", "Home")',
+        autoUpload: true,
+        done: function (e, data) {
+            $('#userPhoto').attr("src", "@Url.Content("~/UserPictures/")" + data.result.filename);
+        }
+    });*@
+
+    function onImageError(obj) {
+        obj.onerror = null;
+        obj.src = '@Url.Content("~/assets/images/users/avatar.jpg")';
+        //$(obj).click();
+        //$(obj).on('click', function () {
+        //    $("#profileImage").click();
+        //});
+    }
+
+    $("#userPhoto").click(function () {
+        return false;
+    });
+
+    $("#btnYes").click(function () {
+        document.getElementById('logoutClick').value = true;
+    });
+</script>

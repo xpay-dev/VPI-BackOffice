@@ -1,0 +1,376 @@
+﻿@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int i = 0;
+}
+
+@model IEnumerable<SDGAdmin.Models.MerchantPOSModel>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "MerchantBranchPOSs")">Home</a></li>
+    <li><a href="#">Merchant Management</a></li>
+    <li class="active">Create New POS</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="panel">
+    <div class="panel-heading">
+        <h3>Create New POS</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin-bottom-50">
+                    <h4>POS Registration</h4>
+                    <!-- Horizontal Form -->
+                    <form action="@Url.Action("Create")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+                        @Html.Hidden("bId", "")
+                        @Html.Hidden("isCheck", false)
+                        @Html.Hidden("merchantName", "")
+                        @Html.Hidden("location", "")
+                        @Html.Hidden("merchantId", "")
+
+                        <div style="color: red;">
+                            @Html.ValidationSummary()
+                        </div>
+                        <div class="panel-body">
+                            <p>Change the POSs to your desired names. The activation codes can only be used once this form is submitted.</p>
+                        </div>
+
+                        <div class="form-group row ddl">
+
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select a Partner</label>
+                                @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @placeholder = " ", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row ddl">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select a Reseller</label>
+                                @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row ddl">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select a Merchant</label>
+                                @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row ddl">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select a Branch</label>
+                                @Html.DropDownList("ddlbranches", new List<SelectListItem>() { new SelectListItem { Text = "No Merchant Branch available", Value = "-3" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @foreach (var m in Model)
+                        {
+                            @Html.HiddenFor(r => m.MerchantBranchId, new { id = "hdnBranchID" })
+                            <div class="form-group row">
+                                <label class="form-control-label">POS </label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        @Html.TextBox("pos[" + i + "].POSName", m.POSName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        @Html.TextBox("pos[" + i + "].ActivationCode", m.ActivationCode, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                            i++;
+                        }
+                        <div class="form-group row">
+                            <label class="form-control-label"></label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <label><input id="chkSend" type="checkbox" /> Email Activation Code ?</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#example3">
+                            Create Multiple POS
+                        </button>
+                        <div class="modal fade modal-size-small" id="example3" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">How many POS?</h4>
+                                    </div>
+                                    <br />
+                                    <div class="modal-body">
+                                        <input type="text" class="form-control" id="posQty" />
+                                    </div>
+                                    <br />
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" id="btnOk">Ok</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                    <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                                </div>
+                                <div class="col-md-9 ">
+                                    <input id="save" class="btn width-150 btn-primary pull-right" value="Submit" type="button">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantposSubmenu").addClass("active");
+            $("#merchantposSubRegister").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            $("#posQty").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl+A, Command+A
+                    (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right, down, up
+                    (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+            });
+
+            $("#save").click(function () {
+                var val = document.getElementById('ddlbranches').value;
+
+                if ((val == -3) || (val == 0)) {
+                    var errMsg = "No Branch Selected";
+                    getModal(1, errMsg);
+                } else {
+                    $("#jvalidate").submit();
+                }
+            });
+
+            $("#btnOk").click(function () {
+                if ($('#posQty').val() == 0) {
+                    alert("Please Enter quantity");
+                }
+                else {
+                    var loc = "@Url.Action("Create", "MerchantBranchPOSs")" + "?posqty=" + $("#posQty").val();
+                    window.location = loc;
+                }
+            });
+
+            $("#close").click(function () {
+           
+            });
+
+            
+            hideDdl();
+
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            $('#chkSend').change(function () {
+                document.getElementById("isCheck").value = $(this).is(':checked');
+            });
+
+            function hideDdl() {
+                var bId = document.getElementById('hdnBranchID').value;
+
+                var qty = getParameterByName('qty');
+                var id = getParameterByName('id');
+
+                if (bId > 0) {
+                    document.getElementById('bId').value = bId;
+                    $(".ddl").hide();
+                }
+            }
+
+            $("#ddlpartners").on("change", function () {
+                var id = document.getElementById('ddlpartners').value;
+                $('#ddlmerchants').empty();
+                $('#ddlmerchants').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchants available');
+                    $('#ddlmerchants').append(option);
+                });
+
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                $.ajax({
+                    url: rootDir + 'Ajax/GetReseller',
+                    type: 'POST',
+                    data: { "pId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlresellers').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if (data.length == 1) {
+                            $.ajax({
+                                url: rootDir + 'Ajax/GetMerchantsByReseller',
+                                type: 'POST',
+                                data: { "rId": $("#ddlresellers").val() },
+                                dataType: "json",
+                                success: function (data) {
+                                    $("option[value='-2']").remove();
+                                    $('#ddlmerchants').empty()
+                                    $.each(data, function (key, value) {
+                                        $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                                    });
+                                    if (data.length == 1) {
+                                        $.ajax({
+                                            url: rootDir + 'Ajax/GetBranches',
+                                            type: 'POST',
+                                            data: { "id": $("#ddlmerchants").val() },
+                                            dataType: "json",
+                                            success: function (data) {
+                                                $("option[value='-3']").remove();
+                                                $('#ddlbranches').empty()
+                                                $.each(data, function (key, value) {
+                                                    $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                                });
+
+                                                document.getElementById('bId').value = $("#ddlbranches").val();
+                                                document.getElementById('merchantId').value = $('#ddlmerchants').val();
+                                                document.getElementById('merchantName').value = $('#ddlmerchants').find('option:selected').text();
+
+                                                if (data.length == 1) {
+                                                    document.getElementById('location').value = $('#ddlbranches').find('option:selected').text();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                $.ajax({
+                    url: rootDir + 'Ajax/GetMerchantsByReseller',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if (data.length == 1) {
+                            $.ajax({
+                                url: rootDir + 'Ajax/GetBranches',
+                                type: 'POST',
+                                data: { "id": $("#ddlmerchants").val() },
+                                dataType: "json",
+                                success: function (data) {
+                                    $("option[value='-3']").remove();
+                                    $('#ddlbranches').empty()
+                                    $.each(data, function (key, value) {
+                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                    });
+
+                                    document.getElementById('bId').value = $("#ddlbranches").val();
+                                    document.getElementById('merchantId').value = $('#ddlmerchants').val();
+                                    document.getElementById('merchantName').value = $('#ddlmerchants').find('option:selected').text();
+
+                                    if (data.length == 1) {
+
+                                        document.getElementById('location').value = $('#ddlbranches').find('option:selected').text();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+            $("#ddlmerchants").on("change", function () {
+                var id = document.getElementById('ddlmerchants').value;
+                document.getElementById('merchantName').value = $('#ddlmerchants').find('option:selected').text();
+                document.getElementById('merchantId').value = $('#ddlmerchants').val();
+                $.ajax({
+                    url: rootDir + 'Ajax/GetBranches',
+                    type: 'POST',
+                    data: { "id": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-3']").remove();
+                        $('#ddlbranches').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        document.getElementById('bId').value = $("#ddlbranches").val();
+
+                        if (data.length == 1) {
+                            document.getElementById('merchantId').value = $('#ddlmerchants').val();
+                            document.getElementById('location').value = $('#ddlbranches').find('option:selected').text();
+                        }
+                    }
+                });
+            });
+
+            $("#ddlbranches").on("change", function () {
+                var id = document.getElementById('ddlbranches').value;
+                document.getElementById('bId').value = id;
+                document.getElementById('location').value = $('#ddlbranches').find('option:selected').text();
+                document.getElementById('merchantId').value = $('#ddlmerchants').val();
+            });
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+    </script>
+}

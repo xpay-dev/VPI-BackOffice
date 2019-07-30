@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Reseller UpdateInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.ResellerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Resellers")">Home</a></li>
+    <li><a href="#">Reseller Management</a></li>
+    <li class="active">Update Reseller</li>
+</ul>
+
+<section class="panel">
+    <div class="panel-heading">
+        <h3>Update Reseller</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin-bottom-50">
+                    <h4>Edit Reseller Details</h4>
+                    <br />
+                    <!-- Horizontal Form -->
+                    <form action="@Url.Action("UpdateInfo")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+
+                        <div class="form-group row">                            
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Reseller Name</label>
+                                @Html.TextBoxFor(m => m.ResellerName, new { @class = "form-control", @placeholder = "Reseller Name", @disabled = "disabled" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">                           
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Street and Civic Number</label>
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">City</label>
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">                           
+                            <div class="col-md-4">
+                                <label class="form-control-label" for="l0">State / Province</label>
+                                @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label" for="l0">Zip / Postal Code</label>
+                                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label" for="l0">Country</label>
+                                @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <label class="form-control-label" for="l0">Primary Contact Number</label>
+                                @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-control-label" for="l0">Fax</label>
+                                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-control-label" for="l0">Mobile Phone Number</label>
+                                @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-control-label" for="l0">Reseller Email Address</label>
+                                @Html.TextBoxFor(m => m.ResellerEmail, new { @class = "form-control", @placeholder = "Reseller Email Address", @type = "email" })
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                    @Html.ActionLink("Default Details", null, null, null, new { @class = "btn btn-default" })
+                                    @Html.ActionLink("Back", "Index", "Resellers", null, new { @class = "btn btn-default" })
+                                </div>
+                                <div class="col-md-9 ">
+                                    <button class="btn width-150 btn-primary pull-right">Save And Continue</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+    </script>
+}

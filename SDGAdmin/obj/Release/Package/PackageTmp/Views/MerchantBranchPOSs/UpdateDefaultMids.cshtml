@@ -1,0 +1,206 @@
+﻿@{
+    ViewBag.Title = "MID ViewDefault";
+}
+
+@model SDGBackOffice.Models.MerchantMidModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Merchant Management</a></li>
+    <li><a href="#">Branch POS</a></li>
+    <li class="active">Default Mids</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Default Mids</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">VISA</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Master Card</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">American Express</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Philippine Peso", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">JBC</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">China Bank</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Citibank</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Barclay Bank</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Diners</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Discover</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Cheque</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">Cash</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 control-label">EBT</label>
+                            <div class="col-md-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.MIDName, new List<SelectListItem>() { new SelectListItem() { Text = "MID Sample", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "MID Name" })
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                                <div class="input-group">
+                                    @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>() { new SelectListItem() { Text = "Php", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Currency" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" class="btn btn-primary pull-right" id="SaveAndContinue" title="Save And Continue" />
+                        @Html.ActionLink("Back", "Index", "MerchantBranches", null, new { @class = "btn btn-default pull-left" })
+                    </div>
+                </div>
+                @Html.ValidationSummary()
+            </form>
+        </div>
+        <!-- END WIZARD WITH VALIDATION -->
+    </div>
+</div>
+    <!-- END PAGE CONTENT WRAPPER -->
+    @section scripts {
+        <!-- THIS PAGE PLUGINS -->
+        <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+        <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+        <!-- END THIS PAGE PLUGINS -->
+    }

@@ -1,0 +1,315 @@
+﻿@{
+    Layout = null;
+}
+@using SDGDAL
+<!DOCTYPE html>
+<html lang="en" class="body-full-height">
+<head>
+    <!-- META SECTION -->
+    <title>Veritas Pay Philippines Inc.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- <link rel="icon" href="~/favicon.ico" type="image/x-icon" /> -->
+    <!-- END META SECTION -->
+
+
+    <link href="@Url.Content("~/assets/common/img/favicon.144x144.png")" rel="apple-touch-icon" type="image/png" sizes="144x144">
+    <link href="@Url.Content("~/assets/common/img/favicon.114x114.png")" rel="apple-touch-icon" type="image/png" sizes="114x114">
+    <link href="@Url.Content("~/assets/common/img/favicon.72x72.png")" rel="apple-touch-icon" type="image/png" sizes="72x72">
+    <link href="@Url.Content("~/assets/common/img/favicon.57x57.png")" rel="apple-touch-icon" type="image/png">
+    <link href="@Url.Content("~/assets/common/img/favicon.png")" rel="icon" type="image/png">
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon">
+
+    <!-- Vendors Styles -->
+    <!-- v1.0.0 -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/bootstrap/dist/css/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/jscrollpane/style/jquery.jscrollpane.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/ladda/dist/ladda-themeless.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/select2/dist/css/select2.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/fullcalendar/dist/fullcalendar.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/cleanhtmlaudioplayer/src/player.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/cleanhtmlvideoplayer/src/player.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/bootstrap-sweetalert/dist/sweetalert.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/summernote/dist/summernote.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/owl.carousel/dist/assets/owl.carousel.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/ionrangeslider/css/ion.rangeSlider.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/datatables/media/css/dataTables.bootstrap4.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/c3/c3.min.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/chartist/dist/chartist.min.css")">
+    <!-- v.1.4.0 -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/nprogress/nprogress.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/vendors/jquery-steps/demo/css/jquery.steps.css")">
+
+    <!-- Clean UI Styles -->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/common/css/source/main.css")">
+
+    <!-- Vendors Scripts -->
+    <!-- v1.0.0 -->
+    <script src="@Url.Content("~/assets/vendors/jquery/jquery.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/tether/dist/js/tether.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap/dist/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-mousewheel/jquery.mousewheel.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jscrollpane/script/jquery.jscrollpane.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/spin.js/spin.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/ladda/dist/ladda.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/select2/dist/js/select2.full.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/html5-form-validation/dist/jquery.validation.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-typeahead/dist/jquery.typeahead.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-mask-plugin/dist/jquery.mask.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/autosize/dist/autosize.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap-show-password/bootstrap-show-password.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/moment/min/moment.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/fullcalendar/dist/fullcalendar.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/cleanhtmlaudioplayer/src/jquery.cleanaudioplayer.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/cleanhtmlvideoplayer/src/jquery.cleanvideoplayer.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/bootstrap-sweetalert/dist/sweetalert.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/summernote/dist/summernote.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/owl.carousel/dist/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/ionrangeslider/js/ion.rangeSlider.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/nestable/jquery.nestable.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables/media/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables/media/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables-fixedcolumns/js/dataTables.fixedColumns.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/datatables-responsive/js/dataTables.responsive.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/editable-table/mindmup-editabletable.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/d3/d3.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/c3/c3.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/chartist/dist/chartist.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/peity/jquery.peity.min.js")"></script>
+    <!-- v1.0.1 -->
+    <script src="@Url.Content("~/assets/vendors/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js")"></script>
+    <!-- v1.1.1 -->
+    <script src="@Url.Content("~/assets/vendors/gsap/src/minified/TweenMax.min.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/hackertyper/hackertyper.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-countTo/jquery.countTo.js")"></script>
+    <!-- v1.4.0 -->
+    <script src="@Url.Content("~/assets/vendors/nprogress/nprogress.js")"></script>
+    <script src="@Url.Content("~/assets/vendors/jquery-steps/build/jquery.steps.min.js")"></script>
+
+    <!-- Clean UI Scripts -->
+    <script src="@Url.Content("~/assets/common/js/common.js")"></script>
+    <script src="@Url.Content("~/assets/common/js/demo.temp.js")"></script>
+    <script type='text/javascript' src='@Url.Content("~/js/jquery.cookie.js")'></script>
+    <script type='text/javascript' src='@Url.Content("~/js/modal.js")'></script>
+</head>
+
+<body class="theme-default">
+    <div class="swal-btn-cancel"></div>
+    <section class="page-content">
+        <div class="page-content-inner" style="background-color: #668bf3;">
+
+            <!-- Login Omega Page -->
+            <div class="single-page-block-header">
+
+            </div>
+            <div class="single-page-block">
+                <div class="single-page-block-inner effect-3d-element">
+                    <div class="blur-placeholder"><!-- --></div>
+                    <div class="single-page-block-form">
+
+                        <div class="margin-right-10 logo">
+                            <center><img src="@Url.Content("~/assets/common/img/logo-login.png")" alt="VeritasPay" /></center>
+                        </div>
+
+                        <h3>
+                            <center>Login</center>
+                        </h3>
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <p id="errMsg" style="font-size: large"></p>
+                        </div>
+
+                        @using (Html.BeginForm("Index", "Home",
+new { ReturnUrl = Url.Action("Index", "Home") },
+FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            @Html.Hidden("captcha", "")
+                            @Html.Hidden("hdnHolder", "")
+                            <div class="form-group">
+                                @Html.TextBox("Username", "", new { @placeholder = "Username", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Password("Password", "", new { @placeholder = "Password", @class = "form-control" })
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <img id="Captcha" src="" />
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBox("txtCaptcha", "", new { @placeholder = "Captcha", @class = "form-control" })
+                                    <br />
+                                    <a href="#" id="getCaptcha" class="pull-right"><span class="fa fa-refresh"></span> Refresh</a>
+
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                @Html.Hidden("RememberMe", "false")
+                                @Html.Hidden("ReturnUrl", (string)ViewBag.ReturnUrl)
+                                <a href="@Url.Action("ChangePassword", "Home")" class="pull-left">Change Password</a>
+                                <input type="submit" class="btn btn-primary width-150 pull-right" id="submit" value="Log In" />
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="single-page-block-footer text-center">
+                <ul class="list-unstyled list-inline">
+                    <li><a href="javascript: void(0);">Copyright 2016. All Rights Reserved. VeritasPay Philippines Inc.</a></li>
+
+                </ul>
+            </div>
+            <!-- End Login Page -->
+
+        </div>
+        <!-- Page Scripts -->
+        <script>
+            $(function () {
+
+                // Add class to body for change layout settings
+                $('body').addClass('single-page single-page-inverse');
+
+                // Form Validation
+                $('#form-validation').validate({
+                    submit: {
+                        settings: {
+                            inputContainer: '.form-group',
+                            errorListClass: 'form-control-error',
+                            errorClass: 'has-danger'
+                        }
+                    }
+                });
+
+                // Show/Hide Password
+                $('.password').password({
+                    eyeClass: '',
+                    eyeOpenClass: 'icmn-eye',
+                    eyeCloseClass: 'icmn-eye-blocked'
+                });
+
+                // Set Background Image for Form Block
+                function setImage() {
+                    var imgUrl = $('.page-content-inner').css('background-image');
+
+                    $('.blur-placeholder').css('background-image', imgUrl);
+                };
+
+                function changeImgPositon() {
+                    var width = $(window).width(),
+                            height = $(window).height(),
+                            left = -(width - $('.single-page-block-inner').outerWidth()) / 2,
+                            top = -(height - $('.single-page-block-inner').outerHeight()) / 2;
+
+
+                    $('.blur-placeholder').css({
+                        width: width,
+                        height: height,
+                        left: left,
+                        top: top
+                    });
+                };
+
+                setImage();
+                changeImgPositon();
+
+                $(window).on('resize', function () {
+                    changeImgPositon();
+                });
+
+                // Mouse Move 3d Effect
+                var rotation = function (e) {
+                    var perX = (e.clientX / $(window).width()) - 0.5;
+                    var perY = (e.clientY / $(window).height()) - 0.5;
+                    TweenMax.to(".effect-3d-element", 0.4, { rotationY: 15 * perX, rotationX: 15 * perY, ease: Linear.easeNone, transformPerspective: 1000, transformOrigin: "center" })
+                };
+
+                if (!cleanUI.hasTouch) {
+                    $('body').mousemove(rotation);
+                }
+
+            });
+        </script>
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                //$('.alert-danger').hide();
+
+                $.removeCookie("visitsAdmin");
+                document.body.onkeypress = function (e) {
+                    var keynum = e.keyCode || e.which;
+                    if (keynum == 13) {
+                        $(".alert-danger").hide();
+                    }
+                }
+
+                function getParameterByName(name) {
+                    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+                }
+
+                var errNum = getParameterByName('err');
+
+                $(".alert-danger").hide();
+                var strErr = '@(ViewBag.SessionExpired)';
+                var strIncorrectCred = '@(ViewBag.Alert)';
+                if (strErr != "") {
+                    getModal(1, strErr);
+                } else if (strIncorrectCred != "") {
+                    getModal(1, strIncorrectCred);
+                } else if (errNum == 1) {
+                    getModal(1, "Session has expired. Please relogin.");
+                }
+
+                $("#close").click(function () {
+                    $(".alert-danger").hide();
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Content("~/Captcha/Captcha.ashx")',
+                    success: function (data) {
+                        document.getElementById('captcha').value = data.toString().substr(data.length - 6);
+                        $("#Captcha").attr("src", "data:image/jpg;base64," + data.toString().substr(0, data.length - 6));
+
+                    }
+                });
+
+                $("#getCaptcha").click(function () {
+                    $("#txtCaptcha").val("");
+                    $.ajax({
+                        url: '@Url.Content("~/Captcha/Captcha1.ashx")',
+                        type: 'POST',
+                        success: function (data) {
+                            document.getElementById('captcha').value = data.toString().substr(data.length - 6);
+                            $("#Captcha").attr("src", "data:image/jpg;base64," + data.toString().substr(0, data.length - 6));
+                        },
+                        error: function () {
+                        }
+                    });
+                });
+
+            });
+
+        </script>
+        <!-- End Page Scripts -->
+    </section>
+
+    <div class="main-backdrop"><!-- --></div>
+
+</body>
+
+</html>

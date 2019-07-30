@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Android App Management</li>
+</ul>
+
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Android App Management</h3>
+                <h4>View All App Packages</h4>
+            </div>
+            <div class="pull-right" id="dvActionKeys">
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("ViewInfo")" onclick="redirectAction(this);">View App Info</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("UpdateInfo")" onclick="redirectAction(this);">Update App Info</a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <table class="table table-invers nowrap" id="androidVerTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>App Name</th>
+                                        <th>Package Name</th>
+                                        <th>Version Name</th>
+                                        <th>Version Code</th>
+                                        <th>Version Build</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#mobileAppMenu").addClass("active");
+            $("#mobileAppIndex").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                getModal(0, strSuccess);
+            }
+
+            refreshAndroidAppVersion();
+        });
+    </script>
+}

@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Merchant UpdateInfo";
+}
+
+@model SDGBackOffice.Models.MerchantModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    @if (SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant)
+    {
+        <li><a href="@Url.Action("Index", "Merchants")">Home</a></li>
+    }
+    else
+    {
+        <li><a href="@Url.Action("Dashboard", "Home")">Home</a></li>
+    }
+    <li><a href="#">Merchant Management</a></li>
+    <li class="active">Update My Info</li>
+</ul>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    @Html.Hidden("success", (object)ViewBag.Success)
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <br />
+            <div style="color: red;">
+                @Html.ValidationSummary()
+            </div>
+            <form role="form" class="form-horizontal" method="post" action="@Url.Action("UpdateMyInfo")" id="jvalidate">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Edit My Info</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Merchant Name</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(m => m.MerchantName, new { @class = "form-control", @placeholder = "Merchant Name", @readonly = "readonly" })
+                                @*<span class="help-block">Required</span>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Address</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(m => m.CountryId, new List<SelectListItem>() { new SelectListItem() { Text = "Philippines", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Country" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Contact Numbers</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary pull-right" id="SaveAndContinue">Save And Continue </button>
+                        @Html.ActionLink("Default Details", null, null, null, new { @class = "btn btn-success pull-left" })
+                        @if (SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant)
+                        {
+                            @Html.ActionLink("Back", "Index", "Merchants", null, new { @class = "btn btn-default pull-left" })
+                        }
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                $("#message-box-success").show();
+                $("#message-box-success").fadeOut(1500);
+            }
+        });
+    </script>
+}

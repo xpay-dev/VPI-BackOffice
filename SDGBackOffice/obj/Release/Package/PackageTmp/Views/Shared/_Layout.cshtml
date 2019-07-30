@@ -1,0 +1,119 @@
+﻿@{
+    if(ViewBag.Title == null) {
+        ViewBag.Title = "PayMaya";
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META SECTION -->
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon" />
+    <link href="@Url.Content("~/assets/common/img/favicon.144x144.png")" rel="apple-touch-icon" type="image/png" sizes="144x144">
+    <link href="@Url.Content("~/assets/common/img/favicon.114x114.png")" rel="apple-touch-icon" type="image/png" sizes="114x114">
+    <link href="@Url.Content("~/assets/common/img/favicon.72x72.png")" rel="apple-touch-icon" type="image/png" sizes="72x72">
+    <link href="@Url.Content("~/ assets / common / img / favicon.57x57.png")" rel="apple - touch - icon" type="image / png">
+    <link href="@Url.Content("~/assets/common/img/favicon.png")" rel="icon" type="image/png">
+    <link href="favicon.ico" rel="shortcut icon">
+
+    @Html.Partial("~/Views/Shared/_PartialStyles.cshtml")
+    @Html.Partial("~/Views/Shared/_PartialScripts.cshtml")
+
+</head>
+
+<body class="theme-dark menu-top menu-static colorful-enabled" ng-controller="MainCtrl">
+    @Html.Hidden("logoutClick", "")
+    @Html.Hidden("value", "")
+    @Html.Hidden("subValue", "")
+
+    @Html.Partial("~/Views/Shared/_PartialHeadNavigationMenu.cshtml")
+
+    @RenderBody()
+    
+    <div class="main-backdrop"><!-- --></div>
+    
+    @RenderSection("scripts", false)
+    <script type="text/javascript">
+        var t;
+        $(document).ready(function () {
+            t = setTimeout(function () {
+                $("div[id^='popover']").remove();
+                t = null;
+            }, 2000);
+            $('.xn-openable').click(function () {
+            });
+            $('.xn-text').click(function () {
+            });
+            $("#requestActCode").click(function () {
+                $("#message-box-info").show();
+            });
+            $("#btnRequest").click(function () {
+                $("#message-box-info").hide();
+                var src = rootDir + "img/filetree/spinner.gif";
+                $.blockUI({ message: '<h4><img src="' + src + '"> Sending Request ...</h4>' });
+                block();
+                var url = '@Url.Content("~/Home/SendActivationCodeRequest")';
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    success: function (data) {
+                        if (data == true) {
+                            $(document).ajaxStop($.unblockUI);
+                            $("#successMsg").text("Your Request has been Sent. Please wait for a Reply");
+                            $("#message-box-success").show();
+                            $("#message-box-success").fadeOut(1500);
+                        } else {
+                            $(document).ajaxStop($.unblockUI);
+                            $("#err").text("Unable to send request, please try again later.");
+                            $("#message-box-danger").show();
+                            $("#message-box-danger").fadeOut(1500);
+                        }
+                    }, error: function (data) {
+                        $(document).ajaxStop($.unblockUI);
+                        $("#err").text("Unable to send request, please try again later.");
+                        $("#message-box-danger").show();
+                        $("#message-box-danger").fadeOut(1500);
+                    }
+                });
+            });
+            $("#btnClose").click(function () {
+                $("#message-box-info").hide();
+            });
+        });
+        $("#btnYes").click(function () {
+            $.removeCookie("visits");
+        });
+        $("#profileImage").on("click", function () {
+            $("#imageFile").click();
+        });
+        $("#userPhoto").click(function () {
+            $("#imageFile").click();
+        });
+        @*$('#imageFile').fileupload({
+            dataType: 'json',
+            url: '@Url.Action("UploadUserPhoto", "Home")',
+            autoUpload: true,
+            done: function (e, data) {
+                $('#userPhoto').attr("src", "@Url.Content("~/UserPictures/")" + data.result.filename);
+            }
+        });*@
+        function onImageError(obj) {
+            //obj.onerror = null;
+            obj.src = '@Url.Content("~/assets/images/users/avatar.jpg")';
+        }
+        $("#userPhoto").click(function () {
+            return false;
+        });
+        $("#btnYes").click(function () {
+            document.getElementById('logoutClick').value = true;
+        });
+        function block() {
+            $.ajax({ url: rootDir + 'Dashboard', cache: false });
+        }
+    </script>
+</body>
+</html>

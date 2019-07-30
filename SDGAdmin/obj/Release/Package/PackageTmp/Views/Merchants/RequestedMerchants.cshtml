@@ -1,0 +1,614 @@
+﻿@{
+    ViewBag.Title = "RequestedMerchants";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.RequestedMerchantRegistrationModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Merchants</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Merchants</h2>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Filter Option</h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Select Partner</label>
+            <div class="col-md-3">
+                @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @placeholder = " ", @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Select Reseller</label>
+            <div class="col-md-3">
+                @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+@Html.Hidden("hdnParentType", SDGAdmin.CurrentUser.ParentType)
+<div class="page-content-wrap">
+    @Html.Hidden("success", (object)ViewBag.Success)
+    @Html.Hidden("outdated", (object)ViewBag.Outdated)
+    <form id="formRequest" action="@Url.Action("RegisterMerchantBranchAndMID")" method="post" role="form" class="form-horizontal">
+        <br />
+        <div style="color: red; margin-left:10px;">
+            <label id="errorMessage"></label>
+            @Html.ValidationSummary()
+        </div>
+        @Html.HiddenFor(m => m.MerchantId, "")
+        @Html.HiddenFor(m => m.ResellerId, "")
+        <div class="row">
+            <div class="col-md-12">
+                <br />
+                <br />
+
+                <!-- START SIMPLE DATATABLE -->
+                <div class="panel panel-default 1st">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Requested Merchants</h3>
+                        <div style="display:inline-grid;" id="dvActionKeys">
+
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" id="rMerchantsTbl">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Merchant Name</th>
+                                    <th>Date Created</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel panel-default tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Branch Information</a></li>
+                        <li><a href="#tab-second" role="tab" data-toggle="tab">User Details</a></li>
+                        <li><a href="#tab-third" role="tab" data-toggle="tab">MID Details</a></li>
+                    </ul>
+                    <input id="x" type="button" class="btn btn-danger pull-right back" value="Close" style="margin-right: 5px; margin-top:5px;" />
+                    <div class="panel-body tab-content">
+                        <div class="tab-pane active" id="tab-first">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <h3 class="panel-title"><strong>Merchant Branch</strong> Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Branch Name</label>
+                                                    <div class="col-md-9">
+                                                        @Html.TextBoxFor(m => m.BranchName, new { @placeholder = "Branch Name", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Address</label>
+                                                    <div class="col-md-5">
+                                                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Address", @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(m => m.City, new { @placeholder = "City", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">State Province</label>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(m => m.StateProvince, new { @placeholder = "State Province", @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(m => m.ZipCode, new { @placeholder = "Zip Code", @class = "form-control" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Contact Numbers</label>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-second">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <h3 class="panel-title"><strong>User</strong> Details</h3>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Name</label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.MiddleName, new { @class = "form-control", @placeholder = "Middle Name" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Address</label>
+                                                <div class="col-md-4">
+                                                    <label class="check">
+                                                        @Html.CheckBoxFor(m => m.User.AddressSameAsParent, new { @id = "chkUserBranchAddress" }) Use Branch's address details
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Address</label>
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(m => m.User.Address, new { @id = "User_Address", @class = "form-control", @placeholder = "Street and Civic Number" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.City, new { @class = "form-control", @placeholder = "City" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label"></label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.DropDownListFor(m => m.User.CountryId, new List<SelectListItem>() { new SelectListItem() { Text = "Philippines", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Country" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Contact Numbers</label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Contact Information</label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.EmailAddress, new { @class = "form-control", @placeholder = "Email Address", @type = "email" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Login Informaton</label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.Username, new { @class = "form-control", @placeholder = "Username" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="password" class="form-control" placeholder="Confirm Password" name="User.ConfirmPassword" id="User.ConfirmPassword" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">PIN</label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.User.PIN, new { @placeholder = "PIN", @class = "form-control", @type = "password" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-third">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <h3 class="panel-title"><strong>MID</strong> Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">MID Details</label>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.MIDName, new { @class = "form-control", @placeholder = "MID Name" })
+                                            </div>
+                                            <label class="col-md-2 control-label">Is Active</label>
+                                            <div class="col-md-1">
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-3">
+                                                <label>Switch:</label>
+                                                @Html.DropDownListFor(m => m.SwitchId, (List<SelectListItem>)ViewBag.Switches, new { @class = "form-control", @placeholder = "Switch" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Card Type:</label>
+                                                @Html.DropDownListFor(m => m.CardTypeId, (List<SelectListItem>)ViewBag.CardTypes, new { @class = "form-control", @placeholder = "Card Type" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Currency:</label>
+                                                @Html.DropDownListFor(m => m.CurrencyId, (List<SelectListItem>)ViewBag.Currencies, new { @class = "form-control", @placeholder = "Currency" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group hiddiv">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-3">
+                                                <label id="param1">Access Code</label>
+                                                @Html.TextBoxFor(m => m.Param_1, new { @class = "form-control accessCode", @placeholder = "Access Code" })
+                                                @Html.TextBoxFor(m => m.Param_7, new { @class = "form-control mbTransNumber", @placeholder = "Merchant Branch Transit Number" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Merchant ID</label>
+                                                @Html.TextBoxFor(m => m.Param_2, new { @class = "form-control", @placeholder = "Merchant Id" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label id="param3">Secure Hash</label>
+                                                @Html.TextBoxFor(m => m.Param_3, new { @class = "form-control secure", @placeholder = "Secure Hash" })
+                                                @Html.TextBoxFor(m => m.Param_6, new { @class = "form-control tid", @placeholder = "Terminal Id" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group hiddiv">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-3">
+                                                <label id="userName">Username</label>
+                                                @Html.TextBoxFor(m => m.Param_4, new { @class = "form-control userName", @placeholder = "Username", @autocomplete = "off" })
+                                                @Html.TextBoxFor(m => m.Param_8, new { @class = "form-control mBankNumber", @placeholder = "Merchant Bank Number" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label id="password">Password</label>
+                                                @Html.TextBoxFor(m => m.Param_5, new { @class = "form-control password", @placeholder = "Password", @type = "password", @autocomplete = "off" })
+                                                @Html.TextBoxFor(m => m.Param_9, new { @class = "form-control mAccountNumber", @placeholder = "Merchant Account Number" })
+                                            </div>
+                                            <div class="col-md-3 originator">
+                                                <label>Originator Id</label>
+                                                @Html.TextBoxFor(m => m.Param_10, new { @class = "form-control oId", @placeholder = "Originator Id" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group hiddiv3">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-3">
+                                                <label id="userName">Merchant Category Code</label>
+                                                @Html.TextBoxFor(m => m.Param_11, new { @class = "form-control", @placeholder = "Category Code", @autocomplete = "off" })
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label id="password">Desposit Merchant Id</label>
+                                                @Html.TextBoxFor(m => m.Param_12, new { @class = "form-control", @placeholder = "Desposit Merchant Id", @autocomplete = "off" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Transaction Charges</label>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_Discount, new { @class = "form-control", @placeholder = "Discount Rate", @Value = 0 })
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_CardNotPresent, new { @class = "form-control", @placeholder = "Card Not Present", @Value = 0 })
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_Decline, new { @class = "form-control", @placeholder = "Decline", @Value = 0 })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_eCommerce, new { @class = "form-control", @placeholder = "eCommerce Rate", @Value = 0 })
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_PreAuth, new { @class = "form-control", @placeholder = "Pre Auth Rate", @Value = 0 })
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_Capture, new { @class = "form-control", @placeholder = "Capture Rate", @Value = 0 })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_Purchased, new { @class = "form-control", @placeholder = "Purchased Rate", @Value = 0 })
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_Refund, new { @class = "form-control", @placeholder = "Refund Rate", @Value = 0 })
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_Void, new { @class = "form-control", @placeholder = "Void Rate", @Value = 0 })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label"></label>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_CashBack, new { @class = "form-control", @placeholder = "Cash Back Rate", @Value = 0 })
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(m => m.TC_BalanceInquiry, new { @class = "form-control", @placeholder = "Balance Inquiry Rate", @Value = 0 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="button" id="clear" class="btn btn-default" value="Clear Form">
+                        <input type="button" id="btnSubmit" class="btn btn-primary pull-right" value="Submit" />
+                    </div>
+                </div>
+                <!-- END TABS -->
+            </div>
+            <!-- END SIMPLE DATATABLE -->
+        </div>
+    </form>
+</div>
+
+<!-- PAGE CONTENT WRAPPER -->
+
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+
+
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+            document.getElementById('CountryId').value = 185;
+            document.getElementById('User_CountryId').value = 185;
+
+            $(".tabs").hide();
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                $("#message-box-success").show();
+                $("#message-box-success").fadeOut(1500);
+            }
+
+            $(".hiddiv").hide();
+            $(".hiddiv3").hide();
+            $(".tid").hide();
+            $(".mbTransNumber").hide();
+            $(".mBankNumber").hide();
+            $(".mAccountNumber").hide();
+            $(".originator").hide();
+
+            $("#SwitchId").change(function () {
+                var ddlswitch = document.getElementById('SwitchId').value;
+                if (ddlswitch != 0) {
+                    $(".hiddiv").show();
+
+                    if (ddlswitch == 27) {
+                        $("#param1").text("Access Code");
+                        $("#param3").text("Terminal ID");
+                        $("#userName").text("Username");
+                        $("#password").text("Password");
+                        $(".secure").hide();
+                        $(".mbTransNumber").hide();
+                        $(".mBankNumber").hide();
+                        $(".mAccountNumber").hide();
+                        $(".originator").hide();
+                        $(".tid").show();
+                        $(".hiddiv3").show();
+                    } else if (ddlswitch == 22) {
+                        $("#param1").text("Merchant Branch Transit Number");
+                        $("#param3").text("Terminal ID");
+                        $("#userName").text("Merchant Bank Number");
+                        $("#password").text("Merchant Account Number");
+                        $(".accessCode").hide();
+                        $(".userName").hide();
+                        $(".password").hide();
+                        $(".secure").hide();
+                        $(".mbTransNumber").show();
+                        $(".mBankNumber").show();
+                        $(".mAccountNumber").show();
+                        $(".tid").show();
+                        $(".originator").show();
+                        $(".hiddiv3").show();
+                    } else {
+                        $("#param1").text("Access Code");
+                        $("#param3").text("Secure Hash");
+                        $("#userName").text("Username");
+                        $("#password").text("Password");
+                        $(".secure").show();
+                        $(".accessCode").show();
+                        $(".userName").show();
+                        $(".password").show();
+                        $(".secure").show();
+                        $(".tid").hide();
+                        $(".mbTransNumber").hide();
+                        $(".mBankNumber").hide();
+                        $(".mAccountNumber").hide();
+                        $(".originator").hide();
+                        $(".hiddiv3").hide();
+                    }
+                } else {
+                    $(".hiddiv").hide();
+                    $(".hiddiv3").hide();
+                }
+            });
+
+            var parentId = '@ViewBag.ParentId';
+
+            refreshRequestedMerchantsTable(parentId);
+
+            $("#x").click(function () {
+                $("#sMsg").text("Are you sure you want the close the Registration panel ?");
+                $("#message-box-warning").show();
+            });
+
+            $("#btnProceed").click(function () {
+                $("#message-box-warning").hide();
+                merchantId = 0;
+                $(".tabs").hide();
+                $(".1st").show();
+            });
+
+            $("#warningClose").click(function () {
+                $("#message-box-warning").hide();
+            });
+
+            $("#ddlresellers").change(function () {
+                document.getElementById('ResellerId').value = $("#ddlresellers").val();
+            });
+
+            $("#chkUserBranchAddress").bind("click", function (o) {
+                if ($("#chkUserBranchAddress:checked").length) {
+                    var address = $("#Address").val();
+                    var city = $("#City").val();
+                    var state = $("#StateProvince").val();
+                    var pContactNumber = $("#PrimaryContactNumber").val();
+                    var fax = $("#Fax").val();
+                    var mobileNumber = $("#MobileNumber").val();
+
+                    $("#User_Address").val($("#Address").val());
+                    $("#User_City").val($("#City").val());
+                    $("#User_StateProvince").val($("#StateProvince").val());
+                    $("#User_ZipCode").val($("#ZipCode").val());
+                    $("#User_PrimaryContactNumber").val($("#PrimaryContactNumber").val());
+                    $("#User_Fax").val($("#Fax").val());
+                    $("#User_MobileNumber").val($("#MobileNumber").val());
+                } else {
+                    $("#User_Address").val("");
+                    $("#User_City").val("");
+                    $("#User_StateProvince").val("");
+                    $("#User_ZipCode").val("");
+                    $("#User_PrimaryContactNumber").val("");
+                    $("#User_Fax").val("");
+                    $("#User_MobileNumber").val("");
+                }
+            });
+
+            $("#btnSubmit").click(function () {
+                document.getElementById('MerchantId').value = merchantId;
+                var ddlswitch = document.getElementById('SwitchId').value;
+                var ddlcard = document.getElementById('CardTypeId').value;
+                var ddlcurrency = document.getElementById('CurrencyId').value;
+
+                if (ddlswitch == "0") {
+                    $("#errorMsg").text("Please select Switch");
+                    $("#message-box-danger").show();
+                } else if (ddlcard == "0") {
+                    $("#errorMsg").text("Please select Card Type");
+                    $("#message-box-danger").show();
+                } else if (ddlcurrency == "0") {
+                    $("#errorMsg").text("Please select Currency");
+                    $("#message-box-danger").show();
+                } else {
+                    $("#formRequest").submit();
+                }
+            });
+
+            $("#ddlpartners").change(function () {
+                var pId = document.getElementById('ddlpartners').value;
+                ptId = 1;
+                refreshUsersTable(pId, ptId);
+                $('#ddlmerchants').empty();
+                $('#ddlmerchants').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchants available');
+                    $('#ddlmerchants').append(option);
+                });
+
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                $.ajax({
+                    url: rootDir + 'Ajax/GetResellerforUser',
+                    type: 'POST',
+                    data: { "pId": pId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlresellers').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlresellers").change(function () {
+                var pId = document.getElementById('ddlresellers').value;
+                ptId = 2;
+                refreshUsersTable(pId, ptId);
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                refreshPOSTable(0);
+                $.ajax({
+                    url: rootDir + 'Ajax/GetMerchantsByResellerforUser',
+                    type: 'POST',
+                    data: { "rId": pId },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+}

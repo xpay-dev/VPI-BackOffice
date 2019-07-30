@@ -1,0 +1,75 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    textarea {
+        resize: none;
+        width: 500px;
+        height: 150px;
+    }
+</style>
+
+@model SDGBackOffice.Models.AgreementsModel
+
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">
+        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "MerchantFeatures")">Home</a></li>
+            <li class="active">Agreements Text</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+@Html.Hidden("hdnCtrl", "");
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Agreement Text</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <!-- Horizontal Form -->
+                            <form action="@Url.Action("AgreementsText")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        @Html.DropDownListFor(a => a.LanguageCode, new List<SelectListItem> { new SelectListItem { Text = "EN-CA", Value = "EN-CA" } }, new { id = "ddlMerchants", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <h4><b>Terms of Service</b></h4>
+                                        @Html.TextAreaFor(a => a.TermsOfService, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h4><b>Disclaimer</b></h4>
+                                        @Html.TextAreaFor(a => a.Disclaimer, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-3 pull-left">
+                                        </div>
+                                        <div class="col-md-9 ">
+                                            <input id="save" class="btn width-150 btn-primary pull-right" type="submit" value="Submit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

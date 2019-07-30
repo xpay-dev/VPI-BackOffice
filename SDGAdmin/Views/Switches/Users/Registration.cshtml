@@ -1,0 +1,372 @@
+﻿@{
+    ViewBag.Title = "Admin User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.UserModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Users")">Home</a></li>
+    <li><a href="#">User Management</a></li>
+    <li class="active">Create New User</li>
+</ul>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <!-- START WIZARD WITH VALIDATION -->
+    <div class="block">
+        <h4>User Registration</h4>
+        <br />
+        <div style="color: red;">
+            @Html.ValidationSummary()
+        </div>
+        <form id="jvalidate" action="@Url.Action("Registration")" method="post" role="form" class="form-horizontal">
+            @Html.Hidden("MerchantId", "")
+            @Html.Hidden("parentId", "")
+            @Html.Hidden("parentTypeId", "")
+            <div class="panel panel-default">
+                <div class="panel-body ddlp">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Partner</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @placeholder = " ", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body ddlr">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Reseller</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body ddlm">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Merchant</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body ddlb">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Branches</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlbranches", new List<SelectListItem>() { new SelectListItem { Text = "No Branches available", Value = "-3" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User Details</h3>
+                </div>
+
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Name</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control", @placeholder = "Middle Name" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Address</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                            @Html.DropDownListFor(m => m.ProvinceId, (List<SelectListItem>)ViewBag.Provinces, new { @class = "form-control ddlProvinces" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Numbers</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Information</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "Email Address" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Login Information</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Username" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @type = "password" })
+                        </div>
+                    </div>
+                    <div class="form-group pin">
+                        <label class="col-md-2 control-label">Mobile App PIN</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.PIN, new { @class = "form-control", @placeholder = "Mobile App PIN", @type = "password" })
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label class="col-md-2 control-label">Permission Set</label>
+                        <div class="col-md-4">
+                            @{
+                                List<SelectListItem> role = new List<SelectListItem>();
+                                role.Add(new SelectListItem()
+                                {
+                                    Text = "Admin",
+                                    Value = "1"
+                                });
+                                role.Add(new SelectListItem()
+                                {
+                                    Text = "Manager",
+                                    Value = "2"
+                                });
+                                role.Add(new SelectListItem()
+                                {
+                                    Text = "Employee",
+                                    Value = "3"
+                                });
+                            }
+                            @Html.DropDownListFor(m => m.RoleId, role)
+                        </div>
+                    </div>*@
+                </div>
+                <div class="panel-footer">
+                    @Html.ActionLink("Back", "Index", "Partners", null, new { @class = "btn btn-default pull-left" })
+                    <input id="save" type="button" value="Submit" class="btn btn-primary pull-right" />
+                </div>
+            </div>
+        </form>
+        <div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+                    <div class="mb-content">
+                        <p id="errMsg" style="font-size: large"></p>
+                    </div>
+                    <div class="mb-footer">
+                        <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END WIZARD WITH VALIDATION -->
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+            $(".page-content").css("height", "100%");
+            var u = localStorage.getItem("userTypeId");
+
+            $("#StateProvince").hide();
+            document.getElementById('CountryId').value = 185;
+
+            if ((u == 1) || (u == 5)) {
+                $(".ddlr").hide();
+                $(".ddlm").hide();
+                $(".ddlb").hide();
+                $(".pin").hide();
+            } else if (u == 2) {
+                $(".ddlm").hide();
+                $(".ddlb").hide();
+                $(".pin").hide();
+            } else if (u == 3) {
+                $(".ddlb").hide();
+            }
+
+            $("#CountryId").change(function () {
+                var cId = $("#CountryId").val();
+                if (cId == 185) {
+                    $("#StateProvince").hide();
+                    $(".ddlProvinces").show();
+                } else {
+                    $("#StateProvince").show();
+                    $(".ddlProvinces").hide();
+                }
+            });
+
+            $("#save").click(function () {
+                var ddlp = document.getElementById('ddlpartners').value;
+                var ddlr = document.getElementById('ddlresellers').value;
+                var ddlm = document.getElementById('ddlmerchants').value;
+                var ddlb = document.getElementById('ddlbranches').value;
+                document.getElementById('MerchantId').value = document.getElementById('ddlmerchants').value;
+
+                if ((u == 1) || (u == 5)) {
+                    document.getElementById('parentId').value = ddlp;
+                    document.getElementById('parentTypeId').value = u;
+
+                    if (ddlp == 0) {
+                        $("#errMsg").text("Please select a Partner");
+                        $("#message-box-danger").show();
+                    } else {
+                        document.getElementById("jvalidate").submit();
+                    }
+
+                } else if (u == 2) {
+                    document.getElementById('parentId').value = ddlr;
+                    document.getElementById('parentTypeId').value = u;
+
+                    if ((ddlr == 0) || (ddlr == -1)) {
+                        $("#errMsg").text("Please select a Reseller");
+                        $("#message-box-danger").show();
+                    } else {
+                        document.getElementById("jvalidate").submit();
+                    }
+
+                } else if (u == 3) {
+                    document.getElementById('parentId').value = ddlm;
+                    document.getElementById('parentTypeId').value = u;
+
+                    if ((ddlm == 0) || (ddlm == -2)) {
+                        $("#errMsg").text("Please select a Merchant");
+                        $("#message-box-danger").show();
+                    } else {
+                        document.getElementById("jvalidate").submit();
+                    }
+
+                } else if (u == 4) {
+                    document.getElementById('parentId').value = ddlb;
+                    document.getElementById('parentTypeId').value = u;
+
+                    if ((ddlb == 0) || (ddlb == -3)) {
+                        $("#errMsg").text("Please select a Merchant Branches");
+                        $("#message-box-danger").show();
+                    } else {
+                        document.getElementById("jvalidate").submit();
+                    }
+
+                }
+            });
+
+            $("#ddlpartners").on("change", function () {
+                var id = document.getElementById('ddlpartners').value;
+                $('#ddlmerchants').empty();
+                $('#ddlmerchants').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '-2').text('No Merchants available');
+                    $('#ddlmerchants').append(option);
+                });
+
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '-3').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                $.ajax({
+                    url: rootDir + 'Ajax/GetResellerforUser',
+                    type: 'POST',
+                    data: { "pId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlresellers').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '-3').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+                $.ajax({
+                    url: rootDir + 'Ajax/GetMerchantsByResellerforUser',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlmerchants").on("change", function () {
+                var id = document.getElementById('ddlmerchants').value;
+                $.ajax({
+                    url: rootDir + 'Ajax/GetBranchesforUser',
+                    type: 'POST',
+                    data: { "id": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-3']").remove();
+                        $('#ddlbranches').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlbranches").on("change", function () {
+                var id = document.getElementById('ddlbranches').value;
+            });
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+
+            $("#close").click(function () {
+                $("#message-box-danger").hide();
+            });
+
+        });
+    </script>
+}

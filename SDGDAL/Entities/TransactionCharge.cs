@@ -1,0 +1,25 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SDGDAL.Entities
+{
+    [Table("TransactionCharges")]
+    public class TransactionCharges
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TransactionChargeId { get; set; }
+
+        public decimal DiscountRate { get; set; }
+        public decimal CardNotPresent { get; set; }
+        public decimal eCommerce { get; set; }
+        public decimal PreAuth { get; set; }
+        public decimal Capture { get; set; }
+        public decimal Purchased { get; set; }
+        public decimal Declined { get; set; }
+        public decimal Refund { get; set; }
+        public decimal Void { get; set; }
+
+        public decimal CashBack { get; set; }
+    }
+}

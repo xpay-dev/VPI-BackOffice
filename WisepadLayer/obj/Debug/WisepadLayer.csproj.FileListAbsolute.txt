@@ -1,0 +1,3 @@
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\WisepadLayer\obj\Debug\WisepadLayer.csproj.App.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\WisepadLayer\obj\Debug\WisepadLayer.csprojAssemblyReference.cache
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\WisepadLayer\obj\Debug\WisepadLayer.csproj.CoreCompileInputs.cache

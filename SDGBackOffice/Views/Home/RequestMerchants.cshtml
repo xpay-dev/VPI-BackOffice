@@ -1,0 +1,290 @@
+﻿@{
+    ViewBag.Title = "Request Merchants";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.RequestedMerchantModel
+
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">
+        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active">Request Merchant</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Request Merchant</h2>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <form action="@Url.Action("RequestMerchants")" method="post" role="form" class="form-horizontal" id="requestForm" autocomplete="off">
+        @Html.HiddenFor(m => m.CardTypeId, "")
+        <div class="col-md-10">
+            <!-- START TABS -->
+            <div class="panel panel-default tabs">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">Merchant Info</a></li>
+                    <li><a href="#tab-second" role="tab" data-toggle="tab">MID Info</a></li>
+                    <li><a href="#tab-third" role="tab" data-toggle="tab">Request Note</a></li>
+                </ul>
+                <div class="panel-body tab-content">
+                    <div class="tab-pane active" id="tab-first">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Merchant</strong> Request</h3>
+                                    <br />
+                                    <br />
+                                    <div style="color: red;">
+                                        @Html.ValidationSummary()
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <h3 class="panel-title"><strong>Merchant</strong> Details</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Merchant Name</label>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(m => m.MerchantName, new { @placeholder = "Merchant Name", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Admin Name</label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.MiddleName, new { @placeholder = "Middle Name", @class = "form-control" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Last Name", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Merchant Email</label>
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(m => m.MerchantEmail, new { @placeholder = "Email", @class = "form-control" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Address</label>
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Contact Numbers</label>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label"></label>
+                                                <div class="col-md-3">
+                                                    @*@Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })*@
+                                                    @Html.DropDownListFor(m => m.ProvinceId, (List<SelectListItem>)ViewBag.Provinces, new { @class = "form-control ddlProvinces" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-second">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>MID</strong> Info</h3>
+                                    <br />
+                                    <br />
+                                    <div style="color: red;">
+                                        @Html.ValidationSummary()
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <h3 class="panel-title"><strong>MID</strong> Details</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Merchant ID</label>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(m => m.MID, new { @placeholder = "Merchant ID", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Secure Hash</label>
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(m => m.SecureHash, new { @placeholder = "Secure Hash", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Access Code</label>
+                                                <div class="col-md-4">
+                                                    @Html.TextBoxFor(m => m.AccessCode, new { @placeholder = "Access Code", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Operator Username</label>
+                                                <div class="col-md-4">
+                                                    @Html.TextBoxFor(m => m.Username, new { @placeholder = "User Name (Optional)", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Operator Password</label>
+                                                <div class="col-md-4">
+                                                    @Html.TextBoxFor(m => m.Password, new { @placeholder = "Password (Optional)", @class = "form-control", @type = "password" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Card Type</label>
+                                                <div class="col-md-4">
+                                                    <label class="check"><input value="1" id="chk1" type="checkbox" /> Master Card</label><br />
+                                                    <label class="check"><input value="2" id="chk2" type="checkbox" /> Visa</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-third">
+                        @*<textarea ></textarea>*@
+                        @Html.TextAreaFor(m => m.RequestNote, new { @placeholder = "Enter your Request Note Here", @class = "form-control" })
+                    </div>
+                    <div class="panel-footer">
+                        <input type="button" id="clear" class="btn btn-default" value="Clear Form">
+                        <input type="button" id="btnSubmit" class="btn btn-primary pull-right" value="Submit" />
+                    </div>
+                </div>
+                <!-- END TABS -->
+            </div>
+        </div>
+    </form>
+</div>
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+            <div class="mb-content">
+                <p id="errorMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById('CountryId').value = 185;
+
+            $("#RequestNote").css({ "resize": "none", "height": "250px" });
+
+            $('#chk1').change(function () {
+                var check1 = document.getElementById('chk1').checked;
+                document.getElementById("CardTypeId").value = 1;
+                $('#chk2').prop('disabled', true);
+
+                if (check1 == false) {
+                    $('#chk2').prop('disabled', false);
+                }
+            });
+
+            $('#chk2').change(function () {
+                var check2 = document.getElementById('chk2').checked;
+                document.getElementById("CardTypeId").value = 2;
+                $('#chk1').prop('disabled', true);
+
+                if (check2 == false) {
+                    $('#chk1').prop('disabled', false);
+                }
+            });
+
+            $("#btnSubmit").click(function () {
+                var chk1 = document.getElementById('chk1').checked;
+                var chk2 = document.getElementById('chk2').checked;
+
+                if ((chk1 == false) && (chk2 == false)) {
+                    alert("Please choose 1 Card Type");
+                } else if ((chk1 == true) && (chk2 == true)) {
+                alert("Please choose 1 Card Type");
+                } else {
+                    $("#requestForm").submit();
+                }
+            });
+        });
+    </script>
+}

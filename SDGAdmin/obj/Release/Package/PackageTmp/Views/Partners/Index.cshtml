@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "My Partners";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Partner Management</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All Partners</h3>
+
+            </div>
+            <div class="pull-right" id="dvActionKeys">
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("Registration", "Resellers")" onclick="redirectActionwithId(this);">Create Reseller</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("UpdateInfo")" onclick="redirectActionwithId(this);">Update Partner Info</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("ViewInfo")" onclick="redirectActionwithId(this);">View Partner Info</a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <table class="table table-inverse nowrap" id="partnersTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Company Name</th>
+                                        <th>Primary Contact Number</th>
+                                        <th>Location</th>
+                                        <th>Parent Partner</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>                                
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#example1').DataTable({
+                responsive: true
+            });
+            //0 = success
+            //1 = failed
+
+            $("#partnerMenu").addClass("active");
+            $("#partnerIndex").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            refreshPartnersTable();
+
+        });
+    </script>
+}

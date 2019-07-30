@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "MID Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.MerchantModel
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">MID Management</li>
+</ul>
+
+<!-- START NOTIFICATION -->
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+<!-- END START NOTIFICATION -->
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        @Html.Hidden("carderror", (object)ViewBag.CardTypeError)
+        <section class="panel">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <div class="row">                
+                        <div class="form-group">                           
+                            <div class="col-md-4">
+                                <h4>Select Partner:</h4>
+                                @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4>Select Reseller:</h4>
+                                @Html.DropDownList("ddlresellers", new List<SelectListItem>() { new SelectListItem { Text = "No Resellers available", Value = "-1" } }, new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-4">
+                                <h4>Select Merchant:</h4>
+                                @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                            </div>
+                        </div>                   
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All MIDs</h3>
+            </div>
+
+            <div class="pull-right" id="dvActionKeys">              
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsUpdateInfo")" onclick="redirectAction(this);">Update MID Info</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsViewInfo")" onclick="redirectAction(this);">View MID Info</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("RemoveAssignedMid")" onclick="redirectActionMidRemove(this);">View/Remove MID</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsAssign")" onclick="redirectActionMidAssign(this);">Assign MID</a>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <table class="table table-inverse nowrap" id="MIDsTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th>MID Name</th>
+                                        <th>Switch Name</th>
+                                        <th>Card Type</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<div class="message-box message-box-danger animated fadeIn div-hide" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-success animated fadeIn div-hide" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="sMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.alert-danger').hide();
+            $('.alert-success').hide();
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantmidSubmenu").addClass("active");
+            $("#merchantmidSubIndex").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            var strError = document.getElementById('carderror').value;
+            var fadeTime = 0;
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            $("#dvActionKeys").hide();
+            refreshMidsTable(this.value);
+        });
+
+        $("#ddlpartners").on("change", function () {
+            var id = document.getElementById('ddlpartners').value;
+            $('#ddlmerchants').empty();
+            $('#ddlmerchants').each(function () {
+                var option = $("<option />");
+                option.attr("value", '0').text('No Merchants available');
+                $('#ddlmerchants').append(option);
+            });
+
+            $.ajax({
+                url: rootDir + 'Ajax/GetReseller',
+                type: 'POST',
+                data: { "pId": id },
+                dataType: "json",
+                success: function (data) {
+                    $("option[value='-1']").remove();
+                    $('#ddlresellers').empty()
+                    $.each(data, function (key, value) {
+                        $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                    });
+
+                    if (data.length == 1) {
+                        $.ajax({
+                            url: rootDir + 'Ajax/GetMerchantsByReseller',
+                            type: 'POST',
+                            data: { "rId": $("#ddlresellers").val() },
+                            dataType: "json",
+                            success: function (data) {
+                                $("option[value='-2']").remove();
+                                $('#ddlmerchants').empty()
+                                $.each(data, function (key, value) {
+                                    $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                                });
+
+                                if (data.length == 1) {
+                                    refreshMidsTable($("#ddlmerchants").val());
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        $("#ddlresellers").on("change", function () {
+            var id = document.getElementById('ddlresellers').value;
+
+            $.ajax({
+                url: rootDir + 'Ajax/GetMerchantsByReseller',
+                type: 'POST',
+                data: { "rId": id },
+                dataType: "json",
+                success: function (data) {
+                    $("option[value='-2']").remove();
+                    $('#ddlmerchants').empty()
+                    $.each(data, function (key, value) {
+                        $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                    });
+
+                    if (data.length == 1) {
+                        refreshMidsTable($("#ddlmerchants").val());
+                    }
+                }
+            });
+        });
+
+        $("#ddlmerchants").on("change", function () {
+            var ddlm = document.getElementById('ddlmerchants').value;
+
+            refreshMidsTable(ddlm);
+        });
+
+        function redirect() {
+            var ddlm = document.getElementById('ddlmerchants').value;
+
+            window.location.href = rootDir + "MIDs/MidsAssign/" + ddlm;
+        }
+
+    </script>
+}

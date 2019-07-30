@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://microsoft.com/webservices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://microsoft.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/webservices/">
+      <s:element name="EvertecKeyConversion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InPinData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EvertecKeyConversionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EvertecKeyConversionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertPinData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InPinData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertPinDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvertPinDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertPinDataToPin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InPinDataClearText" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PAN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertPinDataToPinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvertPinDataToPinResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertPinDataClearText">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InPinData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertPinDataClearTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConvertPinDataClearTextResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptRover">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InputStr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptRoverResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DecryptRoverResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Test">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InputStr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KSN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestResult" type="tns:ReturnResultTest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReturnResultTest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Track1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DecryptTrack2Rover">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InputStr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KSN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptTrack2RoverResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DecryptTrack2RoverResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptTrack1Rover">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InputStr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="KSN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DecryptTrack1RoverResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DecryptTrack1RoverResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EvertecKeyConversionSoapIn">
+    <wsdl:part name="parameters" element="tns:EvertecKeyConversion" />
+  </wsdl:message>
+  <wsdl:message name="EvertecKeyConversionSoapOut">
+    <wsdl:part name="parameters" element="tns:EvertecKeyConversionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConvertPinDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvertPinData" />
+  </wsdl:message>
+  <wsdl:message name="ConvertPinDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvertPinDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConvertPinDataToPinSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvertPinDataToPin" />
+  </wsdl:message>
+  <wsdl:message name="ConvertPinDataToPinSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvertPinDataToPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConvertPinDataClearTextSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvertPinDataClearText" />
+  </wsdl:message>
+  <wsdl:message name="ConvertPinDataClearTextSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvertPinDataClearTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="DecryptRoverSoapIn">
+    <wsdl:part name="parameters" element="tns:DecryptRover" />
+  </wsdl:message>
+  <wsdl:message name="DecryptRoverSoapOut">
+    <wsdl:part name="parameters" element="tns:DecryptRoverResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapIn">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapOut">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:message name="DecryptTrack2RoverSoapIn">
+    <wsdl:part name="parameters" element="tns:DecryptTrack2Rover" />
+  </wsdl:message>
+  <wsdl:message name="DecryptTrack2RoverSoapOut">
+    <wsdl:part name="parameters" element="tns:DecryptTrack2RoverResponse" />
+  </wsdl:message>
+  <wsdl:message name="DecryptTrack1RoverSoapIn">
+    <wsdl:part name="parameters" element="tns:DecryptTrack1Rover" />
+  </wsdl:message>
+  <wsdl:message name="DecryptTrack1RoverSoapOut">
+    <wsdl:part name="parameters" element="tns:DecryptTrack1RoverResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ConversionToolSoap">
+    <wsdl:operation name="EvertecKeyConversion">
+      <wsdl:input message="tns:EvertecKeyConversionSoapIn" />
+      <wsdl:output message="tns:EvertecKeyConversionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinData">
+      <wsdl:input message="tns:ConvertPinDataSoapIn" />
+      <wsdl:output message="tns:ConvertPinDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinDataToPin">
+      <wsdl:input message="tns:ConvertPinDataToPinSoapIn" />
+      <wsdl:output message="tns:ConvertPinDataToPinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinDataClearText">
+      <wsdl:input message="tns:ConvertPinDataClearTextSoapIn" />
+      <wsdl:output message="tns:ConvertPinDataClearTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptRover">
+      <wsdl:input message="tns:DecryptRoverSoapIn" />
+      <wsdl:output message="tns:DecryptRoverSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:input message="tns:TestSoapIn" />
+      <wsdl:output message="tns:TestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptTrack2Rover">
+      <wsdl:input message="tns:DecryptTrack2RoverSoapIn" />
+      <wsdl:output message="tns:DecryptTrack2RoverSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptTrack1Rover">
+      <wsdl:input message="tns:DecryptTrack1RoverSoapIn" />
+      <wsdl:output message="tns:DecryptTrack1RoverSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConversionToolSoap" type="tns:ConversionToolSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EvertecKeyConversion">
+      <soap:operation soapAction="http://microsoft.com/webservices/EvertecKeyConversion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinData">
+      <soap:operation soapAction="http://microsoft.com/webservices/ConvertPinData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinDataToPin">
+      <soap:operation soapAction="http://microsoft.com/webservices/ConvertPinDataToPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinDataClearText">
+      <soap:operation soapAction="http://microsoft.com/webservices/ConvertPinDataClearText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptRover">
+      <soap:operation soapAction="http://microsoft.com/webservices/DecryptRover" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://microsoft.com/webservices/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptTrack2Rover">
+      <soap:operation soapAction="http://microsoft.com/webservices/DecryptTrack2Rover" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptTrack1Rover">
+      <soap:operation soapAction="http://microsoft.com/webservices/DecryptTrack1Rover" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConversionToolSoap12" type="tns:ConversionToolSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EvertecKeyConversion">
+      <soap12:operation soapAction="http://microsoft.com/webservices/EvertecKeyConversion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinData">
+      <soap12:operation soapAction="http://microsoft.com/webservices/ConvertPinData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinDataToPin">
+      <soap12:operation soapAction="http://microsoft.com/webservices/ConvertPinDataToPin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConvertPinDataClearText">
+      <soap12:operation soapAction="http://microsoft.com/webservices/ConvertPinDataClearText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptRover">
+      <soap12:operation soapAction="http://microsoft.com/webservices/DecryptRover" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap12:operation soapAction="http://microsoft.com/webservices/Test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptTrack2Rover">
+      <soap12:operation soapAction="http://microsoft.com/webservices/DecryptTrack2Rover" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptTrack1Rover">
+      <soap12:operation soapAction="http://microsoft.com/webservices/DecryptTrack1Rover" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConversionTool">
+    <wsdl:port name="ConversionToolSoap" binding="tns:ConversionToolSoap">
+      <soap:address location="http://dev.mobilewebservice.hybridpaytech.com/Encryption/webservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConversionToolSoap12" binding="tns:ConversionToolSoap12">
+      <soap12:address location="http://dev.mobilewebservice.hybridpaytech.com/Encryption/webservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

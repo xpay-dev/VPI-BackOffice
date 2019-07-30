@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Merchant On Board Results";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Merchant on Board</li>
+</ul>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <p id="errorMsg" style="font-size: large"></p>
+        </div>
+
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <p id="errMsg" style="font-size: large"></p>
+        </div>
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+       @Html.Hidden("hdnParentType", SDGAdmin.CurrentUser.ParentType)
+        @Html.Hidden("success", (object)ViewBag.Success)
+        @Html.Hidden("outdated", (object)ViewBag.Outdated)
+        @Html.Hidden("error", (object)ViewBag.Error)
+
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All Response Filename/s</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <div class="pull-right">
+                                <a href="#" class="btn btn-primary pull-right" data-link="@Url.Action("GetFileDetails", "MerchantOnBoard")" onclick="redirectActionToGetResponse(this);">View Response</a>
+                            </div>
+                            <table class="table table-hover nowrap" id="FileResponseTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>File Name</th>
+                                        <th>Date Received</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/js/CTMerchantOnBoard.js")"></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.alert-danger').hide();
+            $('.alert-success').hide();
+
+            $("#ctpayment").addClass("active");
+            $("#CTBulkMerchant").addClass("active");
+            $("#AddBulk").addClass("active");
+
+            if (document.getElementById('hdnParentType').value == 'Reseller') {
+                $(".panel-hide").css('display', 'none');
+            }
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                $(".alert-success").show();
+                $(".alert-success").fadeOut(1500);
+            }
+
+            var strOutdated = document.getElementById('outdated').value;
+            if (strOutdated != "") {
+                $("#errorMsg").text(strOutdated);
+                $(".alert-danger").show();
+                $(".alert-danger").fadeOut(2500);
+            }
+
+            var strErr = document.getElementById('error').value;
+            if (strErr != "") {
+                $("#errorMsg").text(strErr);
+                $(".alert-danger").show();
+                $(".alert-danger").fadeOut(2500);
+            }
+
+            $("#close").click(function () {
+                $(".alert-danger").hide();
+                $(".alert-success").hide();
+            });
+
+            refreshGetAllFilenameResponse();
+        });
+    </script>
+}

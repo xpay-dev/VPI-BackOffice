@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Partner UpdateMyInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model CTPaymentBackOffice.Models.PartnerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Partners")">Home</a></li>
+    <li><a href="#">Partner Management</a></li>
+    <li class="active">Update My Info</li>
+</ul>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form role="form" class="form-horizontal" method="post" action="@Url.Action("UpdateMyInfo")">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Edit My Info</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Company Name</label>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "Company Name", @disabled = "disabled" })
+                                @*<span class="help-block">Required</span>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Address</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(m => m.CountryId, new List<SelectListItem>() { new SelectListItem() { Text = "Philippines", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Country" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Contact Numbers</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Contact Information</label>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.CompanyEmail, new { @class = "form-control", @placeholder = "Company Email Address", @type = "email" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" class="btn btn-primary pull-right" id="SaveAndContinue" title="Save And Continue" />
+                        @Html.ActionLink("Default Details", null, null, null, new { @class = "btn btn-success pull-left" })
+                        @Html.ActionLink("Back", "Index", "Partners", null, new { @class = "btn btn-default pull-left" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#partnerMenu").addClass("active");
+        $("#partnerUpdate").addClass("active");
+
+    });
+</script>
+

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>E:\Users\Gabby Peneyra\source\repos\Publish\V2\SW\</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Crypto.CryptoManager.dll">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="bin/CTPaymentUtilities.dll">
+      <publishTime>07/22/2019 13:32:00</publishTime>
+    </File>
+    <File Include="bin/CT_EMV_CLASSES.dll">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/DSPREADQPosLayer.exe">
+      <publishTime>07/24/2019 06:14:12</publishTime>
+    </File>
+    <File Include="bin/DSPREADQPosLayer.exe.config">
+      <publishTime>07/22/2019 13:32:00</publishTime>
+    </File>
+    <File Include="bin/DSPREADQPosLayer.pdb">
+      <publishTime>07/24/2019 06:14:12</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="bin/GatewayProcessor.dll">
+      <publishTime>07/24/2019 06:27:07</publishTime>
+    </File>
+    <File Include="bin/GatewayProcessor.dll.config">
+      <publishTime>07/24/2019 06:20:43</publishTime>
+    </File>
+    <File Include="bin/GatewayProcessor.pdb">
+      <publishTime>07/24/2019 06:27:07</publishTime>
+    </File>
+    <File Include="bin/HPA_ISO8583.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/JWT.dll">
+      <publishTime>06/08/2017 09:56:37</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Azure.AppService.ApiApps.Service.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>06/08/2017 09:56:37</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>06/08/2017 09:56:37</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>06/08/2017 09:56:37</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>06/08/2017 09:56:37</publishTime>
+    </File>
+    <File Include="bin/PAYMAYA_ISO8583.dll">
+      <publishTime>06/08/2017 09:56:37</publishTime>
+    </File>
+    <File Include="bin/RamblerLayer1.exe">
+      <publishTime>07/24/2019 06:14:11</publishTime>
+    </File>
+    <File Include="bin/RamblerLayer1.exe.config">
+      <publishTime>07/24/2019 06:14:06</publishTime>
+    </File>
+    <File Include="bin/SDGDAL.dll">
+      <publishTime>07/24/2019 06:20:26</publishTime>
+    </File>
+    <File Include="bin/SDGDAL.dll.config">
+      <publishTime>07/24/2019 06:20:24</publishTime>
+    </File>
+    <File Include="bin/SDGDAL.pdb">
+      <publishTime>07/24/2019 06:20:26</publishTime>
+    </File>
+    <File Include="bin/SDGUtil.dll">
+      <publishTime>07/24/2019 06:20:42</publishTime>
+    </File>
+    <File Include="bin/SDGUtil.dll.config">
+      <publishTime>07/24/2019 06:20:39</publishTime>
+    </File>
+    <File Include="bin/SDGUtil.pdb">
+      <publishTime>07/24/2019 06:20:42</publishTime>
+    </File>
+    <File Include="bin/SDGWebService.dll">
+      <publishTime>07/24/2019 06:27:09</publishTime>
+    </File>
+    <File Include="bin/SDGWebService.pdb">
+      <publishTime>07/24/2019 06:27:09</publishTime>
+    </File>
+    <File Include="bin/Swashbuckle.Core.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Extensions.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>07/22/2019 13:32:14</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Primitives.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/Thx.Research.Security.dll">
+      <publishTime>06/08/2017 09:56:37</publishTime>
+    </File>
+    <File Include="bin/WebActivatorEx.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/WebApiDoodle.Net.Http.Formatting.dll">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="bin/WisepadLayer.dll">
+      <publishTime>07/24/2019 06:20:39</publishTime>
+    </File>
+    <File Include="bin/WisepadLayer.dll.config">
+      <publishTime>07/24/2019 06:18:41</publishTime>
+    </File>
+    <File Include="bin/WisepadLayer.pdb">
+      <publishTime>07/24/2019 06:20:39</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>07/22/2019 13:32:13</publishTime>
+    </File>
+    <File Include="POSWebService.svc">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="POSWebserviceJSON.svc">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="Signatures/20160215.jpg">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="Signatures/20160217.jpg">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="Signatures/sign.jpg">
+      <publishTime>07/22/2019 13:32:12</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/24/2019 06:27:20</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

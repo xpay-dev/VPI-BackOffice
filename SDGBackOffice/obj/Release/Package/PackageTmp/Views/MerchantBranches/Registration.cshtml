@@ -1,0 +1,260 @@
+﻿@{
+    ViewBag.Title = "Branch Registration";
+}
+
+@model SDGBackOffice.Models.MerchantBranchModel
+
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">
+        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "MerchantBranches")">Home</a></li>
+            <li><a href="#">Branch Management</a></li>
+            <li class="active">Create New Branch</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Branch Registration</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <!-- Horizontal Form -->
+                            <div style="color: red;">
+                                @Html.ValidationSummary()
+                            </div>
+                            <form action="@Url.Action("Registration")" method="post" role="form" class="form-horizontal" id="wizard-validation">
+
+                                <h4>Step 1 - Branch Information</h4>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Merchant</label>
+                                        @Html.DropDownListFor(m => m.MerchantId, (List<SelectListItem>)ViewBag.Merchants, new { @class = "form-control", @placeholder = "Branch Name" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Branch Name</label>
+                                        @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Country</label>
+                                        @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">State / Province</label>
+                                        @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">City</label>
+                                        @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Street and Civic Number</label>
+                                        @Html.TextBoxFor(m => m.Address, new { @id = "Address", @class = "form-control", @placeholder = "Street and Civic Number" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Zip / Postal Code</label>
+                                        @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Primary Contact Number</label>
+                                        @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Fax</label>
+                                        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Mobile Phone Number</label>
+                                        @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                                    </div>
+                                </div>
+
+                                <br />
+                                <br />
+                                <h4>Step 2 - User Details</h4>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">First Name</label>
+                                        @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Middle Name</label>
+                                        @Html.TextBoxFor(m => m.User.MiddleName, new { @class = "form-control", @placeholder = "Middle Name" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Last Name</label>
+                                        @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Address</label>
+                                        <label class="check">
+                                            @Html.CheckBoxFor(m => m.User.AddressSameAsParent, new { @id = "chkUserBranchAddress" }) Use Branch's address details
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Country</label>
+                                        @Html.DropDownListFor(m => m.User.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">State / Province</label>
+                                        @Html.TextBoxFor(m => m.User.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">City</label>
+                                        @Html.TextBoxFor(m => m.User.City, new { @class = "form-control", @placeholder = "City" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Street and Civic Number</label>
+                                        @Html.TextBoxFor(m => m.User.Address, new { @id = "User_Address", @class = "form-control", @placeholder = "Street and Civic Number" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Zip / Postal Code</label>
+                                        @Html.TextBoxFor(m => m.User.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Primary Contact Number</label>
+                                        @Html.TextBoxFor(m => m.User.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Fax</label>
+                                        @Html.TextBoxFor(m => m.User.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Mobile Phone Number</label>
+                                        @Html.TextBoxFor(m => m.User.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Email Address</label>
+                                        @Html.TextBoxFor(m => m.User.EmailAddress, new { @class = "form-control", @placeholder = "Email Address", @type = "email" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Username</label>
+                                        @Html.TextBoxFor(m => m.User.Username, new { @class = "form-control", @placeholder = "Username" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Password</label>
+                                        @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Confirm Password</label>
+                                        <input type="password" class="form-control" placeholder="Confirm Password" name="User.ConfirmPassword" id="User.ConfirmPassword" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">PIN</label>
+                                        @Html.TextBoxFor(m => m.User.PIN, new { @placeholder = "PIN", @class = "form-control", @type = "password" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-3 pull-left">
+                                            <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                                        </div>
+                                        <div class="col-md-9 ">
+                                            <button class="btn btn-primary pull-right width-150">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script>
+        $(document).ready(function () {
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantbranchSubmenu").addClass("active");
+            $("#merchantbranchSubRegister").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            $("#chkUserBranchAddress").bind("click", function (o) {
+                if ($("#chkUserBranchAddress:checked").length) {
+                    var address = $("#Address").val();
+                    var city = $("#City").val();
+                    var state = $("#StateProvince").val();
+                    var primaryContact = $("#PrimaryContactNumber").val();
+                    var fax = $("#Fax").val();
+
+                    $("#User_CountryId").val($("#CountryId").val());
+                    $("#User_Address").val($("#Address").val());
+                    $("#User_City").val($("#City").val());
+                    $("#User_StateProvince").val($("#StateProvince").val());
+                    $("#User_ZipCode").val($("#ZipCode").val());
+                    $("#User_PrimaryContactNumber").val($("#PrimaryContactNumber").val());
+                    $("#User_Fax").val($("#Fax").val());
+                    $("#User_MobileNumber").val($("#MobileNumber").val());
+                } else {
+                    $("#User_Address").val("");
+                    $("#User_City").val("");
+                    $("#User_StateProvince").val("");
+                    $("#User_ZipCode").val("");
+
+                    $("#User_PrimaryContactNumber").val("");
+                    $("#User_Fax").val("");
+                    $("#User_MobileNumber").val("");
+                }
+            });
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+
+        });
+    </script>
+
+}

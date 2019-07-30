@@ -1,0 +1,8 @@
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\bin\Debug\DSPREADQPosLayer.exe.config
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\bin\Debug\DSPREADQPosLayer.exe
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\bin\Debug\DSPREADQPosLayer.pdb
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.csprojResolveAssemblyReference.cache
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.Properties.Resources.resources
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.csproj.GenerateResource.Cache
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.exe
+C:\Users\Gabby.Peneyra\Workloads\Veritas\SDG Project\SDGBackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.pdb

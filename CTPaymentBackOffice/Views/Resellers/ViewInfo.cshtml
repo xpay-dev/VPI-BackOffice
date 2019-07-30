@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Reseller ViewMyInfo";
+}
+
+@model SDGBackOffice.Models.ResellerModel
+
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Resellers")">Home</a></li>
+    <li><a href="#">Reseller Management</a></li>
+    <li class="active">View My Info</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <form class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>My Details</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Reseller Name</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.ResellerName, new { @class = "form-control", @placeholder = "Reseller Name", @disabled = "disabled" })
+                                    @*<span class="help-block">Required</span>*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Address</label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country", @disabled = "disabled" })
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Contact Numbers</label>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number", @disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            @Html.ActionLink("Back", "Index", "Resellers", null, new { @class = "btn btn-default pull-right" })
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <script type="text/javascript">
+        $("input, select").css("color", "black");
+    </script>
+}

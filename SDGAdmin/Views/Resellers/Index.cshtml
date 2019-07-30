@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Reseller Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.PartnerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Resellers")">Home</a></li>
+    <li class="active">Reseller Management</li>
+</ul>
+
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Select Partner:</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(m => m.PartnerId, (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control pull-left" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All Resellers</h3>
+            </div>
+
+            <div class="pull-right" id="dvActionKeys">
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("Registration", "Merchants")" onclick="redirectActionwithId(this);">Create Merchant</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("UpdateInfo")" onclick="redirectActionwithId(this);">Update Reseller Info</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("ViewInfo")" onclick="redirectActionwithId(this);">View Reseller Info</a>
+            </div>
+
+            <div class="panel-body" id="tblDiv">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="margin-bottom-50">
+
+                            <table class="table table-inverse nowrap" id="resellersTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Reseller Name</th>
+                                        <th>Primary Contact Number</th>
+                                        <th>Location</th>
+                                        <th>Associated Partner</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                               
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#resellerMenu").addClass("active");
+            $("#resellerIndex").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            refreshResellerTable(0);
+
+            $("#PartnerId").on("change", function () {
+                var id = document.getElementById('PartnerId').value;
+                $("#dvActionKeys").hide();
+                refreshResellerTable(id);
+            });
+
+
+            if ($("#PartnerId > option").length == 1) {
+                refreshResellerTable($("#PartnerId").val());
+            }
+        });
+    </script>
+}

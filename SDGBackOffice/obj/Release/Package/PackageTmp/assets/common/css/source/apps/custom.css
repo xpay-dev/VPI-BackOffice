@@ -1,0 +1,14 @@
+﻿@media (max-width: 767px) {
+    .mobile {
+        padding: 0 !important;
+    }
+    table {
+        display: block;
+        width: 100%;
+        min-height: .01%;
+        overflow-x: auto;
+    }
+    .btn-mobile {
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.PartnerModel
+
+
+<section class="page-content">
+    <div class="page-content-inner">
+
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Top 10 Selling Merchant</h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="margin-bottom-50">
+
+                            <table class="table table-invers nowrap" id="topMerchantTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Merchant Name</th>
+                                        <th>Partner Company</th>
+                                        <th>Total Sales</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+
+    </div>
+
+
+</section>
+
+@section scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($.cookie("visitsAdmin") === undefined) {
+                $.cookie("visitsAdmin", 1);
+                $("#userPhoto").attr("data-content", "Click here to upload a photo.");
+                $("#userPhoto").popover('show');
+                $("#userPhoto").removeAttr("data-content");
+            }
+
+            refreshTopSellingMerchant(pId);
+
+            var sPassword = '@(ViewBag.PasswordExpiration)';
+
+            if (sPassword != "") {
+                $("#sMsg").text(sPassword);
+                $(".alert-danger").show();
+                $(".alert-danger").fadeOut(2000);
+            }
+        });
+    </script>
+}

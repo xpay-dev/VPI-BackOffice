@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Serial Number";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.DeviceModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Devices")">Home</a></li>
+    <li><a href="#">Device Management</a></li>
+    <li class="active">Add Serial Number</li>
+</ul>
+<!-- END BREADCRUMB -->
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Update Serial Number</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <!-- Horizontal Form -->
+                            <div style="color: red;">
+                                @Html.ValidationSummary()
+                            </div>
+                            <form id="jvalidate-device" action="@Url.Action("AddSerialNumber")" method="post" role="form" class="form-horizontal">
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Device Name</label>
+                                        @Html.DropDownListFor(m => m.MasterDeviceId, (List<SelectListItem>)ViewBag.MasterDevice, new { @class = "form-control", @placeholder = "Country" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Input a Serial Number</label>
+                                        @Html.TextBoxFor(m => m.SerialNumber, new { @class = "form-control", @placeholder = "Serial Number" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Is Key Injected?</label>
+                                        @Html.CheckBoxFor(m => m.IsKeyInjected, new { @class = "icheckbox" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-3 pull-left">
+                                            <input type="button" id="clearForm" class="btn btn-default margin-inline" value="Clear Form">
+                                            @Html.ActionLink("Back", "Index", "Devices", null, new { @class = "btn btn-default pull-left margin-inline" })
+                                        </div>
+                                        <div class="col-md-9">
+
+                                            <button class="btn width-150 btn-primary margin-inline pull-right">Save And Exit</button>
+                                            <input type="submit" class="btn width-150 btn-primary margin-inline pull-right" value="Save & Add More" name="SaveAddMore" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#deviceMenu").addClass("active");
+            $("#deviceAddSerial").addClass("active");
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+    </script>
+
+}

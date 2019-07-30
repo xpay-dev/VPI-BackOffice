@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "Branch Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@model CTPaymentBackOffice.Models.MerchantBranchModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "MerchantBranches")">Home</a></li>
+    <li><a href="#">Branch Management</a></li>
+    <li class="active">Create New Branch</li>
+</ul>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <!-- START WIZARD WITH VALIDATION -->
+    <div class="block">
+        <h4>Branch Registration</h4>
+        <div style="color: red;">
+            <br />
+            <br />
+            @Html.ValidationSummary()
+        </div>
+        <form action="@Url.Action("Registration")" method="post" role="form" class="form-horizontal" id="wizard-validation">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>POS</strong> Registration</h3>
+                
+            </div>
+            <div class="wizard show-submit wizard-validation">
+                <ul>
+                    <li>
+                        <a href="#step-1">
+                            <span class="stepNumber">1</span>
+                            <span class="stepDesc">Branch<br />
+                                <small>Information</small>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="stepNumber">2</span>
+                            <span class="stepDesc">User<br />
+                                <small>Details</small>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                @* Begin Step 1 *@
+                <div id="step-1">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Merchant</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.MerchantId, (List<SelectListItem>)ViewBag.Merchants, new { @class = "form-control", @placeholder = "Branch Name" })
+                            @*<span class="help-block">Required</span>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Branch Name</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control", @placeholder = "Branch Name" })
+                            @*<span class="help-block">Required</span>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Address</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.Address, new { @id = "Address", @class = "form-control", @placeholder = "Street and Civic Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.CountryId,(List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", @placeholder = "Country" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Numbers</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                        </div>
+                    </div>
+                </div>
+                @* End Step 1 *@
+                @* Start Step 2 *@
+                <div id="step-2">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Name</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.MiddleName, new { @class = "form-control", @placeholder = "Middle Name" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Address</label>
+                        <div class="col-md-4">
+                            <label class="check">
+                                @Html.CheckBoxFor(m => m.User.AddressSameAsParent, new { @id = "chkUserBranchAddress" }) Use Branch's address details
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Address</label>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.User.Address, new {@id = "User_Address", @class = "form-control", @placeholder = "Street and Civic Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.City, new { @class = "form-control", @placeholder = "City" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.User.CountryId, new List<SelectListItem>() { new SelectListItem() { Text = "Philippines", Value = "1", Selected = true } }, new { @class = "form-control", @placeholder = "Country" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Numbers</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Contact Information</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.EmailAddress, new { @class = "form-control", @placeholder = "Email Address", @type = "email" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Login Informaton</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.Username, new { @class = "form-control", @placeholder = "Username" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.Password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                        </div>
+                        <div class="col-md-3">
+                            <input type="password" class="form-control" placeholder="Confirm Password" name="User.ConfirmPassword" id="User.ConfirmPassword" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">PIN</label>
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.User.PIN, new { @placeholder = "PIN", @class = "form-control", @type = "password" })
+                        </div>
+                    </div>
+                </div>
+                @* End Step 2 *@
+            </div>
+            
+        </form>
+    </div>
+    <!-- END WIZARD WITH VALIDATION -->
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+<script>
+    $(document).ready(function () {
+
+        $("#merchantMenu").addClass("active");
+        $("#merchantbranchSubmenu").addClass("active");
+        $("#merchantbranchSubIndex").addClass("active");
+
+        $("#chkUserBranchAddress").bind("click", function (o) {
+            if ($("#chkUserBranchAddress:checked").length) {
+                var address = $("#Address").val();
+                var city = $("#City").val();
+                var state = $("#StateProvince").val();
+
+                $("#User_Address").val($("#Address").val());
+                $("#User_City").val($("#City").val());
+                $("#User_StateProvince").val($("#StateProvince").val());
+                $("#User_ZipCode").val($("#ZipCode").val());
+            } else {
+                $("#User_Address").val("");
+                $("#User_City").val("");
+                $("#User_StateProvince").val("");
+                $("#User_ZipCode").val("");
+            }
+        });
+    }
+    );
+</script>
+
+}

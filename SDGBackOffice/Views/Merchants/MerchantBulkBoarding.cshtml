@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Merchant Bulk Boarding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.MerchantModel
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Merchants")">Home</a></li>
+            <li><a href="#">Merchant Management</a></li>
+            <li class="active">Create New Merchant</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Merchant Bulk Boarding</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <div style="color: red;">
+                                @Html.ValidationSummary()
+                            </div>
+                            <h4>Merchant Details</h4>
+
+                            <!-- Horizontal Form -->
+                            <form action="@Url.Action("MerchantBulkBoarding")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off" enctype="multipart/form-data">
+                                @Html.Hidden("rId", "")
+
+
+                                @if ((SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner))
+                                {
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <label class="form-control-label">Reseller</label>
+                                            @Html.DropDownList("resellerId", (List<SelectListItem>)ViewBag.Resellers, new { @placeholder = " ", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                }
+
+                                <br />
+                                <br />
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Click here to upload an Excel File</label> <br />
+                                        <input id="upload" type="file" name="fileUpload" /><br />
+                                        <i>Note:</i>&nbsp;<label>Check your data before uploading.</label>
+                                    </div>
+                                </div>
+                                
+                               
+
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-3 pull-left">
+                                            <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                                        </div>
+                                        <div class="col-md-9 ">
+                                            <input type="button" id="btnSubmit" class="btn width-150 btn-primary pull-right" value="Submit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/dropzone/dropzone.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/fileinput/fileinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/filetree/jqueryFileTree.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var errMsg;
+            $("#merchantMenu").addClass("active");
+            $("#merchantSubmenu").addClass("active");
+            $("#merchantBulkRegister").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            $("#btnSubmit").click(function () {
+                var ext = $("#upload").val().toString().substring($("#upload").val().toString().length - 3)
+                var ext2 = $("#upload").val().toString().substring($("#upload").val().toString().length - 4)
+
+                if ($("#resellerId").val() == 0) {
+                    errMsg = 'No Reseller Selected';
+                    getModal(1, errMsg);
+                } else {
+                    if ((ext == "xls") || (ext2 == "xlsx")) {
+                        document.getElementById('rId').value = $("#resellerId").val();
+                        $("#jvalidate").submit();
+                    } else {
+                        errMsg = 'Invalid file. Check whether the file is an Excel File';
+                        getModal(1, errMsg);
+                    }
+                }
+            });
+
+            $("#resellerId").change(function () {
+                document.getElementById('rId').value = $("#resellerId").val();
+            });
+
+            $("#close").click(function () {
+            });
+
+        });
+    </script>
+}
+
+

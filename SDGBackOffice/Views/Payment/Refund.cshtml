@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Payment";
+}
+
+@model SDGBackOffice.Models.TransactionModel
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Payment")">Home</a></li>
+            <li><a href="#">Virtual Terminal</a></li>
+            <li class="active">Refund</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        @Html.Hidden("success", (object)ViewBag.Success)
+        @Html.Hidden("error", (object)ViewBag.Error)
+        <section class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="">
+                            <!-- Horizontal Form -->
+                            <form action="@Url.Action("Refund")" method="post" role="form" class="form-horizontal" id="jvalidateRefund" autocomplete="off">
+                                <div style="color: red;">
+                                    @Html.ValidationSummary()
+                                </div>
+
+                                <div class="panel-body">
+                                    <h5>Merchant Refund</h5>
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="form-control-label">Merchant Name</label>
+                                            @Html.TextBoxFor(m => m.MerchantName, new { @placeholder = "Merchant Name", @class = "form-control", @disabled = "disabled" })
+                                        </div>
+                                    </div>
+
+                                    <h5>Refund Details:</h5>
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="form-control-label">Reason To Void/Refund:</label>
+                                            @Html.DropDownListFor(m => m.ReasonId, (List<SelectListItem>)ViewBag.Reasons, new { @class = "form-control", @placeholder = "Reason" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="form-control-label">Transaction Number</label>
+                                            @Html.TextBoxFor(m => m.TransactionNumber, new { @placeholder = "0000-0000", @class = "form-control" }) 
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="form-control-label">Note</label>
+                                            @Html.TextBoxFor(m => m.Note, new { @placeholder = "Note", @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <div class="col-md-3 pull-left">
+                                                @Html.ActionLink("Back", "Index", "Payment", null, new { @class = "btn btn-default" })
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="button" id="btnSubmit" class="btn width-150 btn-primary pull-right" value="Refund" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#partnerMenu").addClass("active");
+            $("#partnerRegister").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            var strError = document.getElementById('error').value;
+            if (strError != "") {
+                getModal(1, strError);
+            }
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+
+            $("#ddlbranches").on("change", function () {
+                var id = document.getElementById('ddlbranches').value;
+                $.ajax({
+                    url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+                    type: 'POST',
+                    data: { "bId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlpos').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                            $('#MerchantPosId').val($("#ddlpos").val());
+                        });
+                    }
+                });
+            });
+
+            if ($('#ddlbranches > option').length == 1) {
+                var id = document.getElementById('ddlbranches').value;
+                $.ajax({
+                    url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+                    type: 'POST',
+                    data: { "bId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlpos').empty() //ddlpos
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text)); //dllpos
+                            $('#MerchantPosId').val(document.getElementById('ddlpos').value)
+                        });
+                    }
+                });
+            }
+
+            $("#ddlpos").on("change", function () {
+                var id = document.getElementById('ddlpos').value;
+                $('#MerchantPosId').val($("#ddlpos").val());
+                $('#ddlpos').val($("#ddlpos").val());
+            });
+
+            //ddl for Users
+
+            $("#btnSubmit").click(function () {
+                $("#jvalidateRefund").submit();
+            });
+
+            $("#close").click(function () {
+                $("#message-box-danger").hide();
+            });
+        });
+    </script>
+}

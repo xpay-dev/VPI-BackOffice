@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Payment";
+}
+
+@model SDGBackOffice.Models.TransactionResponseModel
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Payment")">Home</a></li>
+            <li><a href="#">Virtual Terminal</a></li>
+            <li class="active">Payment</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="">
+                            <!-- Horizontal Form -->
+                            <form action="@Url.Action("PageNotif")" method="post" role="form" class="form-horizontal" id="jvalidatePay" autocomplete="off">
+                                <div style="color: red;">
+                                    @Html.ValidationSummary()
+                                </div>
+
+                                <h4>Page Notification</h4>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#partnerMenu").addClass("active");
+            $("#partnerRegister").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+
+
+            if ($('#ddlbranches > option').length == 1) {
+                var id = document.getElementById('ddlbranches').value;
+                $.ajax({
+                    url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+                    type: 'POST',
+                    data: { "bId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlpos').empty() //ddlpos
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text)); //dllpos
+                            $('#MerchantPosId').val($("#ddlpos").val());
+                        });
+                    }
+                });
+            }
+
+            $("#ddlbranches").on("change", function () {
+                var id = document.getElementById('ddlbranches').value;
+                refreshMerchantsTableOnDropdownChange(0);
+                $.ajax({
+                    url: rootDir + 'Ajax/GetPOSByMerchantBranch',
+                    type: 'POST',
+                    data: { "bId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#MerchantPosId').empty()
+                        $.each(data, function (key, value) {
+                            $("#MerchantPosId").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            //ddl for POS onchange
+
+            //ddl for Users
+
+            $("#btnSubmit").click(function () {
+                if ($("#ddlbranches").val() == 0) {
+                    $("#message-box-danger").show();
+                    var errorMsg = "No Branch Selected";
+                    getModal(1, errorMsg);
+                }
+                else if ($("#MerchantPosId").val() == 0) {
+                    $("#message-box-danger").show();
+                    var errorMsg = "No POS Terminal Selected";
+                    getModal(1, errorMsg);
+                }
+                else if ($("#CurrencyId").val() == 0) {
+                    $("#message-box-danger").show();
+                    var errorMsg = "No Currency Selected";
+                    getModal(1, errorMsg);
+                } else if ($("#ExpiryMonth").val() == 0) {
+                    $("#message-box-danger").show();
+                    var errorMsg = "No Expiry Month Selected";
+                    getModal(1, errorMsg);
+                } else if ($("#ExpiryYear").val() == 0) {
+                    $("#message-box-danger").show();
+                    var errorMsg = "No Expiry Year Selected";
+                    getModal(1, errorMsg);
+                } else {
+                    $("#jvalidatePay").submit();
+                }
+            });
+
+            $("#close").click(function () {
+                $("#message-box-danger").hide();
+            });
+        });
+    </script>
+}

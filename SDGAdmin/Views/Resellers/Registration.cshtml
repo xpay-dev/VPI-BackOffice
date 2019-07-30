@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "Reseller Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.ResellerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Resellers")">Home</a></li>
+    <li><a href="#">Reseller Management</a></li>
+    <li class="active">Create New Reseller</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="panel">
+    <div class="panel-heading">
+        <h3>Reseller Registration</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin-bottom-50">
+                    <h4>Reseller Details</h4>
+                    <!-- Horizontal Form -->
+                    <form action="@Url.Action("Registration")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+
+                        <div style="color: red;">
+                            @Html.ValidationSummary()
+                        </div>
+
+                        <div class="form-group row ddl">
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Partner</label>
+                                @Html.DropDownListFor(m => m.PartnerId, (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Reseller Name</label>
+                                @Html.TextBoxFor(m => m.ResellerName, new { @placeholder = "Company Name", @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Company Email</label>
+                                @Html.TextBoxFor(m => m.ResellerEmail, new { @placeholder = "Company Email", @class = "form-control" })
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <h4>Admin Details</h4>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label" for="l0">First Name</label>
+                                @Html.TextBoxFor(m => m.User.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label" for="l0">Middle Name</label>
+                                @Html.TextBoxFor(m => m.User.MiddleName, new { @placeholder = "Middle Name", @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label" for="l0">Last Name</label>
+                                @Html.TextBoxFor(m => m.User.LastName, new { @placeholder = "Last Name", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Admin Email</label>
+                                @Html.TextBoxFor(m => m.User.EmailAddress, new { @placeholder = "Email", @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Enter Username</label>
+                                @Html.TextBoxFor(m => m.User.Username, new { @placeholder = "Username", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Enter Password</label>
+                                @Html.TextBoxFor(m => m.User.Password, new { @placeholder = "Password", @class = "form-control", @type = "password" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-control-label" for="l0">Re-Enter Password</label>
+                                @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @placeholder = "Re-enter Password", @class = "form-control", @type = "password" })
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                    <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                                </div>
+                                <div class="col-md-9 ">
+                                    <button class="btn width-150 btn-primary pull-right" id="save">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#resellerMenu").addClass("active");
+        $("#resellerRegister").addClass("active");
+        $(".page-content").css("height", "100%");
+
+        hideDdl();
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+
+        function hideDdl() {
+            var id = getParameterByName("id");
+
+            if (id != 0) {
+                document.getElementById('PartnerId').value = id;
+
+                $(".ddl").hide();
+            }
+        }
+
+        $("#PartnerId").change(function () {
+            var x = document.getElementById('PartnerId');
+            var id = x.options[x.selectedIndex].value;
+        });
+
+        $('#clearForm').click(function () {
+            $("input[type=text]").val("");
+            $("input[type=password]").val("");
+        });
+
+        $("#save").click(function () {
+            var ddlPartner = document.getElementById('PartnerId').value;
+            var ddlReseller = document.getElementById('ResellerId').value;
+
+            alert(ddlPartner);
+            alert(ddlReseller);
+
+            if (ddlPartner == "0") {
+                $("#message-box-danger").show();
+                var errMsg = "Please select a Partner";
+                getModal(1, errMsg);
+            } else {
+                document.getElementById("reg_form").submit();
+            }
+        });
+    });
+</script>

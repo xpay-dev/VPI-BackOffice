@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "Remove Mids";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.SDMasterModel
+
+<style>
+    select {
+        font-family: verdana;
+        font-size: 8pt;
+        width: 150px;
+        height: 100px;
+    }
+
+    .selectClass {
+        font-size: 15px;
+        font-family: 'Averia Libre';
+    }
+
+    input {
+        text-align: center;
+    }
+</style>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "MIDs")">Home</a></li>
+    <li class="active">Mids Management</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Mids Management</h2>
+</div>
+
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+
+    <div class="row">
+        <div class="col-md-12">
+            @*@if (ViewBag.Branchs != null){
+                    *@<div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Filter Option</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Select Merchant Branch:</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(x => x.MerchantBranch.MerchantBranchId, (List<SelectListItem>)ViewBag.MerchantBranch, new { id = "ddlbranch", @class = "form-control" })
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Select POS:</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownList("ddlpos", new List<SelectListItem>() { new SelectListItem { Text = "Select a Merchant Branch to View POS", Value = "-1" } }, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            @*}*@
+            <!-- START SIMPLE DATATABLE -->
+            <form id="massign" action="@Url.Action("MidsAssign")" method="post" role="form" class="form-horizontal">
+                @Html.Hidden("hdnCtrl", "")
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Assigned MIDs for this POS</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" id="POSTbl">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>MID Name</th>
+                                    <th>Status</th>
+                                    <th>Deleted</th>
+                                    <th>Currency</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </form>
+            <!-- END SIMPLE DATATABLE -->
+            <div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+                <div class="mb-container">
+                    <div class="mb-middle">
+                        <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+                        <div class="mb-content">
+                            <p id="errMsg" style="font-size: large"></p>
+                        </div>
+                        <div class="mb-footer">
+                            <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            refreshPOSAssignedMIDsTable(0);
+
+            $("#ddlpos").on("change", function () {
+                var ddl = document.getElementById('ddlpos').value;
+                refreshPOSAssignedMIDsTable(ddl);
+            });
+
+            $("#ddlbranch").change(function () {
+                var ddl = document.getElementById('ddlbranch').value;
+                refreshPOSAssignedMIDsTable(0);
+                $.ajax({
+                    url: '/Ajax/BanchPOSForMid',
+                    data: { "id": ddl },
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlpos').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            if ($("#ddlbranch > option").length == 1)
+            {
+                $.ajax({
+                    url: '/Ajax/BanchPOSForMid',
+                    data: { "id": $("#ddlbranch").val() },
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlpos').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if ($("#ddlpos").length == 1)
+                        {
+                            refreshPOSAssignedMIDsTable($("#ddlpos").val());
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+}

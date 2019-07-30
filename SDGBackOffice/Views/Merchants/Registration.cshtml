@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Merchant Registration";
+}
+
+@model SDGBackOffice.Models.MerchantModel
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Merchants")">Home</a></li>
+            <li><a href="#">Merchant Management</a></li>
+            <li class="active">Create New Merchant</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Merchant Registration</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <!-- Horizontal Form -->
+                            <form action="@Url.Action("Registration")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+                                <div style="color: red;">
+                                    @Html.ValidationSummary()
+                                </div>
+                                <h4>Merchant Details</h4>
+                                @if ((SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner))
+                                {
+                                    <div class="form-group row">
+
+                                        <div class="col-md-6">
+                                            <label class="form-control-label">Reseller</label>
+                                            @Html.DropDownListFor(m => m.ResellerId, (List<SelectListItem>)ViewBag.Resellers, new { @placeholder = " ", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                }
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Merchant Name</label>
+                                        @Html.TextBoxFor(m => m.MerchantName, new { @placeholder = "Merchant Name", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">First Name</label>
+                                        @Html.TextBoxFor(m => m.User.FirstName, new { @placeholder = "First Name", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Middle Name</label>
+                                        @Html.TextBoxFor(m => m.User.MiddleName, new { @placeholder = "Middle Name", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Last Name</label>
+                                        @Html.TextBoxFor(m => m.User.LastName, new { @placeholder = "Last Name", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Merchant Email</label>
+                                        @Html.TextBoxFor(m => m.User.EmailAddress, new { @placeholder = "Email", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Currency</label>
+                                        @Html.DropDownListFor(m => m.CurrencyId, (List<SelectListItem>)ViewBag.Currencies, new { @placeholder = " ", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Billing Cycle</label>
+                                        @Html.DropDownListFor(m => m.BillingCycleId, (List<SelectListItem>)ViewBag.BillingCycles, new { @placeholder = " ", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Enter Username</label>
+                                        @Html.TextBoxFor(m => m.User.Username, new { @placeholder = "Username", @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Enter Password</label>
+                                        @Html.TextBoxFor(m => m.User.Password, new { @placeholder = "Password", @class = "form-control", @type = "password" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Re-Enter Password</label>
+                                        @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @placeholder = "Re-Enter Password", @class = "form-control", @type = "password" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">PIN</label>
+                                        @Html.TextBoxFor(m => m.User.PIN, new { @placeholder = "PIN", @class = "form-control", @type = "password" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-3 pull-left">
+                                            <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                                        </div>
+                                        <div class="col-md-9 ">
+                                            <input type="button" id="btnSubmit" class="btn btn-primary pull-right width-150" value="Submit" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantSubmenu").addClass("active");
+            $("#merchantSubRegister").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            $("#btnSubmit").click(function () {
+                if ($("#ResellerId").val() == 0) {
+                    $("#errMsg").text("No Reseller Selected");
+                    getModal(1, errMsg);
+                } else {
+                    $("#jvalidate").submit();
+
+                }
+            });
+            $("#close").click(function () {
+                $("#message-box-danger").hide();
+            });
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+    </script>
+}

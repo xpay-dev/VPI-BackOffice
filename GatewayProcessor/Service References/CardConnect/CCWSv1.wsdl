@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soapv1.ws.cconnect.pps/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CCWSv1" targetNamespace="http://soapv1.ws.cconnect.pps/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://soapv1.ws.cconnect.pps/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addProfile" type="tns:addProfile" />
+      <xs:element name="addProfileResponse" type="tns:addProfileResponse" />
+      <xs:element name="authTxn" type="tns:authTxn" />
+      <xs:element name="authTxnResponse" type="tns:authTxnResponse" />
+      <xs:element name="captureTxn" type="tns:captureTxn" />
+      <xs:element name="captureTxnResponse" type="tns:captureTxnResponse" />
+      <xs:element name="deleteProfile" type="tns:deleteProfile" />
+      <xs:element name="deleteProfileResponse" type="tns:deleteProfileResponse" />
+      <xs:element name="deposit" type="tns:deposit" />
+      <xs:element name="depositTxn" type="tns:depositTxn" />
+      <xs:element name="depositTxnResponse" type="tns:depositTxnResponse" />
+      <xs:element name="echo" type="tns:echo" />
+      <xs:element name="echoResponse" type="tns:echoResponse" />
+      <xs:element name="funding" type="tns:funding" />
+      <xs:element name="fundingTxn" type="tns:fundingTxn" />
+      <xs:element name="fundingTxnResponse" type="tns:fundingTxnResponse" />
+      <xs:element name="fundingadjustment" type="tns:fundingadjustment" />
+      <xs:element name="fundingmaster" type="tns:fundingmaster" />
+      <xs:element name="fundingtxn" type="tns:fundingtxn" />
+      <xs:element name="getProfile" type="tns:getProfile" />
+      <xs:element name="getProfileResponse" type="tns:getProfileResponse" />
+      <xs:element name="inquireTxn" type="tns:inquireTxn" />
+      <xs:element name="inquireTxnResponse" type="tns:inquireTxnResponse" />
+      <xs:element name="profileRequest" type="tns:profileRequest" />
+      <xs:element name="profileResponse" type="tns:profileResponse" />
+      <xs:element name="refundTxn" type="tns:refundTxn" />
+      <xs:element name="refundTxnResponse" type="tns:refundTxnResponse" />
+      <xs:element name="settleResp" type="tns:settleResp" />
+      <xs:element name="settlestatTxn" type="tns:settlestatTxn" />
+      <xs:element name="settlestatTxnResponse" type="tns:settlestatTxnResponse" />
+      <xs:element name="txnRequest" type="tns:txnRequest" />
+      <xs:element name="txnResponse" type="tns:txnResponse" />
+      <xs:element name="txnUpdate" type="tns:txnUpdate" />
+      <xs:element name="voidTxn" type="tns:voidTxn" />
+      <xs:element name="voidTxnResponse" type="tns:voidTxnResponse" />
+      <xs:complexType name="getProfile">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="profileid" type="xs:string" />
+          <xs:element minOccurs="0" name="merchid" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getProfileResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:profileResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="profileResponse">
+        <xs:sequence>
+          <xs:element name="respstat" type="xs:string" />
+          <xs:element name="respproc" type="xs:string" />
+          <xs:element name="token" type="xs:string" />
+          <xs:element name="respcode" type="xs:string" />
+          <xs:element name="resptext" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="address" type="xs:string" />
+          <xs:element minOccurs="0" name="city" type="xs:string" />
+          <xs:element minOccurs="0" name="region" type="xs:string" />
+          <xs:element minOccurs="0" name="country" type="xs:string" />
+          <xs:element minOccurs="0" name="postal" type="xs:string" />
+          <xs:element minOccurs="0" name="phone" type="xs:string" />
+          <xs:element minOccurs="0" name="email" type="xs:string" />
+          <xs:element minOccurs="0" name="license" type="xs:string" />
+          <xs:element minOccurs="0" name="ssnl4" type="xs:string" />
+          <xs:element minOccurs="0" name="expiry" type="xs:string" />
+          <xs:element minOccurs="0" name="accttype" type="xs:string" />
+          <xs:element minOccurs="0" name="profileid" type="xs:string" />
+          <xs:element minOccurs="0" name="acctid" type="xs:string" />
+          <xs:element minOccurs="0" name="defaultacct" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="vector">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:abstractList">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="abstractList" abstract="true">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:abstractCollection">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="abstractCollection" abstract="true">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="captureTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="TxnUpdate" type="tns:txnUpdate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="txnUpdate">
+        <xs:sequence>
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="amount" type="xs:string" />
+          <xs:element name="currency" type="xs:string" />
+          <xs:element name="retref" type="xs:string" />
+          <xs:element minOccurs="0" name="ponumber" type="xs:string" />
+          <xs:element minOccurs="0" name="taxamnt" type="xs:string" />
+          <xs:element minOccurs="0" name="shipfromzip" type="xs:string" />
+          <xs:element minOccurs="0" name="shiptozip" type="xs:string" />
+          <xs:element minOccurs="0" name="shiptocountry" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="items" type="tns:item" />
+          <xs:element minOccurs="0" name="authcode" type="xs:string" />
+          <xs:element minOccurs="0" name="invoiceid" type="xs:string" />
+          <xs:element minOccurs="0" name="orderdate" type="xs:string" />
+          <xs:element minOccurs="0" name="frtamnt" type="xs:string" />
+          <xs:element minOccurs="0" name="dutyamnt" type="xs:string" />
+          <xs:element minOccurs="0" name="orderid" type="xs:string" />
+          <xs:element minOccurs="0" name="country" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="userfields" type="tns:userfield" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="item">
+        <xs:sequence>
+          <xs:element name="itemno" type="xs:string" />
+          <xs:element name="material" type="xs:string" />
+          <xs:element name="description" type="xs:string" />
+          <xs:element name="upc" type="xs:string" />
+          <xs:element name="quantity" type="xs:string" />
+          <xs:element name="uom" type="xs:string" />
+          <xs:element name="unitcost" type="xs:string" />
+          <xs:element name="netamnt" type="xs:string" />
+          <xs:element name="taxamnt" type="xs:string" />
+          <xs:element name="discamnt" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="userfield">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" />
+          <xs:element name="value" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="captureTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:txnResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="txnResponse">
+        <xs:sequence>
+          <xs:element name="respstat" type="xs:string" />
+          <xs:element name="retref" type="xs:string" />
+          <xs:element name="account" type="xs:string" />
+          <xs:element name="token" type="xs:string" />
+          <xs:element name="amount" type="xs:string" />
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="respcode" type="xs:string" />
+          <xs:element name="resptext" type="xs:string" />
+          <xs:element name="respproc" type="xs:string" />
+          <xs:element name="authcode" type="xs:string" />
+          <xs:element name="avsresp" type="xs:string" />
+          <xs:element name="cvvresp" type="xs:string" />
+          <xs:element name="commcard" type="xs:string" />
+          <xs:element minOccurs="0" name="setlstat" type="xs:string" />
+          <xs:element minOccurs="0" name="depstat" type="xs:string" />
+          <xs:element minOccurs="0" name="depamnt" type="xs:string" />
+          <xs:element minOccurs="0" name="feeamnt" type="xs:string" />
+          <xs:element minOccurs="0" name="hostbatch" type="xs:string" />
+          <xs:element minOccurs="0" name="merchbatch" type="xs:string" />
+          <xs:element minOccurs="0" name="profileid" type="xs:string" />
+          <xs:element minOccurs="0" name="acctid" type="xs:string" />
+          <xs:element minOccurs="0" name="defaultacct" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addProfile">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="ProfileUpdate" type="tns:profileRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="profileRequest">
+        <xs:sequence>
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element minOccurs="0" name="accttype" type="xs:string" />
+          <xs:element minOccurs="0" name="account" type="xs:string" />
+          <xs:element minOccurs="0" name="expiry" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="street" type="xs:string" />
+          <xs:element minOccurs="0" name="city" type="xs:string" />
+          <xs:element minOccurs="0" name="region" type="xs:string" />
+          <xs:element minOccurs="0" name="country" type="xs:string" />
+          <xs:element minOccurs="0" name="phone" type="xs:string" />
+          <xs:element minOccurs="0" name="postal" type="xs:string" />
+          <xs:element minOccurs="0" name="email" type="xs:string" />
+          <xs:element minOccurs="0" name="bankaba" type="xs:string" />
+          <xs:element minOccurs="0" name="ssnl4" type="xs:string" />
+          <xs:element minOccurs="0" name="license" type="xs:string" />
+          <xs:element minOccurs="0" name="profile" type="xs:string" />
+          <xs:element minOccurs="0" name="defaultacct" type="xs:string" />
+          <xs:element minOccurs="0" name="profileupdate" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addProfileResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:profileResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refundTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="TxnUpdate" type="tns:txnUpdate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="refundTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:txnResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="echo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="echoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="inquireTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="TxnUpdate" type="tns:txnUpdate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="inquireTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:txnResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="voidTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="TxnUpdate" type="tns:txnUpdate" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="voidTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:txnResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="TxnRequest" type="tns:txnRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="txnRequest">
+        <xs:sequence>
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element minOccurs="0" name="accttype" type="xs:string" />
+          <xs:element minOccurs="0" name="account" type="xs:string" />
+          <xs:element minOccurs="0" name="expiry" type="xs:string" />
+          <xs:element name="amount" type="xs:string" />
+          <xs:element name="currency" type="xs:string" />
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+          <xs:element minOccurs="0" name="street" type="xs:string" />
+          <xs:element minOccurs="0" name="city" type="xs:string" />
+          <xs:element minOccurs="0" name="region" type="xs:string" />
+          <xs:element minOccurs="0" name="country" type="xs:string" />
+          <xs:element minOccurs="0" name="phone" type="xs:string" />
+          <xs:element minOccurs="0" name="postal" type="xs:string" />
+          <xs:element minOccurs="0" name="email" type="xs:string" />
+          <xs:element minOccurs="0" name="ecomind" type="xs:string" />
+          <xs:element minOccurs="0" name="cvv2" type="xs:string" />
+          <xs:element name="orderid" type="xs:string" />
+          <xs:element minOccurs="0" name="track" type="xs:string" />
+          <xs:element minOccurs="0" name="bankaba" type="xs:string" />
+          <xs:element minOccurs="0" name="tokenize" type="xs:string" />
+          <xs:element minOccurs="0" name="capture" type="xs:string" />
+          <xs:element minOccurs="0" name="ssnl4" type="xs:string" />
+          <xs:element minOccurs="0" name="license" type="xs:string" />
+          <xs:element minOccurs="0" name="profile" type="xs:string" />
+          <xs:element minOccurs="0" name="secureflag" type="xs:string" />
+          <xs:element minOccurs="0" name="securevalue" type="xs:string" />
+          <xs:element minOccurs="0" name="securexid" type="xs:string" />
+          <xs:element minOccurs="0" name="termid" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="userfields" type="tns:userfield" />
+          <xs:element minOccurs="0" ref="tns:txnUpdate" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="items" type="xs:anyType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="authTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:txnResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="settlestatTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="merchid" type="xs:string" />
+          <xs:element minOccurs="0" name="date" type="xs:string" />
+          <xs:element minOccurs="0" name="batchid" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="settlestatTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:settleResp" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="settleResp">
+        <xs:sequence>
+          <xs:element name="batchid" type="xs:string" />
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="respproc" type="xs:string" />
+          <xs:element name="hostbatch" type="xs:string" />
+          <xs:element name="hoststat" type="xs:string" />
+          <xs:element maxOccurs="unbounded" name="txns" type="tns:txnResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="depositTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="merchid" type="xs:string" />
+          <xs:element minOccurs="0" name="date" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="depositTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:deposit" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deposit">
+        <xs:sequence>
+          <xs:element name="depositid" type="xs:string" />
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="respproc" type="xs:string" />
+          <xs:element name="accttype" type="xs:string" />
+          <xs:element name="action" type="xs:string" />
+          <xs:element name="actdate" type="xs:string" />
+          <xs:element name="postdate" type="xs:string" />
+          <xs:element name="currency" type="xs:string" />
+          <xs:element name="amount" type="xs:string" />
+          <xs:element name="feeamnt" type="xs:string" />
+          <xs:element name="cbakamnt" type="xs:string" />
+          <xs:element name="resptext" type="xs:string" />
+          <xs:element maxOccurs="unbounded" name="txns" type="tns:txnResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteProfile">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="profile" type="xs:string" />
+          <xs:element minOccurs="0" name="merchid" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteProfileResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:profileResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fundingTxn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserPass" type="xs:string" />
+          <xs:element minOccurs="0" name="merchid" type="xs:string" />
+          <xs:element minOccurs="0" name="date" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fundingTxnResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="tns:fundingmaster" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fundingmaster">
+        <xs:sequence>
+          <xs:element name="fundingmasterid" type="xs:long" />
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="fundingdate" type="xs:string" />
+          <xs:element name="datechanged" type="xs:dateTime" />
+          <xs:element maxOccurs="unbounded" ref="tns:funding" />
+          <xs:element maxOccurs="unbounded" name="txn" type="tns:fundingtxn" />
+          <xs:element maxOccurs="unbounded" name="adjustment" type="tns:fundingadjustment" />
+          <xs:element name="errormsg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="funding">
+        <xs:sequence>
+          <xs:element name="fundingid" type="xs:long" />
+          <xs:element name="fundingmasterid" type="xs:long" />
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="netsales" type="xs:decimal" />
+          <xs:element name="thirdparty" type="xs:decimal" />
+          <xs:element name="adjustment" type="xs:decimal" />
+          <xs:element name="interchangefee" type="xs:decimal" />
+          <xs:element name="servicecharge" type="xs:decimal" />
+          <xs:element name="fee" type="xs:decimal" />
+          <xs:element name="reversal" type="xs:decimal" />
+          <xs:element name="otheradjustment" type="xs:decimal" />
+          <xs:element name="totalfunding" type="xs:decimal" />
+          <xs:element name="currency" type="xs:string" />
+          <xs:element name="ddanumber" type="xs:string" />
+          <xs:element name="abanumber" type="xs:string" />
+          <xs:element name="errormsg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fundingtxn">
+        <xs:sequence>
+          <xs:element name="fundingtxnid" type="xs:long" />
+          <xs:element name="fundingmasterid" type="xs:long" />
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="cardnumber" type="xs:string" />
+          <xs:element name="cardtype" type="xs:string" />
+          <xs:element name="cardbrand" type="xs:string" />
+          <xs:element name="amount" type="xs:decimal" />
+          <xs:element name="currency" type="xs:string" />
+          <xs:element name="interchangeunitfee" type="xs:decimal" />
+          <xs:element name="interchangepercentfee" type="xs:decimal" />
+          <xs:element name="date" type="xs:dateTime" />
+          <xs:element name="type" type="xs:string" />
+          <xs:element name="status" type="xs:string" />
+          <xs:element name="retref" type="xs:string" />
+          <xs:element name="dateadded" type="xs:dateTime" />
+          <xs:element name="datechanged" type="xs:dateTime" />
+          <xs:element name="userfield0" type="xs:string" />
+          <xs:element name="userfield1" type="xs:string" />
+          <xs:element name="userfield2" type="xs:string" />
+          <xs:element name="userfield3" type="xs:string" />
+          <xs:element name="userfield4" type="xs:string" />
+          <xs:element name="userfield5" type="xs:string" />
+          <xs:element name="userfield6" type="xs:string" />
+          <xs:element name="userfield7" type="xs:string" />
+          <xs:element name="userfield8" type="xs:string" />
+          <xs:element name="userfield9" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fundingadjustment">
+        <xs:sequence>
+          <xs:element name="fundingadjustmentid" type="xs:long" />
+          <xs:element name="fundingmasterid" type="xs:long" />
+          <xs:element name="merchid" type="xs:string" />
+          <xs:element name="category" type="xs:string" />
+          <xs:element name="type" type="xs:string" />
+          <xs:element name="description" type="xs:string" />
+          <xs:element name="amount" type="xs:decimal" />
+          <xs:element name="currency" type="xs:string" />
+          <xs:element name="dateadded" type="xs:dateTime" />
+          <xs:element name="datechanged" type="xs:dateTime" />
+          <xs:element name="errormsg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Exception" type="tns:Exception" />
+      <xs:complexType name="Exception">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="voidTxn">
+    <wsdl:part name="parameters" element="tns:voidTxn" />
+  </wsdl:message>
+  <wsdl:message name="authTxn">
+    <wsdl:part name="parameters" element="tns:authTxn" />
+  </wsdl:message>
+  <wsdl:message name="addProfile">
+    <wsdl:part name="parameters" element="tns:addProfile" />
+  </wsdl:message>
+  <wsdl:message name="inquireTxn">
+    <wsdl:part name="parameters" element="tns:inquireTxn" />
+  </wsdl:message>
+  <wsdl:message name="refundTxn">
+    <wsdl:part name="parameters" element="tns:refundTxn" />
+  </wsdl:message>
+  <wsdl:message name="getProfile">
+    <wsdl:part name="parameters" element="tns:getProfile" />
+  </wsdl:message>
+  <wsdl:message name="deleteProfileResponse">
+    <wsdl:part name="parameters" element="tns:deleteProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="echoResponse">
+    <wsdl:part name="parameters" element="tns:echoResponse" />
+  </wsdl:message>
+  <wsdl:message name="refundTxnResponse">
+    <wsdl:part name="parameters" element="tns:refundTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="depositTxn">
+    <wsdl:part name="parameters" element="tns:depositTxn" />
+  </wsdl:message>
+  <wsdl:message name="settlestatTxn">
+    <wsdl:part name="parameters" element="tns:settlestatTxn" />
+  </wsdl:message>
+  <wsdl:message name="settlestatTxnResponse">
+    <wsdl:part name="parameters" element="tns:settlestatTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProfileResponse">
+    <wsdl:part name="parameters" element="tns:getProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="fundingTxn">
+    <wsdl:part name="parameters" element="tns:fundingTxn" />
+  </wsdl:message>
+  <wsdl:message name="captureTxnResponse">
+    <wsdl:part name="parameters" element="tns:captureTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="fundingTxnResponse">
+    <wsdl:part name="parameters" element="tns:fundingTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="echo">
+    <wsdl:part name="parameters" element="tns:echo" />
+  </wsdl:message>
+  <wsdl:message name="depositTxnResponse">
+    <wsdl:part name="parameters" element="tns:depositTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception" />
+  </wsdl:message>
+  <wsdl:message name="voidTxnResponse">
+    <wsdl:part name="parameters" element="tns:voidTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteProfile">
+    <wsdl:part name="parameters" element="tns:deleteProfile" />
+  </wsdl:message>
+  <wsdl:message name="addProfileResponse">
+    <wsdl:part name="parameters" element="tns:addProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="captureTxn">
+    <wsdl:part name="parameters" element="tns:captureTxn" />
+  </wsdl:message>
+  <wsdl:message name="inquireTxnResponse">
+    <wsdl:part name="parameters" element="tns:inquireTxnResponse" />
+  </wsdl:message>
+  <wsdl:message name="authTxnResponse">
+    <wsdl:part name="parameters" element="tns:authTxnResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CCWS">
+    <wsdl:operation name="getProfile">
+      <wsdl:input name="getProfile" message="tns:getProfile" />
+      <wsdl:output name="getProfileResponse" message="tns:getProfileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="captureTxn">
+      <wsdl:input name="captureTxn" message="tns:captureTxn" />
+      <wsdl:output name="captureTxnResponse" message="tns:captureTxnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addProfile">
+      <wsdl:input name="addProfile" message="tns:addProfile" />
+      <wsdl:output name="addProfileResponse" message="tns:addProfileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="refundTxn">
+      <wsdl:input name="refundTxn" message="tns:refundTxn" />
+      <wsdl:output name="refundTxnResponse" message="tns:refundTxnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <wsdl:input name="echo" message="tns:echo" />
+      <wsdl:output name="echoResponse" message="tns:echoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="inquireTxn">
+      <wsdl:input name="inquireTxn" message="tns:inquireTxn" />
+      <wsdl:output name="inquireTxnResponse" message="tns:inquireTxnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="voidTxn">
+      <wsdl:input name="voidTxn" message="tns:voidTxn" />
+      <wsdl:output name="voidTxnResponse" message="tns:voidTxnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="authTxn">
+      <wsdl:input name="authTxn" message="tns:authTxn" />
+      <wsdl:output name="authTxnResponse" message="tns:authTxnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="settlestatTxn">
+      <wsdl:input name="settlestatTxn" message="tns:settlestatTxn" />
+      <wsdl:output name="settlestatTxnResponse" message="tns:settlestatTxnResponse" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="depositTxn">
+      <wsdl:input name="depositTxn" message="tns:depositTxn" />
+      <wsdl:output name="depositTxnResponse" message="tns:depositTxnResponse" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteProfile">
+      <wsdl:input name="deleteProfile" message="tns:deleteProfile" />
+      <wsdl:output name="deleteProfileResponse" message="tns:deleteProfileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="fundingTxn">
+      <wsdl:input name="fundingTxn" message="tns:fundingTxn" />
+      <wsdl:output name="fundingTxnResponse" message="tns:fundingTxnResponse" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CCWSv1SoapBinding" type="tns:CCWS">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getProfile">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getProfile">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProfileResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="captureTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="captureTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="captureTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addProfile">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="addProfile">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addProfileResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="refundTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="refundTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="refundTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="echo">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="echo">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="echoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inquireTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="inquireTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="inquireTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="authTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="authTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="authTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="voidTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="voidTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="voidTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="settlestatTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="settlestatTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="settlestatTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProfile">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="deleteProfile">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteProfileResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="depositTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="depositTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="depositTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="fundingTxn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="fundingTxn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="fundingTxnResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CCWSv1">
+    <wsdl:port name="CCWSImplPort" binding="tns:CCWSv1SoapBinding">
+      <soap:address location="http://localhost:8080/cardconnect/CCWSv1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

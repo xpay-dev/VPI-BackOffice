@@ -1,0 +1,235 @@
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll.config
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.pdb
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Crypto.CryptoManager.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPaymentUtilities.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CT_EMV_CLASSES.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\HPA_ISO8583.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.pdb
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.pdb
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.xml
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.csproj.App.config
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.csprojResolveAssemblyReference.cache
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.dll
+C:\Users\Roxanne\Desktop\PayMaya\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.pdb
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll.config
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.pdb
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Crypto.CryptoManager.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPaymentUtilities.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CT_EMV_CLASSES.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\HPA_ISO8583.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.Edm.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.OData.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Spatial.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.OData.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.pdb
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.pdb
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.Edm.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.OData.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Extensions.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Primitives.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Spatial.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.OData.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.xml
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\System.Spatial.resources.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.csproj.App.config
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.csprojResolveAssemblyReference.cache
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.dll
+C:\Users\Developer\Desktop\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.pdb
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll.config
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.pdb
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Crypto.CryptoManager.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPaymentUtilities.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CT_EMV_CLASSES.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\HPA_ISO8583.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.Edm.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.OData.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Extensions.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Formatting.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Primitives.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.WebRequest.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Spatial.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.OData.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.pdb
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.pdb
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.Edm.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.OData.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.WebRequest.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Spatial.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.OData.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.xml
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\System.Spatial.resources.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.csprojResolveAssemblyReference.cache
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.dll
+D:\Hybrid Repositories\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.pdb
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll.config
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPayment.pdb
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Crypto.CryptoManager.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CTPaymentUtilities.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\CT_EMV_CLASSES.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\HPA_ISO8583.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.Edm.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.OData.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Extensions.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Formatting.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.Primitives.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.WebRequest.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Spatial.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.OData.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGDAL.pdb
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\SDGUtil.pdb
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\EntityFramework.SqlServer.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.Edm.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Microsoft.Data.OData.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Newtonsoft.Json.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Net.Http.WebRequest.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Spatial.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.OData.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\System.Web.Http.WebHost.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\WebApiDoodle.Net.Http.Formatting.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\Dapper.xml
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\de\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\es\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\fr\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\it\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ja\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ko\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\ru\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hans\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\bin\Debug\zh-Hant\System.Spatial.resources.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.csprojResolveAssemblyReference.cache
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.dll
+C:\Hybrid BackOffice\SDG Project\SDGBackOffice\CTPayment\obj\Debug\CTPayment.pdb

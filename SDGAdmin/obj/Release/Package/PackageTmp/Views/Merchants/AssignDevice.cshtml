@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Merchant Device";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.MerchantDeviceModel
+
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Merchants")">Home</a></li>
+    <li><a href="#">Merchant Management</a></li>
+    <li class="active">Assign Device</li>
+</ul>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Select Device Name</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(x => x.MasterDevice.MasterDeviceId, (List<SelectListItem>)ViewBag.MasterDevice, new { id = "ddldevice", @class = "form-control" })
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>View All Serial Numbers</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="@Url.Action("AssignDevice")" method="post" role="form" class="form-horizontal">
+                            @Html.Hidden("hdnCtrl", "")
+                            <div class="panel-body">
+                                <table style='text-align: center; vertical-align: middle;'>
+                                    <tr>
+                                        <td style='width: 160px;'>
+                                            <b>Avalaible Serial Number</b><br />
+                                            <select multiple="multiple" id="lbDeviceAvailable" style="width: 400px;" class="form-control" size="20"></select>
+                                        </td>
+                                        <td style='width: 50px; text-align: center; vertical-align: middle;'>
+                                            &nbsp;
+                                            <input type='button' id='btnRight' value='>  ' class="form-control" />
+                                            <br />
+                                            <input type='button' id='btnLeft' value='  <  ' class="form-control" />
+                                        </td>
+                                        <td style='width: 50px; text-align: center; vertical-align: middle;'>
+                                            &nbsp;
+                                            <b>Selected Serial Number</b>
+                                            <br />
+                                            <select multiple="multiple" id="lbAssignedDevice" style="width: 400px;" class="form-control" size="20"></select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="form-group row">
+                                    <div class="col-md-3 pull-left">
+                                    </div>
+                                    <div class="col-md-9 ">
+                                        <input type="submit" value="Assign" class="btn width-150 btn-primary pull-right" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ddldevice").change(function () {
+                var id = document.getElementById('ddldevice').value;
+                $.ajax({
+                    url: rootDir + 'Ajax/DeviceList',
+                    type: 'POST',
+                    data: { "id": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $('#lbDeviceAvailable').empty();
+                        $('#lbAssignedDevice').empty();
+                        $.each(data, function (key, value) {
+                            $("#lbDeviceAvailable").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $('#btnRight').click(function (e) {
+                var selectedOpts = $('#lbDeviceAvailable option:selected');
+                if (selectedOpts.length == 0) {
+                    alert("Select a device that you want to remove to Merchant.");
+                    e.preventDefault();
+                }
+
+                $('#lbAssignedDevice').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $('#btnLeft').click(function (e) {
+                var selectedOpts = $('#lbAssignedDevice option:selected');
+                if (selectedOpts.length == 0) {
+                    alert("Select a Serial Number that you want to remove.");
+                    e.preventDefault();
+                }
+
+                $('#lbDeviceAvailable').append($(selectedOpts).clone());
+                $(selectedOpts).remove();
+                e.preventDefault();
+            });
+
+            $('form').submit(function () {
+                var json = "";
+                $("#lbAssignedDevice option").each(function () {
+                    value = $(this).val()
+                    text = $(this).html()
+
+                    if (json.length != 0) json += ",";
+
+                    json += value;
+                });
+                var id = document.getElementById('hdnCtrl').value = json.toString();
+            });
+        });
+
+    </script>
+}

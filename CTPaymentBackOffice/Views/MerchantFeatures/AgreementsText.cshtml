@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    textarea {
+        resize: none;
+        width: 500px;
+        height: 150px;
+    }
+</style>
+
+@model SDGBackOffice.Models.AgreementsModel
+
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "MerchantFeatures")">Home</a></li>
+    <li class="active">Agreements Text</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Agreements Text</h2>
+</div>
+@Html.Hidden("hdnCtrl", "");
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form action="@Url.Action("AgreementsText")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Agreements Text</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(a => a.LanguageCode, new List<SelectListItem> { new SelectListItem { Text = "EN-CA", Value = "EN-CA" } }, new { id = "ddlMerchants", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <h4><b>Terms of Service</b></h4>
+                                @Html.TextAreaFor(a => a.TermsOfService)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <h4><b>Disclaimer</b></h4>
+                                @Html.TextAreaFor(a => a.Disclaimer)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input id="save" class="btn btn-primary pull-right" type="submit" value="Submit" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,285 @@
+﻿@{
+    ViewBag.Title = "Merchant On Board Results";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.MerchantOnBoardResponseModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Merchant on Board</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>File Details</h2>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+@Html.Hidden("hdnParentType", SDGAdmin.CurrentUser.ParentType)
+<div class="page-content-wrap">
+    @Html.Hidden("success", (object)ViewBag.Success)
+    @Html.Hidden("responseId", (object)ViewBag.ResponseId)
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <form action="@Url.Action("GetFileDetails")" method="post" role="form" class="form-horizontal">
+                @Html.ValidationSummary()
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">View Response</h3>
+                            <div style="display:inline-grid;" id="divActionKeys">
+                                <button class="btn btn-primary pull-right" id="btnUpdateResponse">Update Response</button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <!-- TABS WIDGET -->
+                            <div class="panel-default tabs">
+                                <ul class="nav nav-tabs nav-justified">
+                                    <li class="active"><a href="#tab1" data-toggle="tab">Header</a></li>
+                                    <li><a href="#tab2" data-toggle="tab">Status</a></li>
+                                    <li><a href="#tab3" data-toggle="tab">Merchant</a></li>
+                                    <li><a href="#tab4" data-toggle="tab">Credit</a></li>
+                                    <li><a href="#tab5" data-toggle="tab">Debit</a></li>
+                                    <li><a href="#tab6" data-toggle="tab">Terminal</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab1">
+                                        <p>Sequence Number: @Html.TextBoxFor(h => h.SequenceNumber, new { @class = "form-control" })</p>
+                                        <p>Institution Number: @Html.TextBoxFor(h => h.InstitutionNumber, new { @class = "form-control" })</p>
+                                        <p>Load Date: @Html.TextBoxFor(h => h.LoadDate, new { @class = "form-control" })</p>
+                                        <p>Load Time: @Html.TextBoxFor(h => h.LoadTime, new { @class = "form-control" })</p>
+                                        <p>Misc Text: @Html.TextBoxFor(h => h.MiscText, new { @class = "form-control" })</p>
+                                        <p>Result Code: @Html.TextBoxFor(h => h.ResultCode, new { @class = "form-control" })</p>
+                                        <p>Result Text: @Html.TextBoxFor(h => h.ResultText, new { @class = "form-control ", id = "txtHeaderResult" })</p>
+                                        @Html.Hidden("ResultText", Model.ResultText)
+                                    </div>
+
+                                    <div class="tab-pane" id="tab2">
+                                            <!-- START STATUS -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-body list-group list-group-contacts">
+                                                    @if (Model.STAT != null)
+                                                    {
+                                                        for (int i = 0; i < Model.STAT.Count; i++)
+                                                        {
+                                                            <a href="#" class="list-group-item">
+                                                                <span class="contacts-title">Submitted Record Type: </span>
+                                                                <span>@Html.TextBoxFor(m => m.STAT[i].SubmittedRecordType)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Added: </span>
+                                                                <span>@Html.TextBoxFor(m => m.STAT[i].Added)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Updated: </span>
+                                                                <span>@Html.TextBoxFor(m => m.STAT[i].Updated)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Deleted: </span>
+                                                                <span>@Html.TextBoxFor(m => m.STAT[i].Deleted)</span> &nbsp; &nbsp;
+                                                            </a>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" class="list-group-item">
+                                                            <span class="contacts-title">No Merchants Available</span>
+                                                        </a>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!-- END STATUS -->
+                                    </div>
+
+                                    <div class="tab-pane" id="tab3">
+                                        <div class="col-md-12">
+                                            <!-- START MERCHANTS -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-body list-group list-group-contacts">
+                                                    @if (Model.MERCHANT != null)
+                                                    {
+                                                        for (int i = 0; i < Model.MERCHANT.Count; i++)
+                                                        {
+                                                            <a href="#" class="list-group-item">
+                                                                <span class="contacts-title">Command: </span>
+                                                                <span>@Html.TextBoxFor(m => m.MERCHANT[i].Command)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Merchant Id: </span>
+                                                                <span>@Html.TextBoxFor(m => m.MERCHANT[i].MerchantId)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Result Text: </span>
+                                                                <span>@Html.TextBoxFor(m => m.MERCHANT[i].ResultText)</span> &nbsp; &nbsp;
+                                                            </a>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" class="list-group-item">
+                                                            <span class="contacts-title">No Merchants Available</span>
+                                                        </a>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!-- END MERCHANTS -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-pane" id="tab4">
+                                        <div class="col-md-12">
+                                            <!-- START Credit Card -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-body list-group list-group-contacts">
+                                                    @if (Model.CCARD != null)
+                                                    {
+                                                        for (int i = 0; i < Model.CCARD.Count; i++)
+                                                        {
+                                                            <a href="#" class="list-group-item">
+                                                                <span class="contacts-title">Card Type: </span>
+                                                                <span>@Html.TextBoxFor(m => m.CCARD[i].CardType)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Command: </span>
+                                                                <span>@Html.TextBoxFor(m => m.CCARD[i].Command)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Merchant Id: </span>
+                                                                <span>@Html.TextBoxFor(m => m.CCARD[i].MerchantId)</span> &nbsp; &nbsp;
+                                                                <span class="contacts-title">Result Text: </span>
+                                                                <span>@Html.TextBoxFor(m => m.CCARD[i].ResultText)</span> &nbsp; &nbsp;
+                                                            </a>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" class="list-group-item">
+                                                            <span class="contacts-title">No Credit Cards Available</span>
+                                                        </a>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!-- END Credit Card -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div class=" tab-pane" id="tab5">
+                                        @if (Model.DCARD != null)
+                                        {
+                                            for (int i = 0; i < Model.DCARD.Count; i++)
+                                            {
+                                                <a href="#" class="list-group-item">
+                                                    <span class="contacts-title">Card Type: </span>
+                                                    <span>@Html.TextBoxFor(m => m.DCARD[i].CardType)</span> &nbsp; &nbsp;
+                                                    <span class="contacts-title">Command: </span>
+                                                    <span>@Html.TextBoxFor(m => m.DCARD[i].Command)</span> &nbsp; &nbsp;
+                                                    <span class="contacts-title">Merchant Id: </span>
+                                                    <span>@Html.TextBoxFor(m => m.DCARD[i].MerchantId)</span> &nbsp; &nbsp;
+                                                    <span class="contacts-title">Result Text: </span>
+                                                    <span>@Html.TextBoxFor(m => m.DCARD[i].ResultText)</span> &nbsp; &nbsp;
+                                                </a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="list-group-item">
+                                                <span class="contacts-title">No Debit Cards Available</span>
+                                            </a>
+                                        }
+                                    </div>
+                                    
+                                    <div class=" tab-pane" id="tab6">
+                                        @if (Model.TERMINAL != null)
+                                        {
+                                            for (int i = 0; i < Model.TERMINAL.Count; i++)
+                                            {
+                                                <a href="#" class="list-group-item">
+                                                    <span class="contacts-title">Command: </span>
+                                                    <span>@Html.TextBoxFor(m => m.TERMINAL[i].Command)</span> &nbsp; &nbsp;
+                                                    <span class="contacts-title">Merchant Id: </span>
+                                                    <span>@Html.TextBoxFor(m => m.TERMINAL[i].MerchantId)</span> &nbsp; &nbsp;
+                                                    <span class="contacts-title">Terminal Id: </span>
+                                                    <span>@Html.TextBoxFor(m => m.TERMINAL[i].TerminalId)</span> &nbsp; &nbsp;
+                                                    <span class="contacts-title">Result Text: </span>
+                                                    <span>@Html.TextBoxFor(m => m.TERMINAL[i].ResultText)</span> &nbsp; &nbsp;
+                                                </a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="list-group-item">
+                                                <span class="contacts-title">No Credit Cards Available</span>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END TABS WIDGET -->
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Succes</div>
+            <div class="mb-content">
+                <p id="errorMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-success btn-lg pull-right mb-control-close margin-btn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+            <div class="mb-content">
+                <p id="errorMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-success btn-lg pull-right mb-control-close margin-btn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/js/CTMerchantOnBoard.js")"></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#merchantBulk").addClass("active");
+            $("#ViewResults").addClass("active");
+
+            document.getElementById('value').value = "merchant";
+            if (document.getElementById('hdnParentType').value == 'Reseller') {
+                $(".panel-hide").css('display', 'none');
+            }
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                $("#message-box-success").show();
+                $("#message-box-success").fadeOut(1500);
+            }
+
+            $("#close").click(function () {
+                $("#message-box-danger").hide();
+            });
+
+            var resultHeader = document.getElementById('ResultText').value;
+            if(resultHeader != ""){
+                $("#btnUpdateResponse").hide();
+                $("#btnRemoveResponse").show();
+            } else {
+                $("#btnRemoveResponse").hide();
+            }
+
+            var responseId = document.getElementById('responseId').value;
+            $("#btnRemoveResponse").click(function(){
+                window.location = rootDir + 'MerchantOnBoard/DeleteFileResponse?id=' + responseId;
+            });
+        });
+    </script>
+}

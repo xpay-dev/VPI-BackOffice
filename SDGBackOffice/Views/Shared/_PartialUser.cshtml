@@ -1,0 +1,31 @@
+﻿<div class="menu-icon-container hidden-md-up" style="margin: 0 !important">
+    <div class="animate-menu-button left-menu-toggle">
+        <div> </div>
+    </div>
+</div>
+<div class="menu mobile">
+    <div class="menu-user-block">
+        <div class="dropdown dropdown-avatar">
+            <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="avatar" href="javascript:void(0);">
+                    <img src="@Url.Content("~/assets/common/img/temp/avatars/1.jpg")" alt="Avatar">
+                </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="" role="menu">
+                @Html.ActionLink("Dashboard", "Dashboard", "Home", null, new { @id = "btnYes", @class = "dropdown-item" })
+                <div class="dropdown-divider"></div>
+                @Html.ActionLink("Logout", "Index", "Home", null, new { @id = "btnYes", @class = "dropdown-item" })
+            </ul>
+        </div>
+    </div>
+    <div class="menu-info-block">
+        <div class="left">
+            <div class="header-buttons">
+            </div>
+        </div>
+        <div class="right hidden-md-down margin-left-20">
+            <div class="search-block">
+            </div>
+        </div>
+    </div>
+</div>

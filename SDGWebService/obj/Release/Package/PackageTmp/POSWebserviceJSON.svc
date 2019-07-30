@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="SDGWebService.POSWebserviceJSON" CodeBehind="POSWebserviceJSON.svc.cs" Factory="System.ServiceModel.Activation.WebScriptServiceHostFactory" %>

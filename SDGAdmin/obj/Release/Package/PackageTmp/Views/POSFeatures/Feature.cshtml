@@ -1,0 +1,275 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.MobileAppFeaturesModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "POSFeatures")">Home</a></li>
+    <li><a href="#">POS Management</a></li>
+    <li class="active">POS Feature</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="panel">
+    <div class="panel-heading">
+        <h3>POS Management</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin-bottom-50">
+                    <h4>POS Feature</h4>
+                    <!-- Horizontal Form -->
+                    <form action="@Url.Action("Feature")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="javascript: void(0);" data-toggle="tab" data-target="#tab-first" role="tab">Transaction Settings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript: void(0);" data-toggle="tab" data-target="#tab-second" role="tab">POS Management</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript: void(0);" data-toggle="tab" data-target="#tab-third" role="tab">Tips</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content padding-vertical-20">
+                            <div class="tab-pane active" id="tab-first" role="tabpanel">
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">System Mode</label>
+                                        @Html.DropDownListFor(m => m.SystemMode, (List<SelectListItem>)ViewBag.SystemMode, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">GPS Enabled</label>
+                                        @Html.DropDownListFor(m => m.GPSEnabled, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Language</label>
+                                        @Html.DropDownListFor(m => m.LanguageCode, (List<SelectListItem>)ViewBag.Language, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Currency</label>
+                                        @Html.DropDownListFor(m => m.CurrencyId, (List<SelectListItem>)ViewBag.Currencies, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Credit Transaction</label>
+                                        @Html.DropDownListFor(m => m.CreditTransaction, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Debit Transaction</label>
+                                        @Html.DropDownListFor(m => m.DebitTransaction, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Check Transaction</label>
+                                        @Html.DropDownListFor(m => m.ChequeTransaction, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-control-label">Cash Transaction</label>
+                                        @Html.DropDownListFor(m => m.CashTransaction, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Cash Signature</label>
+                                        @Html.DropDownListFor(m => m.CashSignature, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Credit Signature</label>
+                                        @Html.DropDownListFor(m => m.CreditSignature, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Debit Signature</label>
+                                        @Html.DropDownListFor(m => m.DebitSignature, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Check Signature</label>
+                                        @Html.DropDownListFor(m => m.ChequeSignature, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Debit Refund</label>
+                                        @Html.DropDownListFor(m => m.DebitRefund, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Check Type</label>
+                                        @Html.DropDownListFor(m => m.ChequeType, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Proof ID</label>
+                                        @Html.DropDownListFor(m => m.ProofId, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Reference Number</label>
+                                        @Html.DropDownListFor(m => m.ReferenceNumber, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Enable TOS</label>
+                                        @Html.DropDownListFor(m => m.TOSRequired, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Enable Disclaimer</label>
+                                        @Html.DropDownListFor(m => m.DisclaimerRequired, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane" id="tab-second" role="tabpanel">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Enable SMS Receipts</label>
+                                        @Html.DropDownListFor(m => m.SMSEnabled, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Enable Gift Receipts</label>
+                                        @Html.DropDownListFor(m => m.GiftAllowed, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Enable Email Receipts</label>
+                                        @Html.DropDownListFor(m => m.EmailAllowed, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-control-label">Email Limit per Cycle</label>
+                                        @Html.TextBoxFor(m => m.EmailLimit, new { @placeholder = "Email Limit", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Check for duplicate receipts?</label>
+                                        @Html.DropDownListFor(m => m.CheckForEmailDuplicates, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-control-label">Billing Cycles to Check</label>
+                                        @Html.DropDownListFor(m => m.BillingCyclesCheckEmail, (List<SelectListItem>)ViewBag.BillingCycle, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6 col-xs-12">
+                                        <label class="form-control-label">Enable Print Receipts</label>
+                                        @Html.DropDownListFor(m => m.PrintAllowed, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-control-label">Print Limit per Cycle</label>
+                                        @Html.TextBoxFor(m => m.PrintLimit, new { @placeholder = "Print Limit", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Check for duplicate receipts?</label>
+                                        @Html.DropDownListFor(m => m.CheckForPrintDuplicates, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-control-label">Billing Cycles to Check</label>
+                                        @Html.DropDownListFor(m => m.BillingCyclesCheckPrint, (List<SelectListItem>)ViewBag.BillingCycle, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab-third" role="tabpanel">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Enable Tip Service</label>
+                                        @Html.DropDownListFor(m => m.TipsEnabled, (List<SelectListItem>)ViewBag.DefaultPos, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Enter Tip Amount</label>
+                                        @Html.TextBoxFor(m => m.Amount1, new { @placeholder = "Amount 1", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Enter Tip Amount</label>
+                                        @Html.TextBoxFor(m => m.Amount2, new { @placeholder = "Amount 2", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Enter Tip Amount</label>
+                                        @Html.TextBoxFor(m => m.Amount3, new { @placeholder = "Amount 3", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Enter Tip Percentage</label>
+                                        @Html.TextBoxFor(m => m.Percentage1, new { @placeholder = "Percent 1", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Enter Tip Percentage</label>
+                                        @Html.TextBoxFor(m => m.Percentage2, new { @placeholder = "Percent 2", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Enter Tip Percentage</label>
+                                        @Html.TextBoxFor(m => m.Percentage3, new { @placeholder = "Percent 3", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                   
+                                </div>
+                                <div class="col-md-9 ">
+                                    <button class="btn width-150 btn-primary pull-right">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+}

@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = "Branch Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGBackOffice.Models.SDMasterModel
+
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">
+        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            @if(SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant) {
+                <li><a href="@Url.Action("Index", "MerchantBranches")">Home</a></li>
+            } else {
+                <li><a href="@Url.Action("Dashboard", "Home")">Home</a></li>
+            }
+            <li class="active">Branch Management</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="page-content hdnMerchantOnly">
+    <div class="page-content-inner">
+        @Html.Hidden("hdnParentType", SDGBackOffice.CurrentUser.ParentType)
+        @Html.Hidden("hdnCtrl", "")
+        @Html.Hidden("success", (object)ViewBag.Success)
+        <section class="panel">
+            <div class="panel-heading">
+                <h4>Merchant Branch</h4>
+            </div>
+
+            <div class="panel-body">
+                @if ((SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner))
+                {
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label class="form-control-label">Select Reseller</label>
+                            @Html.DropDownListFor(m => m.Reseller.ResellerId, (List<SelectListItem>)ViewBag.Resellers, new { @placeholder = " ", @class = "form-control", id = "ddlResellers" })
+                        </div>
+                    </div>
+                }
+
+                @if ((SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller))
+                {
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label class="form-control-label">Select Merchant</label>
+                            @Html.DropDownList("ddlmerchant", (List<SelectListItem>)ViewBag.Merchants, new { @placeholder = " ", @class = "form-control", id = "ddlmerchant" })
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    if ((SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner))
+                    {
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Merchant</label>
+                                @Html.DropDownList("ddlmerchant", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-control-label">Select Merchant</label>
+                                @Html.DropDownList("ddlmerchant", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h4>View All Branches</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <div class="pull-right" id="dvActionKeys">
+                                <a href="#" style="margin-right:2px" class="btn btn-primary margin-inline reseller-hide" data-link="@Url.Action("UpdateInfo")" onclick="redirectAction(this);">Update Branch Info</a>
+                                <a href="#" style="margin-right:2px" class="btn btn-primary margin-inline" data-link="@Url.Action("ViewInfo")" onclick="redirectAction(this);">View Branch Info</a>
+                                <a href="#" style="margin-right:2px" class="btn btn-primary margin-inline panel-hide reseller-hide" data-link="@Url.Action("NewUser")" onclick="redirectAction(this);">Add New User</a>
+                            </div>
+                            <table class="table table-inverse nowrap" id="BranchesTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Branch Name</th>
+                                        <th>Primary Contact Number</th>
+                                        <th>POSs</th>
+                                        <th>Parent Merchant</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        function notyConfirm() {
+            noty({
+                text: 'How many POSs? <br /> <input type="text" id="posQty" class="form-control" />',
+                layout: 'topRight',
+                buttons: [
+                        {
+                            addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
+                                $noty.close();
+                                var loc = "@Url.Action("Create", "MerchantBranchPOSs")/" + chosenI + "?qty=" + $("#posQty").val();
+                                window.location = loc;
+                            }
+                        },
+                        {
+                            addClass: 'btn btn-danger btn-clean', text: 'Cancel', onClick: function ($noty) {
+                                $noty.close();
+                            }
+                        }
+                ]
+            })
+        }
+
+        if (document.getElementById('hdnParentType').value == 'Merchant') {
+            $(".panel-hide").css('display', 'none');
+            $(".hdnMerchantOnly").hide();
+        }
+
+        if (document.getElementById('hdnParentType').value == 'Reseller') {
+            $(".reseller-hide").css('display', 'none');
+        }
+
+        $(document).ready(function () {
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantbranchSubmenu").addClass("active");
+            $("#merchantbranchSubIndex").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            var mId = '@ViewBag.MerchantId';
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                getModal(0, strSuccess);
+            }
+
+            if (mId != 0) {
+                refreshBranchTable(mId);
+            } else {
+                if ($('#ddlmerchant > option').length == 1) {
+                    refreshBranchTable($("#ddlmerchant").val());
+                } else {
+                    refreshBranchTable(0);
+                }
+            }
+
+            $("#ddlResellers").on("change", function () {
+                var id = document.getElementById('ddlResellers').value;
+                refreshBranchTable(0);
+                $.ajax({
+                    url: rootDir + 'Ajax/GetMerchantsByReseller',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchant').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchant").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if (data.length == 1) {
+                            refreshBranchTable($("#ddlmerchant").val());
+                        }
+                    }
+                });
+            });
+
+            $("#ddlmerchant").on("change", function () {
+                var id = document.getElementById('ddlmerchant').value;
+                refreshBranchTable(id);
+            });
+
+            if ($('#ddlResellers > option').length == 1) {
+                var id = document.getElementById('ddlResellers').value;
+
+                $.ajax({
+                    url: rootDir + 'Ajax/GetMerchantsByReseller',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchant').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchant").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if (data.length == 1) {
+                            refreshBranchTable(document.getElementById('ddlmerchant').value);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}

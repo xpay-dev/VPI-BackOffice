@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "CreatePosTransaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.TransactionModel
+
+<!-- START NOTIFICATION -->
+<section class="page-content">
+    <div class="page-content-inner">
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <p id="errorMsg" style="font-size: large"></p>
+        </div>
+
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <p id="errMsg" style="font-size: large"></p>
+        </div>
+    </div>
+</section>
+<!-- END START NOTIFICATION -->
+
+<section class="panel">
+    <div class="panel-heading">
+        <h3>Create New Transaction</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin-bottom-50">
+                    <h4>Transaction Details</h4>
+                    <!-- Horizontal Form -->
+                    <form action="@Url.Action("CreatePosTransaction")" method="post" role="form" class="form-horizontal" id="jvalidate-transaction" autocomplete="off">
+                        <div style="color: red;">
+                            @Html.ValidationSummary()
+                            @Html.Hidden("rId", "")
+                        </div>
+                        @Html.HiddenFor(m => m.MerchantPosId, Model.MerchantPosId)
+
+                        <div class="form-group row">                           
+                            <div class="col-md-6">
+                                <label class="form-control-label">Select a User</label>
+                                @Html.DropDownListFor(m => m.AccountId, (List<SelectListItem>)ViewBag.Users, new { @placeholder = " ", @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Select Card Type</label>
+                                @Html.DropDownListFor(m => m.CardTypeId, (List<SelectListItem>)ViewBag.CardTypes, new { @placeholder = " ", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Amount</label>
+                                @Html.TextBoxFor(m => m.Amount, new { @placeholder = "Amount", @class = "form-control" })
+                            </div>
+                        </div>                       
+                        
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                    <input type="button" class="btn btn-default" value="Clear Form" id="clearForm" />
+                                </div>
+                                <div class="col-md-9 ">
+                                    <input type="button" id="btnSubmit" class="btn width-150 btn-primary pull-right" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.alert-danger').hide();
+            $('.alert-success').hide();
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantSubmenu").addClass("active");
+            $("#merchantSubRegister").addClass("active");
+
+            $("#btnSubmit").click(function () {
+                $("#jvalidate-transaction").submit();
+            });
+
+            $("#close").click(function () {
+                $(".alert-danger").hide();
+            });
+
+            $(this).bind('input propertychange', function () {
+                //your code here
+            });
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+
+        });
+    </script>
+}
+
+

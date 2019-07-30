@@ -1,0 +1,209 @@
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SDGAdmin.dll.config
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SDGAdmin.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SDGAdmin.pdb
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\CTPayment.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\EntityFramework.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\GatewayProcessor.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.Edm.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.OData.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Newtonsoft.Json.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\NPOI.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SDGDAL.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SDGUtil.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SendActivation.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\System.Spatial.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\System.Web.Helpers.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\System.Web.Http.OData.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\System.Web.Mvc.Expressions.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Thx.Research.Security.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\CT_EMV_CLASSES.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\HPA_ISO8583.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Crypto.CryptoManager.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Dapper.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\CTPayment.pdb
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\GatewayProcessor.pdb
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SDGDAL.pdb
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SendActivation.pdb
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\SDGUtil.pdb
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\EntityFramework.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.Edm.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.OData.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Newtonsoft.Json.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\System.Spatial.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\System.Web.Helpers.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\System.Web.Http.OData.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\Dapper.xml
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\de\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\es\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\it\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\de\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\es\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\fr\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\it\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ja\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ko\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ru\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\de\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\es\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\fr\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\it\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ja\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ko\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\ru\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\zh-Hans\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csprojResolveAssemblyReference.cache
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.Properties.Resources.resources
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.GenerateResource.Cache
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.dll
+C:\Users\Gabby.Peneyra\Development\Veritas\SDG Project\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGAdmin.dll.config
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGAdmin.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGAdmin.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\CTPayment.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\EntityFramework.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\GatewayProcessor.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.Edm.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.OData.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Newtonsoft.Json.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGDAL.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGUtil.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SendActivation.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Spatial.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Helpers.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Http.OData.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Mvc.Expressions.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\CT_EMV_CLASSES.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\HPA_ISO8583.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\PAYMAYA_ISO8583.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Crypto.CryptoManager.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Dapper.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ICSharpCode.SharpZipLib.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\CTPayment.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\GatewayProcessor.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGDAL.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SendActivation.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGUtil.pdb
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\EntityFramework.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.Edm.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.OData.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Newtonsoft.Json.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Spatial.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Helpers.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Http.OData.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\Dapper.xml
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\de\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\es\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\fr\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\it\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ja\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ko\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ru\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\de\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\es\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\fr\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\it\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ja\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ko\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ru\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\de\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\es\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\fr\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\it\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ja\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ko\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\ru\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hans\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hant\System.Spatial.resources.dll
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csprojResolveAssemblyReference.cache
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.Properties.Resources.resources
+C:\Users\Gabby.Peneyra\Workloads\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.GenerateResource.Cache
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGAdmin.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGAdmin.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGAdmin.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\CTPayment.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\EntityFramework.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\GatewayProcessor.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.Edm.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.OData.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Newtonsoft.Json.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGDAL.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGUtil.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SendActivation.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Spatial.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Helpers.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Http.OData.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Mvc.Expressions.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\CT_EMV_CLASSES.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\HPA_ISO8583.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\PAYMAYA_ISO8583.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Crypto.CryptoManager.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Dapper.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ICSharpCode.SharpZipLib.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\CTPayment.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\CTPayment.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\GatewayProcessor.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\GatewayProcessor.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGDAL.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGDAL.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SendActivation.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SendActivation.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGUtil.pdb
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\SDGUtil.dll.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\EntityFramework.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.Edm.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Microsoft.Data.OData.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Newtonsoft.Json.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Spatial.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Helpers.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\System.Web.Http.OData.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\Dapper.xml
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\de\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\es\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\fr\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\it\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ja\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ko\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ru\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\de\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\es\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\fr\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\it\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ja\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ko\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ru\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\de\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\es\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\fr\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\it\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ja\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ko\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\ru\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hans\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\bin\zh-Hant\System.Spatial.resources.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csprojAssemblyReference.cache
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.Properties.Resources.resources
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.GenerateResource.cache
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.CoreCompileInputs.cache
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.CopyComplete
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.dll
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SDGAdmin\obj\Debug\SDGAdmin.pdb

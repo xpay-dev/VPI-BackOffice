@@ -1,0 +1,683 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model CTPaymentBackOffice.Models.MerchantModel
+
+<link href="@Url.Content("~/Css/datepicker/jquery-ui-1.9.2.custom.min.css")" rel="stylesheet" type="text/css" />
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Reports Central</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Reports Central</h2>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    @Html.Hidden("hdnpId", "")
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default 1st">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Filter Option</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Start Date:</label>
+                        <div class="col-md-3">
+                            <input id="datepickerstart" type="text" />
+                            <a id="clear1" class="remover">
+                                <span class="fa fa-times"></span>
+                            </a>
+                        </div>
+                        <label class="col-md-2 control-label">End Date:</label>
+                        <div class="col-md-3">
+                            <input id="datepickerend" type="text" />
+                            <a id="clear2" class="remover">
+                                <span class="fa fa-times"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @if (CTPaymentBackOffice.CurrentUser.ParentType == CTPaymentBackOffice.Enums.ParentType.Partner)
+                        {
+                            @*Partner Dropdown To be decided*@
+
+                            @*<label class="col-md-2 control-label">Select Partner</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownList("ddlpartners", (List<SelectListItem>)ViewBag.Partners, new { @class = "form-control" })
+                                </div>*@
+                        }
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @if (CTPaymentBackOffice.CurrentUser.ParentType == CTPaymentBackOffice.Enums.ParentType.Partner)
+                        {
+                            <label class="col-md-2 control-label">Select Reseller</label>
+                            <div class="col-md-3">
+                                @Html.DropDownList("ddlresellers", (List<SelectListItem>)ViewBag.Resellers, new { @class = "form-control" })
+                            </div>
+                        }
+                        <label class="col-md-2 control-label">Transaction Types</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddltranstype", (List<SelectListItem>)ViewBag.TransTypes, new { @class = "form-control" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+
+                        @if (CTPaymentBackOffice.CurrentUser.ParentType == CTPaymentBackOffice.Enums.ParentType.Reseller)
+                        {
+                            <label class="col-md-2 control-label">Select Merchant</label>
+                            <div class="col-md-3">
+                                @Html.DropDownList("ddlmerchants", (List<SelectListItem>)ViewBag.Merchants, new { @class = "form-control" })
+                            </div>
+
+                        }
+                        else if (CTPaymentBackOffice.CurrentUser.ParentType != CTPaymentBackOffice.Enums.ParentType.Merchant)
+                        {
+                            <label class="col-md-2 control-label">Select Merchant</label>
+                            <div class="col-md-3">
+                                @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
+                            </div>
+                        }
+                        <label class="col-md-2 control-label">Actions</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlactions", (List<SelectListItem>)ViewBag.TransactionTypes, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select Branches</label>
+                        @if (CTPaymentBackOffice.CurrentUser.ParentType == CTPaymentBackOffice.Enums.ParentType.Merchant)
+                        {
+                            <div class="col-md-3">
+                                @Html.DropDownList("ddlbranches", (List<SelectListItem>)ViewBag.Branches, new { @class = "form-control" })
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-3">
+                                @Html.DropDownList("ddlbranches", new List<SelectListItem>() { new SelectListItem { Text = "No Merchant Branches available", Value = "-3" } }, new { @class = "form-control" })
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Select POS</label>
+                        <div class="col-md-3">
+                            @Html.DropDownList("ddlpos", new List<SelectListItem>() { new SelectListItem { Text = "No POSs available", Value = "-4" } }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- START SIMPLE DATATABLE -->
+            <div class="panel panel-default 1st">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Reports</h3>
+                    <div style="display: inline-grid;" id="">
+                        <input id="view" type="button" class="btn btn-info pull-right" value="View Transaction(s)" />
+                    </div>
+                </div>
+                <div id="tbl1" class="panel-body">
+                    <table class="table" id="transTbl">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Card Type</th>
+                                <th>Transaction Type</th>
+                                <th>Transactions</th>
+                                <th>Currency</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div id="tbl2" class="panel-body">
+                    <table class="table" id="transTbl2">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Transaction Type</th>
+                                <th>Transactions</th>
+                                <th>Currency</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END SIMPLE DATATABLE -->
+            <div class="panel panel-default 2nd">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Reports</h3>
+                    <div style="display: inline-grid;" id="">
+                        <div class="btn-group pull-right">
+                            <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i>Export Data</button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" onclick="$('#transactionTbl').tableExport({type:'excel',escape:'false'});">
+                                        <img src='img/icons/xls.png' width="24" />
+                                        XLS
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <input id="x" type="button" class="btn btn-info pull-right" value="Close" style="margin-right: 5px;" />
+                    </div>
+                </div>
+                <div id="tTbl1" class="panel-body">
+                    <table class="table" id="transactionTbl">
+                        <thead>
+                            <tr>
+                                <th>Transaction Number</th>
+                                <th>Amount</th>
+                                <th>Reference Number (Sales)</th>
+                                <th>Transaction Type</th>
+                                <th>Card Type</th>
+                                <th>Customer Name</th>
+                                <th>Card Number</th>
+                                <th>POS</th>
+                                <th>Location</th>
+                                <th>Merchant</th>
+                                <th>Date Received</th>
+                                <th>Signature</th>
+                                <th>POS Entry Mode</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div id="tTbl2" class="panel-body">
+                    <table class="table" id="transactionTbl2">
+                        <thead>
+                            <tr>
+                                <th>Transaction Number</th>
+                                <th>Amount</th>
+                                <th>Reference Number (Sales)</th>
+                                <th>Transaction Type</th>
+                                <th>Customer Name</th>
+                                <th>Card Number</th>
+                                <th>POS</th>
+                                <th>Location</th>
+                                <th>Merchant</th>
+                                <th>Date Received</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default 3rdMap" style="background-color:none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Location</h3>
+                    <div style="display: inline-grid;" id="">
+                        <input id="xMap" type="button" class="btn btn-info pull-right" value="Close Map" />
+                    </div>
+                </div>
+                <div class="panel panel-default 3rd">
+
+                    <div id="googleMap" style="width:auto;height:380px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="mb-footer">
+</div>
+<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/tableExport.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jquery.base64.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/html2canvas.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jspdf/libs/sprintf.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jspdf/jspdf.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tableexport/jspdf/libs/base64.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/datepicker/jquery-ui-1.9.2.custom.min.js")"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWC5EeMiu8Dq9I20FVXKld6kq_0oN9uns"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $('#datepickerstart').val("");
+            $('#datepickerend').val("");
+
+            $(".2nd").hide();
+
+            $(".3rdMap").hide();
+
+            $("#tbl2").hide();
+
+            $("#message-box-danger").hide();
+
+            $("#message-box-success").hide();
+
+            var pId = '@(ViewBag.User)'
+
+            document.getElementById('hdnpId').value = pId;
+
+            var s = "1/1/0001";
+            var e = "1/1/0001";
+
+            refreshReportsTable(0, 0, 0, 0, 0, 0, 0, s, e);
+
+            $("#ddlpartners").on("change", function () {
+                var id = document.getElementById('ddlpartners').value;
+                $('#ddlmerchants').empty();
+                $('#ddlmerchants').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchants available');
+                    $('#ddlmerchants').append(option);
+                });
+
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+
+                $('#ddlpos').empty();
+                $('#ddlpos').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No POSs available');
+                    $('#ddlpos').append(option);
+                });
+
+                $.ajax({
+                    url: '/Ajax/GetReseller',
+                    type: 'POST',
+                    data: { "pId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-1']").remove();
+                        $('#ddlresellers').empty();
+                        $.each(data, function (key, value) {
+                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                $('#ddlbranches').empty();
+                $('#ddlbranches').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No Merchant Branches available');
+                    $('#ddlbranches').append(option);
+                });
+
+                $('#ddlpos').empty();
+                $('#ddlpos').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No POSs available');
+                    $('#ddlpos').append(option);
+                });
+
+                $.ajax({
+                    url: '/Ajax/GetMerchantsByReseller',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.length == 1) {
+                            $("option[value='-2']").remove();
+                            $('#ddlmerchants').empty()
+                            $.each(data, function (key, value) {
+                                $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                            });
+
+                            $.ajax({
+                                url: '/Ajax/GetBranches',
+                                type: 'POST',
+                                data: { "id": id },
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.length == 1) {
+                                        $.ajax({
+                                            url: '/Ajax/GetBranches',
+                                            type: 'POST',
+                                            data: { "id": id },
+                                            dataType: "json",
+                                            success: function (data) {
+                                                if (data.length == 1) {
+                                                    $("option[value='-3']").remove();
+                                                    $('#ddlbranches').empty()
+                                                    $.each(data, function (key, value) {
+                                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                                    });
+
+                                                    $.ajax({
+                                                        url: '/Ajax/BanchPOSForMid',
+                                                        type: 'POST',
+                                                        data: { "id": $("#ddlbranches").val() },
+                                                        dataType: "json",
+                                                        success: function (data) {
+                                                            $("option[value='-4']").remove();
+                                                            $('#ddlpos').empty();
+                                                            $.each(data, function (key, value) {
+                                                                $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                                            });
+                                                        }
+                                                    });
+                                                } else {
+                                                    $("option[value='-3']").remove();
+                                                    $('#ddlpos').empty();
+                                                    $.each(data, function (key, value) {
+                                                        $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                                    });
+                                                }
+                                            }
+                                        });
+
+                                    } else {
+                                        $("option[value='-3']").remove();
+                                        $('#ddlbranches').empty()
+                                        $.each(data, function (key, value) {
+                                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
+                            $("option[value='-2']").remove();
+                            $('#ddlmerchants').empty()
+                            $.each(data, function (key, value) {
+                                $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                            });
+                        }
+                    }
+                });
+            });
+
+            $("#ddlmerchants").on("change", function () {
+                var id = document.getElementById('ddlmerchants').value;
+
+                $('#ddlpos').empty();
+                $('#ddlpos').each(function () {
+                    var option = $("<option />");
+                    option.attr("value", '0').text('No POSs available');
+                    $('#ddlpos').append(option);
+                });
+
+                $.ajax({
+                    url: '/Ajax/GetBranches',
+                    type: 'POST',
+                    data: { "id": id },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.length == 1) {
+                            $.ajax({
+                                url: '/Ajax/GetBranches',
+                                type: 'POST',
+                                data: { "id": id },
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.length == 1) {
+                                        $("option[value='-3']").remove();
+                                        $('#ddlbranches').empty()
+                                        $.each(data, function (key, value) {
+                                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                        });
+
+                                        $.ajax({
+                                            url: '/Ajax/BanchPOSForMid',
+                                            type: 'POST',
+                                            data: { "id": $("#ddlbranches").val() },
+                                            dataType: "json",
+                                            success: function (data) {
+                                                $("option[value='-4']").remove();
+                                                $('#ddlpos').empty();
+                                                $.each(data, function (key, value) {
+                                                    $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                                });
+                                            }
+                                        });
+                                    } else {
+                                        $("option[value='-3']").remove();
+                                        $('#ddlpos').empty();
+                                        $.each(data, function (key, value) {
+                                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                        });
+                                    }
+                                }
+                            });
+
+                        } else {
+                            $("option[value='-3']").remove();
+                            $('#ddlbranches').empty()
+                            $.each(data, function (key, value) {
+                                $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                            });
+                        }
+                    }
+                });
+            });
+
+            $("#ddlbranches").on("change", function () {
+                var id = document.getElementById('ddlbranches').value;
+
+                $.ajax({
+                    url: '/Ajax/GetPOSByMerchantBranch',
+                    type: 'POST',
+                    data: { "bId": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-4']").remove();
+                        $('#ddlpos').empty();
+                        $.each(data, function (key, value) {
+                            $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+                    }
+                });
+            });
+
+            $("#ddlpos").on("change", function () {
+                var id = document.getElementById('ddlpos').value;
+                var type = document.getElementById('ddltranstype').value;
+                var action = document.getElementById('ddlactions').value;
+            });
+
+            $("#view").click(function () {
+                var start = document.getElementById('datepickerstart').value;
+                var end = document.getElementById('datepickerend').value;
+                var r = document.getElementById('ddlresellers');
+                var m = document.getElementById('ddlmerchants');
+
+                if (r != null) {
+                    r = document.getElementById('ddlresellers').value;
+                } else { r = 0; }
+
+                if (m != null) {
+                    m = document.getElementById('ddlmerchants').value;
+                } else { m = 0; }
+
+                var b = document.getElementById('ddlbranches').value;
+                var mp = document.getElementById('ddlpos').value;
+                var type = document.getElementById('ddltranstype').value;
+                var action = document.getElementById('ddlactions').value;
+
+                if (start == "" && end == "") {
+                    start = "1/1/0001";
+                    end = "1/1/0001";
+                } else if (start == "") {
+                    start = "1/1/0001";
+                } else if (end == "") {
+                    end = "1/1/0001";
+                } else if (start != "" && end != "") {
+                    if ((new Date(start).getTime() > new Date(end).getTime())) {
+                        $("#errMsg").text("Check your Date Filtering. End date is less than Start date.");
+                        $("#message-box-danger").show();
+                    }
+                }
+
+                if (r != 0) {
+
+                    if (type != 0) {
+                        if (type == 4) {
+                            $("#tbl1").hide();
+                            refreshDebitReportsTable(0, r, m, mp, b, type, action, start, end);
+                            $("#tbl2").show();
+                        } else {
+                            $("#tbl2").hide();
+                            $("#tbl1").show();
+                            refreshReportsTable(0, r, m, mp, b, type, action, start, end);
+                        }
+                    } else {
+                        $("#errMsg").text("Please select a Transaction Type.");
+                        $("#message-box-danger").show();
+                    }
+                } else if (r == 0) {
+                    if (type != 0) {
+                        if (type == 4) {
+                            $("#tbl1").hide();
+                            refreshDebitReportsTable(pId, r, m, mp, b, type, action, start, end);
+                            $("#tbl2").show();
+                        } else {
+                            $("#tbl2").hide();
+                            $("#tbl1").show();
+                            refreshReportsTable(pId, r, m, mp, b, type, action, start, end);
+                        }
+                    } else {
+                        $("#errMsg").text("Please select a Transaction Type.");
+                        $("#message-box-danger").show();
+                    }
+                } else {
+                    $("#errMsg").text("Please select a Partner");
+                    $("#message-box-danger").show();
+                }
+            });
+
+            $("#close").click(function () {
+                $("#message-box-danger").hide();
+            });
+
+            $("#xMap").click(function () {
+                $('.3rdMap').hide();
+                $("html, body").animate({ scrollTop: 0 }, 250);
+
+            });
+
+            $("#x").click(function () {
+                $(".2nd").hide();
+                $(".1st").show();
+                $('.3rdMap').hide();
+            });
+
+            $("#datepickerstart").datepicker({
+                onSelect: function (selected) {
+                    //$("#datepickerend").datepicker("option", "minDate", selected)
+                }
+            });
+            $("#datepickerend").datepicker({
+                onSelect: function (selected) {
+                    //$("#datepickerstart").datepicker("option", "maxDate", selected)
+                }
+            });
+
+            $("#clear1").click(function () {
+                $("#datepickerstart").val("");
+            });
+
+            $("#clear2").click(function () {
+                $("#datepickerend").val("");
+            });
+
+            $(".remover").css("cursor", "pointer");
+
+            if ($('#ddlresellers > option').length == 1) {
+                var id = document.getElementById('ddlresellers').value;
+
+                $.ajax({
+                    url: '/Ajax/GetMerchantsByReseller',
+                    type: 'POST',
+                    data: { "rId": id },
+                    dataType: "json",
+                    success: function (data) {
+
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if ($("#ddlmerchants").length == 1) {
+                            $.ajax({
+                                url: '/Ajax/GetBranches',
+                                type: 'POST',
+                                data: { "id": $("#ddlmerchants").val() },
+                                dataType: "json",
+                                success: function (data) {
+                                    $("option[value='-3']").remove();
+                                    $('#ddlbranches').empty();
+                                    $.each(data, function (key, value) {
+                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                    });
+
+                                    if ($("#ddlbranches").length == 1) {
+                                        $.ajax({
+                                            url: '/Ajax/BanchPOSForMid',
+                                            type: 'POST',
+                                            data: { "id": $("#ddlbranches").val() },
+                                            dataType: "json",
+                                            success: function (data) {
+                                                $("option[value='-4']").remove();
+                                                $('#ddlpos').empty();
+                                                $.each(data, function (key, value) {
+                                                    $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                                });
+                                            }
+                                        });
+                                    }
+
+                                }
+                            });
+                        }
+
+                    }
+                });
+            }
+
+        });
+    </script>
+}

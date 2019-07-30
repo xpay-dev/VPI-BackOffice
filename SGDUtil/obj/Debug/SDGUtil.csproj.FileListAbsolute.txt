@@ -1,0 +1,2 @@
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SGDUtil\obj\Debug\SDGUtil.csproj.App.config
+E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SGDUtil\obj\Debug\SDGUtil.csproj.CoreCompileInputs.cache

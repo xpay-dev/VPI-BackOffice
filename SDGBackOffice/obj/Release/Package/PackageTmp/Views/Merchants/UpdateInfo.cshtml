@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "Merchant UpdateInfo";
+}
+
+@model SDGBackOffice.Models.MerchantModel
+<nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
+    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Merchants")">Home</a></li>
+            <li><a href="#">Merchant Management</a></li>
+            <li class="active">Update Merchant Info</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        @Html.Partial("~/Views/Shared/_PartialUser.cshtml")
+    </div>
+</nav>
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Edit Merchant Info</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="margin-bottom-50">
+                            <h4>Merchant Details</h4>
+                            <br />
+                            <!-- Horizontal Form -->
+                            <form id="jvalidate" role="form" class="form-horizontal" method="post" action="@Url.Action("UpdateInfo")">
+                                @Html.HiddenFor(m => m.MerchantFeaturesId)
+                                @Html.HiddenFor(m => m.NeedAddToCT)
+                                @Html.HiddenFor(m => m.NeedUpdateToCT)
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-control-label">Merchant Name</label>
+                                        @Html.TextBoxFor(m => m.MerchantName, new { @class = "form-control", @placeholder = "Merchant Name", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Street and Civic Number</label>
+                                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street and Civic Number" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">City</label>
+                                        @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Country</label>
+                                        @Html.DropDownListFor(m => m.CountryId, (List<SelectListItem>)ViewBag.Countries, new { @class = "form-control", id = "ddlCountry" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">State / Province</label>
+                                        @Html.TextBoxFor(m => m.StateProvince, new { @class = "form-control", @placeholder = "State / Province" })
+                                        @Html.DropDownListFor(m => m.ProvinceId, (List<SelectListItem>)ViewBag.Provinces, new { @class = "form-control ddlProvinces", id = "ddlProvinces" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Zip / Postal Code</label>
+                                        @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control", @placeholder = "Zip / Postal Code" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Primary Contact Number</label>
+                                        @Html.TextBoxFor(m => m.PrimaryContactNumber, new { @class = "form-control", @placeholder = "Primary Contact Number" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Fax</label>
+                                        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", @placeholder = "Fax" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Mobile Phone Number</label>
+                                        @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", @placeholder = "Mobile Phone Number" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Merchant Email Address</label>
+                                        @Html.TextBoxFor(m => m.MerchantEmail, new { @class = "form-control", @placeholder = "Merchant Email Address", @type = "email" })
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Currency</label>
+                                        @Html.DropDownListFor(m => m.CurrencyId, (List<SelectListItem>)ViewBag.Currencies, new { @placeholder = " ", @class = "form-control" })
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-control-label">Billing Cycle</label>
+                                        @Html.DropDownListFor(m => m.BillingCycleId, (List<SelectListItem>)ViewBag.BillingCycles, new { @placeholder = " ", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <div class="form-group row">
+                                        <div class="col-md-3 pull-left">
+                                            @Html.ActionLink("Default Details", null, null, null, new { @class = "btn btn-default" })
+                                            @Html.ActionLink("Back", "Index", "Merchants", null, new { @class = "btn btn-default" })
+                                        </div>
+                                        <div class="col-md-9 ">
+                                            <input type="submit" class="btn btn-primary pull-right" id="SaveAndContinue" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var isIso = '@ViewBag.WithIsoCode';
+
+            if (isIso == 1) {
+                $("#StateProvince").hide();
+            } else {
+                $(".ddlProvinces").hide();
+            }
+
+            $("#ddlCountry").change(function () {
+                var cId = $("#ddlCountry").val();
+                if (cId == 185) {
+                    $("#StateProvince").hide();
+                    $(".ddlProvinces").show();
+                } else if (cId == 40) {
+                    $("#StateProvince").hide();
+                    $(".ddlProvinces").show();
+                }
+                else {
+                    $("#StateProvince").show();
+                    $(".ddlProvinces").hide();
+                }
+            });
+
+            $("#ddlCountry").on("change", function () {
+                var id = document.getElementById('ddlCountry').value;
+                $.ajax({
+                    url: rootDir + 'Ajax/GetProvincesByCountry',
+                    type: 'POST',
+                    data: { "id": id },
+                    dataType: "json",
+                    success: function (data) {
+                        $("option[value='-2']").remove();
+                        $('#ddlProvinces').empty()
+                        $.each(data, function (key, value) {
+                            $("#ddlProvinces").append($("<option></option>").val(value.Value).html(value.Text));
+                        });
+
+                        if (data.length == 0) {
+                            $("#StateProvince").show();
+                            $(".ddlProvinces").hide();
+                        }
+                    }
+                });
+            });
+
+            if ($("#ddlCountry").val() == 185 || $("#ddlCountry").val() == 40) {
+                $("#StateProvince").hide();
+                $(".ddlProvinces").show();
+            } else {
+                $("#StateProvince").show();
+                $(".ddlProvinces").hide();
+            }
+        });
+    </script>
+}
+
+

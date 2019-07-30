@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SDGAdmin.Models.CTPaymentUser
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">CT Payment</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+<section class="panel">
+    <div class="panel-heading">
+        <h3>Add New User for CTPayment</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="margin-bottom-50">
+                    <h4>User Details</h4>
+                    <br />
+                    <!-- Horizontal Form -->
+                    <form action="@Url.Action("Index")" method="post" role="form" class="form-horizontal" id="jvalidate-adduser" autocomplete="off">
+                        <div style="color: red;">
+                            @Html.ValidationSummary()
+                            @Html.Hidden("rId", "")
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-control-label">Name</label>
+                                @Html.TextBoxFor(m => m.Name, new { @placeholder = "Name", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row">                           
+                            <div class="col-md-6">
+                                <label class="form-control-label">Email</label>
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @class = "form-control" })
+                            </div>
+                        </div>                        
+                       
+                        <div class="form-actions">
+                            <div class="form-group row">
+                                <div class="col-md-3 pull-left">
+                                    <button class="btn btn-default">Clear Form</button>
+                                </div>
+                                <div class="col-md-9 ">
+                                    <input type="button" id="btnSubmit" class="btn width-150 btn-primary pull-right" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Horizontal Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#merchantMenu").addClass("active");
+            $("#merchantSubmenu").addClass("active");
+            $("#merchantSubRegister").addClass("active");
+
+            $("#btnSubmit").click(function () {
+                $("#jvalidate-adduser").submit();
+            });
+
+            $("#close").click(function () {
+            });
+
+            $(this).bind('input propertychange', function () {
+                //your code here
+            });
+
+        });
+    </script>
+}
+
+

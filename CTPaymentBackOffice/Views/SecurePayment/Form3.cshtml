@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Secure Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model CTPaymentBackOffice.Models.PartnerModel
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="@Url.Action("Index", "Form3")">Home</a></li>
+    <li><a href="#">Secure Payment</a></li>
+    <li class="active">Form 3</li>
+</ul>
+<!-- PAGE CONTENT WRAPPER -->
+<div class="page-content-wrap">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="@Url.Action("Form3")" method="post" role="form" class="form-horizontal" id="jvalidate" autocomplete="off">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Secure Payment Form</strong></h3>
+                        <div style="color: red;">
+                            <br />
+                            <br />
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <h3 class="panel-title"><strong>The Payment will be made to:</strong> Hybrid Payment Demo</h3>
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label class="col-md-3 control-label">Total Amount</label>
+                                    <div class="col-md-9">
+                                      1,000.00
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Credit Card Number</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(m => m.CompanyName, new { @placeholder = "Credit Card Number", @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Expiration Date</label>
+                                     <div class="col-md-2">
+                                        @Html.TextBoxFor(m => m.User.FirstName, new { @placeholder = "Month", @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-2">
+
+                                        @Html.TextBoxFor(m => m.User.MiddleName, new { @placeholder = "Year", @class = "form-control" })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Email Address</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(m => m.MDR, new { @placeholder = "Email Address", @class = "form-control" })
+                                        <span class="help-block">Transaction Confirmation</span>
+                                    </div>
+                                    
+                                </div>
+
+                                 <div class="form-group">
+                                    <label class="col-md-3 control-label">Verification Code</label>
+                                    <div class="col-md-9">
+                                        @Html.TextBoxFor(m => m.MDR, new { @placeholder = "Verification Code", @class = "form-control" })                                       
+                                    </div>
+                                    
+                                </div>
+
+                                <br />
+                                <div class="form-group">
+                                   <label class="col-md-5 control-label">You have 7:45 left to make your payment</label>                                   
+                                </div>
+
+                                 <div class="form-group">
+                                     <img src ='/img/logo-hybrid.png' />                           
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="panel-footer">
+                        <input type="button" id="clearForm" class="btn btn-default" value="Clear Form">
+                        <button class="btn btn-primary pull-right">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT WRAPPER -->
+@section scripts {
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-file-input.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/bootstrap/bootstrap-select.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/tagsinput/jquery.tagsinput.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/jquery-validation/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/validation.js")"></script>
+    <!-- END THIS PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#partnerMenu").addClass("active");
+            $("#partnerRegister").addClass("active");
+
+            $('#clearForm').click(function () {
+                $("input[type=text]").val("");
+                $("input[type=password]").val("");
+            });
+        });
+    </script>
+}

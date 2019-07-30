@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Update Merchant Boarding";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Merchant Management</li>
+</ul>
+<!-- PAGE TITLE -->
+<div class="page-title">
+    <h2><span class="fa fa-arrow-circle-o-left"></span>Merchant Management</h2>
+</div>
+<!-- END PAGE TITLE -->
+<!-- PAGE CONTENT WRAPPER -->
+@Html.Hidden("hdnParentType", SDGBackOffice.CurrentUser.ParentType)
+<div class="page-content-wrap">
+    @Html.Hidden("success", (object)ViewBag.Success)
+    @Html.Hidden("outdated", (object)ViewBag.Outdated)
+    <div class="row">
+        <div class="col-md-12">
+            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner)
+            {
+                <div class="form-group">
+                    <h4>Select Reseller:</h4>
+                    <div class="col-md-3 ">
+                        @Html.DropDownList("ddlresellers", (List<SelectListItem>)ViewBag.Resellers, new { @class = "form-control pull-left" })
+                    </div>
+                </div>
+            }
+            <br />
+            <br />
+            <!-- START SIMPLE DATATABLE -->
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Update Bulk Merchant</h3>
+                        <div style="display:inline-grid;">
+                            <a href="#" class="btn btn-info pull-right panel-hide" id="btn">Get All Merchant ID</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table" id="MerchantsTbl">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="chk" name="chk" /></th>
+                                    <th>Merchant Name</th>
+                                    <th>Association</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END SIMPLE DATATABLE -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="message-box message-box-success animated fadeIn" id="message-box-success">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+            <div class="mb-content">
+                <p id="errMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+            <div class="mb-content">
+                <p id="errorMsg" style="font-size: large"></p>
+            </div>
+            <div class="mb-footer">
+                <button id="close" class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PAGE CONTENT WRAPPER -->
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#merchantBulk").addClass("active");
+
+            document.getElementById('value').value = "merchant";
+            if (document.getElementById('hdnParentType').value == 'Reseller') {
+                $(".panel-hide").css('display', 'none');
+            }
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                $("#message-box-success").show();
+                $("#message-box-success").fadeOut(1500);
+            }
+
+            var strOutdated = document.getElementById('outdated').value;
+            if (strOutdated != "") {
+                $("#errorMsg").text(strOutdated);
+                $("#message-box-danger").show();
+                $("#message-box-danger").fadeOut(2500);
+            }
+
+            if (document.getElementById('ddlresellers').value != 0) {
+                refreshMerchantsTable(document.getElementById('ddlresellers').value);
+            } else {
+                refreshUpdateMerchantBulkBoarding(0);
+            }
+
+            $("#ddlresellers").on("change", function () {
+                var id = document.getElementById('ddlresellers').value;
+                refreshUpdateMerchantBulkBoarding(id);
+            });
+
+            var strErr = '@(TempData["NeedsUpdate"])';
+            if (strErr != "") {
+                $("#errMsg").text(strErr);
+                $("#message-box-danger").show();
+            }
+
+            $("#close").click(function () {
+                $("#message-box-danger").hide();
+            });
+
+            $('#btn').click(function () {
+                var dataArr = [];
+                $('input:checked').each(function () {
+                    dataArr.push($(this).val());
+                });
+
+                alert(dataArr);
+                window.location = '/MerchantBulkUpload/GetAllMerchantsToBeUpdated?id=' + dataArr;
+            });
+
+        });
+    </script>
+}

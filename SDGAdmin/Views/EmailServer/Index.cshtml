@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li class="active">Email Server Management</li>
+</ul>
+
+<div class="swal-btn-success"></div>
+<div class="swal-btn-cancel"></div>
+
+
+<section class="page-content">
+    <div class="page-content-inner">
+        <section class="panel">
+            <div class="panel-heading">
+                <h3>Select a Partner from the List to Create an Email Server</h3>
+            </div>
+            @Html.Hidden("success", (object)ViewBag.Success)
+            <div class="pull-right" id="dvActionKeys">
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("Create", "EmailServer")" onclick="redirectAction(this);">Create Email Server for this Partner ?</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("EmailServers", "EmailServer")" onclick="redirectActionwithId(this);">View Email Server for this Partner ?</a>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="margin-bottom-50">
+
+                            <table class="table table-inverse nowrap" id="partnersTbl" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Partner Name</th>
+                                        <th>Primary Contact Number</th>
+                                        <th>Location</th>
+                                        <th>Association</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End  -->
+    </div>
+</section>
+
+
+@section scripts {
+    <script type='text/javascript' src='@Url.Content("~/js/backoffice.js")'></script>
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='@Url.Content("~/js/plugins/icheck/icheck.min.js")'></script>
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/js/plugins/datatables/jquery.dataTables.min.js")"></script>
+    <!-- END PAGE PLUGINS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("select").each(function () { this.selectedIndex = 0 });
+
+            $("#featuresMenu").addClass("active");
+            $("#featureEmailServer").addClass("active");
+            $(".page-content").css("height", "100%");
+
+            refreshPartnersTable();
+
+            var strSuccess = document.getElementById('success').value;
+            if (strSuccess != "") {
+                $("#errMsg").text(strSuccess);
+                getModal(0, strSuccess);
+            }
+
+            $("#dvActionKeys").hide();
+
+        });
+    </script>
+
+}
