@@ -290,11 +290,10 @@ namespace SDGBackOffice.Controllers
 
                     var provinces = _refRepo.GetAllProvinces();
 
-                    if ((country == "Philippines") || country == "Philippine")
-                    {
-                        merchant.CountryId = 185;
-                        merchant.StateProvince = provinces[80].ProvinceName;
-                        isoCode = provinces[80].IsoCode;
+                    if ((country == "Philippines") || country == "Philippine") {
+                         merchant.User.CountryId = 1;
+                         merchant.User.StateProvince = "Metro Manila";//provinces[80].ProvinceName;
+                         isoCode = "000";//provinces[80].IsoCode;
                     }
                     else
                     {
@@ -308,9 +307,9 @@ namespace SDGBackOffice.Controllers
 
                     if ((country == "Philippines") || country == "Philippine")
                     {
-                        merchant.User.CountryId = 185;
-                        merchant.User.StateProvince = provinces[80].ProvinceName;
-                        isoCode = provinces[80].IsoCode;
+                        merchant.User.CountryId = 1;
+                        merchant.User.StateProvince = "Metro Manila";//provinces[80].ProvinceName;
+                        isoCode = "000";//provinces[80].IsoCode;
                     }
                     else
                     {
@@ -353,7 +352,7 @@ namespace SDGBackOffice.Controllers
                             Address = merchant.Address,
                             City = merchant.City,
                             StateProvince = merchant.StateProvince,
-                            CountryId = merchant.CountryId,
+                            CountryId = 1,
                             ZipCode = merchant.ZipCode,
                             PrimaryContactNumber = merchant.PrimaryContactNumber,
                             Fax = merchant.Fax,

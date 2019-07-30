@@ -129,7 +129,7 @@ namespace SDGBackOffice.Controllers
                 {
                     CompanyName = p.Partner.CompanyName,
                     PartnerId = p.Partner.PartnerId
-                }
+                }, ResellerId = p.ResellerId
             }).ToList();
 
             return Json(new { draw = data.sEcho, recordsTotal = totalRecords, recordsFiltered = totalRecords, data = resellerModel });

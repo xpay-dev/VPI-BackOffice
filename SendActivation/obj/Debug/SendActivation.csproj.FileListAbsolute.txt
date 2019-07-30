@@ -21,3 +21,16 @@ E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SendActivation\obj\
 E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SendActivation\obj\Debug\SendActivation.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SendActivation\obj\Debug\SendActivation.dll
 E:\Users\Gabby Peneyra\source\repos\BackOffice\SDGBackOffice\SendActivation\obj\Debug\SendActivation.pdb
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Debug\SendActivation.dll.config
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Debug\SendActivation.dll
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Debug\SendActivation.pdb
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Debug\System.Net.Http.Extensions.dll
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Debug\System.Net.Http.Primitives.dll
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Debug\System.Net.Http.Extensions.xml
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Debug\System.Net.Http.Primitives.xml
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Debug\SendActivation.csproj.App.config
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Debug\SendActivation.csprojAssemblyReference.cache
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Debug\SendActivation.csproj.CoreCompileInputs.cache
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Debug\SendActivation.csproj.CopyComplete
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Debug\SendActivation.dll
+E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Debug\SendActivation.pdb
