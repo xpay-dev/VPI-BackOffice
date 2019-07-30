@@ -1,1 +1,1 @@
-# VPI-BackOffice
+# Sample application
