@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\Users\Gabby Peneyra\source\repos\Publish\V2\Admin\</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\From Hybrid\ToDeploy\Admin</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="assets/common/css/main.min.css">
@@ -7777,13 +7777,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/07/2018 08:39:30</publishTime>
     </File>
     <File Include="bin/CTPayment.dll">
-      <publishTime>07/24/2019 06:40:11</publishTime>
+      <publishTime>09/12/2019 06:41:05</publishTime>
     </File>
     <File Include="bin/CTPayment.dll.config">
       <publishTime>07/22/2019 13:31:57</publishTime>
     </File>
     <File Include="bin/CTPayment.pdb">
-      <publishTime>07/24/2019 06:40:11</publishTime>
+      <publishTime>09/12/2019 06:41:05</publishTime>
     </File>
     <File Include="bin/CTPaymentUtilities.dll">
       <publishTime>07/22/2019 13:32:05</publishTime>
@@ -7828,13 +7828,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:23</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.dll">
-      <publishTime>07/24/2019 06:40:17</publishTime>
+      <publishTime>09/12/2019 06:39:56</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.dll.config">
-      <publishTime>07/24/2019 06:20:43</publishTime>
+      <publishTime>09/12/2019 06:39:56</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.pdb">
-      <publishTime>07/24/2019 06:40:17</publishTime>
+      <publishTime>09/12/2019 06:39:56</publishTime>
     </File>
     <File Include="bin/HPA_ISO8583.dll">
       <publishTime>06/08/2017 09:56:37</publishTime>
@@ -7906,37 +7906,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:23</publishTime>
     </File>
     <File Include="bin/SDGAdmin.dll">
-      <publishTime>07/24/2019 06:51:43</publishTime>
+      <publishTime>09/12/2019 06:41:11</publishTime>
     </File>
     <File Include="bin/SDGAdmin.pdb">
-      <publishTime>07/24/2019 06:51:43</publishTime>
+      <publishTime>09/12/2019 06:41:11</publishTime>
     </File>
     <File Include="bin/SDGDAL.dll">
-      <publishTime>07/24/2019 06:40:08</publishTime>
+      <publishTime>09/12/2019 06:39:54</publishTime>
     </File>
     <File Include="bin/SDGDAL.dll.config">
-      <publishTime>07/24/2019 06:40:06</publishTime>
+      <publishTime>09/12/2019 06:39:49</publishTime>
     </File>
     <File Include="bin/SDGDAL.pdb">
-      <publishTime>07/24/2019 06:40:08</publishTime>
+      <publishTime>09/12/2019 06:39:54</publishTime>
     </File>
     <File Include="bin/SDGUtil.dll">
-      <publishTime>07/24/2019 06:40:11</publishTime>
+      <publishTime>09/12/2019 06:39:55</publishTime>
     </File>
     <File Include="bin/SDGUtil.dll.config">
-      <publishTime>07/24/2019 06:40:09</publishTime>
+      <publishTime>09/12/2019 06:39:54</publishTime>
     </File>
     <File Include="bin/SDGUtil.pdb">
-      <publishTime>07/24/2019 06:40:11</publishTime>
+      <publishTime>09/12/2019 06:39:55</publishTime>
     </File>
     <File Include="bin/SendActivation.dll">
-      <publishTime>07/24/2019 06:37:18</publishTime>
+      <publishTime>09/12/2019 06:41:04</publishTime>
     </File>
     <File Include="bin/SendActivation.dll.config">
-      <publishTime>07/24/2019 06:14:06</publishTime>
+      <publishTime>09/12/2019 06:41:04</publishTime>
     </File>
     <File Include="bin/SendActivation.pdb">
-      <publishTime>07/24/2019 06:37:18</publishTime>
+      <publishTime>09/12/2019 06:41:04</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>07/22/2019 13:32:06</publishTime>
@@ -8545,7 +8545,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:06</publishTime>
     </File>
     <File Include="js/backoffice.js">
-      <publishTime>07/22/2019 13:32:06</publishTime>
+      <publishTime>09/11/2019 07:45:37</publishTime>
     </File>
     <File Include="js/blockUI/jquery.blockUI.js">
       <publishTime>07/22/2019 13:32:06</publishTime>
@@ -10018,7 +10018,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:02</publishTime>
     </File>
     <File Include="Views/Merchants/Index.cshtml">
-      <publishTime>07/22/2019 13:32:02</publishTime>
+      <publishTime>09/11/2019 07:30:23</publishTime>
     </File>
     <File Include="Views/Merchants/MerchantBulkBoarding.cshtml">
       <publishTime>07/22/2019 13:32:02</publishTime>
@@ -10048,7 +10048,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:02</publishTime>
     </File>
     <File Include="Views/MIDs/Index.cshtml">
-      <publishTime>07/22/2019 13:32:02</publishTime>
+      <publishTime>09/11/2019 07:33:10</publishTime>
     </File>
     <File Include="Views/MIDs/MidsAssign.cshtml">
       <publishTime>07/22/2019 13:32:02</publishTime>
@@ -10198,7 +10198,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:02</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/24/2019 06:51:47</publishTime>
+      <publishTime>09/12/2019 06:41:15</publishTime>
     </File>
   </ItemGroup>
 </Project>

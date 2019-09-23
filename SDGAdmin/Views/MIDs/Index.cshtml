@@ -58,7 +58,7 @@
                 <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsUpdateInfo")" onclick="redirectAction(this);">Update MID Info</a>
                 <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsViewInfo")" onclick="redirectAction(this);">View MID Info</a>
                 <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("RemoveAssignedMid")" onclick="redirectActionMidRemove(this);">View/Remove MID</a>
-                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsAssign")" onclick="redirectActionMidAssign(this);">Assign MID</a>
+                <a href="#" class="btn btn-primary margin-inline" data-link="@Url.Action("MidsAssign")" onclick="redirectActionEncMidAssign(this);">Assign MID</a>
             </div>
 
             <div class="panel-body">
@@ -152,7 +152,7 @@
             });
 
             $.ajax({
-                url: rootDir + 'Ajax/GetReseller',
+                url: rootDir + 'Ajax/EncGetReseller',
                 type: 'POST',
                 data: { "pId": id },
                 dataType: "json",
@@ -165,7 +165,7 @@
 
                     if (data.length == 1) {
                         $.ajax({
-                            url: rootDir + 'Ajax/GetMerchantsByReseller',
+                            url: rootDir + 'Ajax/EncGetMerchantsByReseller',
                             type: 'POST',
                             data: { "rId": $("#ddlresellers").val() },
                             dataType: "json",

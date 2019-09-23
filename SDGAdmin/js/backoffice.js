@@ -585,6 +585,11 @@ function redirectActionwithId(obj) {
         window.location = obj.getAttribute("data-link") + "?id=" + chosenI;
 }
 
+function redirectActionwithEncId(obj) {
+    if (chosenI != '')
+        window.location = obj.getAttribute("data-link") + "?id=" + chosenI;
+}
+
 function redirectActionwithmId(obj) {
     if (chosenI > 0)
         window.location = obj.getAttribute("data-link") + "?mId=" + chosenI;
@@ -600,6 +605,13 @@ function redirectActionMidAssign(obj) {
     var mId = document.getElementById('ddlmerchants').value;
 
     if (chosenI > 0)
+        window.location = obj.getAttribute("data-link") + "?id=" + chosenI + "&" + "mId=" + mId + "&" + "cId=" + cid;
+}
+
+function redirectActionEncMidAssign(obj) {
+    var mId = document.getElementById('ddlmerchants').value;
+
+    if (chosenI != '')
         window.location = obj.getAttribute("data-link") + "?id=" + chosenI + "&" + "mId=" + mId + "&" + "cId=" + cid;
 }
 
@@ -1405,14 +1417,14 @@ function refreshMidsTable(mId) {
         "bPaginate": true,
         "columns": [
             {
-                data: "CardTypeId", "render": function (data, type, full, meta) {
+                data: "EncryptedCardTypeId", "render": function (data, type, full, meta) {
 
                     cid = data;
                     return data;
                 }
             },
             {
-                data: "MIDId", "render": function (data, type, full, meta) {
+                data: "EncryptedMIDId", "render": function (data, type, full, meta) {
                     var renderMe = "<input cid='" + cid + "' id='radio' name='radio' type='radio' data-value='" + data + "' onclick='readyForActionAssignMid(this);' />";
                     return renderMe;
                 }

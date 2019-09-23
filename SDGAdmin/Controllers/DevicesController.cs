@@ -139,7 +139,7 @@ namespace SDGAdmin.Controllers
                     return HttpNotFound();
                 }
 
-                var device = _deviceRepo.GetDetailsByMasterDeviceId(Convert.ToInt32(Utility.Decrypt(id)));
+                var device = _deviceRepo.GetDetailsByMasterDeviceId(Convert.ToInt32(id));
 
                 var flowtype = _refRepo.GetDeviceFlowType();
 

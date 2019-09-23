@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\Users\Gabby Peneyra\source\repos\Publish\V2\SW\</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\From Hybrid\ToDeploy\WS</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Crypto.CryptoManager.dll">
@@ -22,13 +22,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:13</publishTime>
     </File>
     <File Include="bin/DSPREADQPosLayer.exe">
-      <publishTime>07/24/2019 06:14:12</publishTime>
+      <publishTime>09/19/2019 08:23:48</publishTime>
     </File>
     <File Include="bin/DSPREADQPosLayer.exe.config">
       <publishTime>07/22/2019 13:32:00</publishTime>
     </File>
     <File Include="bin/DSPREADQPosLayer.pdb">
-      <publishTime>07/24/2019 06:14:12</publishTime>
+      <publishTime>09/19/2019 08:23:48</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>07/22/2019 13:32:12</publishTime>
@@ -37,13 +37,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:12</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.dll">
-      <publishTime>07/24/2019 06:27:07</publishTime>
+      <publishTime>09/19/2019 08:23:53</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.dll.config">
-      <publishTime>07/24/2019 06:20:43</publishTime>
+      <publishTime>09/19/2019 08:23:53</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.pdb">
-      <publishTime>07/24/2019 06:27:07</publishTime>
+      <publishTime>09/19/2019 08:23:53</publishTime>
     </File>
     <File Include="bin/HPA_ISO8583.dll">
       <publishTime>07/22/2019 13:32:13</publishTime>
@@ -79,34 +79,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2017 09:56:37</publishTime>
     </File>
     <File Include="bin/RamblerLayer1.exe">
-      <publishTime>07/24/2019 06:14:11</publishTime>
+      <publishTime>09/19/2019 08:23:48</publishTime>
     </File>
     <File Include="bin/RamblerLayer1.exe.config">
-      <publishTime>07/24/2019 06:14:06</publishTime>
+      <publishTime>09/19/2019 08:23:47</publishTime>
     </File>
     <File Include="bin/SDGDAL.dll">
-      <publishTime>07/24/2019 06:20:26</publishTime>
+      <publishTime>09/19/2019 08:23:49</publishTime>
     </File>
     <File Include="bin/SDGDAL.dll.config">
-      <publishTime>07/24/2019 06:20:24</publishTime>
+      <publishTime>09/19/2019 08:23:47</publishTime>
     </File>
     <File Include="bin/SDGDAL.pdb">
-      <publishTime>07/24/2019 06:20:26</publishTime>
+      <publishTime>09/19/2019 08:23:49</publishTime>
     </File>
     <File Include="bin/SDGUtil.dll">
-      <publishTime>07/24/2019 06:20:42</publishTime>
+      <publishTime>09/19/2019 08:23:52</publishTime>
     </File>
     <File Include="bin/SDGUtil.dll.config">
-      <publishTime>07/24/2019 06:20:39</publishTime>
+      <publishTime>09/19/2019 08:23:50</publishTime>
     </File>
     <File Include="bin/SDGUtil.pdb">
-      <publishTime>07/24/2019 06:20:42</publishTime>
+      <publishTime>09/19/2019 08:23:52</publishTime>
     </File>
     <File Include="bin/SDGWebService.dll">
-      <publishTime>07/24/2019 06:27:09</publishTime>
+      <publishTime>09/19/2019 08:26:16</publishTime>
     </File>
     <File Include="bin/SDGWebService.pdb">
-      <publishTime>07/24/2019 06:27:09</publishTime>
+      <publishTime>09/19/2019 08:26:16</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
       <publishTime>07/22/2019 13:32:13</publishTime>
@@ -139,13 +139,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:13</publishTime>
     </File>
     <File Include="bin/WisepadLayer.dll">
-      <publishTime>07/24/2019 06:20:39</publishTime>
+      <publishTime>09/19/2019 08:23:50</publishTime>
     </File>
     <File Include="bin/WisepadLayer.dll.config">
-      <publishTime>07/24/2019 06:18:41</publishTime>
+      <publishTime>09/19/2019 08:23:50</publishTime>
     </File>
     <File Include="bin/WisepadLayer.pdb">
-      <publishTime>07/24/2019 06:20:39</publishTime>
+      <publishTime>09/19/2019 08:23:50</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>07/22/2019 13:32:13</publishTime>
@@ -166,7 +166,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/24/2019 06:27:20</publishTime>
+      <publishTime>09/12/2019 06:39:58</publishTime>
     </File>
   </ItemGroup>
 </Project>
