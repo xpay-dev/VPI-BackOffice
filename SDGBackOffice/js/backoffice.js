@@ -1049,6 +1049,7 @@ function refreshUsersTable(parentId, parentTypeId) {
 function refreshReportsTable(pId, rId, mId, posId, bId, transTypeId, actionId, startDate, endDate) {
     var cardTypeId;
     var x;
+    var y;
     var currency;
     $('#transTbl').dataTable().fnDestroy();
 
@@ -1098,8 +1099,24 @@ function refreshReportsTable(pId, rId, mId, posId, bId, transTypeId, actionId, s
                 }
             },
             {
+                data: "TransType", render: function (data, type, full, meta) {
+                    y = data;
+                    if (data == 3) {
+                        data = "Manual Credit";
+                    } else if (data == 5) {
+                        data = "Credit";
+                    } else if (data == 4) {
+                        data = "Debit";
+                    } else if (data == 9) {
+                        data = "EMV";
+                    } 
+
+                    return data;
+                }
+            },
+            {
                 data: "TotalTransaction", render: function (data, type, full, meta) {
-                    var link = "<input type='button' data-cardtype='" + cardTypeId + "' data-currency='" + currency + "' data-value='" + x + "' value='View Transactions Details' id='" + tId + "' class='btn btn-default btn-rounded' onclick='onClickTransaction(this);' />";
+                    var link = "<input type='button' data-cardtype='" + cardTypeId + "' data-currency='" + currency + "' data-value='" + x + "' data-transtype='" + y + "' value='View Transactions Details' id='" + tId + "' class='btn btn-default btn-rounded' onclick='onClickTransaction(this);' />";
                     return link;
                 }
             },

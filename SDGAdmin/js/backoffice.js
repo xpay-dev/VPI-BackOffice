@@ -388,7 +388,7 @@ function registerRequestedMerchant(obj) {
 function onClickTransaction(obj) {
     var start = document.getElementById('datepickerstart').value;
     var end = document.getElementById('datepickerend').value;
-    var tType = obj.getAttribute("data-value");
+    var action = obj.getAttribute("data-value");
     var currency = obj.getAttribute("data-currency");
     var cardTypeId = obj.getAttribute("data-cardtype");
     var p = document.getElementById('ddlpartners').value;
@@ -396,7 +396,7 @@ function onClickTransaction(obj) {
     var m = document.getElementById('ddlmerchants').value;
     var b = document.getElementById('ddlbranches').value;
     var mp = document.getElementById('ddlpos').value;
-    var action = document.getElementById('ddlactions').value;
+    var tType = obj.getAttribute("data-tTrans");
 
     etType = tType;
     cType = cardTypeId;
@@ -1685,6 +1685,7 @@ function refreshUsersTable(parentId, parentTypeId) {
 function refreshReportsTable(pId, rId, mId, posId, bId, transTypeId, actionId, startDate, endDate) {
     var cardTypeId;
     var x;
+    var y;
     var currency;
     $('#transTbl').dataTable().fnDestroy();
 
@@ -1732,8 +1733,24 @@ function refreshReportsTable(pId, rId, mId, posId, bId, transTypeId, actionId, s
                 }
             },
             {
+                data: "TransType", render: function (data, type, full, meta) {
+                    y = data;
+                    if (data == 3) {
+                        data = "Manual";
+                    } else if (data == 4) {
+                        data = "Debit";
+                    } else if (data == 5) {
+                        data = "Credit";
+                    } else if (data == 9) {
+                        data = "EMV";
+                    } 
+
+                    return data;
+                }
+            },
+            {
                 data: "TotalTransaction", render: function (data, type, full, meta) {
-                    var link = "<input type='button' data-cardtype='" + cardTypeId + "' data-currency='" + currency + "' data-currency='" + currency + "' data-value='" + x + "' value='View Transactions Details' id='" + tId + "' class='btn btn-default btn-rounded' onclick='onClickTransaction(this);' />";
+                    var link = "<input type='button' data-cardtype='" + cardTypeId + "' data-currency='" + currency + "' data-currency='" + currency + "' data-value='" + x + "'  data-tTrans='" + y + "' value='View Transactions Details' id='" + tId + "' class='btn btn-default btn-rounded' onclick='onClickTransaction(this);' />";
                     return link;
                 }
             },
