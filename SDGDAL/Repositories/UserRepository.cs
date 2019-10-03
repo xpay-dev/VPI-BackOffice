@@ -18,8 +18,9 @@ namespace SDGDAL.Repositories
                 {
                     var acc = context.Accounts
                                      .Include("User")
-                                     .SingleOrDefault(a => a.Username == username
-                                                      && a.IsDeleted == false);
+                                     .Where(a => a.Username == username
+                                                      && a.IsDeleted == false)
+                                     .FirstOrDefault();
 
                     if (acc == null)
                     {

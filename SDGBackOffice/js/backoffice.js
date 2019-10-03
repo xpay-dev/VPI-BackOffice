@@ -300,7 +300,8 @@ function onClickTransaction(obj) {
     var start = document.getElementById('datepickerstart').value;
     var end = document.getElementById('datepickerend').value;
     var pId = document.getElementById('hdnpId').value;
-    var tType = obj.getAttribute("data-value");
+    var action = obj.getAttribute("data-value");
+    var tType = obj.getAttribute("data-tTrans");
     var currency = obj.getAttribute("data-currency");
     var cardTypeId = obj.getAttribute("data-cardtype");
     var p = document.getElementById('ddlpartners');
@@ -309,7 +310,7 @@ function onClickTransaction(obj) {
     
     var b = document.getElementById('ddlbranches');
     var mp = document.getElementById('ddlpos').value;
-    var action = document.getElementById('ddlactions').value;
+    //var action = document.getElementById('ddlactions').value;
 
     etType = tType;
     cType = cardTypeId;
@@ -1053,17 +1054,15 @@ function refreshReportsTable(pId, rId, mId, posId, bId, transTypeId, actionId, s
     var currency;
     $('#transTbl').dataTable().fnDestroy();
 
-    $('#transTbl').dataTable({
+    $('#transTbl').DataTable({
         "autoWidth": true,
         "scrollX": true,
         "fixedColumns": true,
         "bDestroy": true,
         "bProcessing": true,
         "bServerSide": true,
-        "bFilter": false,
         "sPaginationType": "full_numbers",
-        "bPaginate": false,
-        "bInfo": false,
+        "bPaginate": true,
         "columns": [
             {
                 data: "Currency", render: function (data, type, full, meta) {
@@ -1102,21 +1101,21 @@ function refreshReportsTable(pId, rId, mId, posId, bId, transTypeId, actionId, s
                 data: "TransType", render: function (data, type, full, meta) {
                     y = data;
                     if (data == 3) {
-                        data = "Manual Credit";
-                    } else if (data == 5) {
-                        data = "Credit";
+                        data = "Manual";
                     } else if (data == 4) {
                         data = "Debit";
+                    } else if (data == 5) {
+                        data = "Credit";
                     } else if (data == 9) {
                         data = "EMV";
-                    } 
+                    }
 
                     return data;
                 }
             },
             {
                 data: "TotalTransaction", render: function (data, type, full, meta) {
-                    var link = "<input type='button' data-cardtype='" + cardTypeId + "' data-currency='" + currency + "' data-value='" + x + "' data-transtype='" + y + "' value='View Transactions Details' id='" + tId + "' class='btn btn-default btn-rounded' onclick='onClickTransaction(this);' />";
+                    var link = "<input type='button' data-cardtype='" + cardTypeId + "' data-currency='" + currency + "' data-currency='" + currency + "' data-value='" + x + "'  data-tTrans='" + y + "' value='View Transactions Details' id='" + tId + "' class='btn btn-default btn-rounded' onclick='onClickTransaction(this);' />";
                     return link;
                 }
             },

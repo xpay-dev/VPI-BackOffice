@@ -11463,28 +11463,28 @@ namespace SDGDAL.Repositories {
                } else {
                     sql += " AND transactionattempts.DateReceived <= CAST('" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59.999' AS Datetime)";
                }
-               if (pId.HasValue && pId.Value != 0) {
+               if (pId.HasValue && pId.Value != 0 && pId.Value > 0) {
                     sql += " AND Resellers.PartnerId = CAST('" + pId.Value + "' AS Int)";
                }
-               if (rId.HasValue && rId.Value != 0) {
+               if (rId.HasValue && rId.Value != 0 && rId.Value > 0) {
                     sql += " AND Resellers.ResellerId = CAST('" + rId.Value + "' AS Int)";
                }
-               if (mId.HasValue && mId.Value != 0) {
+               if (mId.HasValue && mId.Value != 0 && mId.Value > 0) {
                     sql += " AND Merchants.MerchantId = CAST('" + mId.Value + "' AS Int)";
                }
-               if (bId.HasValue && bId.Value != 0) {
+               if (bId.HasValue && bId.Value != 0 && bId.Value > 0) {
                     sql += " AND MerchantBranchPOSs.MerchantBranchId = CAST('" + bId.Value + "' AS Int)";
                }
-               if (posId.HasValue && posId.Value != 0) {
+               if (posId.HasValue && posId.Value != 0 && posId.Value > 0) {
                     sql += " AND Transactions.MerchantPOSId = CAST('" + posId.Value + "' AS Int)";
                }
-               if (transTypeId.HasValue && transTypeId.Value != 0) {
+               if (transTypeId.HasValue && transTypeId.Value != 0 && transTypeId.Value > 0) {
                     sql += " AND transactions.TransactionEntryTypeId = CAST('" + transTypeId.Value + "' AS Int)";
                }
-               if (actionId.HasValue && actionId.Value != 0) {
+               if (actionId.HasValue && actionId.Value != 0 && actionId.Value > 0) {
                     sql += " AND transactionattempts.TransactionTypeId = CAST('" + actionId.Value + "' AS Int)";
                }
-               if (cardTypeId.HasValue && cardTypeId.Value != 0) {
+               if (cardTypeId.HasValue && cardTypeId.Value != 0 && cardTypeId.Value > 0) {
                     sql += " AND transactions.CardTypeId = CAST('" + cardTypeId.Value + "' AS Int)";
                }
                if (!string.IsNullOrEmpty(currencyName)) {

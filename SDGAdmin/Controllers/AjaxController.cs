@@ -1468,7 +1468,7 @@ namespace SDGAdmin.Controllers
                 null : t.TransactionSignature.FileData == null ?
                 ConvertImagetoBase64(t.TransactionSignature.Path + @"\" + t.TransactionSignature.FileName) : ToByteArray(t.TransactionSignature.FileData),
                 Notes = t.Notes
-            }).ToList();;
+            }).ToList();
 
             reportsModel = reportsModel.Where(ta => ta.Amount > 0 && ta.TransactionEntryTypeId == transTypeId && ta.Currency == currenyName).ToList();
 
