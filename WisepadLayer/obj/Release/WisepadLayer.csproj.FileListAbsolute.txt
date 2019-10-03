@@ -40,3 +40,23 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\R
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.pdb
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\WisepadLayer.dll.config
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\WisepadLayer.dll
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\WisepadLayer.pdb
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\SDGDAL.dll
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\System.Net.Http.Extensions.dll
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\System.Net.Http.Primitives.dll
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\EntityFramework.dll
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\Crypto.CryptoManager.dll
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\Dapper.dll
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\SDGDAL.pdb
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\SDGDAL.dll.config
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\System.Net.Http.Extensions.xml
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\System.Net.Http.Primitives.xml
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\EntityFramework.xml
+C:\Work\VPI-BackOffice\WisepadLayer\bin\Release\Dapper.xml
+C:\Work\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.csproj.App.config
+C:\Work\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.csprojAssemblyReference.cache
+C:\Work\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.csproj.CopyComplete
+C:\Work\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.dll
+C:\Work\VPI-BackOffice\WisepadLayer\obj\Release\WisepadLayer.pdb

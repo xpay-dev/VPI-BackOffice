@@ -72,3 +72,39 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.pdb
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGWebService.dll.config
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGWebService.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGWebService.pdb
+C:\Work\VPI-BackOffice\SDGWebService\bin\DSPREADQPosLayer.exe
+C:\Work\VPI-BackOffice\SDGWebService\bin\GatewayProcessor.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\JWT.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\NPOI.OOXML.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\PAYMAYA_ISO8583.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\RamblerLayer1.exe
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGDAL.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGUtil.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\Thx.Research.Security.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\WisepadLayer.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\System.Net.Http.Formatting.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\Dapper.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\NPOI.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\NPOI.OpenXmlFormats.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\NPOI.OpenXml4Net.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\ICSharpCode.SharpZipLib.dll
+C:\Work\VPI-BackOffice\SDGWebService\bin\DSPREADQPosLayer.pdb
+C:\Work\VPI-BackOffice\SDGWebService\bin\DSPREADQPosLayer.exe.config
+C:\Work\VPI-BackOffice\SDGWebService\bin\GatewayProcessor.pdb
+C:\Work\VPI-BackOffice\SDGWebService\bin\GatewayProcessor.dll.config
+C:\Work\VPI-BackOffice\SDGWebService\bin\RamblerLayer1.exe.config
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGDAL.pdb
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGDAL.dll.config
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGUtil.pdb
+C:\Work\VPI-BackOffice\SDGWebService\bin\SDGUtil.dll.config
+C:\Work\VPI-BackOffice\SDGWebService\bin\WisepadLayer.pdb
+C:\Work\VPI-BackOffice\SDGWebService\bin\WisepadLayer.dll.config
+C:\Work\VPI-BackOffice\SDGWebService\bin\System.Net.Http.Formatting.xml
+C:\Work\VPI-BackOffice\SDGWebService\bin\Dapper.xml
+C:\Work\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.csprojAssemblyReference.cache
+C:\Work\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.csproj.CopyComplete
+C:\Work\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.dll
+C:\Work\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.pdb

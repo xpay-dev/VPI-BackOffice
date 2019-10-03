@@ -56,3 +56,31 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Releas
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.pdb
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\SDGUtil.dll.config
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\SDGUtil.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\SDGUtil.pdb
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\Microsoft.Web.Infrastructure.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\Newtonsoft.Json.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\SDGDAL.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Net.Http.Extensions.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Net.Http.Formatting.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Net.Http.Primitives.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Web.Http.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Web.Http.WebHost.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\EntityFramework.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\Dapper.dll
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\SDGDAL.pdb
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\SDGDAL.dll.config
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\Newtonsoft.Json.xml
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Net.Http.Extensions.xml
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Net.Http.Formatting.xml
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Net.Http.Primitives.xml
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Web.Http.xml
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\System.Web.Http.WebHost.xml
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\EntityFramework.xml
+C:\Work\VPI-BackOffice\SGDUtil\bin\Release\Dapper.xml
+C:\Work\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csproj.App.config
+C:\Work\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csprojAssemblyReference.cache
+C:\Work\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csproj.CopyComplete
+C:\Work\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.dll
+C:\Work\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.pdb

@@ -1508,7 +1508,25 @@ namespace SDGWebService.WebserviceFunctions {
 
                          #endregion Transaction
                     } else if (request.POSWSRequest.SystemMode.ToUpper().Equals("TESTAPPROVED")) {
-                         response.POSWSResponse.Status = "Approved";
+                        var transaction = new SDGDAL.Entities.Transaction();
+                        var transactionAttempt = new SDGDAL.Entities.TransactionAttempt();
+                        var nTransaction = new SDGDAL.Entities.Transaction();
+                        nTransaction.CopyProperties(transaction);
+                        transactionAttemptId = transactionAttempt.TransactionAttemptId;
+
+                        transactionAttempt.AuthNumber = "XP-001";
+                        transactionAttempt.ReturnCode = "00";
+                        transactionAttempt.SeqNumber = "621814389248";
+                        transactionAttempt.TransNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                        transactionAttempt.BatchNumber = DateTime.Now.ToString("yyyyMMddhhmmss");
+                        transactionAttempt.DisplayReceipt = "123456987";
+                        transactionAttempt.DisplayTerminal = "0000005";
+                        transactionAttempt.DateReceived = DateTime.Now;
+                        transactionAttempt.PosEntryMode = 05;
+                        transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                        transactionAttempt.Notes = "API Offline Purchase Approved";
+
+                        response.POSWSResponse.Status = "Approved";
                          response.POSWSResponse.Message = "";
                          response.POSWSResponse.ErrNumber = "0";
                          response.POSWSResponse.UpdatePending = true;
@@ -1526,7 +1544,18 @@ namespace SDGWebService.WebserviceFunctions {
                          response.Tax2Rate = 0;
                          response.Total = request.CardDetails.Amount;
                          response.Tips = request.Tips;
-                    } else {
+
+                        response.CardType = "1";
+                        response.TraceNumber = transactionAttempt.TransNumber;
+                        response.TransactionEntryType = "9";
+                        response.TransactionType = "3";
+                        response.BatchNumber = transactionAttempt.BatchNumber;
+                        response.Currency = "1";
+
+
+
+
+                } else {
                          response.POSWSResponse.ErrNumber = "2101.10";
                          response.POSWSResponse.Status = "Declined";
                          response.POSWSResponse.Message = "Invalid System Mode";

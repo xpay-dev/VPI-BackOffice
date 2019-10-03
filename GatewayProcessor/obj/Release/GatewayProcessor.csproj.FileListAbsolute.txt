@@ -84,3 +84,45 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\o
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.pdb
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\GatewayProcessor.dll.config
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\GatewayProcessor.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\GatewayProcessor.pdb
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\CTPaymentUtilities.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\CT_EMV_CLASSES.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\HPA_ISO8583.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\Newtonsoft.Json.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\NPOI.OOXML.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\PAYMAYA_ISO8583.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\SDGDAL.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\SDGUtil.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Net.Http.Extensions.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Net.Http.Formatting.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Net.Http.Primitives.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Web.Http.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Web.Http.WebHost.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\Thx.Research.Security.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\WebApiDoodle.Net.Http.Formatting.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\EntityFramework.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\Crypto.CryptoManager.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\Dapper.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\NPOI.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\NPOI.OpenXmlFormats.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\NPOI.OpenXml4Net.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\SDGDAL.pdb
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\SDGDAL.dll.config
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\SDGUtil.pdb
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\SDGUtil.dll.config
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\Newtonsoft.Json.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Net.Http.Extensions.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Net.Http.Formatting.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Net.Http.Primitives.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Web.Http.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\System.Web.Http.WebHost.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\WebApiDoodle.Net.Http.Formatting.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\EntityFramework.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\bin\Release\Dapper.xml
+C:\Work\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csproj.App.config
+C:\Work\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csprojAssemblyReference.cache
+C:\Work\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csproj.CopyComplete
+C:\Work\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.dll
+C:\Work\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.pdb

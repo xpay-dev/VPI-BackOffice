@@ -16,3 +16,11 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\o
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.exe
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.pdb
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\bin\Release\DSPREADQPosLayer.exe.config
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\bin\Release\DSPREADQPosLayer.exe
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\bin\Release\DSPREADQPosLayer.pdb
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.csprojAssemblyReference.cache
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.Properties.Resources.resources
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.csproj.GenerateResource.cache
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.exe
+C:\Work\VPI-BackOffice\DSPREADQPosLayer\obj\Release\DSPREADQPosLayer.pdb
