@@ -1527,11 +1527,11 @@ namespace SDGWebService.WebserviceFunctions {
                         transactionAttempt.Notes = "API Offline Purchase Approved";
 
                         response.POSWSResponse.Status = "Approved";
-                         response.POSWSResponse.Message = "";
+                         response.POSWSResponse.Message = "X Approved";
                          response.POSWSResponse.ErrNumber = "0";
                          response.POSWSResponse.UpdatePending = true;
 
-                         response.AuthNumber = "5042158454";
+                         response.AuthNumber = "X"+DateTime.Now.ToString("yyyyMMddhhmmss"); 
                          response.SequenceNumber = "0015248456";
                          response.Timestamp = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString();
                          response.TransactionNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
@@ -1544,14 +1544,15 @@ namespace SDGWebService.WebserviceFunctions {
                          response.Tax2Rate = 0;
                          response.Total = request.CardDetails.Amount;
                          response.Tips = request.Tips;
-
-                        response.CardType = "1";
-                        response.TraceNumber = transactionAttempt.TransNumber;
-                        response.TransactionEntryType = "9";
-                        response.TransactionType = "3";
+                                       
+                        response.CardType = SDGUtil.Functions.ConvertCardTypeName(SDGUtil.Functions.GetCardType(request.CardDetails.CardNumber)).ToString();
+                        response.TraceNumber = SDGUtil.Functions.GenerateSystemTraceAudit();
+                        response.TransNumber = transactionAttempt.TransNumber;
+                        response.TransactionEntryType = Convert.ToInt32(SDGDAL.Enums.TransactionEntryType.EMV).ToString();
+                        response.TransactionType = "3"; 
                         response.BatchNumber = transactionAttempt.BatchNumber;
-                        response.Currency = "1";
-
+                        response.Currency = request.CardDetails.Currency;
+                    
 
 
 
