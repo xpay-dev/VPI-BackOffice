@@ -136,6 +136,12 @@ namespace SDGAdmin.Controllers
                     Value = "4",
                     Text = "Debit Transaction"
                 });
+                                        
+                ddlTransTypes.Add(new SelectListItem()
+                {
+                    Value = "9",
+                    Text = "EMV"
+                });
 
                 //ddlTransTypes.Add(new SelectListItem()
                 //{

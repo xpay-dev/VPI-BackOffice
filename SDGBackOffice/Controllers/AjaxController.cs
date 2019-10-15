@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -1217,55 +1218,34 @@ namespace SDGBackOffice.Controllers
         #region Transaction Credit
         [HttpPost]
         [CustomAttributes.SessionExpireFilter]
-        public JsonResult TransactionAttemptList(int? pId, int? rId, int? mId, int? posId, int? bId, int transTypeId, int actionId, DateTime? startDate, DateTime? endDate)
+        public async Task<JsonResult> TransactionAttemptList(int? pId, int? rId, int? mId, int? posId, int? bId, int transTypeId, int actionId, DateTime? startDate, DateTime? endDate)
         {
             try
             {
-                DataTableModel data = new DataTableModel(Request);
+                    DataTableModel data = new DataTableModel(Request);
 
-                int totalRecords = 0;
+                    int totalRecords = 0;
 
-                List<TransactionAttempt> transactionAttempts = new List<TransactionAttempt>();
-                if (posId.HasValue && posId.Value > 0)
-                {
-                    transactionAttempts = _transactionRepo.GetAllTransactionAttemptsbyPosId(transTypeId, actionId, posId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-                }
-                else if (bId.HasValue && bId.Value > 0)
-                {
-                    transactionAttempts = _transactionRepo.GetAllTransactionAttemptsbyBranchId(transTypeId, actionId, bId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-                }
-                else if (mId.HasValue && mId.Value > 0)
-                {
-                    transactionAttempts = _transactionRepo.GetAllTransactionAttemptsbyMerchantId(transTypeId, actionId, mId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-                }
-                else if (rId.HasValue && rId.Value > 0)
-                {
-                    transactionAttempts = _transactionRepo.GetAllTransactionAttemptsbyResellerId(transTypeId, actionId, rId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-                }
-                else if (pId.HasValue && pId.Value > 0)
-                {
-                    transactionAttempts = _transactionRepo.GetAllTransactionAttemptsbyPartnerId(transTypeId, actionId, pId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-                }
-                else
-                {
-                    transactionAttempts = _transactionRepo.GetAllTransactionAttemptsbyPosId(0, actionId, posId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-                }
+                    List<TransactionAttempt> transactionAttempts = new List<TransactionAttempt>();
 
-                var gTransactionAttempts = transactionAttempts.Where(t => t.Amount > 0).GroupBy(item => new { CardTypeId = item.Transaction.CardTypeId, CardType = item.Transaction.CardType.TypeName, TransactionTypeId = item.TransactionTypeId, CurrencyName = item.Transaction.Currency.CurrencyName }, item => item,
-                    (key, items) => new { CardTypeId = key.CardTypeId, CardType = key.CardType, TransactionType = key.TransactionTypeId, TransactionAttempts = items, Currency = key.CurrencyName });
+                    transactionAttempts = await _transactionRepo.ReportCentral(pId, rId, mId, posId, bId, 0, transTypeId, actionId, null, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0);
 
-                var reportsModel = gTransactionAttempts.Select(t => new
-                {
-                    CardTypeId = t.CardTypeId,
-                    CardType = t.CardType,
-                    Currency = t.Currency,
-                    TransactionTypeId = t.TransactionType,
-                    TotalAmount = t.TransactionAttempts.Sum(a => a.Amount),
-                    TotalCount = t.TransactionAttempts.Count()
-                }).Where(a => a.TotalAmount > 0);
+                    var gTransactionAttempts = transactionAttempts.Where(t => t.Amount > 0).GroupBy(item => new { CardTypeId = item.Transaction.CardTypeId, CardType = item.Transaction.CardType.TypeName, TransactionTypeId = item.TransactionTypeId, CurrencyName = item.Transaction.Currency.CurrencyName, TransType = item.Transaction.TransactionEntryTypeId }, item => item,
+                     (key, items) => new { CardTypeId = key.CardTypeId, CardType = key.CardType, TransactionType = key.TransactionTypeId, TransactionAttempts = items, Currency = key.CurrencyName, TransType = key.TransType });
 
-                return Json(new { draw = data.sEcho, recordsTotal = reportsModel.Count(), recordsFiltered = reportsModel.Count(), data = reportsModel });
-            }
+                    var reportsModel = gTransactionAttempts.Select(t => new
+                    {
+                         CardTypeId = t.CardTypeId,
+                         CardType = t.CardType,
+                         Currency = t.Currency,
+                         TransType = t.TransType,
+                         TransactionTypeId = t.TransactionType,
+                         TotalAmount = t.TransactionAttempts.Sum(a => a.Amount),
+                         TotalCount = t.TransactionAttempts.Count()
+                    }).Where(a => a.TotalAmount > 0);
+
+                    return Json(new { draw = data.sEcho, recordsTotal = reportsModel.Count(), recordsFiltered = reportsModel.Count(), data = reportsModel });
+               }
             catch (Exception ex)
             {
 
@@ -1275,41 +1255,19 @@ namespace SDGBackOffice.Controllers
 
         [HttpPost]
         [CustomAttributes.SessionExpireFilter]
-        public JsonResult TransactionList(int? pId, int? rId, int? mId, int? posId, int? bId, int cardTypeId, int transTypeId, int actionId, string currenyName, DateTime? startDate, DateTime? endDate)
+        public async Task<JsonResult> TransactionList(int? pId, int? rId, int? mId, int? posId, int? bId, int cardTypeId, int transTypeId, int actionId, string currenyName, DateTime? startDate, DateTime? endDate)
         {
-            DataTableModel data = new DataTableModel(Request);
+               DataTableModel data = new DataTableModel(Request);
+               //Image img = Bitmap.FromFile("" + "");
+               int totalRecords = 0;
 
-            int totalRecords = 0;
+               List<TransactionAttempt> transactionAttempts = new List<TransactionAttempt>();
 
-            List<TransactionAttempt> transactionAttempts = new List<TransactionAttempt>();
+               transactionAttempts = await _transactionRepo.ReportCentral(pId, rId, mId, posId, bId, cardTypeId, transTypeId, actionId, currenyName, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0);
 
-            if (posId.HasValue && posId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyPosId(cardTypeId, transTypeId, actionId, currenyName, posId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (bId.HasValue && bId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyBranchId(cardTypeId, transTypeId, actionId, currenyName, bId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (mId.HasValue && mId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyMerchantId(cardTypeId, transTypeId, actionId, currenyName, mId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (rId.HasValue && rId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyResellerId(cardTypeId, transTypeId, actionId, currenyName, rId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (pId.HasValue && pId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyPartnerId(cardTypeId, transTypeId, actionId, currenyName, pId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyPosId(0, 0, actionId, currenyName, posId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
 
-            var reportsModel = transactionAttempts.Select(t => new
-            {
+               var reportsModel = transactionAttempts.Select(t => new
+               {  
                 TransactionId = t.Transaction.TransactionId,
                 CardType = t.Transaction.CardType.TypeName,
                 TransactionEntryTypeId = t.Transaction.TransactionEntryTypeId,
@@ -1335,72 +1293,50 @@ namespace SDGBackOffice.Controllers
                 TraceNumber = t.TransNumber,
                 ImageSource = t.TransactionSignature == null ?
                 null : t.TransactionSignature.FileData == null ?
-                ConvertImagetoBase64(t.TransactionSignature.Path + @"\" + t.TransactionSignature.FileName) : ToByteArray(t.TransactionSignature.FileData)
+                ConvertImagetoBase64(t.TransactionSignature.Path + @"\" + t.TransactionSignature.FileName) : ToByteArray(t.TransactionSignature.FileData),
+                Notes = t.Notes
+               }).ToList();
 
-            }).Where(ta => ta.Amount > 0 && ta.TransactionTypeId == transTypeId && ta.Currency == currenyName).ToList();
+               reportsModel = reportsModel.Where(ta => ta.Amount > 0 && ta.TransactionEntryTypeId == transTypeId && ta.Currency == currenyName).ToList();
 
-            return Json(new { draw = data.sEcho, recordsTotal = reportsModel.Count, recordsFiltered = totalRecords, data = reportsModel });
+               return Json(new { draw = data.sEcho, recordsTotal = reportsModel.Count, recordsFiltered = totalRecords, data = reportsModel });
         }
 
         [HttpPost]
         [CustomAttributes.SessionExpireFilter]
-        public JsonResult TransactionList2(int? pId, int? rId, int? mId, int? posId, int? bId, int cardTypeId, int transTypeId, int actionId, string currenyName, DateTime? startDate, DateTime? endDate)
+        public async Task<JsonResult> TransactionList2(int? pId, int? rId, int? mId, int? posId, int? bId, int cardTypeId, int transTypeId, int actionId, string currenyName, DateTime? startDate, DateTime? endDate)
         {
-            DataTableModel data = new DataTableModel(Request);
+               DataTableModel data = new DataTableModel(Request);
 
-            data.sSortDir_0 = "desc";
+               data.sSortDir_0 = "desc";
 
-            data.iDisplayStart = 0;
+               data.iDisplayStart = 0;
 
-            data.iDisplayLength = int.MaxValue;
+               data.iDisplayLength = int.MaxValue;
 
-            int totalRecords = 0;
+               int totalRecords = 0;
 
-            List<TransactionAttempt> transactionAttempts = new List<TransactionAttempt>();
+               List<TransactionAttempt> transactionAttempts = new List<TransactionAttempt>();
 
-            if (posId.HasValue && posId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyPosId2(cardTypeId, transTypeId, actionId, currenyName, posId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (bId.HasValue && bId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyBranchId2(cardTypeId, transTypeId, actionId, currenyName, bId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (mId.HasValue && mId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyMerchantId2(cardTypeId, transTypeId, actionId, currenyName, mId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (rId.HasValue && rId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyResellerId2(cardTypeId, transTypeId, actionId, currenyName, rId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else if (pId.HasValue && pId.Value > 0)
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyPartnerId2(cardTypeId, transTypeId, actionId, currenyName, pId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
-            else
-            {
-                transactionAttempts = _transactionRepo.GetAllTransactionbyPosId2(0, 0, actionId, currenyName, posId.Value, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0, out totalRecords);
-            }
+               transactionAttempts = await _transactionRepo.ReportCentral(pId, rId, mId, posId, bId, cardTypeId, transTypeId, actionId, currenyName, startDate, endDate, data.sSearch, data.iDisplayStart, data.iDisplayLength, "TransactionId", data.sSortDir_0);
 
-            var reportsModel = transactionAttempts.Where(ta => ta.TransactionTypeId == transTypeId
-                && ta.Transaction.Currency.CurrencyName == currenyName).Select(t => new
-                {
-                    NameOnCard = t.Transaction.NameOnCard,
-                    TotalAmount = t.Transaction.Currency.CurrencyCode + " " + t.Amount.ToString("N2"),
-                    Amount = t.Amount,
-                    TransNumber = t.TransactionId + "-" + t.TransactionAttemptId,
-                    Reference = t.Reference,
-                    POS = t.Transaction.MerchantPOS.MerchantPOSName,
-                    Location = t.Transaction.MerchantPOS.MerchantBranch.MerchantBranchName,
-                    MerchantName = t.Transaction.MerchantPOS.MerchantBranch.Merchant.MerchantName,
-                    DateReceived = t.DateReceived.ToString("D"),
-                    POSEntryMode = t.PosEntryMode,
-                    AuthNumber = t.AuthNumber
+               var reportsModel = transactionAttempts.Where(ta => ta.Transaction.TransactionEntryTypeId == transTypeId
+                && ta.Transaction.Currency.CurrencyName == currenyName).Select(t => new {
+                     NameOnCard = t.Transaction.NameOnCard,
+                     TotalAmount = t.Transaction.Currency.CurrencyCode + " " + t.Amount.ToString("N2"),
+                     Amount = t.Amount,
+                     TransNumber = t.TransactionId + "-" + t.TransactionAttemptId,
+                     Reference = t.Reference,
+                     POS = t.Transaction.MerchantPOS.MerchantPOSName,
+                     Location = t.Transaction.MerchantPOS.MerchantBranch.MerchantBranchName,
+                     MerchantName = t.Transaction.MerchantPOS.MerchantBranch.Merchant.MerchantName,
+                     DateReceived = t.DateReceived.ToString("D"),
+                     POSEntryMode = t.PosEntryMode,
+                     AuthNumber = t.AuthNumber
                 }).Where(t => t.Amount > 0).ToList();
 
 
-            return Json(reportsModel);
+               return Json(reportsModel);
         }
         #endregion
 
