@@ -19,7 +19,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\bin\Release\System.Net.Http.Primitives.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Release\SendActivation.csproj.App.config
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Release\SendActivation.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Release\SendActivation.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Release\SendActivation.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Release\SendActivation.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SendActivation\obj\Release\SendActivation.pdb

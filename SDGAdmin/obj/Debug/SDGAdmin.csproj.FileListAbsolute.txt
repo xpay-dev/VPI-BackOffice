@@ -277,7 +277,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\bin\zh-Ha
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\obj\Debug\SDGAdmin.csprojAssemblyReference.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\obj\Debug\SDGAdmin.Properties.Resources.resources
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.GenerateResource.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\obj\Debug\SDGAdmin.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\obj\Debug\SDGAdmin.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGAdmin\obj\Debug\SDGAdmin.pdb

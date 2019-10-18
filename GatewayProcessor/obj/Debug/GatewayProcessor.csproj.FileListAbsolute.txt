@@ -40,7 +40,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\b
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\bin\Debug\Dapper.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Debug\GatewayProcessor.csproj.App.config
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Debug\GatewayProcessor.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Debug\GatewayProcessor.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Debug\GatewayProcessor.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Debug\GatewayProcessor.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Debug\GatewayProcessor.pdb

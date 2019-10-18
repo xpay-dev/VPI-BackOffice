@@ -257,7 +257,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\bin\Debu
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\bin\Debug\zh-Hans\System.Spatial.resources.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\bin\Debug\zh-Hant\System.Spatial.resources.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\obj\Debug\CTPayment.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\obj\Debug\CTPayment.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\obj\Debug\CTPayment.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\obj\Debug\CTPayment.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\CTPayment\obj\Debug\CTPayment.pdb

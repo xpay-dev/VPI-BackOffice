@@ -81,7 +81,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\bin\Release
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\bin\Release\WebMatrix.WebData.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\obj\Release\SDGDAL.csproj.App.config
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\obj\Release\SDGDAL.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\obj\Release\SDGDAL.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\obj\Release\SDGDAL.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\obj\Release\SDGDAL.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGDAL\obj\Release\SDGDAL.pdb
