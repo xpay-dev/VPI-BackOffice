@@ -162,7 +162,7 @@ namespace WisepadLayer
             tdes.Key = key;
             tdes.IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
             tdes.Mode = CipherMode.CBC;
-            tdes.Padding = PaddingMode.None;
+                 tdes.Padding = PaddingMode.None;
 
             return tdes.CreateDecryptor().TransformFinalBlock(data, 0, data.Length);
         }
