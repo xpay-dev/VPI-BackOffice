@@ -12,6 +12,5 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\b
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.csprojAssemblyReference.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.Properties.Resources.resources
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.csproj.GenerateResource.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.exe
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\DSPREADQPosLayer\obj\Debug\DSPREADQPosLayer.pdb
