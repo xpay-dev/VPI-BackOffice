@@ -52,7 +52,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\bin\Releas
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\bin\Release\Dapper.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csproj.App.config
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SGDUtil\obj\Release\SDGUtil.pdb

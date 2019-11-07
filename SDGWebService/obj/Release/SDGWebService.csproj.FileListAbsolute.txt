@@ -68,7 +68,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\bin\
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\bin\System.Net.Http.Formatting.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\bin\Dapper.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGWebService\obj\Release\SDGWebService.pdb

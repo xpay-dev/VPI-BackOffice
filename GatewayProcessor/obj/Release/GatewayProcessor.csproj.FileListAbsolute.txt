@@ -80,7 +80,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\b
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\bin\Release\Dapper.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csproj.App.config
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\GatewayProcessor\obj\Release\GatewayProcessor.pdb

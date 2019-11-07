@@ -22,13 +22,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:13</publishTime>
     </File>
     <File Include="bin/DSPREADQPosLayer.exe">
-      <publishTime>09/19/2019 08:23:48</publishTime>
+      <publishTime>11/04/2019 22:06:40</publishTime>
     </File>
     <File Include="bin/DSPREADQPosLayer.exe.config">
       <publishTime>07/22/2019 13:32:00</publishTime>
     </File>
     <File Include="bin/DSPREADQPosLayer.pdb">
-      <publishTime>09/19/2019 08:23:48</publishTime>
+      <publishTime>11/04/2019 22:06:40</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>07/22/2019 13:32:12</publishTime>
@@ -37,13 +37,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:12</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.dll">
-      <publishTime>09/19/2019 08:23:53</publishTime>
+      <publishTime>11/04/2019 22:06:44</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.dll.config">
-      <publishTime>09/19/2019 08:23:53</publishTime>
+      <publishTime>10/18/2019 09:10:42</publishTime>
     </File>
     <File Include="bin/GatewayProcessor.pdb">
-      <publishTime>09/19/2019 08:23:53</publishTime>
+      <publishTime>11/04/2019 22:06:44</publishTime>
     </File>
     <File Include="bin/HPA_ISO8583.dll">
       <publishTime>07/22/2019 13:32:13</publishTime>
@@ -79,34 +79,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2017 09:56:37</publishTime>
     </File>
     <File Include="bin/RamblerLayer1.exe">
-      <publishTime>09/19/2019 08:23:48</publishTime>
+      <publishTime>11/04/2019 22:06:40</publishTime>
     </File>
     <File Include="bin/RamblerLayer1.exe.config">
-      <publishTime>09/19/2019 08:23:47</publishTime>
+      <publishTime>11/04/2019 22:06:40</publishTime>
     </File>
     <File Include="bin/SDGDAL.dll">
-      <publishTime>09/19/2019 08:23:49</publishTime>
+      <publishTime>11/04/2019 22:06:41</publishTime>
     </File>
     <File Include="bin/SDGDAL.dll.config">
-      <publishTime>09/19/2019 08:23:47</publishTime>
+      <publishTime>10/18/2019 09:10:36</publishTime>
     </File>
     <File Include="bin/SDGDAL.pdb">
-      <publishTime>09/19/2019 08:23:49</publishTime>
+      <publishTime>11/04/2019 22:06:41</publishTime>
     </File>
     <File Include="bin/SDGUtil.dll">
-      <publishTime>09/19/2019 08:23:52</publishTime>
+      <publishTime>11/04/2019 22:06:43</publishTime>
     </File>
     <File Include="bin/SDGUtil.dll.config">
-      <publishTime>09/19/2019 08:23:50</publishTime>
+      <publishTime>10/18/2019 09:10:40</publishTime>
     </File>
     <File Include="bin/SDGUtil.pdb">
-      <publishTime>09/19/2019 08:23:52</publishTime>
+      <publishTime>11/04/2019 22:06:43</publishTime>
     </File>
     <File Include="bin/SDGWebService.dll">
-      <publishTime>09/19/2019 08:26:16</publishTime>
+      <publishTime>11/04/2019 22:06:44</publishTime>
     </File>
     <File Include="bin/SDGWebService.pdb">
-      <publishTime>09/19/2019 08:26:16</publishTime>
+      <publishTime>11/04/2019 22:06:44</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
       <publishTime>07/22/2019 13:32:13</publishTime>
@@ -139,13 +139,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2019 13:32:13</publishTime>
     </File>
     <File Include="bin/WisepadLayer.dll">
-      <publishTime>09/19/2019 08:23:50</publishTime>
+      <publishTime>11/04/2019 22:06:42</publishTime>
     </File>
     <File Include="bin/WisepadLayer.dll.config">
-      <publishTime>09/19/2019 08:23:50</publishTime>
+      <publishTime>11/04/2019 22:06:42</publishTime>
     </File>
     <File Include="bin/WisepadLayer.pdb">
-      <publishTime>09/19/2019 08:23:50</publishTime>
+      <publishTime>11/04/2019 22:06:42</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>07/22/2019 13:32:13</publishTime>

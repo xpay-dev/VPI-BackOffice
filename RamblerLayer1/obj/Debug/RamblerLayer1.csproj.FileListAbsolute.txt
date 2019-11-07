@@ -67,7 +67,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\Debug\RamblerLayer1.csprojAssemblyReference.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\Debug\RamblerLayer1.Properties.Resources.resources
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\Debug\RamblerLayer1.csproj.GenerateResource.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\Debug\RamblerLayer1.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\Debug\RamblerLayer1.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\Debug\RamblerLayer1.exe
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\RamblerLayer1\obj\Debug\RamblerLayer1.pdb

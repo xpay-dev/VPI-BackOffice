@@ -18,7 +18,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\bin\D
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\bin\Debug\Dapper.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Debug\WisepadLayer.csproj.App.config
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Debug\WisepadLayer.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Debug\WisepadLayer.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Debug\WisepadLayer.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Debug\WisepadLayer.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\WisepadLayer\obj\Debug\WisepadLayer.pdb

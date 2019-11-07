@@ -1456,7 +1456,7 @@ namespace SDGWebService.WebserviceFunctions
                     response.Message = "Login successful.";
                     response.UpdatePending = mobileApp.UpdatePending;
                     response.AccountId = Convert.ToString(account.AccountId);
-
+                    response.MobileAppId = Convert.ToString(mobileApp.MobileAppId);
                     response.SequenceNumber = "";
 
                     action = "creating mobile app token log";
@@ -1596,7 +1596,7 @@ namespace SDGWebService.WebserviceFunctions
                                 resultCredit = _transRepo.GetCreditTransactionByMobileAppId(request.MobileAppId);
 
                                 if (resultCredit == null || resultCredit.Count <= 0)
-                                {
+                                {  
                                     response.Status = "DECLINED";
                                     response.ErrNumber = "2009.3";
                                     response.Message = "There are no transactions made today.";
