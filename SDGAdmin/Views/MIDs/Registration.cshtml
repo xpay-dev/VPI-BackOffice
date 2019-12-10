@@ -81,21 +81,21 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row hiddiv divCommon">
-                                    <div class="col-md-3" id="divAccessCode">
+                                <div class="form-group row hiddiv divCommon" id="divCommonPaymaya">
+                                    @*<div class="col-md-3" id="divAccessCode hidden">
                                         <label id="param1">Access Code</label>
                                         @Html.TextBoxFor(m => m.Param_1, new { @class = "form-control accessCode", @placeholder = "Access Code" })
                                         @Html.TextBoxFor(m => m.Param_7, new { @class = "form-control mbTransNumber", @placeholder = "Merchant Branch Transit Number" })
-                                    </div>
-                                    <div class="col-md-3" id="divSecureHash">
+                                    </div>*@
+                                    <div class="col-md-4" id="divSecureHash">
                                         <label>Secure Hash</label>
-                                        @Html.TextBoxFor(m => m.Param_3, new { @class = "form-control secure", @placeholder = "Secure Hash" })
+                                        @Html.TextBoxFor(m => m.Param_3, new { @class = "form-control secure", @placeholder = "Secure Key" })
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <label>Merchant ID</label>
-                                        @Html.TextBoxFor(m => m.Param_2, new { @class = "form-control", @placeholder = "Merchant Id" })
+                                        @Html.TextBoxFor(m => m.Param_2,    new { @class = "form-control", @placeholder = "Merchant Id" })
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <label>Terminal Id</label>
                                         @Html.TextBoxFor(m => m.Param_6, new { @class = "form-control tid2", @placeholder = "Terminal Id" })
                                    </div>
@@ -331,60 +331,7 @@
         $(".hiddiv").hide();
         $("#SwitchId").change(function () {
             var name = $('#SwitchId option:selected').text();
-            if (name == "Api Master Card") {
-                $("#param1").text("Access Code");
-                $(".masterCard").show();
-                $(".ctpayment").hide();
-                $(".mBankNumber").hide();
-                $(".mAccountNumber").hide();
-                $(".accessCode").show();
-                $(".mbTransNumber").hide();
-                $(".divCommon").show();
-                $("#userName").text("Username");
-                $("#password").text("Password");
-                $(".userName").show();
-                $(".password").show();
-                $("#divSecureHash").show();
-                $("#divAccessCode").show();
-                $(".secure").show();
-            }
-            else if (name == "Data Collect") {
-                $("#param1").text("Access Code");
-                $(".masterCard").show();
-                $(".ctpayment").hide();
-                $(".mBankNumber").hide();
-                $(".mAccountNumber").hide();
-                $(".accessCode").show();
-                $(".mbTransNumber").hide();
-                $(".divCommon").show();
-                $("#userName").text("Username");
-                $("#password").text("Password");
-                $(".userName").show();
-                $(".password").show();
-                $("#divSecureHash").show();
-                $("#divAccessCode").show();
-                $(".secure").show();
-            }
-            else if (name == "CT Payment") {
-                $(".masterCard").hide();
-                $(".divCommon").show();
-                $(".ctpayment").show();
-                $(".userName").hide();
-                $(".password").hide();
-                $(".secure").hide();
-                $(".accessCode").hide();
-                $(".mBankNumber").show(); 
-                $(".mAccountNumber").show();
-                $("#param1").text("Merchant Branch Transit Number");
-                $("#userName").text("Merchant Bank Number");
-                $("#password").text("Merchant Account Number");
-                $("#divSecureHash").hide();
-                $(".mbTransNumber").show();
-                $("#divUsername").show();
-                $("#divPassword").show();
-                $("#divAccessCode").show();
-            }
-            else if (name == "Offline Switch") {
+             if (name == "Offline Switch") {
                 $(".masterCard").hide();
                 $(".ctpayment").hide();
                 $(".divCommon").show();
@@ -392,26 +339,9 @@
                 $("#divPassword").hide();
                 $("#divSecureHash").hide(); 
                 $("#divAccessCode").hide();
-            }
-            else if (name == "Maxbank Payment") {
-                $(".masterCard").hide();
-                $(".ctpayment").hide();
-                $(".divCommon").show();
-                $("#divUsername").hide();
-                $("#divPassword").hide();
-                $("#divSecureHash").hide();
-                $("#divAccessCode").hide();
-            }
-            else if (name == "Worldnet" || name == "Nova Pay" || name == "Pay Eco" || name == "Global One Pay" || name == "Trust Pay") {
-                $(".masterCard").hide();
-                $(".ctpayment").hide();
-                $(".divCommon").show();
-                $("#divUsername").hide();
-                $("#divPassword").hide();
-                $("#divSecureHash").hide();
-                $("#divAccessCode").hide(); 
-            }
-            else {
+             } else if (name == "PayMaya") {
+                 $('#divCommonPaymaya').show();
+             } else {
                 $(".hiddiv").hide();
             }
         });

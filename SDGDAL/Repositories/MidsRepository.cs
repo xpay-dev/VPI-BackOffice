@@ -16,6 +16,8 @@ namespace SDGDAL.Repositories
                                     .Include("Switch")
                                     .Include("Currency")
                                     .Include("Merchant")
+                                    .Include("Merchant.ContactInformation")
+                                    .Include("Merchant.ContactInformation.Country")
                                     .SingleOrDefault(m =>
                                         m.CardTypeId == cardTypeId
                                         && m.MerchantBranchPOSs.Any(mbp => mbp.MerchantBranchPOSId == posId

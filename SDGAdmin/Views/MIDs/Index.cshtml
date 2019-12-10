@@ -190,7 +190,7 @@
             var id = document.getElementById('ddlresellers').value;
 
             $.ajax({
-                url: rootDir + 'Ajax/GetMerchantsByReseller',
+                url: rootDir + 'Ajax/EncGetMerchantsByReseller',
                 type: 'POST',
                 data: { "rId": id },
                 dataType: "json",

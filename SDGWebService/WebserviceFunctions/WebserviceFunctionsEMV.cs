@@ -1,6 +1,7 @@
 ﻿using CT_EMV_CLASSES;
 using CT_EMV_CLASSES.DOWNLOAD;
 using CT_EMV_CLASSES.FINANCIAL;
+using GatewayProcessor.PayMaya;
 using HPA_ISO8583;
 using Newtonsoft.Json;
 using SDGDAL;
@@ -12,6 +13,7 @@ using SDGWebService.TLVFunctions;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -419,42 +421,7 @@ namespace SDGWebService.WebserviceFunctions {
                               response.POSWSResponse.UpdatePending = updatePending;
                               return response;
                          }
-
-                         // TODO:
-                         #region validate device
-
-                         //try
-                         //{
-                         //    LogicLayer.classDevice classDev = new classDevice();
-                         //    LogicLayer.classDevice.EntityDevice sendDev = new classDevice.EntityDevice();
-                         //    LogicLayer.classDevice.DeviceResponse retDev = new classDevice.DeviceResponse();
-
-                         //    sendDev.DeviceLink.Device_ID = dDeviceID;
-                         //    sendDev.DeviceLink.MobileApp_Id = retMob.MobileApp[0].MobileAppRow.ID;
-                         //    sendDev.AssignedDevice.Merchant_ID = retMob.MobileApp[0].MerchantRow.ID;
-
-                         //    retDev = classDev.DeviceValidation(sendDev);
-
-                         //    if (retDev.ErrNum != DataLayer1.ENums.DeviceError.NoError)
-                         //    {
-                         //        Ret.Status = "DECLINED";
-                         //        Ret.Message = "Unauthorized Payment Device";
-                         //        Ret.ErrNumber = "2045.13";
-                         //        Ret.UpdatePending = false;
-                         //        return Ret;
-                         //    }
-                         //}
-                         //catch
-                         //{
-                         //    Ret.Status = "DECLINED";
-                         //    Ret.Message = "Invalid Input Type";
-                         //    Ret.ErrNumber = "2045.14";
-                         //    Ret.UpdatePending = false;
-                         //    return Ret;
-                         //}
-
-                         #endregion validate device
-
+                         
                          action = "setting up transaction and transactionattempt details.";
                          int posId = mobileApp.MerchantBranchPOSId;
 
@@ -462,7 +429,8 @@ namespace SDGWebService.WebserviceFunctions {
                          int cardTypeId = SDGUtil.Functions.GetCardType(cardNumber);
                          if (cardTypeId != 0) {
                               transaction.CardTypeId = cardTypeId;
-                         } else {
+                         } 
+                         else {
                               response.POSWSResponse.Status = "Declined";
                               response.POSWSResponse.Message = "Invalid card type";
                               response.POSWSResponse.ErrNumber = "2101.2";
@@ -480,30 +448,7 @@ namespace SDGWebService.WebserviceFunctions {
 
                          transaction.TaxAmount = 0;
 
-                         #region //TODO: get TaxId
-
-                         //Tax resTax = new Tax();
-                         //resTax = getTax(retMob.MobileApp[0].MobileAppRow.MerchantLocationPOSID);
-                         //decimal Tax_ID = resTax.TaxID;
-                         //decimal TaxCal_ID = resTax.TaxCalID;
-
-                         //if (Tax_ID != 0)
-                         //{
-                         //    sendTrans.TransDetail.Tax_ID = Tax_ID;
-                         //}
-                         //else
-                         //{
-                         //    Ret.Status = "DECLINED";
-                         //    Ret.Message = "Invalid Tax";
-                         //    Ret.ErrNumber = "2045.16";
-                         //    Ret.UpdatePending = isUpdate;
-                         //    Ret.TransNumber = "0";
-                         //    return Ret;
-                         //}
-
-                         #endregion //TODO: get TaxId
-
-                         //TODO: Should compute?
+                          //TODO: Should compute?
                          transaction.FinalAmount = request.CardDetails.Amount;
 
                          try {
@@ -532,33 +477,10 @@ namespace SDGWebService.WebserviceFunctions {
                          transactionAttempt.MobileAppId = mobileApp.MobileAppId;
                          transactionAttempt.DeviceId = request.Device;
                          transactionAttempt.GPSLat = request.POSWSRequest.GPSLat;
-                         //transactionAttempt.
                          transactionAttempt.GPSLong = request.POSWSRequest.GPSLong;
                          transactionAttempt.Amount = transaction.OriginalAmount;
 
                          transactionAttempt.Notes = request.Device.ToString();
-
-                         #region TODO: Compute tax
-
-                         //TODO: Compute tax? Do Tax?
-                         //calculate tax
-                         //TaxDetail retTax = new TaxDetail();
-                         //decimal TaxAmount = dAmount - dTips;
-                         //retTax = calculateTax(TaxAmount, Tax_ID, TaxCal_ID);
-                         //if (retTax.printTax)
-                         //{
-                         //    sendTrans.Tax1 = retTax.Tax1;
-                         //    sendTrans.Tax2 = retTax.Tax2;
-                         //}
-                         //else
-                         //{
-                         //    sendTrans.Tax1 = "";
-                         //    sendTrans.Tax2 = "";
-                         //}
-
-                         //transaction.TransactionAttempts.Add(transactionAttempt); //cause of error
-
-                         #endregion TODO: Compute tax
 
                          #region Handle Transaction response
 
@@ -611,7 +533,7 @@ namespace SDGWebService.WebserviceFunctions {
 
                               //card number masking
                               string s = NE_CARD.Substring(NE_CARD.Length - 4);
-                              string r = new string('*', NE_CARD.Length);
+                              string r = new string('*', NE_CARD.Length - 4);
                               string MASK_CARD = r + s;
                               //month masking
                               string MASK_EMONTH = new string('*', NE_EMONTH.Length);
@@ -638,6 +560,10 @@ namespace SDGWebService.WebserviceFunctions {
                                    var tempTransaction = new SDGDAL.Entities.TempTransaction();
 
                                    tempTransaction.CopyProperties(transaction);
+                                   tempTransaction.MidId = mid.MidId;
+                                   tempTransaction.CardNumber = E_CARD;
+                                   tempTransaction.ExpMonth = E_EMONTH;
+                                   tempTransaction.ExpYear = E_EYEAR;
 
                                    var nTempTransaction = _transRepo.CreateTempTransaction(tempTransaction);
 
@@ -678,7 +604,7 @@ namespace SDGWebService.WebserviceFunctions {
                               nTransaction.CardNumber = E_CARD;
                               nTransaction.ExpMonth = E_EMONTH;
                               nTransaction.ExpYear = E_EYEAR;
-                              nTransaction.CSC = E_CSC;
+                              nTransaction.CSC = "";
                               nTransaction.CurrencyId = mid.CurrencyId;
                               nTransaction.MidId = mid.MidId;
                               nTransaction.Track1 = "";
@@ -699,549 +625,8 @@ namespace SDGWebService.WebserviceFunctions {
                                    } else {
                                         transactionAttemptId = transactionAttempt.TransactionAttemptId;
 
-                                        #region Master Card Demo
-
-                                        if (mid.Switch.SwitchCode == "MasterCardDemo") {
-                                             if (transactionAttempt.TransactionTypeId == Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale)) {
-                                                  action = "processing master card.";
-                                                  GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
-                                                  GatewayProcessor.MasterCard.TransactionData transData = new GatewayProcessor.MasterCard.TransactionData();
-                                                  GatewayProcessor.MasterCard.APILogin apiLogin = new GatewayProcessor.MasterCard.APILogin();
-
-                                                  transData.AccessCode = mid.Param_1;
-                                                  transData.MerchantId = mid.Param_2;
-                                                  transData.TerminalId = mid.Param_6;
-                                                  transData.SecureHash = mid.Param_3;
-                                                  apiLogin.Username = mid.Param_4;
-                                                  apiLogin.Password = mid.Param_5;
-
-                                                  ///for mid AddendumData param
-                                                  transData.PFI = mid.Param_13;
-                                                  transData.ISO = mid.Param_14;
-                                                  transData.SMI = mid.Param_15;
-                                                  transData.PFN = mid.Param_16;
-                                                  transData.SMN = mid.Param_17;
-                                                  transData.MSA = mid.Param_18;
-                                                  transData.MCI = mid.Param_19;
-                                                  transData.MST = mid.Param_20;
-                                                  transData.MCO = mid.Param_21;
-                                                  transData.MPC = mid.Param_22;
-                                                  transData.MPP = mid.Param_23;
-                                                  transData.MCC = mid.Param_24;
-
-                                                  decimal orgAmount = transactionAttempt.Amount;
-                                                  decimal finalAmount = orgAmount * 100;
-
-                                                  try {
-                                                       transData.Amount = finalAmount.ToString().Remove(finalAmount.ToString().IndexOf('.'));
-                                                  } catch {
-                                                       transData.Amount = finalAmount.ToString();
-                                                  }
-
-                                                  transData.CardNumber = transaction.CardNumber;
-                                                  transData.CardExpirationDate = transaction.ExpYear.ToString() + transaction.ExpMonth.ToString();
-                                                  transData.CSC = transaction.CSC;
-                                                  transData.Currency = request.CardDetails.Currency;
-                                                  transData.TransNumber = rTransaction.TransactionId + "-" + transactionAttempt.TransactionAttemptId;
-                                                  transData.OrderInfo = transData.TransNumber;
-                                                  transData.SecureHash = transData.SecureHash;
-                                                  transData.MerchTxnRef = transaction.TransactionId + "-" + transactionAttempt.TransactionAttemptId;
-                                                  transData.Track1 = transaction.Track1;
-                                                  transData.Track2 = ";" + transaction.Track2.Replace('D', '=').Replace('F', '?');
-                                                  transData.EmvIccData = emvDataResult.EmvIccData;
-
-                                                  var apiResponse = gateway.ProcessMasterCardDemoEMVCardNotPresent(transData, apiLogin, "purchase", cardTypeId);
-
-                                                  if (apiResponse.Status == "Approved") {
-                                                       transactionAttempt.TransactionAttemptId = transactionAttempt.TransactionAttemptId;
-                                                       transactionAttempt.AuthNumber = apiResponse.AuthorizeId;
-                                                       transactionAttempt.ReturnCode = apiResponse.AcqResponseCode;
-                                                       transactionAttempt.SeqNumber = apiResponse.ReceiptNumber;
-                                                       transactionAttempt.TransNumber = apiResponse.TransactionNumber;
-                                                       transactionAttempt.PosEntryMode = apiResponse.PosEntryMode;
-
-                                                       transactionAttempt.BatchNumber = apiResponse.BatchNumber;
-                                                       transactionAttempt.DisplayReceipt = "";
-                                                       transactionAttempt.DisplayTerminal = "";
-                                                       transactionAttempt.DateReceived = DateTime.Now;
-                                                       transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                       transactionAttempt.Notes = " API Mastercard Demo Purchase Approved";
-
-                                                       response.CardType = Convert.ToString((SDGDAL.Enums.MobileAppCardType)rTransaction.CardTypeId);
-                                                       response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-                                                       response.POSWSResponse.ErrNumber = "0";
-                                                       response.POSWSResponse.Message = "sTransaction Successful.";
-                                                       response.POSWSResponse.Status = "Approved";
-                                                  } else if (apiResponse.Status == "Declined") {
-                                                       transactionAttempt.PosEntryMode = apiResponse.PosEntryMode;
-                                                       transactionAttempt.TransactionAttemptId = transactionAttempt.TransactionAttemptId;
-                                                       transactionAttempt.AuthNumber = "";
-                                                       transactionAttempt.ReturnCode = apiResponse.AcqResponseCode == null ? apiResponse.TransactionResponseCode : apiResponse.AcqResponseCode;
-                                                       transactionAttempt.SeqNumber = apiResponse.ReceiptNumber;
-                                                       transactionAttempt.TransNumber = apiResponse.TransactionNumber;
-                                                       transactionAttempt.DisplayReceipt = "";
-                                                       transactionAttempt.DisplayTerminal = "";
-                                                       transactionAttempt.DateReceived = DateTime.Now;
-                                                       transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                       transactionAttempt.Notes = " API Mastercard Demo Purchase Declined." + apiResponse.Message;
-                                                       transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
-
-                                                       response.POSWSResponse.ErrNumber = apiResponse.AcqResponseCode == null ? apiResponse.TransactionResponseCode : apiResponse.AcqResponseCode;
-                                                       response.POSWSResponse.Message = apiResponse.Message;
-                                                       response.POSWSResponse.Status = "Declined";
-                                                  } else {
-                                                       response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + apiResponse.Message;
-                                                       response.POSWSResponse.ErrNumber = "2101.7";
-                                                       response.POSWSResponse.Status = "Declined";
-                                                       return response;
-                                                  }
-
-                                                  #region TO DO Update Balance Mid
-
-                                                  // TODO: Should update mid balance (if already implemented)
-                                                  /*
-                                                   try
-                                                  {
-                                                      //update balance
-                                                      classMids.EntityMids sendBalance = new classMids.EntityMids();
-                                                      classMids.MidsResponse retBalance = new classMids.MidsResponse();
-                                                      classMids._Mids dataMids = new classMids._Mids();
-                                                      classMids classMids = new classMids();
-
-                                                      decimal newBalance = MidsDetail.MidsPrice.CurrentBalance + transAttData.TransAttemptDetail.Amount;
-
-                                                      dataMids.MidsPrice.ID = MidsDetail.MidsPrice.ID;
-                                                      dataMids.MidsPrice.Batch = MidsDetail.MidsPrice.Batch;
-                                                      dataMids.MidsPrice.BatchCloseTypeID = MidsDetail.MidsPrice.BatchCloseTypeID;
-                                                      dataMids.MidsPrice.BatchTime = MidsDetail.MidsPrice.BatchTime;
-                                                      dataMids.MidsPrice.Capture = MidsDetail.MidsPrice.Capture;
-                                                      dataMids.MidsPrice.CardNotPresent = MidsDetail.MidsPrice.CardNotPresent;
-                                                    //  dataMids.MidsPrice.ChargeBack = MidsDetail.MidsPrice.ChargeBack;
-                                                      dataMids.MidsPrice.CurrentBalance = newBalance;
-                                                      dataMids.MidsPrice.DailyLimit = MidsDetail.MidsPrice.DailyLimit;
-                                                      dataMids.MidsPrice.Purchased = MidsDetail.MidsPrice.Purchased;
-                                                      dataMids.MidsPrice.DiscountRate = MidsDetail.MidsPrice.DiscountRate;
-                                                      dataMids.MidsPrice.eCommerce = MidsDetail.MidsPrice.eCommerce;
-                                                      dataMids.MidsPrice.PreAuth = MidsDetail.MidsPrice.PreAuth;
-                                                      dataMids.MidsPrice.Refund = MidsDetail.MidsPrice.Refund;
-                                                      dataMids.MidsPrice.Settlement = MidsDetail.MidsPrice.Settlement;
-                                                      dataMids.MidsPrice.Void = MidsDetail.MidsPrice.Void;
-
-                                                      sendBalance.MidsDetail.Add(dataMids);
-
-                                                      retBalance = classMids.MidsPrice_Update(sendBalance);
-                                                  }
-                                                  catch
-                                                  {
-                                                  }
-                                                   */
-
-                                                  #endregion TO DO Update Balance Mid
-                                             } else {
-                                                  string type = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                  response.POSWSResponse.Message = type + " Transaction not supported, please contact support.";
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  return response;
-                                             }
-                                        }
-
-                                        #endregion Master Card Demo
-
-                                        #region Master Card
-                                else if (mid.Switch.SwitchCode == "MasterCard") {
-                                             if (transactionAttempt.TransactionTypeId == Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale)) {
-                                                  action = "processing master card.";
-                                                  GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
-                                                  GatewayProcessor.MasterCard.TransactionData transData = new GatewayProcessor.MasterCard.TransactionData();
-                                                  GatewayProcessor.MasterCard.APILogin apiLogin = new GatewayProcessor.MasterCard.APILogin();
-
-                                                  transData.AccessCode = mid.Param_1;
-                                                  transData.MerchantId = mid.Param_2;
-                                                  transData.TerminalId = mid.Param_6;
-                                                  transData.SecureHash = mid.Param_3;
-                                                  apiLogin.Username = mid.Param_4;
-                                                  apiLogin.Password = mid.Param_5;
-
-                                                  ///for mid AddendumData param
-                                                  transData.PFI = mid.Param_13;
-                                                  transData.ISO = mid.Param_14;
-                                                  transData.SMI = mid.Param_15;
-                                                  transData.PFN = mid.Param_16;
-                                                  transData.SMN = mid.Param_17;
-                                                  transData.MSA = mid.Param_18;
-                                                  transData.MCI = mid.Param_19;
-                                                  transData.MST = mid.Param_20;
-                                                  transData.MCO = mid.Param_21;
-                                                  transData.MPC = mid.Param_22;
-                                                  transData.MPP = mid.Param_23;
-                                                  transData.MCC = mid.Param_24;
-
-                                                  decimal orgAmount = transactionAttempt.Amount;
-                                                  decimal finalAmount = orgAmount * 100;
-
-                                                  try {
-                                                       transData.Amount = finalAmount.ToString().Remove(finalAmount.ToString().IndexOf('.'));
-                                                  } catch {
-                                                       transData.Amount = finalAmount.ToString();
-                                                  }
-
-                                                  transData.CardNumber = transaction.CardNumber;
-                                                  transData.CardExpirationDate = transaction.ExpYear.ToString() + transaction.ExpMonth.ToString();
-                                                  transData.CSC = transaction.CSC;
-                                                  transData.Currency = request.CardDetails.Currency;
-                                                  transData.TransNumber = transaction.TransactionId + "-" + transactionAttempt.TransactionAttemptId;
-                                                  transData.OrderInfo = transData.TransNumber;
-                                                  transData.MerchTxnRef = transaction.TransactionId + "-" + transactionAttempt.TransactionAttemptId;
-                                                  transData.Track1 = transaction.Track1;
-                                                  transData.Track2 = transaction.Track2;
-                                                  transData.EmvIccData = emvDataResult.EmvIccData;
-
-                                                  var apiResponse = gateway.ProcessMasterCard(transData, apiLogin, "purchase", cardTypeId);
-
-                                                  action = "updating transaction attempt id:" + transactionAttempt.TransactionAttemptId + ". Api Response Status: " + apiResponse.Status + ". Api Response Message: " + apiResponse.Message + ". ";
-                                                  if (apiResponse.Status == "Approved") {
-                                                       transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                       transactionAttempt.AuthNumber = apiResponse.AuthorizeId;
-                                                       transactionAttempt.ReturnCode = apiResponse.AcqResponseCode;
-                                                       transactionAttempt.SeqNumber = apiResponse.ReceiptNumber;
-                                                       transactionAttempt.TransNumber = apiResponse.TransactionNumber;
-                                                       transactionAttempt.BatchNumber = apiResponse.BatchNumber;
-                                                       transactionAttempt.DisplayReceipt = "";
-                                                       transactionAttempt.DisplayTerminal = "";
-                                                       transactionAttempt.DateReceived = DateTime.Now;
-                                                       transactionAttempt.PosEntryMode = apiResponse.PosEntryMode;
-                                                       transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                       transactionAttempt.Notes = "API Mastercard Purchase Approved";
-
-                                                       response.CardType = Convert.ToString((SDGDAL.Enums.MobileAppCardType)rTransaction.CardTypeId);
-                                                       response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-                                                       response.POSWSResponse.ErrNumber = "0";
-                                                       response.POSWSResponse.Message = "Transaction Successful.";
-                                                       response.POSWSResponse.Status = "Approved";
-                                                  } else if (apiResponse.Status == "Declined") {
-                                                       transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                       transactionAttempt.AuthNumber = "";
-                                                       transactionAttempt.ReturnCode = apiResponse.AcqResponseCode == null ? apiResponse.TransactionResponseCode : apiResponse.AcqResponseCode;
-                                                       transactionAttempt.SeqNumber = apiResponse.ReceiptNumber;
-                                                       transactionAttempt.TransNumber = apiResponse.TransactionNumber;
-                                                       transactionAttempt.DisplayReceipt = "";
-                                                       transactionAttempt.DisplayTerminal = "";
-                                                       transactionAttempt.PosEntryMode = apiResponse.PosEntryMode;
-                                                       transactionAttempt.DateReceived = DateTime.Now;
-                                                       transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                       transactionAttempt.Notes = "API Mastercard Purchase Declined." + apiResponse.Message;
-                                                       transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
-
-                                                       response.POSWSResponse.ErrNumber = apiResponse.AcqResponseCode == null ? apiResponse.TransactionResponseCode : apiResponse.AcqResponseCode;
-                                                       response.POSWSResponse.Message = apiResponse.Message;
-                                                       response.POSWSResponse.Status = "Declined";
-
-                                                       ApplicationLog.LogCardFormatError("SDGWebService-Migs",
-                                                                                             request.CardDetails.Track1,
-                                                                                             request.CardDetails.Ksn,
-                                                                                             request.CardDetails.NameOnCard,
-                                                                                             expYear + expMonth,
-                                                                                             track2,
-                                                                                             apiResponse.AcqResponseCode + "-" + apiResponse.Message,
-                                                                                             transData.MerchantId + "-" + transData.TerminalId,
-                                                                                             transData.TransNumber);
-                                                  } else {
-                                                       response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + apiResponse.Message;
-                                                       response.POSWSResponse.ErrNumber = "2111.3";
-                                                       response.POSWSResponse.Status = "Declined";
-                                                       return response;
-                                                  }
-
-                                                  #region Decrypt Card Number
-
-                                                  string Key = transactionAttempt.Transaction.Key.Key;
-                                                  string KeyIV = transactionAttempt.Transaction.Key.IV;
-                                                  string E_Card = transactionAttempt.Transaction.CardNumber;
-
-                                                  String hashCardNumber = Utility.DecryptEncDataWithKeyAndIV(E_Card, Key, KeyIV);
-
-                                                  transaction.CardNumber = SDGUtil.Functions.HashCardNumber(hashCardNumber);
-
-                                                  #endregion Decrypt Card Number
-
-                                                  #region // TODO: Should update mid balance (if already implemented)
-
-                                                  /*
-                                                   try
-                                                  {
-                                                      //update balance
-                                                      classMids.EntityMids sendBalance = new classMids.EntityMids();
-                                                      classMids.MidsResponse retBalance = new classMids.MidsResponse();
-                                                      classMids._Mids dataMids = new classMids._Mids();
-                                                      classMids classMids = new classMids();
-
-                                                      decimal newBalance = MidsDetail.MidsPrice.CurrentBalance + transAttData.TransAttemptDetail.Amount;
-
-                                                      dataMids.MidsPrice.ID = MidsDetail.MidsPrice.ID;
-                                                      dataMids.MidsPrice.Batch = MidsDetail.MidsPrice.Batch;
-                                                      dataMids.MidsPrice.BatchCloseTypeID = MidsDetail.MidsPrice.BatchCloseTypeID;
-                                                      dataMids.MidsPrice.BatchTime = MidsDetail.MidsPrice.BatchTime;
-                                                      dataMids.MidsPrice.Capture = MidsDetail.MidsPrice.Capture;
-                                                      dataMids.MidsPrice.CardNotPresent = MidsDetail.MidsPrice.CardNotPresent;
-                                                    //  dataMids.MidsPrice.ChargeBack = MidsDetail.MidsPrice.ChargeBack;
-                                                      dataMids.MidsPrice.CurrentBalance = newBalance;
-                                                      dataMids.MidsPrice.DailyLimit = MidsDetail.MidsPrice.DailyLimit;
-                                                      dataMids.MidsPrice.Purchased = MidsDetail.MidsPrice.Purchased;
-                                                      dataMids.MidsPrice.DiscountRate = MidsDetail.MidsPrice.DiscountRate;
-                                                      dataMids.MidsPrice.eCommerce = MidsDetail.MidsPrice.eCommerce;
-                                                      dataMids.MidsPrice.PreAuth = MidsDetail.MidsPrice.PreAuth;
-                                                      dataMids.MidsPrice.Refund = MidsDetail.MidsPrice.Refund;
-                                                      dataMids.MidsPrice.Settlement = MidsDetail.MidsPrice.Settlement;
-                                                      dataMids.MidsPrice.Void = MidsDetail.MidsPrice.Void;
-
-                                                      sendBalance.MidsDetail.Add(dataMids);
-
-                                                      retBalance = classMids.MidsPrice_Update(sendBalance);
-                                                  }
-                                                  catch
-                                                  {
-                                                  }
-                                                   */
-
-                                                  #endregion // TODO: Should update mid balance (if already implemented)
-                                             } else {
-                                                  string type = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                  response.POSWSResponse.Message = type + " Transaction not supported, please contact support.";
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  return response;
-                                             }
-                                        }
-
-                                        #endregion Master Card
-
-                                        #region CTPayment
-                                else if (mid.Switch.SwitchCode == "CTPayment") {
-                                             if (transactionAttempt.TransactionTypeId == Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale)) {
-                                                  action = "processing emv transaction.";
-
-                                                  GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
-                                                  GatewayProcessor.CTPaymentGateway.TransactionEMVData emvTransData = new GatewayProcessor.CTPaymentGateway.TransactionEMVData();
-
-                                                  #region Header Request
-
-                                                  string msgClass = "FO";
-                                                  string operatorId = "   ";
-                                                  string posEntryMode = "05";
-                                                  string terminalId = mid.Param_6;
-                                                  string transType = "000";
-                                                  string msgVersion = "05";
-                                                  string posStatIndicator = "000";
-                                                  string seqNumber = _traceNumRepo.GenerateSystemTraceNumber();
-                                                  string seqByte = "0";
-
-                                                  HEADER_REQUEST header = new HEADER_REQUEST(msgClass, terminalId, operatorId, seqByte + seqNumber, transType, DateTime.Now, posEntryMode, msgVersion, posStatIndicator);
-
-                                                  header.GetRequestHeader();
-
-                                                  #endregion Header Request
-
-                                                  #region Track2 Equivalent Data
-
-                                                  TRACK2_EQUIVALENT_DATA track2EquivalentData = new TRACK2_EQUIVALENT_DATA(emvDataResult.TrackData[0].CardNumber, emvDataResult.TrackData[0].ExpiryDate, emvDataResult.TrackData[0].ServiceCode, emvDataResult.TrackData[0].DiscretionaryData);
-                                                  EMV emv = new EMV(track2EquivalentData);
-                                                  TRACK2_REQUEST tr = new TRACK2_REQUEST(emv);
-                                                  emv.TED = track2EquivalentData;
-                                                  tr.EMV = emv;
-
-                                                  #endregion Track2 Equivalent Data
-
-                                                  #region TRANS AMOUNT
-
-                                                  decimal orgAmount = transactionAttempt.Amount;
-                                                  decimal finalAmount = orgAmount * 100;
-
-                                                  try {
-                                                       emvTransData.Amount = finalAmount.ToString().Remove(finalAmount.ToString().IndexOf('.'));
-                                                  } catch {
-                                                       emvTransData.Amount = finalAmount.ToString();
-                                                  }
-
-                                                  if (emvTransData.Amount.Length < 2) {
-                                                       emvTransData.Amount = emvTransData.Amount.ToString().PadLeft(2, '0');
-                                                  }
-
-                                                  TRANS_AMOUNT_1 transAmount = new TRANS_AMOUNT_1(emvTransData.Amount, "");
-
-                                                  #endregion TRANS AMOUNT
-
-                                                  #region CASHBACK AMOUNT
-
-                                                  CASH_BACK_AMOUNT cashbackAmount = new CASH_BACK_AMOUNT();
-
-                                                  #endregion CASHBACK AMOUNT
-
-                                                  #region APP ACCOUNT TYPE
-
-                                                  APP_ACCOUNT_TYPE appAccountType = new APP_ACCOUNT_TYPE();
-
-                                                  #endregion APP ACCOUNT TYPE
-
-                                                  #region SubField1
-
-                                                  SUBFIDE1 subfield1 = new SUBFIDE1(emvDataResult.SubField1Data[0].Amount,
-                                                                                    emvDataResult.SubField1Data[0].ApplicationCryptogram,
-                                                                                    emvDataResult.SubField1Data[0].AppInterchangeProfile,
-                                                                                    emvDataResult.SubField1Data[0].Atc,
-                                                                                    emvDataResult.SubField1Data[0].CryptogramInfoData,
-                                                                                    emvDataResult.SubField1Data[0].IssuerData,
-                                                                                    emvDataResult.SubField1Data[0].TerminalCountryCode,
-                                                                                    emvDataResult.SubField1Data[0].AmountOther,
-                                                                                    emvDataResult.SubField1Data[0].TerminalVerificationResults,
-                                                                                    emvDataResult.SubField1Data[0].TransCurrencyCode,
-                                                                                    emvDataResult.SubField1Data[0].TransDate,
-                                                                                    emvDataResult.SubField1Data[0].TransType,
-                                                                                    emvDataResult.SubField1Data[0].UnpredictableNumber);
-
-                                                  #endregion SubField1
-
-                                                  #region SubField2
-
-                                                  SUBFIDE2 subfield2 = new SUBFIDE2(emvDataResult.SubField2Data[0].PanSeqNumber,
-                                                                                    emvDataResult.SubField2Data[0].AppVersionNumber,
-                                                                                    emvDataResult.SubField2Data[0].Cvm,
-                                                                                    emvDataResult.SubField2Data[0].InterfaceSerialNumber,
-                                                                                    emvDataResult.SubField2Data[0].PosEntryMode,
-                                                                                    emvDataResult.SubField2Data[0].TerminalType,
-                                                                                    emvDataResult.SubField2Data[0].TransSequenceCounter,
-                                                                                    emvDataResult.SubField2Data[0].DedicatedFileName);
-
-                                                  #endregion SubField2
-
-                                                  #region Invoice Number Field
-
-                                                  string invoiceNumberField = "0" + (String.Format("{0:d6}", (DateTime.Now.Ticks / 10) % 1000000));
-
-                                                  INVOICE_NUMBER invoiceNumber = new INVOICE_NUMBER(invoiceNumberField, "");
-
-                                                  #endregion Invoice Number Field
-
-                                                  #region POS CONDITIONS FIELD
-
-                                                  POS_CONDITIONS posConditions = new POS_CONDITIONS(0, 0, CT_EMV_CLASSES.METHODS.FIDP_CARDHOLDER_AUTHENTICATION_METHOD.NOT_AUTHENTICATED, 0);
-
-                                                  #endregion POS CONDITIONS FIELD
-
-                                                  EMV_REQUEST emvRequest = new EMV_REQUEST(header, tr, transAmount, null, subfield1, subfield2, null, posConditions, invoiceNumber);
-
-                                                  var apiResponse = gateway.ProcessCTPaymentCreditTransaction(emvRequest.EMVRequest(), "purchase");
-
-                                                  action = "updating transaction attempt id:" + transactionAttempt.TransactionAttemptId + ". Api Response Status: " + apiResponse.Status + ". Api Response Message: " + apiResponse.Result.Message + ". ";
-
-                                                  if (apiResponse.Result.Status == "Approved") {
-                                                       transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                       transactionAttempt.AuthNumber = apiResponse.Result.AuthorizeId;
-                                                       transactionAttempt.ReturnCode = "00";
-                                                       transactionAttempt.SeqNumber = apiResponse.Result.ReceiptNumber;
-                                                       transactionAttempt.TransNumber = apiResponse.Result.TransactionNumber;
-                                                       transactionAttempt.BatchNumber = apiResponse.Result.BatchNumber;
-                                                       transactionAttempt.DisplayReceipt = "";
-                                                       transactionAttempt.DisplayTerminal = apiResponse.Result.TerminalId;
-                                                       transactionAttempt.DateReceived = DateTime.Now;
-                                                       transactionAttempt.PosEntryMode = apiResponse.Result.PosEntryMode;
-                                                       transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                       transactionAttempt.Notes = "API EMV CTPayment Purchase Approved";
-
-                                                       response.CardType = Convert.ToString((SDGDAL.Enums.MobileAppCardType)rTransaction.CardTypeId);
-                                                       response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-                                                       response.POSWSResponse.ErrNumber = "0";
-                                                       response.POSWSResponse.Message = "Transaction Successful.";
-                                                       response.POSWSResponse.Status = "Approved";
-                                                  } else if (apiResponse.Result.Status == "Declined") {
-                                                       transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                       transactionAttempt.AuthNumber = "";
-                                                       transactionAttempt.ReturnCode = apiResponse.Result.AcqResponseCode;
-                                                       transactionAttempt.SeqNumber = apiResponse.Result.ReceiptNumber;
-                                                       transactionAttempt.TransNumber = apiResponse.Result.TransactionNumber;
-                                                       transactionAttempt.DisplayReceipt = "";
-                                                       transactionAttempt.DisplayTerminal = "";
-                                                       transactionAttempt.PosEntryMode = apiResponse.Result.PosEntryMode;
-                                                       transactionAttempt.DateReceived = DateTime.Now;
-                                                       transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                       transactionAttempt.Notes = "API EMV CTPayment Purchase Declined." + apiResponse.Result.Message;
-                                                       transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
-
-                                                       response.POSWSResponse.ErrNumber = apiResponse.Result.AcqResponseCode;
-                                                       response.POSWSResponse.Message = apiResponse.Result.Message;
-                                                       response.POSWSResponse.Status = "Declined";
-                                                  } else {
-                                                       response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + apiResponse.Result.Message;
-                                                       response.POSWSResponse.ErrNumber = "2111.3";
-                                                       response.POSWSResponse.Status = "Declined";
-                                                       return response;
-                                                  }
-
-                                                  #region Decrypt Card Number
-
-                                                  string Key = transactionAttempt.Transaction.Key.Key;
-                                                  string KeyIV = transactionAttempt.Transaction.Key.IV;
-                                                  string E_Card = transactionAttempt.Transaction.CardNumber;
-
-                                                  String hashCardNumber = Utility.DecryptEncDataWithKeyAndIV(E_Card, Key, KeyIV);
-
-                                                  transaction.CardNumber = SDGUtil.Functions.HashCardNumber(hashCardNumber);
-
-                                                  #endregion Decrypt Card Number
-
-                                                  #region // TODO: Should update mid balance (if already implemented)
-
-                                                  /*
-                                                   try
-                                                  {
-                                                      //update balance
-                                                      classMids.EntityMids sendBalance = new classMids.EntityMids();
-                                                      classMids.MidsResponse retBalance = new classMids.MidsResponse();
-                                                      classMids._Mids dataMids = new classMids._Mids();
-                                                      classMids classMids = new classMids();
-
-                                                      decimal newBalance = MidsDetail.MidsPrice.CurrentBalance + transAttData.TransAttemptDetail.Amount;
-
-                                                      dataMids.MidsPrice.ID = MidsDetail.MidsPrice.ID;
-                                                      dataMids.MidsPrice.Batch = MidsDetail.MidsPrice.Batch;
-                                                      dataMids.MidsPrice.BatchCloseTypeID = MidsDetail.MidsPrice.BatchCloseTypeID;
-                                                      dataMids.MidsPrice.BatchTime = MidsDetail.MidsPrice.BatchTime;
-                                                      dataMids.MidsPrice.Capture = MidsDetail.MidsPrice.Capture;
-                                                      dataMids.MidsPrice.CardNotPresent = MidsDetail.MidsPrice.CardNotPresent;
-                                                    //  dataMids.MidsPrice.ChargeBack = MidsDetail.MidsPrice.ChargeBack;
-                                                      dataMids.MidsPrice.CurrentBalance = newBalance;
-                                                      dataMids.MidsPrice.DailyLimit = MidsDetail.MidsPrice.DailyLimit;
-                                                      dataMids.MidsPrice.Purchased = MidsDetail.MidsPrice.Purchased;
-                                                      dataMids.MidsPrice.DiscountRate = MidsDetail.MidsPrice.DiscountRate;
-                                                      dataMids.MidsPrice.eCommerce = MidsDetail.MidsPrice.eCommerce;
-                                                      dataMids.MidsPrice.PreAuth = MidsDetail.MidsPrice.PreAuth;
-                                                      dataMids.MidsPrice.Refund = MidsDetail.MidsPrice.Refund;
-                                                      dataMids.MidsPrice.Settlement = MidsDetail.MidsPrice.Settlement;
-                                                      dataMids.MidsPrice.Void = MidsDetail.MidsPrice.Void;
-
-                                                      sendBalance.MidsDetail.Add(dataMids);
-
-                                                      retBalance = classMids.MidsPrice_Update(sendBalance);
-                                                  }
-                                                  catch
-                                                  {
-                                                  }
-                                                   */
-
-                                                  #endregion // TODO: Should update mid balance (if already implemented)
-                                             } else {
-                                                  string type = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                  response.POSWSResponse.Message = type + " Transaction not supported, please contact support.";
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  return response;
-                                             }
-                                        }
-
-                                        #endregion CTPayment
-
                                         #region Offline Switch
-                                   else if (mid.Switch.SwitchCode == "Offline") {
+                                        if (mid.Switch.SwitchCode == "000") {
                                              transactionAttempt.TransactionAttemptId = transactionAttemptId;
                                              transactionAttempt.AuthNumber = "VP-001";
                                              transactionAttempt.ReturnCode = "00";
@@ -1263,193 +648,137 @@ namespace SDGWebService.WebserviceFunctions {
                                         }
                                         #endregion Offline Switch
 
-                                        #region MaxBank EMV
-
-                                else if (mid.Switch.SwitchCode == "Maxbank") {
-                                             if (transactionAttempt.TransactionTypeId == Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale)) {
-                                                  action = "processing debit card.";
-
-                                                  DE_ISO8583 de = new DE_ISO8583();
-                                                  GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
-                                                  GatewayProcessor.VeritasPayment.CardDetails transData = new GatewayProcessor.VeritasPayment.CardDetails();
-
-                                                  transData.PrivateAdditionalData = Convert.ToString(request.CardDetails.EpbKsn.Length).PadLeft(4, '0') + request.CardDetails.EpbKsn + Convert.ToString(cardNumber.Length).PadLeft(4, '0') + cardNumber;
-                                                  transData.MerchantID = mid.Param_2;
-                                                  transData.TerminalID = mid.Param_6;
-
-                                                  decimal orgAmount = transactionAttempt.Amount;
-                                                  decimal finalAmount = orgAmount * 100;
-
-                                                  try {
-                                                       transData.Amount = finalAmount.ToString().Remove(finalAmount.ToString().IndexOf('.'));
-                                                  } catch {
-                                                       transData.Amount = finalAmount.ToString();
-                                                  }
-
-                                                  transData.RetrievalReferenceNumber = SDGUtil.Functions.GenerateRetrievalNumber(12);
-                                                  transData.SystemTraceAudit = transactionAttempt.TransNumber;
-                                                  transData.CardNumber = cardNumber;
-                                                  transData.NameOnCard = request.CardDetails.NameOnCard;
-                                                  transData.Track2Data = track2.Replace('D', '=').TrimStart(';').TrimEnd('F').TrimEnd('?');
-                                                  transData.Track1Data = null;
-                                                  transData.ExpirationDate = (transaction.ExpMonth == null || transaction.ExpYear == null) ? null : transaction.ExpYear + transaction.ExpMonth;
-                                                  transData.PinBlock = null;
-                                                  transData.CurrencyCode = mid.Currency.IsoCode;
-                                                  transData.ChipCardData = emvDataResult.EmvIccData;
-
-                                                  //Fees
-                                                  transData.AmountTransactionFee = "00000000";
-                                                  transData.MessageAuthorizationCode = "0000000000000000";
-
-                                                  action = "processing transaction for debit api integration. Transaction was successfully saved.";
-
-                                                  try {
-                                                       var apiResponse = gateway.ProcessPurchaseMaxbankGateway(transData, "PURCHASE");
-
-                                                       if (apiResponse.Result.Status == "Approved") {
-                                                            transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                            transactionAttempt.AuthNumber = apiResponse.Result.AuthorizationID;
-                                                            transactionAttempt.ReturnCode = apiResponse.Result.ReturnCode;
-                                                            transactionAttempt.TransNumber = apiResponse.Result.SytemTraceAudit;
-                                                            transactionAttempt.Reference = apiResponse.Result.Reference;
-                                                            transactionAttempt.DisplayReceipt = transData.MerchantID;
-                                                            transactionAttempt.DisplayTerminal = transData.TerminalID;
-                                                            transactionAttempt.BatchNumber = _batchRepo.GenerateBatchNumber(mobileApp.MobileAppId, Convert.ToInt32(SDGDAL.Enums.Ref_PaymentType.Credit));
-                                                            transactionAttempt.DateReceived = DateTime.Now;
-                                                            transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                            transactionAttempt.Notes = "API Credit EMV Purchase Approved";
-                                                            response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                            response.POSWSResponse.ErrNumber = "0";
-                                                            response.POSWSResponse.Message = "Transaction Successful.";
-                                                            response.POSWSResponse.Status = "Approved";
-                                                       } else if (apiResponse.Result.Status == "Declined") {
-                                                            transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                            transactionAttempt.AuthNumber = apiResponse.Result.AuthorizationID;
-                                                            transactionAttempt.ReturnCode = apiResponse.Result.ReturnCode;
-                                                            transactionAttempt.TransNumber = transData.SystemTraceAudit;
-                                                            transactionAttempt.Reference = apiResponse.Result.Reference;
-                                                            transactionAttempt.DateReceived = DateTime.Now;
-                                                            transactionAttempt.DisplayReceipt = transData.MerchantID;
-                                                            transactionAttempt.DisplayTerminal = transData.TerminalID;
-                                                            transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                            transactionAttempt.Notes += "API Credit EMV Purchase Declined" + apiResponse.Result.Message;
-                                                            transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
-
-                                                            response.POSWSResponse.ErrNumber = apiResponse.Result.ErrNumber;
-                                                            response.POSWSResponse.Message = apiResponse.Result.Message;
-                                                            response.POSWSResponse.Status = "Declined";
-                                                       } else {
-                                                            response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + apiResponse.Result.Message;
-                                                            response.POSWSResponse.ErrNumber = "2101.7";
-                                                            response.POSWSResponse.Status = "Declined";
-                                                            return response;
-                                                       }
-                                                  } catch (Exception ex) {
-                                                       // Log error
-                                                       var errorOnAction = "Error while " + action;
-                                                       var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction, "TransactionPurchaseEMV", "", "");
-
-                                                       response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + "Declined" + " " + errorOnAction + " " + ex.Message;
-                                                       response.POSWSResponse.ErrNumber = "2000.10";
-                                                       response.POSWSResponse.Status = "Declined";
-                                                       return response;
-                                                  }
-                                             } else {
-                                                  string type = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                  response.POSWSResponse.Message = type + " Transaction not supported, please contact support.";
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  return response;
-                                             }
-                                        }
-
-                                        #endregion MaxBank EMV
-
                                         #region PayMaya
-                                else if (mid.Switch.SwitchCode == "PayMaya") {
+                                        //to do
+                                        else if (mid.Switch.SwitchCode == "001") {
                                              if (transactionAttempt.TransactionTypeId == Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale)) {
                                                   action = "processing api paymaya";
                                                   GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
-                                                  GatewayProcessor.VeritasPayment.CardDetails transData = new GatewayProcessor.VeritasPayment.CardDetails();
 
-                                                  transData.PrivateAdditionalData = Convert.ToString(request.CardDetails.EpbKsn.Length).PadLeft(4, '0') + request.CardDetails.EpbKsn + Convert.ToString(cardNumber.Length).PadLeft(4, '0') + cardNumber;
-                                                  transData.MerchantID = mid.Param_2;
-                                                  transData.TerminalID = mid.Param_6;
+                                                  string refNo = "XPAY-" + SDGUtil.Functions.GenerateRetrievalNumber(12);
 
-                                                  decimal orgAmount = transactionAttempt.Amount;
-                                                  decimal finalAmount = orgAmount * 100;
+                                                  var submerchant = new P3SubMerchant {
+                                                       address = new P3Address {
+                                                            alphaCountryCode = mid.Merchant.ContactInformation.Country.CountryCode,
+                                                            city = mid.Merchant.ContactInformation.City,
+                                                            line1 = mid.Merchant.ContactInformation.Address,
+                                                            postalCode = "1209",
+                                                            state = mid.Merchant.ContactInformation.StateProvince
+                                                       },
+                                                       id = "XPAY-" + mid.Merchant.MerchantName.Replace(" ", "_"),
+                                                       name = mid.Merchant.MerchantName
+                                                  };
 
-                                                  try {
-                                                       transData.Amount = finalAmount.ToString().Remove(finalAmount.ToString().IndexOf('.'));
-                                                  } catch {
-                                                       transData.Amount = finalAmount.ToString();
-                                                  }
+                                                  var submerchants = new List<P3SubMerchant>();
+                                                  submerchants.Add(submerchant);
 
-                                                  transData.RetrievalReferenceNumber = SDGUtil.Functions.GenerateRetrievalNumber(12);
-                                                  transData.SystemTraceAudit = transactionAttempt.TransNumber;
-                                                  transData.CardNumber = cardNumber;
-                                                  transData.NameOnCard = request.CardDetails.NameOnCard;
-                                                  transData.Track2Data = track2.Replace('D', '=').TrimStart(';').TrimEnd('F').TrimEnd('?');
-                                                  transData.Track1Data = null;
-                                                  transData.ExpirationDate = (transaction.ExpMonth == null || transaction.ExpYear == null) ? null : transaction.ExpYear + transaction.ExpMonth;
-                                                  transData.PinBlock = null;
-                                                  transData.CurrencyCode = mid.Currency.IsoCode;
-                                                  transData.ChipCardData = emvDataResult.EmvIccData;
-
-                                                  //Fees
-                                                  transData.AmountTransactionFee = "00000000";
-                                                  transData.MessageAuthorizationCode = "0000000000000000";
+                                                  var requestP3 = new P3Request { 
+                                                       merchant = new P3Merchant { 
+                                                            id = mid.Param_2,
+                                                            paymentFacilitator = new P3PaymentFacilitator { 
+                                                                 subMerchants = submerchants
+                                                            }
+                                                       }, payer = new P3Payer { 
+                                                            fundingInstrument = new P3FundingInstrument { 
+                                                                 card = new P3Card { 
+                                                                      cardNumber = cardNumber,
+                                                                      expiryMonth = expMonth,
+                                                                      expiryYear = "20" + expYear
+                                                                 }
+                                                            }
+                                                       }, transaction = new P3Transaction { 
+                                                            amount = new P3Amount { 
+                                                                 total = new P3Total { 
+                                                                      currency = mid.Currency.IsoCode,
+                                                                      value = request.CardDetails.Amount
+                                                                 }
+                                                            }
+                                                       }
+                                                  };
 
                                                   action = "processing transaction for creedit api integration. Transaction was successfully saved.";
 
                                                   try {
-                                                       var apiResponse = gateway.ProcessPayMayaGateway(transData, "PURCHASE");
+                                                       var authp3Bytes = Encoding.UTF8.GetBytes(mid.Param_3);
+                                                       var authp3 = Convert.ToBase64String(authp3Bytes);
+                                                       var p3result = string.Empty;
+                                                       var p3Response = new P3Response();
+                                                       var errorLogs = new List<P3ErrorLog>();
+                                                       Task.Run(async () => {
+                                                            p3result = await gateway.ProcessPayMayaP3Gateway(JsonConvert.SerializeObject(requestP3), authp3, refNo);
+                                                            if (p3result.StartsWith("Error")) {
+                                                                 throw new Exception(p3result.Replace("Error : ", string.Empty));
+                                                            }
+                                                            if (p3result.Contains("logref")) {
+                                                                 errorLogs = JsonConvert.DeserializeObject<List<P3ErrorLog>>(p3result);
+                                                                 var errorlog = errorLogs.FirstOrDefault();
+                                                                 transactionAttempt.TransactionAttemptId = transactionAttemptId;
+                                                                 transactionAttempt.AuthNumber = string.Empty;
+                                                                 transactionAttempt.ReturnCode = errorlog.code;
+                                                                 transactionAttempt.TransNumber = errorlog.logref;
+                                                                 transactionAttempt.Reference = string.Empty;
+                                                                 transactionAttempt.DisplayReceipt = string.Empty;
+                                                                 transactionAttempt.DisplayTerminal = mid.Param_3;
+                                                                 transactionAttempt.BatchNumber = string.Empty;
+                                                                 transactionAttempt.DateReceived = DateTime.Now;
+                                                                 transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                                                 transactionAttempt.Notes = "API PayMaya EMV Purchase Declined" + errorlog.message;
+                                                                 response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
 
-                                                       if (apiResponse.Result.Status == "Approved") {
-                                                            transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                            transactionAttempt.AuthNumber = apiResponse.Result.AuthorizationID;
-                                                            transactionAttempt.ReturnCode = apiResponse.Result.ReturnCode;
-                                                            transactionAttempt.TransNumber = apiResponse.Result.SytemTraceAudit;
-                                                            transactionAttempt.Reference = apiResponse.Result.Reference;
-                                                            transactionAttempt.DisplayReceipt = transData.MerchantID;
-                                                            transactionAttempt.DisplayTerminal = transData.TerminalID;
-                                                            transactionAttempt.BatchNumber = _batchRepo.GenerateBatchNumber(mobileApp.MobileAppId, Convert.ToInt32(SDGDAL.Enums.Ref_PaymentType.Credit));
-                                                            transactionAttempt.DateReceived = DateTime.Now;
-                                                            transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                            transactionAttempt.Notes = "API PayMaya EMV Purchase Approved";
-                                                            response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+                                                                 response.POSWSResponse.ErrNumber = errorlog.code;
+                                                                 response.POSWSResponse.Message = "Transaction Failed." + errorlog.message;
+                                                                 response.POSWSResponse.Status = "Declined";
+                                                            } else {
+                                                                 p3Response = JsonConvert.DeserializeObject<P3Response>(p3result);
+                                                                 if (p3Response != null) {
+                                                                      if (p3Response.status == "SUCCESS") {
+                                                                           transactionAttempt.TransactionAttemptId = transactionAttemptId;
+                                                                           transactionAttempt.AuthNumber = p3Response.receipt.approvalCode;
+                                                                           transactionAttempt.ReturnCode = "00";
+                                                                           transactionAttempt.TransNumber = p3Response.paymentTransactionReferenceNo;
+                                                                           transactionAttempt.Reference = p3Response.receipt.transactionId;
+                                                                           transactionAttempt.DisplayReceipt = p3Response.receipt.receiptNo;
+                                                                           transactionAttempt.DisplayTerminal = mid.Param_3;
+                                                                           transactionAttempt.BatchNumber = p3Response.receipt.batch;
+                                                                           transactionAttempt.DateReceived = DateTime.Now;
+                                                                           transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                                                           transactionAttempt.Notes = "API PayMaya EMV Purchase Approved";
+                                                                           response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
 
-                                                            response.POSWSResponse.ErrNumber = "0";
-                                                            response.POSWSResponse.Message = "Transaction Successful.";
-                                                            response.POSWSResponse.Status = "Approved";
-                                                       } else if (apiResponse.Result.Status == "Declined") {
-                                                            transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                            transactionAttempt.AuthNumber = apiResponse.Result.AuthorizationID;
-                                                            transactionAttempt.ReturnCode = apiResponse.Result.ReturnCode;
-                                                            transactionAttempt.TransNumber = transData.SystemTraceAudit;
-                                                            transactionAttempt.Reference = apiResponse.Result.Reference;
-                                                            transactionAttempt.DateReceived = DateTime.Now;
-                                                            transactionAttempt.DisplayReceipt = transData.MerchantID;
-                                                            transactionAttempt.DisplayTerminal = transData.TerminalID;
-                                                            transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                            transactionAttempt.Notes = "API PayMaya EMV Purchase Declined" + apiResponse.Result.Message;
-                                                            transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
+                                                                           response.POSWSResponse.ErrNumber = "0";
+                                                                           response.POSWSResponse.Message = "Transaction Successful.";
+                                                                           response.POSWSResponse.Status = "Approved";
+                                                                      } else {
+                                                                           transactionAttempt.TransactionAttemptId = transactionAttemptId;
+                                                                           transactionAttempt.AuthNumber = p3Response.receipt.approvalCode;
+                                                                           transactionAttempt.ReturnCode = "01";
+                                                                           transactionAttempt.TransNumber = p3Response.paymentTransactionReferenceNo;
+                                                                           transactionAttempt.Reference = p3Response.receipt.transactionId;
+                                                                           transactionAttempt.DisplayReceipt = p3Response.receipt.receiptNo;
+                                                                           transactionAttempt.DisplayTerminal = mid.Param_3;
+                                                                           transactionAttempt.BatchNumber = p3Response.receipt.batch;
+                                                                           transactionAttempt.DateReceived = DateTime.Now;
+                                                                           transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                                                           transactionAttempt.Notes = "API PayMaya EMV Purchase Declined";
+                                                                           response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
 
-                                                            response.POSWSResponse.ErrNumber = apiResponse.Result.ErrNumber;
-                                                            response.POSWSResponse.Message = apiResponse.Result.Message;
-                                                            response.POSWSResponse.Status = "Declined";
-                                                       } else {
-                                                            response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + apiResponse.Result.Message;
-                                                            response.POSWSResponse.ErrNumber = "2101.7";
-                                                            response.POSWSResponse.Status = "Declined";
-                                                            return response;
-                                                       }
+                                                                           response.POSWSResponse.ErrNumber = "0";
+                                                                           response.POSWSResponse.Message = "Transaction Failed.";
+                                                                           response.POSWSResponse.Status = "Declined";
+                                                                      }
+                                                                 } else {
+                                                                      response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+                                                                      response.POSWSResponse.ErrNumber = "0";
+                                                                      response.POSWSResponse.Message = "Transaction Failed.";
+                                                                      response.POSWSResponse.Status = "Declined";
+                                                                 }
+                                                            }
+                                                       }).GetAwaiter().GetResult();
                                                   } catch (Exception ex) {
+                                                       action = "processing transaction for creedit api integration";
                                                        // Log error
                                                        var errorOnAction = "Error while " + action;
                                                        var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction, "TransactionPurchaseEMV", "", "");
-
                                                        response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + "Declined" + " " + errorOnAction + " " + ex.Message;
                                                        response.POSWSResponse.ErrNumber = "2000.10";
                                                        response.POSWSResponse.Status = "Declined";
@@ -1466,7 +795,7 @@ namespace SDGWebService.WebserviceFunctions {
 
                                         #endregion PayMaya
 
-                                else {
+                                        else {
                                              transactionAttempt.DateReceived = DateTime.Now;
                                              var nTransactionAttemptOffline = _transRepo.UpdateTransactionAttempt(transactionAttempt);
                                              response.POSWSResponse.Message = "Transaction failed. Switch not yet supported. Please contact Support.";
@@ -1511,7 +840,8 @@ namespace SDGWebService.WebserviceFunctions {
                          #endregion Handle Transaction response
 
                          #endregion Transaction
-                    } else if (request.POSWSRequest.SystemMode.ToUpper().Equals("TESTAPPROVED")) {
+                    } 
+                    else if (request.POSWSRequest.SystemMode.ToUpper().Equals("TESTAPPROVED")) {
                          var transaction = new SDGDAL.Entities.Transaction();
                          var transactionAttempt = new SDGDAL.Entities.TransactionAttempt();
                          var nTransaction = new SDGDAL.Entities.Transaction();
@@ -1555,7 +885,8 @@ namespace SDGWebService.WebserviceFunctions {
                          response.TransactionType = "3";
                          response.BatchNumber = transactionAttempt.BatchNumber;
                          response.Currency = request.CardDetails.Currency;
-                    } else if (request.POSWSRequest.SystemMode.ToUpper().Equals("TESTBANK")) {
+                    }
+                    else if (request.POSWSRequest.SystemMode.ToUpper().Equals("TESTBANK")) {
                          string track1 = "";
                          string track2 = "";
                          string cardNumber = "";
@@ -1572,8 +903,8 @@ namespace SDGWebService.WebserviceFunctions {
                          response.POSWSResponse = GetCardDetails(request.CardDetails, sd, cardAction, out track1, out track2,
                              out cardNumber, out nameOnCard, out expDate, out expYear, out expMonth, out emvDataResult);
 
-                         using (var httpClient = new HttpClient { BaseAddress = new Uri("https://mondepay.com/") }) {
-                              ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+                         using (var httpClient = new HttpClient { BaseAddress = new Uri("http://mondepay.com/") }) {
+                              //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
                               using (var content = new StringContent(JsonConvert.SerializeObject(new RequeTestBankModeRequest {
                                    Amount = request.CardDetails.Amount,
                                    CardNumber = cardNumber,
@@ -1589,321 +920,321 @@ namespace SDGWebService.WebserviceFunctions {
                                    }).GetAwaiter().GetResult();
                                    try {
                                         var genericResponse = JsonConvert.DeserializeObject<RequeTestBankModeResponse>(responseDataObj);
-                                        
-                                             var account = new SDGDAL.Entities.Account();
 
-                                             action = "checking mobile app availability.";
+                                        var account = new SDGDAL.Entities.Account();
 
-                                             response.POSWSResponse = mobileAppFunctions.CheckStatus(request.POSWSRequest.RToken, out mobileApp, out account);
+                                        action = "checking mobile app availability.";
 
-                                             if (response.POSWSResponse.Status == "Declined") {
-                                                  return response;
-                                             }
+                                        response.POSWSResponse = mobileAppFunctions.CheckStatus(request.POSWSRequest.RToken, out mobileApp, out account);
 
-                                             MobileAppMethods mobileAppMethods = new MobileAppMethods();
+                                        if (response.POSWSResponse.Status == "Declined") {
+                                             return response;
+                                        }
 
-                                             response.POSWSResponse = GetCardDetails(request.CardDetails, sd, cardAction, out track1, out track2,
-                                                 out cardNumber, out nameOnCard, out expDate, out expYear, out expMonth, out emvDataResult);
+                                        MobileAppMethods mobileAppMethods = new MobileAppMethods();
 
-                                             if (response.POSWSResponse.Status == "Declined") {
-                                                  return response;
-                                             }
+                                        response.POSWSResponse = GetCardDetails(request.CardDetails, sd, cardAction, out track1, out track2,
+                                            out cardNumber, out nameOnCard, out expDate, out expYear, out expMonth, out emvDataResult);
 
-                                             #region Read Tracks
+                                        if (response.POSWSResponse.Status == "Declined") {
+                                             return response;
+                                        }
 
-                                             try {
-                                                  action = "reading track data from icc.";
+                                        #region Read Tracks
 
-                                                  decimal tempNum = Convert.ToDecimal(cardNumber);
+                                        try {
+                                             action = "reading track data from icc.";
 
-                                                  decimal dMonth, dYear;
+                                             decimal tempNum = Convert.ToDecimal(cardNumber);
 
-                                                  dMonth = SDGUtil.Functions.ConvertNumeric(expMonth);
-                                                  dYear = SDGUtil.Functions.ConvertNumeric(expYear);
+                                             decimal dMonth, dYear;
 
-                                                  if (dMonth == -1 || dYear == -1) {
-                                                       response.POSWSResponse.ErrNumber = "2100.3";
-                                                       response.POSWSResponse.Message = "Card decode error";
-                                                       response.POSWSResponse.Status = "Declined";
-                                                       response.POSWSResponse.UpdatePending = false;
-                                                       return response;
-                                                  }
-                                             } catch {
+                                             dMonth = SDGUtil.Functions.ConvertNumeric(expMonth);
+                                             dYear = SDGUtil.Functions.ConvertNumeric(expYear);
+
+                                             if (dMonth == -1 || dYear == -1) {
                                                   response.POSWSResponse.ErrNumber = "2100.3";
                                                   response.POSWSResponse.Message = "Card decode error";
                                                   response.POSWSResponse.Status = "Declined";
                                                   response.POSWSResponse.UpdatePending = false;
                                                   return response;
                                              }
+                                        } catch {
+                                             response.POSWSResponse.ErrNumber = "2100.3";
+                                             response.POSWSResponse.Message = "Card decode error";
+                                             response.POSWSResponse.Status = "Declined";
+                                             response.POSWSResponse.UpdatePending = false;
+                                             return response;
+                                        }
 
-                                             #endregion Read Tracks
+                                        #endregion Read Tracks
 
-                                             action = "logging mobile app action.";
-                                             mobileAppFunctions.LogMobileAppAction("Purchase Credit Transaction EMV", mobileApp.MobileAppId, account.AccountId, request.POSWSRequest.GPSLat, request.POSWSRequest.GPSLong);
+                                        action = "logging mobile app action.";
+                                        mobileAppFunctions.LogMobileAppAction("Purchase Credit Transaction EMV", mobileApp.MobileAppId, account.AccountId, request.POSWSRequest.GPSLat, request.POSWSRequest.GPSLong);
 
-                                             if (!mobileApp.MobileAppFeatures.CreditTransaction) // boolean, check if true / enabled - lol, wrong names
-                                             {
-                                                  response.POSWSResponse.ErrNumber = "2101.1";
-                                                  response.POSWSResponse.Message = "Credit transactions are currently disabled on this device";
+                                        if (!mobileApp.MobileAppFeatures.CreditTransaction) // boolean, check if true / enabled - lol, wrong names
+                                        {
+                                             response.POSWSResponse.ErrNumber = "2101.1";
+                                             response.POSWSResponse.Message = "Credit transactions are currently disabled on this device";
+                                             response.POSWSResponse.Status = "Declined";
+                                             return response;
+                                        }
+
+                                        #region Transaction
+
+                                        bool updatePending = mobileApp.UpdatePending;
+
+                                        var transaction = new SDGDAL.Entities.Transaction();
+                                        var transactionAttempt = new SDGDAL.Entities.TransactionAttempt();
+
+                                        //Check Device
+                                        if (!_deviceRepo.HasDeviceByMasterDeviceId(request.Device)) {
+                                             response.POSWSResponse.Status = "Declined";
+                                             response.POSWSResponse.Message = "No Device Available.";
+                                             response.POSWSResponse.ErrNumber = "2101.3";
+                                             response.POSWSResponse.UpdatePending = updatePending;
+                                             return response;
+                                        }
+
+
+                                        action = "setting up transaction and transactionattempt details.";
+                                        int posId = mobileApp.MerchantBranchPOSId;
+
+                                        //get cardtype and do simple card validate
+                                        int cardTypeId = SDGUtil.Functions.GetCardType(cardNumber);
+                                        if (cardTypeId != 0) {
+                                             transaction.CardTypeId = cardTypeId;
+                                        } else {
+                                             response.POSWSResponse.Status = "Declined";
+                                             response.POSWSResponse.Message = "Invalid card type";
+                                             response.POSWSResponse.ErrNumber = "2101.2";
+                                             response.POSWSResponse.UpdatePending = updatePending;
+                                             response.TransactionNumber = "0";
+                                             return response;
+                                        }
+
+                                        transaction.CardNumber = cardNumber;
+                                        transaction.NameOnCard = request.CardDetails.NameOnCard;
+                                        transaction.ExpMonth = expMonth;
+                                        transaction.ExpYear = expYear;
+                                        transaction.CSC = "";
+                                        transaction.OriginalAmount = request.CardDetails.Amount;
+
+                                        transaction.TaxAmount = 0;
+
+
+
+                                        //TODO: Should compute?
+                                        transaction.FinalAmount = request.CardDetails.Amount;
+
+                                        try {
+                                             transaction.CurrencyId = _transRepo.GetCurrencyIdByCurrencyName(request.CardDetails.Currency);
+                                        } catch {
+                                             response.POSWSResponse.Status = "Declined";
+                                             response.POSWSResponse.Message = "Invalid currency.";
+                                             response.POSWSResponse.ErrNumber = "2101.3";
+                                             response.POSWSResponse.UpdatePending = updatePending;
+                                             response.TransactionNumber = "0";
+                                             return response;
+                                        }
+
+                                        transaction.Track1 = track1;
+                                        transaction.Track2 = track2;
+                                        transaction.Track3 = request.CardDetails.Track3;
+
+                                        transaction.DateCreated = DateTime.Now;
+                                        transaction.RefNumApp = request.CardDetails.RefNumberApp;
+                                        transaction.RefNumSales = request.CardDetails.RefNumberSale;
+                                        transaction.Notes = request.Device.ToString();
+                                        transaction.TransactionEntryTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionEntryType.EMV);
+                                        transaction.MerchantPOSId = mobileApp.MerchantBranchPOSId;
+                                        transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale);
+                                        transactionAttempt.AccountId = account.AccountId;
+                                        transactionAttempt.MobileAppId = mobileApp.MobileAppId;
+                                        transactionAttempt.DeviceId = request.Device;
+                                        transactionAttempt.GPSLat = request.POSWSRequest.GPSLat;
+                                        //transactionAttempt.
+                                        transactionAttempt.GPSLong = request.POSWSRequest.GPSLong;
+                                        transactionAttempt.Amount = transaction.OriginalAmount;
+
+                                        transactionAttempt.Notes = request.Device.ToString();
+
+
+
+                                        #region Handle Transaction response
+
+                                        action = "setting up transaction entry for database.";
+
+                                        try {
+                                             action = "checking mid status before setting up transaction entry.";
+                                             var mid = new SDGDAL.Entities.Mid();
+
+                                             mid = _midsRepo.GetMidByPosIdAndCardTypeId(transaction.MerchantPOSId, transaction.CardTypeId);
+
+                                             if (mid == null) {
+                                                  response.POSWSResponse.ErrNumber = "2101.4";
+                                                  response.POSWSResponse.Message = "Mid not found.";
                                                   response.POSWSResponse.Status = "Declined";
+
                                                   return response;
-                                             }
-
-                                             #region Transaction
-
-                                             bool updatePending = mobileApp.UpdatePending;
-
-                                             var transaction = new SDGDAL.Entities.Transaction();
-                                             var transactionAttempt = new SDGDAL.Entities.TransactionAttempt();
-
-                                             //Check Device
-                                             if (!_deviceRepo.HasDeviceByMasterDeviceId(request.Device)) {
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  response.POSWSResponse.Message = "No Device Available.";
-                                                  response.POSWSResponse.ErrNumber = "2101.3";
-                                                  response.POSWSResponse.UpdatePending = updatePending;
-                                                  return response;
-                                             }
-
-
-                                             action = "setting up transaction and transactionattempt details.";
-                                             int posId = mobileApp.MerchantBranchPOSId;
-
-                                             //get cardtype and do simple card validate
-                                             int cardTypeId = SDGUtil.Functions.GetCardType(cardNumber);
-                                             if (cardTypeId != 0) {
-                                                  transaction.CardTypeId = cardTypeId;
                                              } else {
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  response.POSWSResponse.Message = "Invalid card type";
-                                                  response.POSWSResponse.ErrNumber = "2101.2";
-                                                  response.POSWSResponse.UpdatePending = updatePending;
-                                                  response.TransactionNumber = "0";
-                                                  return response;
-                                             }
-
-                                             transaction.CardNumber = cardNumber;
-                                             transaction.NameOnCard = request.CardDetails.NameOnCard;
-                                             transaction.ExpMonth = expMonth;
-                                             transaction.ExpYear = expYear;
-                                             transaction.CSC = "";
-                                             transaction.OriginalAmount = request.CardDetails.Amount;
-
-                                             transaction.TaxAmount = 0;
-
-                                             
-
-                                             //TODO: Should compute?
-                                             transaction.FinalAmount = request.CardDetails.Amount;
-
-                                             try {
-                                                  transaction.CurrencyId = _transRepo.GetCurrencyIdByCurrencyName(request.CardDetails.Currency);
-                                             } catch {
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  response.POSWSResponse.Message = "Invalid currency.";
-                                                  response.POSWSResponse.ErrNumber = "2101.3";
-                                                  response.POSWSResponse.UpdatePending = updatePending;
-                                                  response.TransactionNumber = "0";
-                                                  return response;
-                                             }
-
-                                             transaction.Track1 = track1;
-                                             transaction.Track2 = track2;
-                                             transaction.Track3 = request.CardDetails.Track3;
-
-                                             transaction.DateCreated = DateTime.Now;
-                                             transaction.RefNumApp = request.CardDetails.RefNumberApp;
-                                             transaction.RefNumSales = request.CardDetails.RefNumberSale;
-                                             transaction.Notes = request.Device.ToString();
-                                             transaction.TransactionEntryTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionEntryType.EMV);
-                                             transaction.MerchantPOSId = mobileApp.MerchantBranchPOSId;
-                                             transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale);
-                                             transactionAttempt.AccountId = account.AccountId;
-                                             transactionAttempt.MobileAppId = mobileApp.MobileAppId;
-                                             transactionAttempt.DeviceId = request.Device;
-                                             transactionAttempt.GPSLat = request.POSWSRequest.GPSLat;
-                                             //transactionAttempt.
-                                             transactionAttempt.GPSLong = request.POSWSRequest.GPSLong;
-                                             transactionAttempt.Amount = transaction.OriginalAmount;
-
-                                             transactionAttempt.Notes = request.Device.ToString();
-
-                                             
-
-                                             #region Handle Transaction response
-
-                                             action = "setting up transaction entry for database.";
-
-                                             try {
-                                                  action = "checking mid status before setting up transaction entry.";
-                                                  var mid = new SDGDAL.Entities.Mid();
-
-                                                  mid = _midsRepo.GetMidByPosIdAndCardTypeId(transaction.MerchantPOSId, transaction.CardTypeId);
-
-                                                  if (mid == null) {
-                                                       response.POSWSResponse.ErrNumber = "2101.4";
-                                                       response.POSWSResponse.Message = "Mid not found.";
+                                                  if (!mid.IsActive || mid.IsDeleted) {
+                                                       response.POSWSResponse.ErrNumber = "2101.5";
+                                                       response.POSWSResponse.Message = "Mid is Inactive.";
                                                        response.POSWSResponse.Status = "Declined";
 
                                                        return response;
-                                                  } else {
-                                                       if (!mid.IsActive || mid.IsDeleted) {
-                                                            response.POSWSResponse.ErrNumber = "2101.5";
-                                                            response.POSWSResponse.Message = "Mid is Inactive.";
-                                                            response.POSWSResponse.Status = "Declined";
-
-                                                            return response;
-                                                       }
-
-                                                       if (!mid.Switch.IsActive) {
-                                                            response.POSWSResponse.ErrNumber = "2101.6";
-                                                            response.POSWSResponse.Message = "Switch is Inactive.";
-                                                            response.POSWSResponse.Status = "Declined";
-
-                                                            return response;
-                                                       }
                                                   }
 
-                                                  action = "trying to encrypt card data.";
-
-                                                  #region Encrypt Card Data
-
-                                                  //ENCRYPT CARD DATA
-                                                  string NE_CARD = transaction.CardNumber;
-                                                  string NE_EMONTH = transaction.ExpMonth;
-                                                  string NE_EYEAR = transaction.ExpYear;
-                                                  string NE_CSC = transaction.CSC;
-                                                  string E_CARD;
-                                                  string E_EMONTH, E_EYEAR;
-                                                  string E_CSC;
-                                                  byte[] desKey;
-                                                  byte[] desIV;
-
-                                                  //card number masking
-                                                  string s = NE_CARD.Substring(NE_CARD.Length - 4);
-                                                  string r = new string('*', NE_CARD.Length);
-                                                  string MASK_CARD = r + s;
-                                                  //month masking
-                                                  string MASK_EMONTH = new string('*', NE_EMONTH.Length);
-                                                  //year masking
-                                                  string MASK_EYEAR = new string('*', NE_EYEAR.Length);
-                                                  //CSC masking
-                                                  string MASK_CSC = new string('*', NE_CSC.Length);
-
-                                                  E_CARD = Utility.GenerateSymmetricKeyAndEcryptData(MASK_CARD, out desKey, out desIV);
-
-                                                  transaction.Key = new SDGDAL.Entities._Key();
-                                                  transaction.Key.Key = Convert.ToBase64String(desKey);
-                                                  transaction.Key.IV = Convert.ToBase64String(desIV);
-
-                                                  E_EMONTH = Utility.EncryptDataWithExistingKey(NE_EMONTH, desKey, desIV);
-                                                  E_EYEAR = Utility.EncryptDataWithExistingKey(NE_EYEAR, desKey, desIV);
-                                                  E_CSC = Utility.EncryptDataWithExistingKey(NE_CSC, desKey, desIV);
-
-                                                  #endregion Encrypt Card Data
-
-                                                  action = "checking if address is required. ";
-                                                  if (mid.Switch.IsAddressRequired) {
-                                                       action = "saving temp transaction because switch requires address.";
-                                                       var tempTransaction = new SDGDAL.Entities.TempTransaction();
-
-                                                       tempTransaction.CopyProperties(transaction);
-
-                                                       var nTempTransaction = _transRepo.CreateTempTransaction(tempTransaction);
-
-                                                       if (nTempTransaction.TransactionId > 0) {
-                                                            response.POSWSResponse.Status = "Declined";
-                                                            response.POSWSResponse.Message = "This transaction require customer to enter their billing address.";
-                                                            response.POSWSResponse.ErrNumber = "2101.7";
-                                                            return response;
-                                                       } else {
-                                                            throw new Exception(action);
-                                                       }
-                                                  }
-
-                                                  transactionAttempt.TransactionChargesId = mid.TransactionChargesId;
-
-                                                  action = "checking if switch is active. ";
                                                   if (!mid.Switch.IsActive) {
-                                                       transactionAttempt.DateSent = DateTime.Now;
-                                                       transactionAttempt.DateReceived = DateTime.Now;
-                                                       transactionAttempt.DepositDate = DateTime.Now;
-                                                       transactionAttempt.Notes = ((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId).ToString() + " Declined. Switch inactive.";
-                                                       transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
-                                                  } else {
-                                                       transactionAttempt.DateSent = DateTime.Now;
-                                                       transactionAttempt.DateReceived = Convert.ToDateTime("1900/01/01");
-                                                       transactionAttempt.DepositDate = Convert.ToDateTime("1900/01/01");
-                                                       transactionAttempt.TransNumber = SDGUtil.Functions.GenerateSystemTraceAudit();
+                                                       response.POSWSResponse.ErrNumber = "2101.6";
+                                                       response.POSWSResponse.Message = "Switch is Inactive.";
+                                                       response.POSWSResponse.Status = "Declined";
 
-                                                       if (!mid.IsActive || mid.IsDeleted) {
-                                                            transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
-                                                       }
+                                                       return response;
                                                   }
+                                             }
 
-                                                  action = "saving transaction details to database.";
-                                                  var nTransaction = new SDGDAL.Entities.Transaction();
-                                                  nTransaction.CopyProperties(transaction);
+                                             action = "trying to encrypt card data.";
 
-                                                  nTransaction.CardNumber = E_CARD;
-                                                  nTransaction.ExpMonth = E_EMONTH;
-                                                  nTransaction.ExpYear = E_EYEAR;
-                                                  nTransaction.CSC = E_CSC;
-                                                  nTransaction.CurrencyId = mid.CurrencyId;
-                                                  nTransaction.MidId = mid.MidId;
-                                                  nTransaction.Track1 = "";
-                                                  nTransaction.Track2 = "";
-                                                  nTransaction.Track3 = "";
+                                             #region Encrypt Card Data
 
-                                                  var rTransaction = _transRepo.CreateTransaction(nTransaction, transactionAttempt);
+                                             //ENCRYPT CARD DATA
+                                             string NE_CARD = transaction.CardNumber;
+                                             string NE_EMONTH = transaction.ExpMonth;
+                                             string NE_EYEAR = transaction.ExpYear;
+                                             string NE_CSC = "";
+                                             string E_CARD;
+                                             string E_EMONTH, E_EYEAR;
+                                             string E_CSC;
+                                             byte[] desKey;
+                                             byte[] desIV;
 
-                                                  if (rTransaction.TransactionId > 0) {
-                                                       action = "processing transaction for api integration. Transaction was successfully saved.";
-                                                       transaction.TransactionId = rTransaction.TransactionId;
+                                             //card number masking
+                                             string s = NE_CARD.Substring(NE_CARD.Length - 4);
+                                             string r = new string('*', NE_CARD.Length);
+                                             string MASK_CARD = r + s;
+                                             //month masking
+                                             string MASK_EMONTH = new string('*', NE_EMONTH.Length);
+                                             //year masking
+                                             string MASK_EYEAR = new string('*', NE_EYEAR.Length);
+                                             //CSC masking
+                                             string MASK_CSC = new string('*', NE_CSC.Length);
 
-                                                       if (((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId) == Enums.TransactionType.Declined) {
-                                                            response.POSWSResponse.Message = "Transaction failed. Please contact Support.";
-                                                            response.POSWSResponse.ErrNumber = "2101.8";
-                                                            response.POSWSResponse.Status = "Declined";
-                                                            return response;
-                                                       } else {
-                                                            transactionAttemptId = transactionAttempt.TransactionAttemptId;
+                                             E_CARD = Utility.GenerateSymmetricKeyAndEcryptData(MASK_CARD, out desKey, out desIV);
 
-                                                            action = "processing api paymaya";
-                                                            GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
-                                                            GatewayProcessor.VeritasPayment.CardDetails transData = new GatewayProcessor.VeritasPayment.CardDetails();
+                                             transaction.Key = new SDGDAL.Entities._Key();
+                                             transaction.Key.Key = Convert.ToBase64String(desKey);
+                                             transaction.Key.IV = Convert.ToBase64String(desIV);
 
-                                                            transData.PrivateAdditionalData = Convert.ToString(request.CardDetails.EpbKsn.Length).PadLeft(4, '0') + request.CardDetails.EpbKsn + Convert.ToString(cardNumber.Length).PadLeft(4, '0') + cardNumber;
-                                                            transData.MerchantID = mid.Param_2;
-                                                            transData.TerminalID = mid.Param_6;
+                                             E_EMONTH = Utility.EncryptDataWithExistingKey(NE_EMONTH, desKey, desIV);
+                                             E_EYEAR = Utility.EncryptDataWithExistingKey(NE_EYEAR, desKey, desIV);
+                                             E_CSC = Utility.EncryptDataWithExistingKey(NE_CSC, desKey, desIV);
 
-                                                            decimal orgAmount = transactionAttempt.Amount;
-                                                            decimal finalAmount = orgAmount * 100;
+                                             #endregion Encrypt Card Data
 
-                                                            try {
-                                                                 transData.Amount = finalAmount.ToString().Remove(finalAmount.ToString().IndexOf('.'));
-                                                            } catch {
-                                                                 transData.Amount = finalAmount.ToString();
-                                                            }
+                                             action = "checking if address is required. ";
+                                             if (mid.Switch.IsAddressRequired) {
+                                                  action = "saving temp transaction because switch requires address.";
+                                                  var tempTransaction = new SDGDAL.Entities.TempTransaction();
 
-                                                            transData.RetrievalReferenceNumber = SDGUtil.Functions.GenerateRetrievalNumber(12);
-                                                            transData.SystemTraceAudit = transactionAttempt.TransNumber;
-                                                            transData.CardNumber = cardNumber;
-                                                            transData.NameOnCard = request.CardDetails.NameOnCard;
-                                                            transData.Track2Data = track2.Replace('D', '=').TrimStart(';').TrimEnd('F').TrimEnd('?');
-                                                            transData.Track1Data = null;
-                                                            transData.ExpirationDate = (transaction.ExpMonth == null || transaction.ExpYear == null) ? null : transaction.ExpYear + transaction.ExpMonth;
-                                                            transData.PinBlock = null;
-                                                            transData.CurrencyCode = mid.Currency.IsoCode;
-                                                            transData.ChipCardData = emvDataResult.EmvIccData;
+                                                  tempTransaction.CopyProperties(transaction);
 
-                                                            //Fees
-                                                            transData.AmountTransactionFee = "00000000";
-                                                            transData.MessageAuthorizationCode = "0000000000000000";
+                                                  var nTempTransaction = _transRepo.CreateTempTransaction(tempTransaction);
 
-                                                            action = "processing transaction for creedit api integration. Transaction was successfully saved.";
+                                                  if (nTempTransaction.TransactionId > 0) {
+                                                       response.POSWSResponse.Status = "Declined";
+                                                       response.POSWSResponse.Message = "This transaction require customer to enter their billing address.";
+                                                       response.POSWSResponse.ErrNumber = "2101.7";
+                                                       return response;
+                                                  } else {
+                                                       throw new Exception(action);
+                                                  }
+                                             }
 
-                                                            try {
+                                             transactionAttempt.TransactionChargesId = mid.TransactionChargesId;
+
+                                             action = "checking if switch is active. ";
+                                             if (!mid.Switch.IsActive) {
+                                                  transactionAttempt.DateSent = DateTime.Now;
+                                                  transactionAttempt.DateReceived = DateTime.Now;
+                                                  transactionAttempt.DepositDate = DateTime.Now;
+                                                  transactionAttempt.Notes = ((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId).ToString() + " Declined. Switch inactive.";
+                                                  transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
+                                             } else {
+                                                  transactionAttempt.DateSent = DateTime.Now;
+                                                  transactionAttempt.DateReceived = Convert.ToDateTime("1900/01/01");
+                                                  transactionAttempt.DepositDate = Convert.ToDateTime("1900/01/01");
+                                                  transactionAttempt.TransNumber = SDGUtil.Functions.GenerateSystemTraceAudit();
+
+                                                  if (!mid.IsActive || mid.IsDeleted) {
+                                                       transactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Declined);
+                                                  }
+                                             }
+
+                                             action = "saving transaction details to database.";
+                                             var nTransaction = new SDGDAL.Entities.Transaction();
+                                             nTransaction.CopyProperties(transaction);
+
+                                             nTransaction.CardNumber = E_CARD;
+                                             nTransaction.ExpMonth = E_EMONTH;
+                                             nTransaction.ExpYear = E_EYEAR;
+                                             nTransaction.CSC = "";
+                                             nTransaction.CurrencyId = mid.CurrencyId;
+                                             nTransaction.MidId = mid.MidId;
+                                             nTransaction.Track1 = "";
+                                             nTransaction.Track2 = "";
+                                             nTransaction.Track3 = "";
+
+                                             var rTransaction = _transRepo.CreateTransaction(nTransaction, transactionAttempt);
+
+                                             if (rTransaction.TransactionId > 0) {
+                                                  action = "processing transaction for api integration. Transaction was successfully saved.";
+                                                  transaction.TransactionId = rTransaction.TransactionId;
+
+                                                  if (((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId) == Enums.TransactionType.Declined) {
+                                                       response.POSWSResponse.Message = "Transaction failed. Please contact Support.";
+                                                       response.POSWSResponse.ErrNumber = "2101.8";
+                                                       response.POSWSResponse.Status = "Declined";
+                                                       return response;
+                                                  } else {
+                                                       transactionAttemptId = transactionAttempt.TransactionAttemptId;
+
+                                                       action = "processing api paymaya";
+                                                       GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
+                                                       GatewayProcessor.VeritasPayment.CardDetails transData = new GatewayProcessor.VeritasPayment.CardDetails();
+
+                                                       transData.PrivateAdditionalData = Convert.ToString(request.CardDetails.EpbKsn.Length).PadLeft(4, '0') + request.CardDetails.EpbKsn + Convert.ToString(cardNumber.Length).PadLeft(4, '0') + cardNumber;
+                                                       transData.MerchantID = mid.Param_2;
+                                                       transData.TerminalID = mid.Param_6;
+
+                                                       decimal orgAmount = transactionAttempt.Amount;
+                                                       decimal finalAmount = orgAmount * 100;
+
+                                                       try {
+                                                            transData.Amount = finalAmount.ToString().Remove(finalAmount.ToString().IndexOf('.'));
+                                                       } catch {
+                                                            transData.Amount = finalAmount.ToString();
+                                                       }
+
+                                                       transData.RetrievalReferenceNumber = SDGUtil.Functions.GenerateRetrievalNumber(12);
+                                                       transData.SystemTraceAudit = transactionAttempt.TransNumber;
+                                                       transData.CardNumber = cardNumber;
+                                                       transData.NameOnCard = request.CardDetails.NameOnCard;
+                                                       transData.Track2Data = track2.Replace('D', '=').TrimStart(';').TrimEnd('F').TrimEnd('?');
+                                                       transData.Track1Data = null;
+                                                       transData.ExpirationDate = (transaction.ExpMonth == null || transaction.ExpYear == null) ? null : transaction.ExpYear + transaction.ExpMonth;
+                                                       transData.PinBlock = null;
+                                                       transData.CurrencyCode = mid.Currency.IsoCode;
+                                                       transData.ChipCardData = emvDataResult.EmvIccData;
+
+                                                       //Fees
+                                                       transData.AmountTransactionFee = "00000000";
+                                                       transData.MessageAuthorizationCode = "0000000000000000";
+
+                                                       action = "processing transaction for creedit api integration. Transaction was successfully saved.";
+
+                                                       try {
                                                             var apiResponse = genericResponse;
 
                                                             transactionAttempt.TransactionAttemptId = transactionAttemptId;
@@ -1923,48 +1254,49 @@ namespace SDGWebService.WebserviceFunctions {
                                                             response.POSWSResponse.Message = "Transaction Successful.";
                                                             response.POSWSResponse.Status = "Approved";
                                                        } catch (Exception ex) {
-                                                                 // Log error
-                                                                 var errorOnAction = "Error while " + action;
-                                                                 var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction, "TransactionPurchaseEMV", "", "");
+                                                            // Log error
+                                                            var errorOnAction = "Error while " + action;
+                                                            var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction, "TransactionPurchaseEMV", "", "");
 
-                                                                 response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + "Declined" + " " + errorOnAction + " " + ex.Message;
-                                                                 response.POSWSResponse.ErrNumber = "2000.10";
-                                                                 response.POSWSResponse.Status = "Declined";
-                                                                 return response;
-                                                            }
-                                                            transactionAttempt.DateReceived = DateTime.Now;
-                                                            var nTransactionAttemptOffline = _transRepo.UpdateTransactionAttempt(transactionAttempt);
-                                                            response.POSWSResponse.Message = genericResponse.Note;
-                                                            response.POSWSResponse.ErrNumber = genericResponse.Status == "000" ? "0" : genericResponse.Status;
-                                                            response.POSWSResponse.Status = genericResponse.Status;
+                                                            response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + "Declined" + " " + errorOnAction + " " + ex.Message;
+                                                            response.POSWSResponse.ErrNumber = "2000.10";
+                                                            response.POSWSResponse.Status = "Declined";
                                                             return response;
                                                        }
-                                                  } else {
-                                                       throw new Exception(action);
+                                                       transactionAttempt.DateReceived = DateTime.Now;
+                                                       var nTransactionAttemptOffline = _transRepo.UpdateTransactionAttempt(transactionAttempt);
+                                                       response.POSWSResponse.Message = genericResponse.Note;
+                                                       response.POSWSResponse.ErrNumber = genericResponse.Status == "000" ? "0" : genericResponse.Status;
+                                                       response.POSWSResponse.Status = genericResponse.Status;
+                                                       return response;
                                                   }
-                                             } catch (Exception ex) {
-                                                  // Log error please
-                                                  var errorOnAction = "Error while " + action;
-
-                                                  var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction + "\n" + ex.Message, "TransationPurchaseCreditEMV", ex.StackTrace);
-
-                                                  response.POSWSResponse.ErrNumber = "2101.9";
-                                                  response.POSWSResponse.Message = "Unknown error, please contact support. Ref: " + errRefNumber;
-                                                  response.POSWSResponse.Status = "Declined";
+                                             } else {
+                                                  throw new Exception(action);
                                              }
+                                        } catch (Exception ex) {
+                                             // Log error please
+                                             var errorOnAction = "Error while " + action;
 
-                                             return response;
+                                             var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction + "\n" + ex.Message, "TransationPurchaseCreditEMV", ex.StackTrace);
 
-                                             #endregion Handle Transaction response
+                                             response.POSWSResponse.ErrNumber = "2101.9";
+                                             response.POSWSResponse.Message = "Unknown error, please contact support. Ref: " + errRefNumber;
+                                             response.POSWSResponse.Status = "Declined";
+                                        }
 
-                                             #endregion Transaction
-                                   } catch (Exception ex){
+                                        return response;
+
+                                        #endregion Handle Transaction response
+
+                                        #endregion Transaction
+                                   } catch (Exception ex) {
                                         var e = ex;
                                         return null;
                                    }
                               }
                          }
-                    } else {
+                    } 
+                    else {
                          response.POSWSResponse.ErrNumber = "2101.10";
                          response.POSWSResponse.Status = "Declined";
                          response.POSWSResponse.Message = "Invalid System Mode";
@@ -2046,11 +1378,14 @@ namespace SDGWebService.WebserviceFunctions {
 
                     #region WisePad 2.0 DeviceId = 4
                     case SDGDAL.Enums.SwipeDevice.WisePad2:
+                    //For decryption key
                     string key = WisepadLayer.DUKPTServer.GetDataKey(cd.Ksn, bdk);
 
                     if (cardAction == Enums.CardAction.EMV) {
+                         //for card value in hex string
                          string decryptedTlv = WisepadLayer.TripleDES.decrypt_CBC(cd.EmvICCData, key);
 
+                         //convertion from hex string to actual card details
                          var resultTlv = TLVParser.DecodeTLV(decryptedTlv);
                          emvDataResult.EmvIccData = decryptedTlv;
                          emvDataResult.SubField1Data = resultTlv.SubField1Data;

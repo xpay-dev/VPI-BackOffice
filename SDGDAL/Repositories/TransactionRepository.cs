@@ -11452,7 +11452,7 @@ namespace SDGDAL.Repositories {
                          + " left join Merchants on MerchantBranches.MerchantId = Merchants.MerchantId"
                          + " left join Resellers on Merchants.ResellerId = Resellers.ResellerId"
                          + " left outer join Currencies on transactions.CurrencyId = Currencies.CurrencyId";
-
+               sql += " AND transactionattempts.ReturnCode != null AND transactionattempts.ReturnCode = '00'";
                if (startDate.Value != DateTime.MinValue) {
                     sql += " WHERE transactionattempts.DateReceived >= CAST('" + startDate.Value.ToString("yyyy-MM-dd") + " 00:00:00.000' AS Datetime)";
                } else {
