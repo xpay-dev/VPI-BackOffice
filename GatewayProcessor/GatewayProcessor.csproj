@@ -104,6 +104,8 @@
     <Compile Include="CTPaymentGateway\PinPad.cs" />
     <Compile Include="CTPaymentGateway\Terminal.cs" />
     <Compile Include="CTPaymentGateway\TransactionEMVData.cs" />
+    <Compile Include="PayMaya\P3Request.cs" />
+    <Compile Include="PayMaya\P3Response.cs" />
     <Compile Include="PayMaya\Request.cs" />
     <Compile Include="PayMaya\TransactionResponse.cs" />
     <Compile Include="PayOnline\TransactionRequest.cs" />
