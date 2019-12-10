@@ -8,7 +8,8 @@
 <link href="@Url.Content("~/Css/datepicker/jquery-ui-1.9.2.custom.min.css")" rel="stylesheet" type="text/css" />
 
 <nav class="top-menu" ng-class="{'hidden-top-menu': hideTopMenu}">
-    <div class="col-sm-6">        <!-- START BREADCRUMB -->
+    <div class="col-sm-6">
+        <!-- START BREADCRUMB -->
         <ul class="breadcrumb">
             <li><a href="#">Home</a></li>
             <li class="active">Reports Central</li>
@@ -27,6 +28,9 @@
         @Html.Hidden("userType", "")
         @Html.Hidden("hdnpId", "")
         @Html.Hidden("hdnType", "")
+        @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
+            @Html.Hidden("ddlpartners", SDGBackOffice.CurrentUser.ParentId)
+        }
         <section class="panel">
             <div class="panel-heading">
                 <h3>Reports Central</h3>
@@ -53,17 +57,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner)
-                            {
-
-                            }
-                        </div>
-
 
                         <div class="form-group row">
-                            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner)
-                            {
+                            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Reseller</label>
                                     @Html.DropDownList("ddlresellers", (List<SelectListItem>)ViewBag.Resellers, new { @class = "form-control" })
@@ -77,17 +73,14 @@
 
 
                         <div class="form-group row">
-                            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller)
-                            {
+                            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller) {
 
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Merchant</label>
                                     @Html.DropDownList("ddlmerchants", (List<SelectListItem>)ViewBag.Merchants, new { @class = "form-control" })
                                 </div>
 
-                            }
-                            else if (SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant)
-                            {
+                            } else if (SDGBackOffice.CurrentUser.ParentType != SDGBackOffice.Enums.ParentType.Merchant) {
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Merchant</label>
                                     @Html.DropDownList("ddlmerchants", new List<SelectListItem>() { new SelectListItem { Text = "No Merchants available", Value = "-2" } }, new { @class = "form-control" })
@@ -102,15 +95,12 @@
 
 
                         <div class="form-group row">
-                            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Merchant)
-                            {
+                            @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Merchant) {
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Branch</label>
                                     @Html.DropDownList("ddlbranches", (List<SelectListItem>)ViewBag.Branches, new { @class = "form-control" })
                                 </div>
-                            }
-                            else
-                            {
+                            } else {
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Branch</label>
                                     @Html.DropDownList("ddlbranches", new List<SelectListItem>() { new SelectListItem { Text = "No Merchant Branches available", Value = "-3" } }, new { @class = "form-control" })
@@ -138,8 +128,7 @@
     <div class="page-content-inner">
         <div class="panel panel-default 1st">
             <div class="panel-heading">
-                <h3 id="headerReport" class="panel-title">Reports</h3>
-
+                <h3 class="panel-title">Reports</h3>
                 <div style="display: inline-grid;" id="">
                     <input id="view" type="button" class="btn btn-primary pull-right" value="View Transaction(s)" />
                 </div>
@@ -151,6 +140,7 @@
                             <th></th>
                             <th></th>
                             <th>Card Type</th>
+                            <th>Transaction Entry Type</th><!--Action-->
                             <th>Transaction Type</th>
                             <th>Transactions</th>
                             <th>Currency</th>
@@ -163,7 +153,6 @@
             </div>
             <div id="tbl2" class="panel-body">
                 <table class="table table-inverse nowrap" id="transTbl2" width="100%">
-
                     <thead>
                         <tr>
                             <th></th>
@@ -185,10 +174,10 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Reports</h3>
                         <div style="display: inline-grid;" id="">
-                                <div class="pull-right">
-                                    <input id="x" type="button" class="btn btn-default margin-inline" value="Close" style="margin-right: 5px;" />
-                                    <button id="export" class="btn btn-primary margin-inline"><i class="fa fa-bars"></i>Export Data</button>
-                                </div>
+                            <div class="pull-right">
+                                <input id="x" type="button" class="btn btn-default margin-inline" value="Close" style="margin-right: 5px;" />
+                                <button id="export" class="btn btn-primary margin-inline"><i class="fa fa-bars"></i>Export Data</button>
+                            </div>
                         </div>
                     </div>
                     <div id="tTbl1" class="panel-body">
@@ -218,7 +207,7 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                  
+
                 </div>
             </div>
         </section>
@@ -260,9 +249,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#example1').DataTable({
-                responsive: true
-            });
+
 
             $("select").each(function () { this.selectedIndex = 0 });
 
@@ -275,21 +262,8 @@
 
             $("#tbl2").hide();
 
-            $("#tTbl1").hide();
-
-            $("#tTblExport").hide();
-
-            $("#message-box-danger").hide();
-
-            $("#message-box-success").hide();
-
-            var pId = '@(ViewBag.User)'
-
-            document.getElementById('hdnpId').value = pId;
-
             var s = "1/1/0001";
             var e = "1/1/0001";
-
             refreshReportsTable(0, 0, 0, 0, 0, 0, 0, s, e);
 
             $("#ddlpartners").on("change", function () {
@@ -304,14 +278,14 @@
                 $('#ddlbranches').empty();
                 $('#ddlbranches').each(function () {
                     var option = $("<option />");
-                    option.attr("value", '-3').text('No Merchant Branches available');
+                    option.attr("value", '0').text('No Merchant Branches available');
                     $('#ddlbranches').append(option);
                 });
 
                 $('#ddlpos').empty();
                 $('#ddlpos').each(function () {
                     var option = $("<option />");
-                    option.attr("value", '-4').text('No POSs available');
+                    option.attr("value", '0').text('No POSs available');
                     $('#ddlpos').append(option);
                 });
 
@@ -334,64 +308,41 @@
                                 data: { "rId": $("#ddlresellers").val() },
                                 dataType: "json",
                                 success: function (data) {
-                                    if (data.length == 1) {
-                                        $("option[value='-2']").remove();
-                                        $('#ddlmerchants').empty()
-                                        $.each(data, function (key, value) {
-                                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
-                                        });
+                                    $("option[value='-2']").remove();
+                                    $('#ddlmerchants').empty()
+                                    $.each(data, function (key, value) {
+                                        $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                                    });
 
+                                    if (data.length == 1) {
                                         $.ajax({
                                             url: rootDir + 'Ajax/GetBranches',
                                             type: 'POST',
                                             data: { "id": $("#ddlmerchants").val() },
                                             dataType: "json",
                                             success: function (data) {
-                                                if (data.length == 1) {
-                                                    $("option[value='-3']").remove();
-                                                    $('#ddlbranches').empty()
-                                                    $.each(data, function (key, value) {
-                                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
-                                                    });
+                                                $("option[value='-3']").remove();
+                                                $('#ddlbranches').empty()
+                                                $.each(data, function (key, value) {
+                                                    $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                                });
 
+                                                if (data.length == 1) {
                                                     $.ajax({
-                                                        url: rootDir + 'Ajax/BanchPOSForMid',
+                                                        url: rootDir + 'Ajax/GetPOSByMerchantBranch',
                                                         type: 'POST',
-                                                        data: { "id": $("#ddlbranches").val() },
+                                                        data: { "bId": $("#ddlbranches").val() },
                                                         dataType: "json",
                                                         success: function (data) {
-                                                            if (data.length == 1) {
-                                                                $("option[value='-4']").remove();
-                                                                $('#ddlpos').empty();
-                                                                $.each(data, function (key, value) {
-                                                                    $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
-                                                                });
-
-                                                              
-                                                            } else {
-                                                                $("option[value='-3']").remove();
-                                                                $('#ddlpos').empty();
-                                                                $.each(data, function (key, value) {
-                                                                    $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
-                                                                });
-                                                            }
+                                                            $("option[value='-4']").remove();
+                                                            $('#ddlpos').empty();
+                                                            $.each(data, function (key, value) {
+                                                                $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
+                                                            });
                                                         }
-                                                    });
-
-                                                } else {
-                                                    $("option[value='-3']").remove();
-                                                    $('#ddlbranches').empty()
-                                                    $.each(data, function (key, value) {
-                                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
                                                     });
                                                 }
                                             }
-                                        });
-                                    } else {
-                                        $("option[value='-2']").remove();
-                                        $('#ddlmerchants').empty()
-                                        $.each(data, function (key, value) {
-                                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
                                         });
                                     }
                                 }
@@ -406,14 +357,14 @@
                 $('#ddlbranches').empty();
                 $('#ddlbranches').each(function () {
                     var option = $("<option />");
-                    option.attr("value", '-3').text('No Merchant Branches available');
+                    option.attr("value", '0').text('No Merchant Branches available');
                     $('#ddlbranches').append(option);
                 });
 
                 $('#ddlpos').empty();
                 $('#ddlpos').each(function () {
                     var option = $("<option />");
-                    option.attr("value", '-4').text('No POSs available');
+                    option.attr("value", '0').text('No POSs available');
                     $('#ddlpos').append(option);
                 });
 
@@ -441,11 +392,12 @@
                                     $.each(data, function (key, value) {
                                         $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
                                     });
+
                                     if (data.length == 1) {
                                         $.ajax({
-                                            url: rootDir + 'Ajax/BanchPOSForMid',
+                                            url: rootDir + 'Ajax/GetPOSByMerchantBranch',
                                             type: 'POST',
-                                            data: { "id": $("#ddlbranches").val() },
+                                            data: { "bId": $("#ddlbranches").val() },
                                             dataType: "json",
                                             success: function (data) {
                                                 $("option[value='-4']").remove();
@@ -455,15 +407,8 @@
                                                 });
                                             }
                                         });
-
                                     }
                                 }
-                            });
-                        } else {
-                            $("option[value='-2']").remove();
-                            $('#ddlmerchants').empty()
-                            $.each(data, function (key, value) {
-                                $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
                             });
                         }
                     }
@@ -476,7 +421,7 @@
                 $('#ddlpos').empty();
                 $('#ddlpos').each(function () {
                     var option = $("<option />");
-                    option.attr("value", '-4').text('No POSs available');
+                    option.attr("value", '0').text('No POSs available');
                     $('#ddlpos').append(option);
                 });
 
@@ -486,17 +431,17 @@
                     data: { "id": id },
                     dataType: "json",
                     success: function (data) {
-
                         $("option[value='-3']").remove();
                         $('#ddlbranches').empty()
                         $.each(data, function (key, value) {
                             $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
                         });
+
                         if (data.length == 1) {
                             $.ajax({
-                                url: rootDir + 'Ajax/BanchPOSForMid',
+                                url: rootDir + 'Ajax/GetPOSByMerchantBranch',
                                 type: 'POST',
-                                data: { "id": $("#ddlbranches").val() },
+                                data: { "bId": $("#ddlbranches").val() },
                                 dataType: "json",
                                 success: function (data) {
                                     $("option[value='-4']").remove();
@@ -505,12 +450,6 @@
                                         $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
                                     });
                                 }
-                            });
-                        } else {
-                            $("option[value='-3']").remove();
-                            $('#ddlpos').empty();
-                            $.each(data, function (key, value) {
-                                $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
                             });
                         }
                     }
@@ -540,23 +479,13 @@
                 var type = document.getElementById('ddltranstype').value;
                 var action = document.getElementById('ddlactions').value;
             });
-            $("#view").click(function () {
-                var uType = '@(ViewBag.UserType)'
-                var user;
 
+            $("#view").click(function () {
                 var start = document.getElementById('datepickerstart').value;
                 var end = document.getElementById('datepickerend').value;
-                var r = document.getElementById('ddlresellers');
-                var m = document.getElementById('ddlmerchants');
-
-                if (r != null) {
-                    r = document.getElementById('ddlresellers').value;
-                } else { r = 0; }
-
-                if (m != null) {
-                    m = document.getElementById('ddlmerchants').value;
-                } else { m = 0; }
-
+                var p = document.getElementById('ddlpartners').value;
+                var r = document.getElementById('ddlresellers').value;
+                var m = document.getElementById('ddlmerchants').value;
                 var b = document.getElementById('ddlbranches').value;
                 var mp = document.getElementById('ddlpos').value;
                 var type = document.getElementById('ddltranstype').value;
@@ -571,101 +500,43 @@
                     end = "1/1/0001";
                 } else if (start != "" && end != "") {
                     if ((new Date(start).getTime() > new Date(end).getTime())) {
-                        $("#errMsg").text("Check your Date Filtering. End date is less than Start date.");
-                        $("#message-box-danger").show();
+                        $("#errorMsg").text("Check your Date Filtering. End date is less than Start date.");
+                        getModal(1, errorMsg);
                     }
                 }
 
-                if (r > 0) {
-                    if (type > 0) {
+                if (p != 0) {
+                    if (type != 0) {
+
                         if (type == 4) {
                             $("#tbl1").hide();
-                            refreshDebitReportsTable(0, r, m, mp, b, type, action, start, end);
+                            refreshDebitReportsTable(p, r, m, mp, b, type, action, start, end);
                             $("#tbl2").show();
                         } else if (type == 5) {
                             $("#tbl2").hide();
                             $("#tbl1").show();
-                            refreshReportsTable(0, r, m, mp, b, type, action, start, end);
+                            refreshReportsTable(p, r, m, mp, b, type, action, start, end);
                         } else {
                             $("#tbl2").hide();
                             $("#tbl1").show();
-                            refreshReportsTable(0, r, m, mp, b, type, action, start, end);
+                            refreshReportsTable(p, r, m, mp, b, type, action, start, end);
                         }
+
                     } else {
-                        if (uType == "reseller") {
-                            document.getElementById('hdnType').value = uType;
-                            document.getElementById('userType').value = "reseller";
-                            $("#tbl2").hide();
-                            $("#tbl1").show();
-                            refreshReportsTable(0, pId, m, mp, b, type, action, start, end);
-                        } else if (uType == "merchant") {
-                            document.getElementById('hdnType').value = uType;
-                            document.getElementById('userType').value = "merchant";
-                            $("#tbl2").hide();
-                            $("#tbl1").show();
-                            refreshReportsTable(0, 0, pId, mp, b, type, action, start, end);
-                        } else {
-                            $("#tbl2").hide();
-                            $("#tbl1").show();
-                            refreshReportsTable(pId, r, m, mp, b, type, action, start, end);
-                        }
-                        //$("#errMsg").text("Please select a Transaction Type.");
-                        //$("#message-box-danger").show();
-                    }
-                } else if (r == 0) {
-                    if (type > 0) {
-                        if (type == 4) {
-                            $("#tbl1").hide();
-                            refreshDebitReportsTable(pId, r, m, mp, b, type, action, start, end);
-                            $("#tbl2").show();
-                        } else {
-                            if (uType == "reseller") {
-                                document.getElementById('hdnType').value = uType;
-                                document.getElementById('userType').value = "reseller";
-                                $("#tbl2").hide();
-                                $("#tbl1").show();
-                                refreshReportsTable(0, pId, m, mp, b, type, action, start, end);
-                            } else if (uType == "merchant") {
-                                document.getElementById('hdnType').value = uType;
-                                document.getElementById('userType').value = "merchant";
-                                $("#tbl2").hide();
-                                $("#tbl1").show();
-                                refreshReportsTable(0, 0, pId, mp, b, type, action, start, end);
-                            } else {
-                                $("#tbl2").hide();
-                                $("#tbl1").show();
-                                refreshReportsTable(pId, r, m, mp, b, type, action, start, end);
-                            }
-                        }
-                    } else {
-                        if (uType == "reseller") {
-                            document.getElementById('hdnType').value = uType;
-                            document.getElementById('userType').value = "reseller";
-                            $("#tbl2").hide();
-                            $("#tbl1").show();
-                            refreshReportsTable(0, pId, m, mp, b, type, action, start, end);
-                        } else if (uType == "merchant") {
-                            document.getElementById('hdnType').value = uType;
-                            document.getElementById('userType').value = "merchant";
-                            $("#tbl2").hide();
-                            $("#tbl1").show();
-                            refreshReportsTable(0, 0, pId, mp, b, type, action, start, end);
-                        } else {
-                            $("#tbl2").hide();
-                            $("#tbl1").show();
-                            refreshReportsTable(pId, r, m, mp, b, type, action, start, end);
-                        }
+                        $("#tbl2").hide();
+                        $("#tbl1").show();
+                        refreshReportsTable(p, r, m, mp, b, type, action, start, end);
                         //$("#errMsg").text("Please select a Transaction Type.");
                         //$("#message-box-danger").show();
                     }
                 } else {
-                    $("#errMsg").text("Please select a Partner");
-                    $("#message-box-danger").show();
+                    $("#errorMsg").text("Please select a Partner");
+                    getModal(1, errorMsg);
                 }
             });
 
             $("#close").click(function () {
-                $("#message-box-danger").hide();
+
             });
 
             $("#xMap").click(function () {
@@ -680,126 +551,29 @@
                 $('.3rdMap').hide();
             });
 
-            //$("#datepickerstart").datepicker({
-            //    onSelect: function (selected) {
-            //        //$("#datepickerend").datepicker("option", "minDate", selected)
-            //    }
-            //});
-            //$("#datepickerend").datepicker({
-            //    onSelect: function (selected) {
-            //        //$("#datepickerstart").datepicker("option", "maxDate", selected)
-            //    }
-            //});
-
-            $('.datepicker-only-init').datetimepicker({
-                widgetPositioning: {
-                    horizontal: 'left'
-                },
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                },
-                format: 'LL'
+            $("#datepickerstart").datepicker({
+                onSelect: function (selected) {
+                    //$("#datepickerend").datepicker("option", "minDate", selected)
+                }
+            });
+            $("#datepickerend").datepicker({
+                onSelect: function (selected) {
+                    //$("#datepickerstart").datepicker("option", "maxDate", selected)
+                }
             });
 
             $("#clear1").click(function () {
                 $("#datepickerstart").val("");
+                datepicker('option', { minDate: null, maxDate: null });
             });
 
             $("#clear2").click(function () {
                 $("#datepickerend").val("");
+                datepicker('option', { minDate: null, maxDate: null });
             });
 
             $(".remover").css("cursor", "pointer");
-
-            if ($('#ddlresellers > option').length == 1) {
-                var id = document.getElementById('ddlresellers').value;
-
-                $.ajax({
-                    url: rootDir + 'Ajax/GetMerchantsByReseller',
-                    type: 'POST',
-                    data: { "rId": id },
-                    dataType: "json",
-                    success: function (data) {
-
-                        $("option[value='-2']").remove();
-                        $('#ddlmerchants').empty()
-                        $.each(data, function (key, value) {
-                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
-                        });
-
-                        if (data.length == 1) {
-                            $.ajax({
-                                url: rootDir + 'Ajax/GetBranches',
-                                type: 'POST',
-                                data: { "id": $("#ddlmerchants").val() },
-                                dataType: "json",
-                                success: function (data) {
-                                    $("option[value='-3']").remove();
-                                    $('#ddlbranches').empty();
-                                    $.each(data, function (key, value) {
-                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
-                                    });
-
-                                    if (data.length == 1) {
-                                        $.ajax({
-                                            url: rootDir + 'Ajax/BanchPOSForMid',
-                                            type: 'POST',
-                                            data: { "id": $("#ddlbranches").val() },
-                                            dataType: "json",
-                                            success: function (data) {
-                                                $("option[value='-4']").remove();
-                                                $('#ddlpos').empty();
-                                                $.each(data, function (key, value) {
-                                                    $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
-                                                });
-                                            }
-                                        });
-                                    }
-
-                                }
-                            });
-                        }
-
-                    }
-                });
-            }
-
-            if ($("#ddlmerchants > option").length == 1) {
-                $.ajax({
-                    url: rootDir + 'Ajax/GetBranches',
-                    type: 'POST',
-                    data: { "id": $("#ddlmerchants").val() },
-                    dataType: "json",
-                    success: function (data) {
-                        $("option[value='-3']").remove();
-                        $('#ddlbranches').empty();
-                        $.each(data, function (key, value) {
-                            $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
-                        });
-
-                        if (data.length == 1) {
-                            $.ajax({
-                                url: rootDir + 'Ajax/BanchPOSForMid',
-                                type: 'POST',
-                                data: { "id": $("#ddlbranches").val() },
-                                dataType: "json",
-                                success: function (data) {
-                                    $("option[value='-4']").remove();
-                                    $('#ddlpos').empty();
-                                    $.each(data, function (key, value) {
-                                        $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
-                                    });
-                                }
-                            });
-                        }
-
-                    }
-                });
-            }
-
         });
     </script>
+
 }

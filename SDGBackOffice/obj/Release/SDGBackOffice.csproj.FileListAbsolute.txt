@@ -64,7 +64,6 @@ E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\bin\
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\bin\Dapper.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\bin\System.Spatial.xml
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\obj\Release\SDGBackOffice.csprojAssemblyReference.cache
-E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\obj\Release\SDGBackOffice.csproj.CoreCompileInputs.cache
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\obj\Release\SDGBackOffice.csproj.CopyComplete
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\obj\Release\SDGBackOffice.dll
 E:\Users\Gabby Peneyra\source\repos\FromGitHub\VPI-BackOffice\SDGBackOffice\obj\Release\SDGBackOffice.pdb
