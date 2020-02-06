@@ -1,4 +1,5 @@
-﻿using SDGWebService.Classes;
+﻿using GatewayProcessor.PayMaya;
+using SDGWebService.Classes;
 using SDGWebService.WebserviceFunctions;
 using System;
 using System.ServiceModel;
@@ -105,6 +106,10 @@ namespace SDGWebService {
           
           public CreditVoidRefundResponse CreditTransactionVoidRefund(TransactionVoidRefundRequest VoidRequest) {
                return wsFunctionsCreditSwipe.CreditTransactionVoidRefund(VoidRequest);
+          }
+
+          public PurchaseResponse EcomTransactionEMV(TransactionRequest request) {
+               return wsFunctionsCreditEMV.EcomTransactionEMV(request);
           }
      }
 }

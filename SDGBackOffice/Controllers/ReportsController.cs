@@ -52,7 +52,7 @@ namespace SDGBackOffice.Controllers {
                               Text = "Select a Partner",
                               Selected = 0 == 0
                          });
-
+                         
                          ddlPartners.AddRange(partners.Select(p => new SelectListItem() {
                               Value = p.PartnerId.ToString(),
                               Text = p.CompanyName
@@ -287,16 +287,24 @@ namespace SDGBackOffice.Controllers {
 
                if (CurrentUser.ParentType == Enums.ParentType.Partner) {
                     GetPartnerByPartnerId();
+                    //GetResellerByPartnerId();
                     uType = "partner";
                }
-
                if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller) {
+                    ViewBag.PartnerId = _resellerRepo.GetResellerById(CurrentUser.ParentId).FirstOrDefault().PartnerId;
                     GetMerchantByReseller();
                     uType = "reseller";
                } else if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Merchant) {
+                    var merchant = _merchantRepo.GetMerchantById(CurrentUser.ParentId).FirstOrDefault();
+                    ViewBag.PartnerId = merchant.PartnerId;
+                    ViewBag.ResellerId = merchant.ResellerId;
                     GetBrachesByMerchant();
                     uType = "merchant";
                } else if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.MerchantLocation) {
+                    var branch = _branchRepo.GetDetailsbyMerchantBranchId(CurrentUser.ParentId);
+                    ViewBag.PartnerId = branch.Merchant.PartnerId;
+                    ViewBag.ResellerId = branch.Merchant.ResellerId;
+                    ViewBag.MerchantId = branch.Merchant;
                     GetPOSByBranch();
                     uType = "branch";
                }
@@ -315,6 +323,33 @@ namespace SDGBackOffice.Controllers {
                ViewBag.CurrentUser = CurrentUser.ParentId;
 
                return View();
+          }
+
+          private void GetResellerByPartnerId() {
+               try {
+                    action = "getting reseller by partner id.";
+
+                    var resellers = _resellerRepo.GetAllResellersByPartner(CurrentUser.ParentId, "");
+
+                    var ddlResellers = new List<SelectListItem>();
+
+                    ddlResellers.Add(new SelectListItem() {
+                         Value = "0",
+                         Text = "Select a Merchant",
+                         Selected = 0 == 0
+                    });
+
+                    ddlResellers.AddRange(resellers.Select(p => new SelectListItem() {
+                         Value = p.ResellerId.ToString(),
+                         Text = p.ResellerName
+                    }).ToList());
+
+                    ViewBag.Reseller = ddlResellers;
+               } catch (Exception ex) {
+                    var errorOnAction = "Error while " + action;
+
+                    var errRefNumber = ApplicationLog.LogError("SDGBackOffice", errorOnAction + "\n" + ex.Message, "GetResellerByPartnerId", ex.StackTrace);
+               }
           }
 
           public ActionResult ReportsGraph() {

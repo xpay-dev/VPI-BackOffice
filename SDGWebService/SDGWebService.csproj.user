@@ -36,7 +36,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>18626</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:18628/</IISUrl>
+          <IISUrl>http://localhost:18629/gateway</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://localhost:18626</CustomServerUrl>

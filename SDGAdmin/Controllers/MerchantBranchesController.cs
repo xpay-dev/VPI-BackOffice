@@ -233,7 +233,7 @@ namespace SDGAdmin.Controllers
                 }
                 else
                 {
-                    mId = Convert.ToInt32(Utility.Decrypt(Convert.ToString(Request["mId"])));
+                    mId = Convert.ToInt32(Convert.ToString(Request["mId"]));
                 }
 
                 if (CurrentUser.ParentType != Enums.ParentType.Partner)

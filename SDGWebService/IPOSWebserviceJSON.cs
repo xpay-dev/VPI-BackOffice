@@ -1,4 +1,5 @@
-﻿using SDGWebService.Classes;
+﻿using GatewayProcessor.PayMaya;
+using SDGWebService.Classes;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -101,5 +102,9 @@ namespace SDGWebService {
           [OperationContract]
           [WebInvoke(UriTemplate = "CreditTransactionVoidRefund", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
           CreditVoidRefundResponse CreditTransactionVoidRefund(TransactionVoidRefundRequest request);
+
+          [OperationContract]
+          [WebInvoke(UriTemplate = "EcomTransactionEMV", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+          PurchaseResponse EcomTransactionEMV(TransactionRequest request);
      }
 }
