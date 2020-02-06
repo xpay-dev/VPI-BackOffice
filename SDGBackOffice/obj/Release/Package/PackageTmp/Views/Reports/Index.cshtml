@@ -25,12 +25,9 @@
 <div class="swal-btn-cancel"></div>
 <section class="page-content">
     <div class="page-content-inner">
-        @Html.Hidden("userType", "")
+        <input id="userType" value="@ViewBag.UserType" type="hidden" />
         @Html.Hidden("hdnpId", "")
         @Html.Hidden("hdnType", "")
-        @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
-            @Html.Hidden("ddlpartners", SDGBackOffice.CurrentUser.ParentId)
-        }
         <section class="panel">
             <div class="panel-heading">
                 <h3>Reports Central</h3>
@@ -60,6 +57,7 @@
 
                         <div class="form-group row">
                             @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Partner) {
+                                <input id="ddlpartners" value="@SDGBackOffice.CurrentUser.ParentId" type="hidden" />
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Reseller</label>
                                     @Html.DropDownList("ddlresellers", (List<SelectListItem>)ViewBag.Resellers, new { @class = "form-control" })
@@ -74,7 +72,8 @@
 
                         <div class="form-group row">
                             @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Reseller) {
-
+                                <input id="ddlpartners" value="@ViewBag.PartnerId)" type="hidden" />
+                                <input id="ddlresellers" value="@SDGBackOffice.CurrentUser.ParentId" type="hidden" />
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Merchant</label>
                                     @Html.DropDownList("ddlmerchants", (List<SelectListItem>)ViewBag.Merchants, new { @class = "form-control" })
@@ -96,6 +95,9 @@
 
                         <div class="form-group row">
                             @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.Merchant) {
+                                <input id="ddlpartners" value="@ViewBag.PartnerId)" type="hidden" />
+                                <input id="ddlresellers" value="@ViewBag.ResellerId" type="hidden" />
+                                <input id="ddlmerchants" value="@SDGBackOffice.CurrentUser.ParentId" type="hidden" />
                                 <div class="col-md-4">
                                     <label class="form-control-label">Select Branch</label>
                                     @Html.DropDownList("ddlbranches", (List<SelectListItem>)ViewBag.Branches, new { @class = "form-control" })
@@ -107,6 +109,12 @@
                                 </div>
                             }
                         </div>
+                        @if (SDGBackOffice.CurrentUser.ParentType == SDGBackOffice.Enums.ParentType.MerchantLocation) {
+                            <input id="ddlpartners" value="@ViewBag.PartnerId)" type="hidden" />
+                            <input id="ddlresellers" value="@ViewBag.ResellerId" type="hidden" />
+                            <input id="ddlmerchants" value="@ViewBag.MerchantId" type="hidden" />
+                            <input id="ddlbranches" value="@SDGBackOffice.CurrentUser.ParentId" type="hidden" />
+                        }
 
                         <div class="form-group row">
                             <div class="col-md-4">
@@ -266,15 +274,8 @@
             var e = "1/1/0001";
             refreshReportsTable(0, 0, 0, 0, 0, 0, 0, s, e);
 
-            $("#ddlpartners").on("change", function () {
-                var id = document.getElementById('ddlpartners').value;
-                $('#ddlmerchants').empty();
-                $('#ddlmerchants').each(function () {
-                    var option = $("<option />");
-                    option.attr("value", '0').text('No Merchants available');
-                    $('#ddlmerchants').append(option);
-                });
-
+            if ($('#userType').val() == 'partner' && $("#ddlresellers").length == 1) {
+                var id = document.getElementById('ddlresellers').value;
                 $('#ddlbranches').empty();
                 $('#ddlbranches').each(function () {
                     var option = $("<option />");
@@ -290,58 +291,42 @@
                 });
 
                 $.ajax({
-                    url: rootDir + 'Ajax/GetReseller',
+                    url: rootDir + 'Ajax/GetMerchantsByReseller',
                     type: 'POST',
-                    data: { "pId": id },
+                    data: { "rId": id },
                     dataType: "json",
                     success: function (data) {
-                        $("option[value='-1']").remove();
-                        $('#ddlresellers').empty();
+                        $("option[value='-2']").remove();
+                        $('#ddlmerchants').empty()
                         $.each(data, function (key, value) {
-                            $("#ddlresellers").append($("<option></option>").val(value.Value).html(value.Text));
+                            $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
                         });
 
                         if (data.length == 1) {
                             $.ajax({
-                                url: rootDir + 'Ajax/GetMerchantsByReseller',
+                                url: rootDir + 'Ajax/GetBranches',
                                 type: 'POST',
-                                data: { "rId": $("#ddlresellers").val() },
+                                data: { "id": $("#ddlmerchants").val() },
                                 dataType: "json",
                                 success: function (data) {
-                                    $("option[value='-2']").remove();
-                                    $('#ddlmerchants').empty()
+                                    $("option[value='-3']").remove();
+                                    $('#ddlbranches').empty()
                                     $.each(data, function (key, value) {
-                                        $("#ddlmerchants").append($("<option></option>").val(value.Value).html(value.Text));
+                                        $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
                                     });
 
                                     if (data.length == 1) {
                                         $.ajax({
-                                            url: rootDir + 'Ajax/GetBranches',
+                                            url: rootDir + 'Ajax/GetPOSByMerchantBranch',
                                             type: 'POST',
-                                            data: { "id": $("#ddlmerchants").val() },
+                                            data: { "bId": $("#ddlbranches").val() },
                                             dataType: "json",
                                             success: function (data) {
-                                                $("option[value='-3']").remove();
-                                                $('#ddlbranches').empty()
+                                                $("option[value='-4']").remove();
+                                                $('#ddlpos').empty();
                                                 $.each(data, function (key, value) {
-                                                    $("#ddlbranches").append($("<option></option>").val(value.Value).html(value.Text));
+                                                    $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
                                                 });
-
-                                                if (data.length == 1) {
-                                                    $.ajax({
-                                                        url: rootDir + 'Ajax/GetPOSByMerchantBranch',
-                                                        type: 'POST',
-                                                        data: { "bId": $("#ddlbranches").val() },
-                                                        dataType: "json",
-                                                        success: function (data) {
-                                                            $("option[value='-4']").remove();
-                                                            $('#ddlpos').empty();
-                                                            $.each(data, function (key, value) {
-                                                                $("#ddlpos").append($("<option></option>").val(value.Value).html(value.Text));
-                                                            });
-                                                        }
-                                                    });
-                                                }
                                             }
                                         });
                                     }
@@ -350,7 +335,7 @@
                         }
                     }
                 });
-            });
+            }
 
             $("#ddlresellers").on("change", function () {
                 var id = document.getElementById('ddlresellers').value;
