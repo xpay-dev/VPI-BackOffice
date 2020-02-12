@@ -2022,6 +2022,24 @@ namespace SDGDAL.Repositories {
                }
           }
 
+          public TransactionVoidReason CreateVoidTransaction(TransactionVoidReason voidTransaction) {
+               using (DataContext context = new DataContext()) {
+                    using (var trans = context.Database.BeginTransaction()) {
+                         try {
+                              var transVoid = context.TransactionVoidReason.Add(voidTransaction);
+                              context.SaveChanges();
+
+                              trans.Commit();
+
+                              return transVoid;
+                         } catch (Exception ex) {
+                              trans.Rollback();
+                              throw ex;
+                         }
+                    }
+               };
+          }
+
           public List<TransactionAttempt> GetAllTransactionbyMerchantId(int cardTypeId, int transTypeId, int actionid, string currencyName, int merchantId, DateTime? startDate, DateTime? endDate, string search,
              int pageNumber, int numberOfRecords, string sortString, string sortOrder, out int totalRecords) {
                using (DataContext context = new DataContext()) {
@@ -10692,6 +10710,33 @@ namespace SDGDAL.Repositories {
                }
           }
 
+          public TransactionAttempt CreateTransactionAttempt(TransactionAttempt transactionAttempt) {
+               using (DataContext context = new DataContext()) {
+                    try {
+                         var trans = context.TransactionAttempts.Add(transactionAttempt);
+
+                         context.SaveChanges();
+
+                         if (trans.TransactionAttemptId > 0) {
+                              transactionAttempt.TransactionAttemptId = trans.TransactionAttemptId;
+                         }
+
+                         return trans;
+                    } catch (System.Data.Entity.Validation.DbEntityValidationException dbEx) {
+                         Exception raise = dbEx;
+
+                         foreach (var validationErrors in dbEx.EntityValidationErrors) {
+                              foreach (var validationError in validationErrors.ValidationErrors) {
+                                   string msg = string.Format("{0} : {1}", validationErrors.Entry.Entity.ToString(),
+                                       validationError.ErrorMessage);
+                                   raise = new InvalidOperationException(msg, raise);
+                              }
+                         }
+                         throw raise;
+                    }
+               }
+          }
+
           public Transaction CreateTransaction(Transaction transaction, TransactionAttempt transactionAttempt) {
                using (DataContext context = new DataContext()) {
                     try {
@@ -10722,16 +10767,6 @@ namespace SDGDAL.Repositories {
                          }
                          throw raise;
                     }
-               }
-          }
-
-          public TransactionAttempt CreateTransactionAttempt(TransactionAttempt transactionAttempt) {
-               using (DataContext context = new DataContext()) {
-                    var trans = context.TransactionAttempts.Add(transactionAttempt);
-
-                    context.SaveChanges();
-
-                    return trans;
                }
           }
 
@@ -11407,10 +11442,10 @@ namespace SDGDAL.Repositories {
 
 
           public async Task<List<TransactionAttempt>> ReportCentral(int? pId, int? rId, int? mId, int? posId, int? bId, int? cardTypeId, int? transTypeId, int? actionId, string currencyName, DateTime? startDate, DateTime? endDate, string sSearch, int iDisplayStart, int iDisplayLength, string v, string sSortDir_0) {
-                    return await Task.Run(() => { 
+               return await Task.Run(() => {
                     using (DataContext context = new DataContext()) {
-                              List<TransactionAttempt> results = new List<TransactionAttempt>();
-                              try {
+                         List<TransactionAttempt> results = new List<TransactionAttempt>();
+                         try {
                               string sqlCommand = string.Format("exec {0}", "GetKeys");
                               var keys = context.Database.SqlQuery<_Key>(sqlCommand, new List<dynamic>().ToArray()).ToList();
                               results = context.TransactionAttempts

@@ -5,6 +5,7 @@ using GatewayProcessor.PayMaya;
 using HPA_ISO8583;
 using Newtonsoft.Json;
 using SDGDAL;
+using SDGDAL.Entities;
 using SDGDAL.Repositories;
 using SDGUtil;
 using SDGWebService.Classes;
@@ -1571,10 +1572,189 @@ namespace SDGWebService.WebserviceFunctions {
                                    } else {
                                         transactionAttemptId = transactionAttempt.TransactionAttemptId;
 
-                                        #region Offline Switch
-                                        if (mid.Switch.SwitchCode == "000") {
+                                        if (request.TransactionStatus == 0) {
+
+                                             #region Offline Switch
+                                             if (mid.Switch.SwitchCode == "000") {
+                                                  transactionAttempt.TransactionAttemptId = transactionAttemptId;
+                                                  transactionAttempt.AuthNumber = "VP-001";
+                                                  transactionAttempt.ReturnCode = "00";
+                                                  transactionAttempt.SeqNumber = "621814389248";
+                                                  transactionAttempt.TransNumber = "1100000648";
+                                                  transactionAttempt.BatchNumber = DateTime.Now.ToString("yyyyMMddhhmmss");
+                                                  transactionAttempt.DisplayReceipt = "123456987";
+                                                  transactionAttempt.DisplayTerminal = "0000005";
+                                                  transactionAttempt.DateReceived = DateTime.Now;
+                                                  transactionAttempt.PosEntryMode = 05;
+                                                  transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                                  transactionAttempt.Notes = "API Offline Purchase Approved";
+
+                                                  response.CardType = Convert.ToString((SDGDAL.Enums.MobileAppCardType)rTransaction.CardTypeId);
+                                                  response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+                                                  response.POSWSResponse.ErrNumber = "0";
+                                                  response.POSWSResponse.Message = "Transaction Successful.";
+                                                  response.POSWSResponse.Status = "Approved";
+                                             }
+                                             #endregion Offline Switch
+
+                                             #region PayMaya
+                                             //to do
+                                             else if (mid.Switch.SwitchCode == "001") {
+                                                  if (transactionAttempt.TransactionTypeId == Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale)) {
+                                                       action = "processing api paymaya";
+                                                       GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
+
+                                                       string refNo = "XPAY-" + SDGUtil.Functions.GenerateRetrievalNumber(12);
+
+                                                       var submerchant = new P3SubMerchant {
+                                                            address = new P3Address {
+                                                                 alphaCountryCode = mid.Merchant.ContactInformation.Country.CountryCode,
+                                                                 city = mid.Merchant.ContactInformation.City,
+                                                                 line1 = mid.Merchant.ContactInformation.Address,
+                                                                 postalCode = "1209",
+                                                                 state = mid.Merchant.ContactInformation.StateProvince
+                                                            },
+                                                            id = "XPAY-" + mid.Merchant.MerchantId.ToString("D5"),
+                                                            name = mid.Merchant.MerchantName
+                                                       };
+
+                                                       var submerchants = new List<P3SubMerchant>();
+                                                       submerchants.Add(submerchant);
+
+                                                       var requestP3 = new P3Request {
+                                                            merchant = new P3Merchant {
+                                                                 id = mid.Param_2,
+                                                                 paymentFacilitator = new P3PaymentFacilitator {
+                                                                      subMerchants = submerchants
+                                                                 }
+                                                            }, payer = new P3Payer {
+                                                                 fundingInstrument = new P3FundingInstrument {
+                                                                      card = new P3Card {
+                                                                           cardNumber = cardNumber,
+                                                                           expiryMonth = expMonth,
+                                                                           expiryYear = "20" + expYear
+                                                                      }
+                                                                 }
+                                                            }, transaction = new P3Transaction {
+                                                                 amount = new P3Amount {
+                                                                      total = new P3Total {
+                                                                           currency = mid.Currency.IsoCode,
+                                                                           value = request.CardDetails.Amount
+                                                                      }
+                                                                 }
+                                                            }
+                                                       };
+
+                                                       action = "processing transaction for creedit api integration. Transaction was successfully saved.";
+
+                                                       try {
+                                                            var authp3Bytes = Encoding.UTF8.GetBytes(mid.Param_3);
+                                                            var authp3 = Convert.ToBase64String(authp3Bytes);
+                                                            var p3result = string.Empty;
+                                                            var p3Response = new P3Response();
+                                                            var errorLogs = new List<P3ErrorLog>();
+                                                            Task.Run(async () => {
+                                                                 p3result = await gateway.ProcessPayMayaP3Gateway(JsonConvert.SerializeObject(requestP3), authp3, refNo);
+                                                                 if (p3result.StartsWith("Error")) {
+                                                                      throw new Exception(p3result.Replace("Error : ", string.Empty));
+                                                                 }
+                                                                 if (p3result.Contains("logref")) {
+                                                                      errorLogs = JsonConvert.DeserializeObject<List<P3ErrorLog>>(p3result);
+                                                                      var errorlog = errorLogs.FirstOrDefault();
+                                                                      transactionAttempt.TransactionAttemptId = transactionAttemptId;
+                                                                      transactionAttempt.AuthNumber = string.Empty;
+                                                                      transactionAttempt.ReturnCode = errorlog.code;
+                                                                      transactionAttempt.TransNumber = errorlog.logref;
+                                                                      transactionAttempt.Reference = string.Empty;
+                                                                      transactionAttempt.DisplayReceipt = string.Empty;
+                                                                      transactionAttempt.DisplayTerminal = mid.Param_3;
+                                                                      transactionAttempt.BatchNumber = string.Empty;
+                                                                      transactionAttempt.DateReceived = DateTime.Now;
+                                                                      transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                                                      transactionAttempt.Notes = "API PayMaya EMV Purchase Declined" + errorlog.message;
+                                                                      response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+
+                                                                      response.POSWSResponse.ErrNumber = errorlog.code;
+                                                                      response.POSWSResponse.Message = "Transaction Failed." + errorlog.message;
+                                                                      response.POSWSResponse.Status = "Declined";
+                                                                 } else {
+                                                                      p3Response = JsonConvert.DeserializeObject<P3Response>(p3result);
+                                                                      if (p3Response != null) {
+                                                                           if (p3Response.status == "SUCCESS") {
+                                                                                transactionAttempt.TransactionAttemptId = transactionAttemptId;
+                                                                                transactionAttempt.AuthNumber = p3Response.receipt.approvalCode;
+                                                                                transactionAttempt.ReturnCode = "00";
+                                                                                transactionAttempt.TransNumber = p3Response.paymentTransactionReferenceNo;
+                                                                                transactionAttempt.Reference = p3Response.receipt.transactionId;
+                                                                                transactionAttempt.DisplayReceipt = p3Response.receipt.receiptNo;
+                                                                                transactionAttempt.DisplayTerminal = mid.Param_3;
+                                                                                transactionAttempt.BatchNumber = p3Response.receipt.batch;
+                                                                                transactionAttempt.DateReceived = DateTime.Now;
+                                                                                transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                                                                transactionAttempt.Notes = "API PayMaya EMV Purchase Approved";
+                                                                                response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+
+                                                                                response.POSWSResponse.ErrNumber = "0";
+                                                                                response.POSWSResponse.Message = "Transaction Successful.";
+                                                                                response.POSWSResponse.Status = "Approved";
+                                                                           } else {
+                                                                                transactionAttempt.TransactionAttemptId = transactionAttemptId;
+                                                                                transactionAttempt.AuthNumber = p3Response.receipt.approvalCode;
+                                                                                transactionAttempt.ReturnCode = "01";
+                                                                                transactionAttempt.TransNumber = p3Response.paymentTransactionReferenceNo;
+                                                                                transactionAttempt.Reference = p3Response.receipt.transactionId;
+                                                                                transactionAttempt.DisplayReceipt = p3Response.receipt.receiptNo;
+                                                                                transactionAttempt.DisplayTerminal = mid.Param_3;
+                                                                                transactionAttempt.BatchNumber = p3Response.receipt.batch;
+                                                                                transactionAttempt.DateReceived = DateTime.Now;
+                                                                                transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                                                                transactionAttempt.Notes = "API PayMaya EMV Purchase Declined";
+                                                                                response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+
+                                                                                response.POSWSResponse.ErrNumber = "0";
+                                                                                response.POSWSResponse.Message = "Transaction Failed.";
+                                                                                response.POSWSResponse.Status = "Declined";
+                                                                           }
+                                                                      } else {
+                                                                           response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+                                                                           response.POSWSResponse.ErrNumber = "0";
+                                                                           response.POSWSResponse.Message = "Transaction Failed.";
+                                                                           response.POSWSResponse.Status = "Declined";
+                                                                      }
+                                                                 }
+                                                            }).GetAwaiter().GetResult();
+                                                       } catch (Exception ex) {
+                                                            action = "processing transaction for creedit api integration";
+                                                            // Log error
+                                                            var errorOnAction = "Error while " + action;
+                                                            var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction, "TransactionPurchaseEMV", "", "");
+                                                            response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + "Declined" + " " + errorOnAction + " " + ex.Message;
+                                                            response.POSWSResponse.ErrNumber = "2000.10";
+                                                            response.POSWSResponse.Status = "Declined";
+                                                            return response;
+                                                       }
+                                                  } else {
+                                                       string type = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
+
+                                                       response.POSWSResponse.Message = type + " Transaction not supported, please contact support.";
+                                                       response.POSWSResponse.Status = "Declined";
+                                                       return response;
+                                                  }
+                                             }
+
+                                             #endregion PayMaya
+
+                                             else {
+                                                  transactionAttempt.DateReceived = DateTime.Now;
+                                                  var nTransactionAttemptOffline = _transRepo.UpdateTransactionAttempt(transactionAttempt);
+                                                  response.POSWSResponse.Message = "Transaction failed. Switch not yet supported. Please contact Support.";
+                                                  response.POSWSResponse.ErrNumber = "2101.9";
+                                                  response.POSWSResponse.Status = "Declined";
+                                                  return response;
+                                             }
+                                        } else if (request.TransactionStatus == 1) {
                                              transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                             transactionAttempt.AuthNumber = "VP-001";
+                                             transactionAttempt.AuthNumber = "VP-000";
                                              transactionAttempt.ReturnCode = "00";
                                              transactionAttempt.SeqNumber = "621814389248";
                                              transactionAttempt.TransNumber = "1100000648";
@@ -1584,170 +1764,63 @@ namespace SDGWebService.WebserviceFunctions {
                                              transactionAttempt.DateReceived = DateTime.Now;
                                              transactionAttempt.PosEntryMode = 05;
                                              transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                             transactionAttempt.Notes = "API Offline Purchase Approved";
+                                             transactionAttempt.Notes = "API Purchase Approved";
+
+                                             var pTransactionAttempt = _transRepo.UpdateTransactionAttempt(transactionAttempt);
+                                             var voidTransaction = new SDGDAL.Entities.TransactionVoidReason {
+                                                  VoidReason = request.VoidRefundNote
+                                             };
+
+                                             var vTransaction = _transRepo.CreateVoidTransaction(voidTransaction);
+
+                                             var vTransactionAttempt = new SDGDAL.Entities.TransactionAttempt();
+                                             vTransactionAttempt.AccountId = account.AccountId;
+                                             vTransactionAttempt.Amount = request.CardDetails.Amount * -1;
+                                             vTransactionAttempt.MobileAppId = mobileApp.MobileAppId;
+                                             vTransactionAttempt.DeviceId = request.Device;
+                                             vTransactionAttempt.GPSLat = request.POSWSRequest.GPSLat;
+                                             vTransactionAttempt.GPSLong = request.POSWSRequest.GPSLong;
+                                             vTransactionAttempt.Notes = request.Device.ToString();
+                                             vTransactionAttempt.TransactionTypeId = Convert.ToInt32(SDGDAL.Enums.TransactionType.Void);
+                                             vTransactionAttempt.TransactionChargesId = mid.TransactionChargesId;
+                                             vTransactionAttempt.DateSent = DateTime.Now;
+                                             vTransactionAttempt.TransNumber = SDGUtil.Functions.GenerateSystemTraceAudit();
+                                             vTransactionAttempt.AuthNumber = "VP-000";
+                                             vTransactionAttempt.ReturnCode = "00";
+                                             vTransactionAttempt.SeqNumber = "621814389248";
+                                             vTransactionAttempt.BatchNumber = DateTime.Now.ToString("yyyyMMddhhmmss");
+                                             vTransactionAttempt.DisplayReceipt = "123456987";
+                                             vTransactionAttempt.DisplayTerminal = "0000005";
+                                             vTransactionAttempt.DateReceived = DateTime.Now;
+                                             vTransactionAttempt.PosEntryMode = 05;
+                                             vTransactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
+                                             vTransactionAttempt.Notes = "API Void Approved";
+                                             vTransactionAttempt.TransactionVoidReasonId = voidTransaction.TransactionVoidReasonId;
+                                             vTransactionAttempt.TransactionVoidNote = "Voided";
+                                             vTransactionAttempt.TransactionId = transaction.TransactionId;
+
+                                             vTransactionAttempt = _transRepo.CreateTransactionAttempt(vTransactionAttempt);
 
                                              response.CardType = Convert.ToString((SDGDAL.Enums.MobileAppCardType)rTransaction.CardTypeId);
                                              response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
                                              response.POSWSResponse.ErrNumber = "0";
                                              response.POSWSResponse.Message = "Transaction Successful.";
                                              response.POSWSResponse.Status = "Approved";
-                                        }
-                                        #endregion Offline Switch
-
-                                        #region PayMaya
-                                        //to do
-                                        else if (mid.Switch.SwitchCode == "001") {
-                                             if (transactionAttempt.TransactionTypeId == Convert.ToInt32(SDGDAL.Enums.TransactionType.Sale)) {
-                                                  action = "processing api paymaya";
-                                                  GatewayProcessor.Gateways gateway = new GatewayProcessor.Gateways();
-
-                                                  string refNo = "XPAY-" + SDGUtil.Functions.GenerateRetrievalNumber(12);
-
-                                                  var submerchant = new P3SubMerchant {
-                                                       address = new P3Address {
-                                                            alphaCountryCode = mid.Merchant.ContactInformation.Country.CountryCode,
-                                                            city = mid.Merchant.ContactInformation.City,
-                                                            line1 = mid.Merchant.ContactInformation.Address,
-                                                            postalCode = "1209",
-                                                            state = mid.Merchant.ContactInformation.StateProvince
-                                                       },
-                                                       id = "XPAY-" + mid.Merchant.MerchantId.ToString("D5"),
-                                                       name = mid.Merchant.MerchantName
-                                                  };
-
-                                                  var submerchants = new List<P3SubMerchant>();
-                                                  submerchants.Add(submerchant);
-
-                                                  var requestP3 = new P3Request { 
-                                                       merchant = new P3Merchant { 
-                                                            id = mid.Param_2,
-                                                            paymentFacilitator = new P3PaymentFacilitator { 
-                                                                 subMerchants = submerchants
-                                                            }
-                                                       }, payer = new P3Payer { 
-                                                            fundingInstrument = new P3FundingInstrument { 
-                                                                 card = new P3Card { 
-                                                                      cardNumber = cardNumber,
-                                                                      expiryMonth = expMonth,
-                                                                      expiryYear = "20" + expYear
-                                                                 }
-                                                            }
-                                                       }, transaction = new P3Transaction { 
-                                                            amount = new P3Amount { 
-                                                                 total = new P3Total { 
-                                                                      currency = mid.Currency.IsoCode,
-                                                                      value = request.CardDetails.Amount
-                                                                 }
-                                                            }
-                                                       }
-                                                  };
-
-                                                  action = "processing transaction for creedit api integration. Transaction was successfully saved.";
-
-                                                  try {
-                                                       var authp3Bytes = Encoding.UTF8.GetBytes(mid.Param_3);
-                                                       var authp3 = Convert.ToBase64String(authp3Bytes);
-                                                       var p3result = string.Empty;
-                                                       var p3Response = new P3Response();
-                                                       var errorLogs = new List<P3ErrorLog>();
-                                                       Task.Run(async () => {
-                                                            p3result = await gateway.ProcessPayMayaP3Gateway(JsonConvert.SerializeObject(requestP3), authp3, refNo);
-                                                            if (p3result.StartsWith("Error")) {
-                                                                 throw new Exception(p3result.Replace("Error : ", string.Empty));
-                                                            }
-                                                            if (p3result.Contains("logref")) {
-                                                                 errorLogs = JsonConvert.DeserializeObject<List<P3ErrorLog>>(p3result);
-                                                                 var errorlog = errorLogs.FirstOrDefault();
-                                                                 transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                                 transactionAttempt.AuthNumber = string.Empty;
-                                                                 transactionAttempt.ReturnCode = errorlog.code;
-                                                                 transactionAttempt.TransNumber = errorlog.logref;
-                                                                 transactionAttempt.Reference = string.Empty;
-                                                                 transactionAttempt.DisplayReceipt = string.Empty;
-                                                                 transactionAttempt.DisplayTerminal = mid.Param_3;
-                                                                 transactionAttempt.BatchNumber = string.Empty;
-                                                                 transactionAttempt.DateReceived = DateTime.Now;
-                                                                 transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                                 transactionAttempt.Notes = "API PayMaya EMV Purchase Declined" + errorlog.message;
-                                                                 response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                                 response.POSWSResponse.ErrNumber = errorlog.code;
-                                                                 response.POSWSResponse.Message = "Transaction Failed." + errorlog.message;
-                                                                 response.POSWSResponse.Status = "Declined";
-                                                            } else {
-                                                                 p3Response = JsonConvert.DeserializeObject<P3Response>(p3result);
-                                                                 if (p3Response != null) {
-                                                                      if (p3Response.status == "SUCCESS") {
-                                                                           transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                                           transactionAttempt.AuthNumber = p3Response.receipt.approvalCode;
-                                                                           transactionAttempt.ReturnCode = "00";
-                                                                           transactionAttempt.TransNumber = p3Response.paymentTransactionReferenceNo;
-                                                                           transactionAttempt.Reference = p3Response.receipt.transactionId;
-                                                                           transactionAttempt.DisplayReceipt = p3Response.receipt.receiptNo;
-                                                                           transactionAttempt.DisplayTerminal = mid.Param_3;
-                                                                           transactionAttempt.BatchNumber = p3Response.receipt.batch;
-                                                                           transactionAttempt.DateReceived = DateTime.Now;
-                                                                           transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                                           transactionAttempt.Notes = "API PayMaya EMV Purchase Approved";
-                                                                           response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                                           response.POSWSResponse.ErrNumber = "0";
-                                                                           response.POSWSResponse.Message = "Transaction Successful.";
-                                                                           response.POSWSResponse.Status = "Approved";
-                                                                      } else {
-                                                                           transactionAttempt.TransactionAttemptId = transactionAttemptId;
-                                                                           transactionAttempt.AuthNumber = p3Response.receipt.approvalCode;
-                                                                           transactionAttempt.ReturnCode = "01";
-                                                                           transactionAttempt.TransNumber = p3Response.paymentTransactionReferenceNo;
-                                                                           transactionAttempt.Reference = p3Response.receipt.transactionId;
-                                                                           transactionAttempt.DisplayReceipt = p3Response.receipt.receiptNo;
-                                                                           transactionAttempt.DisplayTerminal = mid.Param_3;
-                                                                           transactionAttempt.BatchNumber = p3Response.receipt.batch;
-                                                                           transactionAttempt.DateReceived = DateTime.Now;
-                                                                           transactionAttempt.DepositDate = DateTime.Now.AddYears(-100);
-                                                                           transactionAttempt.Notes = "API PayMaya EMV Purchase Declined";
-                                                                           response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                                           response.POSWSResponse.ErrNumber = "0";
-                                                                           response.POSWSResponse.Message = "Transaction Failed.";
-                                                                           response.POSWSResponse.Status = "Declined";
-                                                                      }
-                                                                 } else {
-                                                                      response.TransactionType = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-                                                                      response.POSWSResponse.ErrNumber = "0";
-                                                                      response.POSWSResponse.Message = "Transaction Failed.";
-                                                                      response.POSWSResponse.Status = "Declined";
-                                                                 }
-                                                            }
-                                                       }).GetAwaiter().GetResult();
-                                                  } catch (Exception ex) {
-                                                       action = "processing transaction for creedit api integration";
-                                                       // Log error
-                                                       var errorOnAction = "Error while " + action;
-                                                       var errRefNumber = ApplicationLog.LogError("SDGWebService", errorOnAction, "TransactionPurchaseEMV", "", "");
-                                                       response.POSWSResponse.Message = "Transaction failed. Please contact Support. Details:" + "Declined" + " " + errorOnAction + " " + ex.Message;
-                                                       response.POSWSResponse.ErrNumber = "2000.10";
-                                                       response.POSWSResponse.Status = "Declined";
-                                                       return response;
-                                                  }
-                                             } else {
-                                                  string type = Convert.ToString((SDGDAL.Enums.TransactionType)transactionAttempt.TransactionTypeId);
-
-                                                  response.POSWSResponse.Message = type + " Transaction not supported, please contact support.";
-                                                  response.POSWSResponse.Status = "Declined";
-                                                  return response;
-                                             }
-                                        }
-
-                                        #endregion PayMaya
-
-                                        else {
-                                             transactionAttempt.DateReceived = DateTime.Now;
-                                             var nTransactionAttemptOffline = _transRepo.UpdateTransactionAttempt(transactionAttempt);
-                                             response.POSWSResponse.Message = "Transaction failed. Switch not yet supported. Please contact Support.";
-                                             response.POSWSResponse.ErrNumber = "2101.9";
-                                             response.POSWSResponse.Status = "Declined";
+                                             response.MerchantId = transactionAttempt.DisplayReceipt;
+                                             response.TerminalId = transactionAttempt.DisplayTerminal;
+                                             response.TransactionNumber = Convert.ToString(transaction.TransactionId) + "-" + Convert.ToString(transactionAttempt.TransactionAttemptId);
+                                             response.AuthNumber = transactionAttempt.AuthNumber;
+                                             response.TransNumber = transactionAttempt.TransNumber;
+                                             response.SequenceNumber = transactionAttempt.SeqNumber;
+                                             response.BatchNumber = transactionAttempt.BatchNumber;
+                                             response.Timestamp = SDGUtil.Functions.Format_Datetime(transactionAttempt.DateReceived);
+                                             response.TransactionEntryType = Convert.ToString((SDGDAL.Enums.TransactionEntryType)transaction.TransactionEntryTypeId);
+                                             response.Total = Convert.ToDecimal(transactionAttempt.Amount.ToString("N2"));
+                                             response.CardNumber = SDGUtil.Functions.HashCardNumber(transaction.CardNumber);
+                                             response.Currency = request.CardDetails.Currency;
                                              return response;
+                                        } else {
+                                             throw new Exception("Invalid Transaction Status");
                                         }
 
                                         action = "updating void transaction";
@@ -1766,6 +1839,7 @@ namespace SDGWebService.WebserviceFunctions {
                                         response.Total = Convert.ToDecimal(transactionAttempt.Amount.ToString("N2"));
                                         response.CardNumber = SDGUtil.Functions.HashCardNumber(transaction.CardNumber);
                                         response.Currency = request.CardDetails.Currency;
+                                        return response;
                                    }
                               } else {
                                    throw new Exception(action);
